@@ -1,0 +1,82 @@
+! Urxvt Settings
+! Maintainer: sheoak <dev@sheoak.fr>
+
+" https://powerline.readthedocs.org/en/latest/installation/linux.html#font-installation
+URxvt.font: xft:DejaVu Sans Mono for Powerline:size=13
+
+URxvt.allow_bold:       false
+URxvt.boldFont:
+
+URxvt.skipBuiltinGlyphs: true
+URxvt.iso14755:          false
+URxvt.iso14755_52:       false
+URxvt.intensityStyles:   false
+Xft.dpi:                 96
+Xft.antialias:           true
+Xft.rgba:                rgb
+Xft.hinting:             true
+Xft.hintstyle:           hintslight
+
+! Be sure to have unicode support
+URxvt*title:rxvt-unicode
+URxvt*iconName:urxvt
+URxvt*termName:rxvt-unicode
+URxvt*buffered:true
+
+! For mutt notifications
+XTerm*bellIsUrgent: true
+URxvt*urgentOnBell: true
+URxvt*scrollBar: False
+
+URxvt.depth: 32
+URxvt.dynamicColors:on
+URxvt.inheritPixmap: true
+URxvt.transparent: false
+URxvt.fading:      0
+URxvt.shading:     0
+
+!URxvt Nice solarized theme : perfect for vim and zsh agnoster theme
+!Don’t forget to copy the files and to replace by your home folder 
+!(~/ will not work)
+!#include "/home/fox/.xcolors/solarized_light"
+#include "/home/fox/.xcolors/solarized_dark"
+
+!Cursor theme
+Xcursor*theme:          aero
+Xcursor*size:           16
+
+! Clicking links
+URxvt.urlLauncher:      firefox
+
+URxvt*cursorBlink:     false
+URxvt*cursorUnderline: true
+
+! urxvt tabs settings:
+URxvt.tabbed.tabbar-fg:  2
+URxvt.tabbed.tabbar-bg:  0
+URxvt.tabbed.tab-fg:     2
+URxvt.tabbed.tab-bg:     8
+URxvt.tabbed.autohide:   yes
+URxvt.tabbed.new-button: no
+URxvt*tabbed.title:      no
+
+! Activate our custom script for copy/paste and changing font size
+URxvt.perl-ext-common: default,clipboard,matcher,font-size
+URxvt.url-launcher:    /usr/bin/xdg-open
+URxvt.matcher.button:  1
+URxvt.keysym.C-Delete: perl:matcher:last
+URxvt.keysym.M-Delete: perl:matcher:list
+
+! CTRL -/+/= to change font size
+! Be sure te install the script in /usr/lib/urxvt/perl/font-size
+URxvt.keysym.Control-plus:  perl:font-increase
+URxvt.keysym.Control-minus: perl:font-decrease
+URxvt.keysym.Control-equal: perl:font-reset
+
+! Copy / Paste with keyboard, be sure to install perl script
+! Ctrl+Shift+C / Ctrl+Shift+V to copy/paste
+! in /usr/lib/urxvt/perl/clipboard
+URxvt.keysym.C-C:   perl:clipboard:copy
+URxvt.keysym.C-V:   perl:clipboard:paste
+
+URxvt*modifier: alt
