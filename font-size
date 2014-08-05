@@ -1,0 +1,32 @@
+#!/usr/bin/perl
+my %original_size = ();
+
+sub on_start {
+  my($term) = @_;
+  if ($term->resource('font') =~ /size\=(\d+)/) {
+    $original_size{$term->vt} = $1;
+  }
+}
+
+sub on_user_command {
+  my($term, $command) = @_;
+
+  my $font = $term->resource('font');
+  if ($font =~ /size\=(\d+)/) {
+    my $new_size = my $current_size = $1;
+    if ($command eq "font-increase") {
+      $new_size++;
+    } elsif ($command eq "font-decrease") {
+      $new_size--;
+    } elsif ($command eq "font-reset") {
+      $new_size=$original_size{$term->vt};
+    } else {
+      return;
+    }
+    if ($new_size<6) {
+      $new_size = 6;
+    }
+    $font =~ s/size\=$current_size/size\=$new_size/;
+    $term->cmd_parse( "\033]710;$font\007");
+  }
+}
