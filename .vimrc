@@ -292,11 +292,14 @@ if has("autocmd")
         " From https://github.com/thoughtbot/dotfiles/blob/master/vimrc
         autocmd BufReadPost *
         \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-        \ exe "normal g`\"" |
+            \ exe "silent! normal g`\"za" |
         \ endif
 
         " autoreload vimrc
         " autocmd bufwritepost .vimrc source %
+
+        "au BufWinLeave * mkview
+        "au BufWinEnter * silent loadview
 
     augroup END
     " }}}
