@@ -238,7 +238,7 @@ if exists('&wildignorecase')
     set wildignorecase
 endif
 
-set previewheight=30    " vim-fugitive and any preview window
+set previewheight=20    " preview window height
 
 " }}}
 
@@ -560,6 +560,8 @@ let g:snips_author = username . "<" . email . ">"
 " }}}
 
 " vim-fugitive {{{
+" https://github.com/tpope/vim-fugitive
+" -----------------------------------------------------------------------------
 nmap <leader>gs :Gstatus<CR><C-w>20+
 nmap <leader>ge :Gedit<CR>
 nmap <leader>ga :Gadd<CR>
