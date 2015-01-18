@@ -1,4 +1,4 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"https://github.com/tpope/vim-fugitive""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Maintainer: sheoak
 " Version:    O.11
 "
@@ -567,6 +567,7 @@ nmap <leader>ge :Gedit<CR>
 nmap <leader>ga :Gadd<CR>
 nmap <leader>gd :Gdiff<CR>
 nmap <leader>gl :Glog<CR>
+nmap <leader>gp :Gpush<CR>
 nmap <leader>gc :Gcommit<CR>
 " }}}
 
