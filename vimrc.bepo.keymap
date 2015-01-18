@@ -1,0 +1,162 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" BÉPO Keyboard specific detection & settings
+"
+" Based on http://bepo.fr/wiki/Vim suggestion, unknow author
+"
+" Maintainer: sheoak
+" Version:    O.1
+"
+"  .----------------. .----------------. .----------------. .----------------.
+" | .--------------. | .--------------. | .--------------. | .--------------. |
+" | |   ______     | | |  _________   | | |   ______     | | |     ____     | |
+" | |  |_   _ \    | | | |_   ___  |  | | |  |_   __ \   | | |   .'    `.   | |
+" | |    | |_) |   | | |   | |_  \_|  | | |    | |__) |  | | |  /  .--.  \  | |
+" | |    |  __'.   | | |   |  _|  _   | | |    |  ___/   | | |  | |    | |  | |
+" | |   _| |__) |  | | |  _| |___/ |  | | |   _| |_      | | |  \  `--'  /  | |
+" | |  |_______/   | | | |_________|  | | |  |_____|     | | |   `.____.'   | |
+" | |              | | |              | | |              | | |              | |
+" | '--------------' | '--------------' | '--------------' | '--------------' |
+"  '----------------' '----------------' '----------------' '----------------'
+"
+" TODO: fix
+" TODO: remap unite t / s
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" bepo configuration, only if it’s current layout {{{
+" ----------------------------------------------------------------------------
+if empty(system("setxkbmap -print|grep bepo"))
+    finish
+endif
+" }}}
+
+" w -> é, easier for motions like daw viw -> daè diè {{{
+" ----------------------------------------------------------------------------
+noremap é w
+noremap É W
+onoremap aé aw
+onoremap aÉ aW
+onoremap ié iw
+onoremap iÉ iW
+" }}}
+
+" Easier window manipulation with w instead of C-w {{{
+" ----------------------------------------------------------------------------
+noremap w <C-w>
+noremap W <C-w><C-w>
+
+" direct acces to <C-w> with w
+noremap wt <C-w>j
+noremap ws <C-w>k
+noremap wc <C-w>h
+noremap wr <C-w>l
+noremap wd <C-w>d
+noremap wo <C-w>o
+noremap wp <C-w>p
+noremap w<SPACE> :split<CR>
+noremap w<CR> :vsplit<CR>
+" }}}
+
+" Home row HJKL -> CTSR {{{
+" ----------------------------------------------------------------------------
+noremap c h
+noremap r l
+noremap t j
+noremap s k
+" Top/Bottom of the screen
+noremap C H
+noremap R L
+" Join line / help
+noremap T J
+noremap S K
+" Previous / next fold
+noremap zs zj
+noremap zt zk
+" }}}
+
+" Remap home row keys somewhere else {{{
+" ----------------------------------------------------------------------------
+" T move to J (To)
+noremap j t
+noremap J T
+" C move to L (Change)
+noremap l c
+noremap L C
+" R move to H (Replace)
+noremap h r
+noremap H R
+" S move to K (Substitute)
+noremap k s
+noremap K S
+" Spelling k move to s
+noremap ]k ]s
+noremap [k [s
+" }}}
+
+" Remap g… {{{
+" ----------------------------------------------------------------------------
+noremap gs gk
+noremap gt gj
+" Prgvious / next / first / last tab
+noremap gb gT
+noremap gé gt
+noremap gB :exe "silent! tabfirst"<CR>
+noremap gÉ :exe "silent! tablast"<CR>
+" }}}
+
+" <> direct access {{{
+noremap « <
+noremap » >
+" }}}
+
+" autocompletion bépo {{{
+" (right hand) <C-x> + …
+" d: dictionnary (default is k)
+" m: oMni (default is o)
+" n / l / f stay default (normal, line, file)
+inoremap <C-x><C-m> <C-x><C-o>
+inoremap <C-x><C-d> <C-x><C-k>
+" }}}
+
+" Spell {{{
+" z= command is hard to type in bépo
+" FIXME « » is taken (remapped <>)
+if has("spell")
+    "map «s z=
+    "map «g zg
+    "map »w zw
+    "map «uw zuw
+    "map «ug zug
+end
+" }}}
+
+" Ex remapping {{{
+" FIXME: gb gé does not work in :Ex
+if has("autocmd")
+    augroup netrw_dvorak_fix
+        autocmd!
+        autocmd filetype netrw call Fix_netrw_maps_for_dvorak()
+    augroup END
+    function! Fix_netrw_maps_for_dvorak()
+        noremap <buffer> t j
+        noremap <buffer> s k
+        noremap <buffer> k s
+    endfunction
+endif
+" }}}
+
+" Plugin Surround {{{
+" bépo mapping
+let g:surround_no_mappings = 1
+nmap ls  <Plug>Csurround
+" same
+nmap ds  <Plug>Dsurround
+nmap ys  <Plug>Ysurround
+nmap yS  <Plug>YSurround
+nmap yss <Plug>Yssurround
+nmap ySs <Plug>YSsurround
+nmap ySS <Plug>YSsurround
+xmap S   <Plug>VSurround
+xmap gS  <Plug>VgSurround
+" }}}
+
+" vim:foldmethod=marker:foldlevel=0
