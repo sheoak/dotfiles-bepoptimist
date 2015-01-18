@@ -59,9 +59,9 @@ POWERLINE_DETECT_SSH="true"
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
-export PATH="/home/fox/npm/bin:/usr/local/bin:/usr/local/sbin:/bin:/usr/bin:/usr/sbin:/usr/bin/X11:/usr/X11R6/bin:/usr/games:/sbin:/home/fox/Scripts"
-# export MANPATH="/usr/local/man:$MANPATH"
+export PATH="$PATH:$HOME/npm/bin:$HOME/bin"
+#export PATH="$PATH:$HOME/npm/bin:/usr/local/bin:/usr/local/sbin:/bin:/usr/bin:/usr/sbin:/usr/bin/X11:/usr/X11R6/bin:/usr/games:/sbin:$HOME/Scripts"
+#export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 export LANG=fr_FR.UTF-8
@@ -79,18 +79,12 @@ export LANG=fr_FR.UTF-8
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias itconfig="vim ~/.i3/config"
 alias viconfig="vim ~/.vimrc"
 alias synergystart="nohup synergys -f -c /etc/synergy.conf > ~/.synergy.out 2> /dev/null &"
-
 
 alias p="less ~/.post-it"
 alias pe="vim ~/.post-it"
@@ -100,7 +94,6 @@ alias gp="git push -u origin master"
 
 alias restartaudio="pulseaudio -k && sudo alsa force-reload"
 alias xm="xmodmap ~/.Xmodmaprc"
-
 
 function removeignore()
 {
@@ -118,14 +111,11 @@ function livraison() {
 
     version=$((version + 1))
 
+    # TODO: use tar
     git diff --name-only $1 | zip ../livraison-$version-`date +%Y-%m-%d` -@
     echo "Don’t forget to create tag (git tag livraison-$version-`date +%Y-%m-%d`)"
 }
 
-function timer() {
-    sleep $1 && mplayer ~/Documents/alarm.mp3 &> /dev/null
-}
-
-
 setopt menu_complete
 
+[[ -s $HOME/.zshrc.local ]] && source "$HOME/.zshrc.local"
