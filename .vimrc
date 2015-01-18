@@ -66,13 +66,16 @@ else
     set rtp+=~/.vim/bundle/Vundle.vim
     call vundle#begin()
 
+    " Themes
+    Plugin 'altercation/vim-colors-solarized'
+    Plugin 'morhetz/gruvbox'
+
     Plugin 'tpope/vim-commentary'
     Plugin 'tpope/vim-surround'
     Plugin 'tpope/vim-fugitive'
     Plugin 'tpope/vim-repeat'
     Plugin 'tpope/vim-speeddating'
     Plugin 'sjl/gundo.vim'
-    Plugin 'altercation/vim-colors-solarized'
     Plugin 'bling/vim-airline'
     Plugin 'airblade/vim-gitgutter'
     Plugin 'Shougo/unite.vim'
@@ -242,20 +245,24 @@ else
     set background=dark
 endif
 
+try
+    colorscheme solarized
+    "colorscheme gruvbox
+catch
+    colorscheme desert
+endtry
+
 " Color for xiterm, rxvt, nxterm, color-xterm:
-if has("terminfo")
+if has("terminfo") && g:colors_name == 'solarized'
     set t_Co=16     " better for solarized theme
+else
+    set t_Co=256
 endif
 
 if has("syntax")
   syntax on
 endif
 
-try
-    colorscheme solarized
-catch
-    colorscheme desert
-endtry
 
 " }}}
 
