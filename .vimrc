@@ -17,7 +17,6 @@
 "
 " TODO: clean mappings and improve
 " TODO: remap $ / ^
-" TODO: Unite mappings
 " TODO: paste mapping (system/mouse/xclip, unite yank…)
 " TODO: custom templates licence
 "
@@ -25,7 +24,8 @@
 " -----------------------------------------------------------------------------
 "
 " - git
-" - TODO: complete list
+" - ag : optional but really faster with unite
+"   https://github.com/ggreer/the_silver_searcher
 "
 " Installation:
 " -----------------------------------------------------------------------------
@@ -70,15 +70,19 @@ else
     Plugin 'altercation/vim-colors-solarized'
     Plugin 'morhetz/gruvbox'
 
+    " Favorites
+    Plugin 'Shougo/unite.vim'
+    Plugin 'Shougo/vimproc.vim'             " Unite deps for file_sync
+    Plugin 'Shougo/neomru.vim'              " Unite deps for file_mru
+    Plugin 'tpope/vim-fugitive'             " Git integration
+    Plugin 'airblade/vim-gitgutter'         " Git gutter on the left
+    Plugin 'bling/vim-airline'              " Cool status bar
+
     Plugin 'tpope/vim-commentary'
     Plugin 'tpope/vim-surround'
-    Plugin 'tpope/vim-fugitive'
     Plugin 'tpope/vim-repeat'
     Plugin 'tpope/vim-speeddating'
     Plugin 'sjl/gundo.vim'
-    Plugin 'bling/vim-airline'
-    Plugin 'airblade/vim-gitgutter'
-    Plugin 'Shougo/unite.vim'
     "Plugin 'kien/ctrlp.vim'
     Plugin 'mattn/emmet-vim'
     Plugin 'godlygeek/tabular'
@@ -495,22 +499,34 @@ if exists(":Tabularize")
 endif
 " }}}
 
-" Plugin CtrlP {{{
-" -----------------------------------------------------------------------------
-"let g:ctrlp_root_markers      = '.ctags, .git, .pleeeaserc, Gemfile'
-"let g:ctrlp_working_path_mode = 'rc'
-"let g:ctrlp_map               = ';<Space>'
-"let g:ctrlp_cmd               = 'CtrlP'
-"map <leader><space> :CtrlP<CR>
-"let g:ctrlp_prompt_mappings = {
-    "\ 'PrtSelectMove("j")':   ['<C-BS>', '<down>'],
-    "\ 'PrtSelectMove("k")':   ['<C-Enter>', '<up>']
-"\ }
-" }}}
-
 " Plugin Unite {{{
-map ,<Space> :Unite -start-insert -no-split file buffer<CR>
-"map <Space> :Unite -no-split file buffer<CR>
+let g:unite_source_history_yank_enable = 1
+
+" Default Unite buffer, async recursive
+nnoremap <leader><space> :Unite -no-split -start-insert file_rec/git<cr>
+"nnoremap <leader>f :Unite -no-split -start-insert file_rec/async:!<cr>
+nnoremap <leader>f :Unite -no-split -start-insert file_rec/async<cr>
+" Yank history
+nnoremap <leader>y :Unite history/yank<cr>
+" Buffer switching
+nnoremap <leader>m :Unite -quick-match buffer<cr>
+
+nnoremap <leader>j :Unite -no-split buffer<cr>
+nnoremap <leader>l :Unite -no-split -start-insert file_mru<cr>
+nnoremap <leader>y :Unite -no-split history/yank<cr>
+
+call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern',
+    \ '\.svg$\|\.ico\|\.png$\|\.jpg$\|\.tmp/\|vendor/\|node_modules/')
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+let g:unite_source_rec_max_cache_files=3000
+
+if executable('ag')
+    let g:unite_source_rec_async_command= 'ag --nocolor --nogroup
+        \ --hidden -g "" -G "\.(js|php|css|sass|json|md|txt|html|jade|scss|less|tex)$"'
+endif
+"call unite#custom#source('file_rec,file_rec/async', 'max_candidates', 0)
+"let g:unite_source_rec_async_command='ag --nocolor --nogroup --ignore ".hg" --ignore ".svn" --ignore ".git" --ignore ".bzr" --hidden -g ""'
+"nnoremap <leader>l :Unite -no-split -start-insert outline<cr>
 " }}}
 
 " Plugin vim-airline {{{
