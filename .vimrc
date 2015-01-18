@@ -238,6 +238,8 @@ if exists('&wildignorecase')
     set wildignorecase
 endif
 
+set previewheight=30    " vim-fugitive and any preview window
+
 " }}}
 
 " Theme settings {{{
