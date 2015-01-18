@@ -130,10 +130,13 @@ filetype plugin indent on    " required
 " Basic vim settings {{{
 " -----------------------------------------------------------------------------
 set hidden                     " no alert if current buffer has not been saved
-set modelines=1                " enable modelines comments
+set modeline                   " enable modelines comments
+set modelines=1
 set tags=.ctags                " search for tags file where vim is open
 set fileformat=unix            " unix format by default, of course
 set visualbell                 " no sounds
+set noerrorbells
+set shell=zsh                  " shell zsh by default
 " }}}
 
 " Backup / history / undo {{{
@@ -143,7 +146,7 @@ set backup
 set backupdir=~/.vim/backups,/tmp/
 set directory=~/.vim/backups/swap/,/tmp/
 set writebackup
-set backupskip=/tmp,~/.Backups
+set backupskip=/tmp/*,~/.Backups/*,*.tmp/*,*.cache/*
 
 " Persistent Undo
 " Keep undo history across sessions, by storing in file.
@@ -160,7 +163,7 @@ set tabstop=4           " number of visual spaces per TAB
 set softtabstop=4       " number of spaces in tab when editing
 set shiftwidth=4
 set expandtab           " tabs are spaces
-set listchars=nbsp:·,trail:¤,tab:\ \
+set listchars=nbsp:·,trail:¤,tab:\ \ 
 set list
 set backspace=indent,eol,start  " allow all backspacing in insert mode
 set clipboard=unnamed           " yank to the system clipboard by default
@@ -189,6 +192,7 @@ set incsearch           " search as characters are entered
 set nohlsearch          " highlight matches off
 set ignorecase
 set smartcase
+"set gdefault            " Add the g flag to search/replace by default
 " }}}
 
 " Folding {{{
@@ -551,6 +555,15 @@ let g:username=system("git config --list | grep user.name | cut -d'=' -f2")
 
 " Plugin vim-template
 let g:snips_author = username . "<" . email . ">"
+" }}}
+
+" vim-fugitive {{{
+nmap <leader>gs :Gstatus<CR><C-w>20+
+nmap <leader>ge :Gedit<CR>
+nmap <leader>ga :Gadd<CR>
+nmap <leader>gd :Gdiff<CR>
+nmap <leader>gl :Glog<CR>
+nmap <leader>gc :Gcommit<CR>
 " }}}
 
 " }}} plugins section
