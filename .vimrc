@@ -24,6 +24,8 @@
 " -----------------------------------------------------------------------------
 "
 " - git
+" - vundle: https://github.com/gmarik/Vundle.vim
+" - jshint: npm install jshint
 " - ag : optional but really faster with unite
 "   https://github.com/ggreer/the_silver_searcher
 "
@@ -37,6 +39,12 @@
 " - .vimrc.local if you want to override settings only on your local machine
 " - .vimrc.bundles.local if you want to add plugins only on your local machine
 " - .vimrc.mac if you are using vim on a mac (experimental)
+"
+" Tip: Setting your keyboard key repeat and speed high will give you a better
+" experince in vim!
+"
+" Tip: You can remap caplocks to ESC, it’s not done here because it’s better
+" to do it system wise, and I use a typematrix, caplocks is far away!
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
