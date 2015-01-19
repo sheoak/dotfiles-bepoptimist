@@ -518,29 +518,31 @@ endif
 " }}}
 
 " Plugin Unite {{{
-let g:unite_source_history_yank_enable = 1
+if (!exists('s:plugin_off'))
+    let g:unite_source_history_yank_enable = 1
 
-" Default Unite buffer, async recursive
-nnoremap <leader><space> :Unite -no-split -start-insert file_rec/git<cr>
-"nnoremap <leader>f :Unite -no-split -start-insert file_rec/async:!<cr>
-nnoremap <leader>f :Unite -no-split -start-insert file_rec/async<cr>
-" Yank history
-nnoremap <leader>y :Unite history/yank<cr>
-" Buffer switching
-nnoremap <leader>m :Unite -quick-match buffer<cr>
+    " Default Unite buffer, async recursive
+    nnoremap <leader><space> :Unite -no-split -start-insert file_rec/git<cr>
+    "nnoremap <leader>f :Unite -no-split -start-insert file_rec/async:!<cr>
+    nnoremap <leader>f :Unite -no-split -start-insert file_rec/async<cr>
+    " Yank history
+    nnoremap <leader>y :Unite history/yank<cr>
+    " Buffer switching
+    nnoremap <leader>m :Unite -quick-match buffer<cr>
 
-nnoremap <leader>j :Unite -no-split buffer<cr>
-nnoremap <leader>l :Unite -no-split -start-insert file_mru<cr>
-nnoremap <leader>y :Unite -no-split history/yank<cr>
+    nnoremap <leader>j :Unite -no-split buffer<cr>
+    nnoremap <leader>l :Unite -no-split -start-insert file_mru<cr>
+    nnoremap <leader>y :Unite -no-split history/yank<cr>
 
-call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern',
-    \ '\.svg$\|\.ico\|\.png$\|\.jpg$\|\.tmp/\|vendor/\|node_modules/')
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-let g:unite_source_rec_max_cache_files=3000
+    call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern',
+        \ '\.svg$\|\.ico\|\.png$\|\.jpg$\|\.tmp/\|vendor/\|node_modules/')
+    call unite#filters#matcher_default#use(['matcher_fuzzy'])
+    let g:unite_source_rec_max_cache_files=3000
 
-if executable('ag')
-    let g:unite_source_rec_async_command= 'ag --nocolor --nogroup
-        \ --hidden -g "" -G "\.(js|php|css|sass|json|md|txt|html|jade|scss|less|tex)$"'
+    if executable('ag')
+        let g:unite_source_rec_async_command= 'ag --nocolor --nogroup
+            \ --hidden -g "" -G "\.(js|php|css|sass|json|md|txt|html|jade|scss|less|tex)$"'
+    endif
 endif
 "call unite#custom#source('file_rec,file_rec/async', 'max_candidates', 0)
 "let g:unite_source_rec_async_command='ag --nocolor --nogroup --ignore ".hg" --ignore ".svn" --ignore ".git" --ignore ".bzr" --hidden -g ""'
