@@ -23,11 +23,12 @@
 " Dependencies:
 " -----------------------------------------------------------------------------
 "
-" - git
-" - vundle: https://github.com/gmarik/Vundle.vim
-" - jshint: npm install jshint
-" - ag : optional but really faster with unite
-"   https://github.com/ggreer/the_silver_searcher
+" - git:        for vim-fugitive plugin
+" - cmake:      to compile YouComplete plugin
+" - vundle:     https://github.com/gmarik/Vundle.vim
+" - jshint:     for syntastic — npm install jshint
+" - ag:         optional but really faster with unite
+"               https://github.com/ggreer/the_silver_searcher
 "
 " Installation:
 " -----------------------------------------------------------------------------
@@ -39,6 +40,14 @@
 " - .vimrc.local if you want to override settings only on your local machine
 " - .vimrc.bundles.local if you want to add plugins only on your local machine
 " - .vimrc.mac if you are using vim on a mac (experimental)
+"
+" YouComplete: (example on ubuntu)
+" cd ~/.vim/bundle/YouCompleteMe/
+" ./install.sh
+"
+" Vimproc: (for Unite)
+" cd ~/.vim/bundle/vimproc.vim
+" make
 "
 " Tip: Setting your keyboard key repeat and speed high will give you a better
 " experince in vim!
