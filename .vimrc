@@ -1,4 +1,6 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vim main configuration file
+"
 " Maintainer: sheoak
 " Version:    O.11
 "
