@@ -1,4 +1,9 @@
-#command
+# bepo mappings for less
+#
+# Maintainer: sheoak
+# Version:    O.11
+
+# command
 c   next-tag
 C   prev-tag
 t   forw-line
