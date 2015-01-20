@@ -50,4 +50,6 @@ sudo npm install -g pleeease jshint sails
 
 a2enmod headers rewrite
 
+# FIXME zathura bug if not in etc?
+sudo cp .zathura/zathurarc /etc/zathurarc
 
