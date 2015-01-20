@@ -412,8 +412,10 @@ command! W w !sudo tee % > /dev/null
 
 " FN mappings, F5-F12 are taken by debugger
 map <F1> <nop>
+" Toggle paste mode
 map <F2> :set invpaste<CR>
-map <F3> <nop>
+" Toggle backgound color
+map <F3> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
 map <F4> <nop>
 
 " Paste to system/clipboard buffer
@@ -485,7 +487,6 @@ end
 " Plugin vim-solarized {{{
 " -----------------------------------------------------------------------------
 let g:solarized_termtrans=0
-map <F3> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
 " }}}
 
 " Plugin Emmet {{{
