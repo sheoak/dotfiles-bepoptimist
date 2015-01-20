@@ -2,7 +2,6 @@
 
 URxvt*background: #fdf6e3
 URxvt*foreground: #839496
-!!*fading: 40
 URxvt*fadeColor: #fdf6e3
 URxvt*cursorColor: #586e75
 URxvt*pointerColorBackground: #93a1a1
