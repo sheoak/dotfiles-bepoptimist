@@ -591,8 +591,8 @@ nnoremap <buffer> <C-p> :call pdv#DocumentWithSnip()<CR>
 " Vim template {{{
 " -----------------------------------------------------------------------------
 " Try to get email and name from git
-let g:email=system("git config --list | grep user.email | cut -d'=' -f2")
-let g:username=system("git config --list | grep user.name | cut -d'=' -f2")
+let g:email=system("echo -n `git config --list | grep user.email | head -n 1 | cut -d'=' -f2`")
+let g:username=system("echo -n `git config --list | grep user.name | cut -d'=' -f2`")
 
 " Plugin vim-template
 let g:snips_author = username . "<" . email . ">"
