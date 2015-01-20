@@ -440,6 +440,9 @@ map <leader>Q :q!<CR>
 map <leader>, :w<CR>
 map <leader>; :W<CR>
 
+" new tab, ranger style
+map gn :tabe<CR>
+
 " }}}
 
 " Spell mappings {{{
