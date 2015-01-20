@@ -485,6 +485,7 @@ end
 " Plugin vim-solarized {{{
 " -----------------------------------------------------------------------------
 let g:solarized_termtrans=0
+map <F3> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
 " }}}
 
 " Plugin Emmet {{{
