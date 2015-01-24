@@ -540,6 +540,7 @@ if (!exists('s:plugin_off'))
     nnoremap <leader>j :Unite -no-split buffer<cr>
     nnoremap <leader>l :Unite -no-split -start-insert file_mru<cr>
     nnoremap <leader>y :Unite -no-split history/yank<cr>
+    nnoremap <leader>n :Unite -no-split file/new file<cr>
 
     call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern',
         \ '\.svg$\|\.ico\|\.png$\|\.jpg$\|\.tmp/\|vendor/\|node_modules/')
@@ -550,6 +551,7 @@ if (!exists('s:plugin_off'))
         let g:unite_source_rec_async_command= 'ag --nocolor --nogroup
             \ --hidden -g "" -G "\.(js|php|css|sass|json|md|txt|html|jade|scss|less|tex)$"'
     endif
+
 endif
 "call unite#custom#source('file_rec,file_rec/async', 'max_candidates', 0)
 "let g:unite_source_rec_async_command='ag --nocolor --nogroup --ignore ".hg" --ignore ".svn" --ignore ".git" --ignore ".bzr" --hidden -g ""'
