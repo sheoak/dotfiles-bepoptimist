@@ -33,6 +33,9 @@ sudo apt-get install -y
     \ nodejs
     \ ruby-full
 
+# ranger
+sudo apt-get install -y ranger caca-utils highlight atool w3m poppler-utils mediainfo
+
 # LAMP
 sudo apt-get install -y
     \ apache2
