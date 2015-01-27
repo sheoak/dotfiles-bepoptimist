@@ -20,17 +20,13 @@ sudoapt-get install -y \
      console-data \
      chromium-browser \
      filezilla \
-     ubuntu-restricted-extras \
-     ubuntu-restricted-addons \
      build-essential \
      gimp \
      unrar \
-     htop \
      thunar \
      unzip \
      thunar-archive-plugin \
      vim-common \
-     nodejs \
      ruby-full
 
 # ranger
