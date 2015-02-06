@@ -132,6 +132,10 @@ else
     " Plugin 'pangloss/vim-javascript'
     Plugin 'elzr/vim-json'                           " JSON
 
+    Plugin 'vim-pandoc/vim-pandoc'
+    Plugin 'vim-pandoc/vim-pandoc-syntax'
+
+
     " Use local bundles config if available
     if filereadable(expand("~/.vimrc.bundles.local"))
         source ~/.vimrc.bundles.local
@@ -220,8 +224,8 @@ set smartcase
 
 " Folding {{{
 " -----------------------------------------------------------------------------
-set foldenable          " enable folding
-"set nofoldenable        "dont fold by default
+"set foldenable         " enable folding
+set nofoldenable        "dont fold by default
 set foldlevelstart=10   " open most folds by default
 set foldnestmax=2       " 10 nested fold max
 set foldmethod=indent   " fold based on indent level
@@ -614,6 +618,10 @@ nmap <leader>gd :Gdiff<CR>
 nmap <leader>gl :Glog<CR>
 nmap <leader>gp :Gpush<CR>
 nmap <leader>gc :Gcommit<CR>
+" }}}
+
+" vim-pandoc {{{
+let g:pandoc#biblio#sources = 'b'
 " }}}
 
 " }}} plugins section
