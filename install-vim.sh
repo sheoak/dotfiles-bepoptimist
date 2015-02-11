@@ -8,12 +8,11 @@
 # Install repo dependencies, using apt-get
 if [ ! -d ~/.vim/bundle/Vundle.vim/ ];
 then
-    echo "You must install vundle first https://github.com/gmarik/Vundle.vim"
-    echo "Installation cancelled"
-    exit
+    # vundle install
+    git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 fi
 
-sudo apt-get install silversearcher-ag cmake git nodejs npm
+sudo apt-get install silversearcher-ag cmake git nodejs npm vim-common python-dev
 sudo npm install -g sass jshint
 
 # install vundle plugins

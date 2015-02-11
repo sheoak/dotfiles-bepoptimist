@@ -7,7 +7,7 @@
 
 sudo apt-get update
 
-sudoapt-get install -y \
+sudo apt-get install -y \
      urxvt-unicode \
      nodejs \
      npm \
@@ -49,6 +49,8 @@ sudo apt-get install -y \
      phpmyadmin \
      php5-curl \
 
+sudo apt-get remove nano
+
 sudo gem install sass
 sudo gem install compass
 npm update
@@ -59,4 +61,10 @@ a2enmod headers rewrite
 # FIXME zathura bug if not in etc?
 sudo cp /etc/zathurarc /etc/zathurarc.bak
 sudo cp .zathura/zathurarc /etc/zathurarc
+
+
+git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+chsh -s /bin/zsh
+
+
 
