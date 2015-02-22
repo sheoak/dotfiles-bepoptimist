@@ -10,8 +10,10 @@ sudo apt-get update
 sudo apt-get install -y \
      urxvt-unicode \
      nodejs \
+     zathura \
      npm \
      git \
+     git-flow \
      subversion \
      build-essential \
      ubuntu-restricted \
@@ -27,7 +29,10 @@ sudo apt-get install -y \
      unzip \
      thunar-archive-plugin \
      vim-common \
-     ruby-full
+     ruby-full \
+     conky \
+     feh \
+     mongodb
 
 # ranger
 sudo apt-get install -y \
@@ -65,6 +70,8 @@ sudo cp .zathura/zathurarc /etc/zathurarc
 
 git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 chsh -s /bin/zsh
+
+sudo update-alternatives --config x-terminal-emulator
 
 
 
