@@ -9,6 +9,10 @@ sudo apt-get update
 
 sudo apt-get install -y \
      urxvt-unicode \
+     offlineimap \
+     mpd \
+     ncmpcpp \
+     gnome-icon-theme-full \
      nodejs \
      zathura \
      npm \
@@ -32,7 +36,11 @@ sudo apt-get install -y \
      ruby-full \
      conky \
      feh \
-     mongodb
+     mongodb \
+     weechat \
+     msmtp \
+     msmtp-gnome \
+     mutt
 
 # ranger
 sudo apt-get install -y \
