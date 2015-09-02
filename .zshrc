@@ -1,13 +1,11 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="agnoster"
-DEFAULT_USER="fox"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -66,22 +64,11 @@ export PATH="$PATH:$HOME/npm/bin:$HOME/bin"
 # You may need to manually set your language environment
 export LANG=fr_FR.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 alias itconfig="vim ~/.i3/config"
 alias viconfig="vim ~/.vimrc"
 alias synergystart="nohup synergys -f -c /etc/synergy.conf > ~/.synergy.out 2> /dev/null &"
@@ -94,6 +81,9 @@ alias gp="git push -u origin master"
 
 alias restartaudio="pulseaudio -k && sudo alsa force-reload"
 alias xm="xmodmap ~/.Xmodmaprc"
+
+alias feh='feh -B black -FZx '
+alias ll='ls --color -lh --group-directories-first'
 
 function removeignore()
 {
@@ -116,6 +106,13 @@ function livraison() {
     echo "Don’t forget to create tag (git tag livraison-$version-`date +%Y-%m-%d`)"
 }
 
+bindkey '^R' history-incremental-search-backward
 setopt menu_complete
+
+EDITOR=/usr/bin/vim
+VISUAL=/usr/bin/vim
+SUDO_EDITOR=/usr/bin/vim
+
+export SUDO_EDITOR
 
 [[ -s $HOME/.zshrc.local ]] && source "$HOME/.zshrc.local"
