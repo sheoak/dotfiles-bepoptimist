@@ -1,8 +1,13 @@
 ! Urxvt Settings
-! Maintainer: sheoak <dev@sheoak.fr>
+! Filename: .Xdefaults
+! Author:   sheoak <https://github.com/sheoak/>
+!
+! Maintainer: sheoak
+! Version:    O.1
+! TODO: fix broken paste shortcut / script
 
-" https://powerline.readthedocs.org/en/latest/installation/linux.html#font-installation
-URxvt.font: xft:DejaVu Sans Mono for Powerline:size=13
+! Font, using powerline, make sure the font is installed!
+URxvt.font: xft:DejaVu Sans Mono for Powerline:size=9
 
 URxvt.allow_bold:       false
 URxvt.boldFont:
@@ -17,7 +22,6 @@ Xft.rgba:                rgb
 Xft.hinting:             true
 Xft.hintstyle:           hintslight
 
-! Be sure to have unicode support
 URxvt*title:rxvt-unicode
 URxvt*iconName:urxvt
 URxvt*termName:rxvt-unicode
@@ -30,26 +34,20 @@ URxvt*scrollBar: False
 
 URxvt.depth: 32
 URxvt.dynamicColors:on
-URxvt.inheritPixmap: true
-URxvt.transparent: false
-URxvt.fading:      0
-URxvt.shading:     0
+URxvt.fading:      20
 
-!URxvt Nice solarized theme : perfect for vim and zsh agnoster theme
-!Don’t forget to copy the files and to replace by your home folder 
-!(~/ will not work)
-!#include "/home/fox/.xcolors/solarized_light"
-#include "/home/fox/.xcolors/solarized_dark"
+URxvt.transparent:   true
+URxvt.shading:       18
 
-!Cursor theme
+! Cursor theme
 Xcursor*theme:          aero
 Xcursor*size:           16
 
-! Clicking links
+! Clickable links
 URxvt.urlLauncher:      firefox
 
 URxvt*cursorBlink:     false
-URxvt*cursorUnderline: true
+URxvt*cursorUnderline: false
 
 ! urxvt tabs settings:
 URxvt.tabbed.tabbar-fg:  2
@@ -60,23 +58,71 @@ URxvt.tabbed.autohide:   yes
 URxvt.tabbed.new-button: no
 URxvt*tabbed.title:      no
 
-! Activate our custom script for copy/paste and changing font size
+URxvt.perl-lib : $HOME/.urxvt/perl
+
+
 URxvt.perl-ext-common: default,clipboard,matcher,font-size
+!URxvt.perl-ext-common: default,matcher,font-size
 URxvt.url-launcher:    /usr/bin/xdg-open
 URxvt.matcher.button:  1
 URxvt.keysym.C-Delete: perl:matcher:last
 URxvt.keysym.M-Delete: perl:matcher:list
 
 ! CTRL -/+/= to change font size
-! Be sure te install the script in /usr/lib/urxvt/perl/font-size
 URxvt.keysym.Control-plus:  perl:font-increase
 URxvt.keysym.Control-minus: perl:font-decrease
 URxvt.keysym.Control-equal: perl:font-reset
 
-! Copy / Paste with keyboard, be sure to install perl script
-! Ctrl+Shift+C / Ctrl+Shift+V to copy/paste
-! in /usr/lib/urxvt/perl/clipboard
-URxvt.keysym.C-C:   perl:clipboard:copy
-URxvt.keysym.C-V:   perl:clipboard:paste
+! Keyboard paste
+URxvt.keysym.C-V: perl:clipboard:paste
 
 URxvt*modifier: alt
+
+! -----------------------------------------------------------------------------
+! Theme Solarized Dark
+! I could not find a way to find home path from this file (~/ or $HOME) is not
+! working with #include, so I included it here. Any help is welcome!
+!
+! Source http://github.com/altercation/solarized
+! See ~/.xcolors/solarized_light for light version
+! -----------------------------------------------------------------------------
+
+URxvt*foreground: #657b83
+URxvt*background: rgba:0000/2b00/3600/2200
+
+URxvt*fadeColor: #002b36
+URxvt*cursorColor: #93a1a1
+URxvt*pointerColorBackground: #586e75
+URxvt*pointerColorForeground: #93a1a1
+
+!! black dark/light
+URxvt*color0: #073642
+URxvt*color8: #002b36
+
+!! red dark/light
+URxvt*color1: #dc322f
+URxvt*color9: #cb4b16
+
+!! green dark/light
+URxvt*color2: #859900
+URxvt*color10: #586e75
+
+!! yellow dark/light
+URxvt*color3: #b58900
+URxvt*color11: #657b83
+
+!! blue dark/light
+URxvt*color4: #268bd2
+URxvt*color12: #839496
+
+!! magenta dark/light
+URxvt*color5: #d33682
+URxvt*color13: #6c71c4
+
+!! cyan dark/light
+URxvt*color6: #2aa198
+URxvt*color14: #93a1a1
+
+!! white dark/light
+URxvt*color7: #eee8d5
+URxvt*color15: #fdf6e3

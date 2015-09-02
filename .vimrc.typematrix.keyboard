@@ -1,0 +1,17 @@
+" ----------------------------------------------------------------------------
+" TypeMatrix mapping for vim
+"
+" Maintainer: sheoak
+" Version:    O.11
+"
+" Get advantage of the different disposition of a few keys like enter or
+" backspace
+" ----------------------------------------------------------------------------
+
+noremap <BS> <PageUp>
+noremap <Space> <PageDown>
+
+" Emmet typematrix edit button (right of space)
+let g:user_emmet_leader_key='i' 
+
+" vim:foldmethod=marker:foldlevel=0

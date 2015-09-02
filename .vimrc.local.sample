@@ -1,0 +1,19 @@
+" ----------------------------------------------------------------------------
+" Local vimrc (sample)
+"
+" Maintainer: sheoak
+" Version:    O.11
+" ----------------------------------------------------------------------------
+
+" Replace vimrc settings
+if !g:email
+    let g:email="john.doe@domain.com"
+endif
+
+if !g:username
+    let g:username="John Doe"
+endif
+
+" Plugin vim-template
+let g:snips_author = username . "<" . email . ">"
+

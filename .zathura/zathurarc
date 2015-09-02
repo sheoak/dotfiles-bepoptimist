@@ -1,0 +1,32 @@
+# Configuration file for zathura, for bépo keyboard
+# (It seems to only works if the config is in /etc/zathurarc)
+#
+# Maintainer: sheoak
+# Version:    O.11
+
+# Basic bépo keyboard configuration for zathura
+map [normal]     s scroll up
+map [normal]     t scroll down
+map [normal]     c scroll left
+map [normal]     r scroll right
+
+# s is used
+map [fullscreen] w adjust_window width
+
+#map [normal]    <C-o> navigate previous
+#map [normal]    <C-p> navigate next
+
+map [normal]     <C-s> scroll half-up
+map [normal]     <C-t> scroll half-down
+map [normal]     <C-c> rotate rotate-ccw
+map [normal]     <C-r> rotate rotate-cw
+
+map [normal]     <bs>    full up
+map [normal]     <enter> full down
+
+map [normal]     w zoom to width
+map [normal]     h reload
+#map [normal]     H reload the document
+
+
+
