@@ -62,6 +62,7 @@ sudo pacman -S \
     vlc \
     w3m \
     weechat \
+    xclip \
     zathura \
     zathura-pdf-poppler \
     zsh

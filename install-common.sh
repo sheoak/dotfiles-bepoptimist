@@ -5,6 +5,8 @@
 #
 # Distributed under terms of the MIT license.
 
+# TODO: i3 config + include local
+
 cd `dirname $0`
 DOTFILES="`pwd`"
 
