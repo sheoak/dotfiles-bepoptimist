@@ -4,9 +4,7 @@
 # Copyright (C) 2015 sheoak <dev@sheoak.fr>
 #
 # Distributed under terms of the MIT license.
-#
-
-sudo gem install sass
-sudo npm install -g sails
-sudo npm install -g bower
+sudo gem install sass compass
+npm update
+sudo npm install -g pleeease jshint sails bower
 

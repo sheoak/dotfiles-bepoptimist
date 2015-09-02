@@ -8,66 +8,65 @@
 sudo apt-get update
 
 sudo apt-get install -y \
-     urxvt-unicode \
-     offlineimap \
-     mpd \
-     ncmpcpp \
-     gnome-icon-theme-full \
-     nodejs \
-     zathura \
-     npm \
+     build-essential \
+     build-essential \
+     chromium-browser \
+     conky \
+     console-data \
+     feh \
+     filezilla \
+     gimp \
      git \
      git-flow \
-     subversion \
-     build-essential \
-     ubuntu-restricted \
-     ubuntu-restricted-extras \
+     gnome-icon-theme-full \
      htop \
-     console-data \
-     chromium-browser \
-     filezilla \
-     build-essential \
-     gimp \
-     unrar \
-     thunar \
-     unzip \
-     thunar-archive-plugin \
-     vim-common \
-     ruby-full \
-     conky \
-     feh \
+     i3 \
      mongodb \
-     weechat \
+     mpd \
      msmtp \
      msmtp-gnome \
-     mutt
+     mutt \
+     ncmpcpp \
+     nodejs \
+     npm \
+     offlineimap \
+     python-dev \
+     python3 \
+     ruby-full \
+     silversearcher-ag \
+     subversion \
+     thunar \
+     thunar-archive-plugin \
+     ubuntu-restricted \
+     ubuntu-restricted-extras \
+     unrar \
+     unzip \
+     urxvt-unicode \
+     vim-common \
+     weechat \
+     zathura
 
 # ranger
 sudo apt-get install -y \
-    ranger \
+    atool \
     caca-utils \
     highlight \
-    atool \
-    w3m \
+    mediainfo \
     poppler-utils \
-    mediainfo
+    ranger \
+    w3m
 
 # LAMP
 sudo apt-get install -y \
      apache2 \
-     php5 \
-     mysql-server \
      libapache2-mod-php5 \
-     php5-mysql \
-     phpmyadmin \
+     mysql-server \
+     php5 \
      php5-curl \
+     php5-mysql \
+     phpmyadmin
 
 sudo apt-get remove nano
-
-sudo gem install sass
-sudo gem install compass
-npm update
-sudo npm install -g pleeease jshint sails
 
 a2enmod headers rewrite
 
@@ -75,11 +74,6 @@ a2enmod headers rewrite
 sudo cp /etc/zathurarc /etc/zathurarc.bak
 sudo cp .zathura/zathurarc /etc/zathurarc
 
-
-git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-chsh -s /bin/zsh
-
 sudo update-alternatives --config x-terminal-emulator
 
-
-
+source `dirname $0`/install-common.sh
