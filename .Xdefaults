@@ -1,13 +1,12 @@
 ! Urxvt Settings
-! Filename: .Xdefaults
-! Author:   sheoak <https://github.com/sheoak/>
-!
-! Maintainer: sheoak
-! Version:    O.1
-! TODO: fix broken paste shortcut / script
+! Maintainer: sheoak <dev@sheoak.fr>
 
-! Font, using powerline, make sure the font is installed!
-URxvt.font: xft:DejaVu Sans Mono for Powerline:size=9
+URxvt.letterSpace: -1
+
+URxvt*loginShell: true
+
+" https://powerline.readthedocs.org/en/latest/installation/linux.html#font-installation
+URxvt.font: xft:DejaVu Sans Mono for Powerline:size=11
 
 URxvt.allow_bold:       false
 URxvt.boldFont:
@@ -22,6 +21,7 @@ Xft.rgba:                rgb
 Xft.hinting:             true
 Xft.hintstyle:           hintslight
 
+! Be sure to have unicode support
 URxvt*title:rxvt-unicode
 URxvt*iconName:urxvt
 URxvt*termName:rxvt-unicode
@@ -34,20 +34,17 @@ URxvt*scrollBar: False
 
 URxvt.depth: 32
 URxvt.dynamicColors:on
-URxvt.fading:      20
 
-URxvt.transparent:   true
-URxvt.shading:       18
+URxvt.inheritPixmap: true
+URxvt.transparent: true
+URxvt.shading:     10
 
-! Cursor theme
+!Cursor theme
 Xcursor*theme:          aero
 Xcursor*size:           16
 
-! Clickable links
-URxvt.urlLauncher:      firefox
-
 URxvt*cursorBlink:     false
-URxvt*cursorUnderline: false
+URxvt*cursorUnderline: true
 
 ! urxvt tabs settings:
 URxvt.tabbed.tabbar-fg:  2
@@ -58,37 +55,41 @@ URxvt.tabbed.autohide:   yes
 URxvt.tabbed.new-button: no
 URxvt*tabbed.title:      no
 
-URxvt.perl-lib : $HOME/.urxvt/perl
+! Activate our custom script for copy/paste and changing font size
+URxvt.perl-ext: default,url-select
+URxvt.perl-ext-common: default,resize-font,keyboard-select,clipboard
+URxvt.keysym.C-b: perl:url-select:select_next
 
-
-URxvt.perl-ext-common: default,clipboard,matcher,font-size
-!URxvt.perl-ext-common: default,matcher,font-size
-URxvt.url-launcher:    /usr/bin/xdg-open
-URxvt.matcher.button:  1
-URxvt.keysym.C-Delete: perl:matcher:last
-URxvt.keysym.M-Delete: perl:matcher:list
+! url-select
+URxvt.url-select.launcher: /usr/bin/xdg-open
+URxvt.url-select.underline: true
+URxvt.keysym.C-Escape: perl:keyboard-select:activate
+URxvt.keysym.C-u: perl:keyboard-select:search
 
 ! CTRL -/+/= to change font size
-URxvt.keysym.Control-plus:  perl:font-increase
-URxvt.keysym.Control-minus: perl:font-decrease
-URxvt.keysym.Control-equal: perl:font-reset
+URxvt.resize-font.smaller: C-minus
+URxvt.resize-font.bigger: C-plus
 
-! Keyboard paste
-URxvt.keysym.C-V: perl:clipboard:paste
+! Copy / Paste with keyboard
+! Ctrl+Shift+C / Ctrl+Shift+V to copy/paste
+! in /usr/lib/urxvt/perl/clipboard
+URxvt.keysym.C-C:   perl:clipboard:copy
+URxvt.keysym.C-V:   perl:clipboard:paste
+
+URxvt.clipboard.copycmd:  xclip -i -selection clipboard
+URxvt.clipboard.pastecmd: xclip -o -selection clipboard
+URxvt.clipboard.autocopy: true
 
 URxvt*modifier: alt
 
-! -----------------------------------------------------------------------------
-! Theme Solarized Dark
-! I could not find a way to find home path from this file (~/ or $HOME) is not
-! working with #include, so I included it here. Any help is welcome!
-!
-! Source http://github.com/altercation/solarized
-! See ~/.xcolors/solarized_light for light version
-! -----------------------------------------------------------------------------
+! Colors
+!URxvt Nice solarized theme : perfect for vim and zsh agnoster theme
+!!Source http://github.com/altercation/solarized
 
 URxvt*foreground: #657b83
+
 URxvt*background: rgba:0000/2b00/3600/2200
+!URxvt*shading: 10%
 
 URxvt*fadeColor: #002b36
 URxvt*cursorColor: #93a1a1
@@ -126,3 +127,4 @@ URxvt*color14: #93a1a1
 !! white dark/light
 URxvt*color7: #eee8d5
 URxvt*color15: #fdf6e3
+
