@@ -4,6 +4,8 @@
 # Copyright (C) 2015 sheoak <dev@sheoak.fr>
 #
 # Distributed under terms of the MIT license.
+# TODO: infinality-bundle repo
+
 # vars
 cd `dirname $0`
 DOTFILES="`pwd`"
@@ -83,6 +85,12 @@ git clone https://aur.archlinux.org/urxvt-resize-font-git
 cd /tmp/urxvt-resize-font-git
 makepkg -s && sudo pacman -U urxvt*.tar.xz
 
+# mac fonts
+cd /tmp
+git clone https://aur.archlinux.org/ttf-mac-fonts.git
+cd ttf-mac-fonts
+makepkg -s && sudo pacman -U ttf*.tar.xz
+
 sudo pacman -R nano
 
 #a2enmod headers rewrite
@@ -110,8 +118,13 @@ sudo systemctl enable ldm && sudo systemctl start ldm
 sudo tee /sys/class/backlight/acpi_video0/brightness <<< 10
 
 # default apps
+mkdir -p $HOME/.local/share/applications
+touch $HOME/.local/share/applications/mimeapps.list
 xdg-mime default chromium.desktop x-scheme-handler/http
 xdg-mime default chromium.desktop x-scheme-handler/https
+
+mkdir -p $HOME/.local/share/fonts
+cp -r fonts/* $HOME/.local/share/fonts/
 
 # arch specific dotfiles
 ln -s $DOTFILES/arch/.zlogin $HOME/
