@@ -97,7 +97,7 @@ else
     Plugin 'airblade/vim-gitgutter'         " Git gutter on the left
     Plugin 'bling/vim-airline'              " Cool status bar
 
-    Plugin 'tpope/vim-commentary'
+    "Plugin 'tpope/vim-commentary'
     Plugin 'tpope/vim-surround'
     Plugin 'tpope/vim-repeat'
     Plugin 'tpope/vim-speeddating'
@@ -111,7 +111,7 @@ else
     Plugin 'honza/vim-snippets'
     "Plugin 'aperezdc/vim-template'
     Plugin 'sheoak/vim-mucfind'
-    Plugin 'Valloric/YouCompleteMe'
+    "Plugin 'Valloric/YouCompleteMe'
     Plugin 'joonty/vdebug'
     " Plugin 'jaredly/vim-debug'
     Plugin 'tobyS/vmustache'
@@ -127,7 +127,7 @@ else
     " Plugin 'cakebaker/scss-syntax.vim'             " SASS. Broken for .sass?
     Plugin 'othree/javascript-libraries-syntax.vim'  " Javascript
     Plugin 'jelera/vim-javascript-syntax'
-    Plugin 'vim-scripts/JavaScript-Indent'
+    "Plugin 'vim-scripts/JavaScript-Indent'
     Plugin 'burnettk/vim-angular'
     " Plugin 'pangloss/vim-javascript'
     Plugin 'elzr/vim-json'                           " JSON
