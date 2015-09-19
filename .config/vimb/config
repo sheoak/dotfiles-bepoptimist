@@ -1,0 +1,50 @@
+
+nnoremap c h
+nnoremap r l
+nnoremap t j
+nnoremap s k
+nnoremap C H
+nnoremap R L
+
+nnoremap T <C-d>
+nnoremap S <C-u>
+
+nnoremap gn t
+nnoremap j t
+nnoremap J T
+nnoremap l c
+nnoremap L C
+nnoremap h r
+nnoremap H R
+nnoremap k s
+nnoremap K S
+
+nnoremap gs gk
+nnoremap gt gj
+
+nnoremap c <C-o>
+nnoremap r <C-i>
+nnoremap gb gT
+nnoremap gé gt
+
+
+nnoremap <BS> <C-u>
+nnoremap <Space> <Cd>
+
+nmap + zi
+nmap - zo
+nmap = zz
+nmap <F5> h
+nmap <F11> :set statusbar!<CR>:set fullscreen!<CR>
+
+nmap d :quit<CR>
+
+set hintkeys=auiectrsn
+
+set previouspattern=/\bprev\|précédent\|previous\b/i,/^(<\|<<\|«)$/,/^(<\|<<\|«)/,/(<\|<<\|«)$/
+set nextpattern=/\bnext\|suivant\b/i,/^(>\|>>\|»)$/,/^(>\|>>\|»)/,/(>\|>>\|»)$/,/\bmore\b/i
+
+set editor-command=/usr/bin/urxvt -e vim %s
+
+set fontsize=16
+set strict-ssl=false
