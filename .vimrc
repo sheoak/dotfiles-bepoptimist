@@ -15,7 +15,7 @@
 " I also used some of Doug Ireton mirror pond settings
 " https://github.com/dougireton/mirror_pond/blob/master/vimrc
 "
-" Thank you to all the people behind the plugins I use, it’s awesome!
+" Thank you to all the people behind the plugins I used, it’s awesome!
 "
 " TODO: clean mappings and improve
 " TODO: remap $ / ^
@@ -109,7 +109,7 @@ else
     Plugin 'MarcWeber/vim-addon-mw-utils'
     Plugin 'sirver/ultisnips'
     Plugin 'honza/vim-snippets'
-    Plugin 'aperezdc/vim-template'
+    "Plugin 'aperezdc/vim-template'
     Plugin 'sheoak/vim-mucfind'
     Plugin 'Valloric/YouCompleteMe'
     Plugin 'joonty/vdebug'
@@ -473,6 +473,13 @@ if has("spell")
 
         autocmd FileType markdown setlocal
             \ tw=80
+            \ formatoptions+=t
+            \ spell spelllang=en
+
+        " git commit messages
+        autocmd FileType gitcommit setlocal
+            \ tw=72
+            \ colorcolumn=72
             \ spell spelllang=en
 
         " Mail: remove annoying trail space detection and set gutter
@@ -536,8 +543,6 @@ if (!exists('s:plugin_off'))
     nnoremap <leader><space> :Unite -no-split -start-insert file_rec/git<cr>
     "nnoremap <leader>f :Unite -no-split -start-insert file_rec/async:!<cr>
     nnoremap <leader>f :Unite -no-split -start-insert file_rec/async<cr>
-    " Yank history
-    nnoremap <leader>y :Unite history/yank<cr>
     " Buffer switching
     nnoremap <leader>m :Unite -quick-match buffer<cr>
 
@@ -546,14 +551,18 @@ if (!exists('s:plugin_off'))
     nnoremap <leader>y :Unite -no-split history/yank<cr>
     nnoremap <leader>n :Unite -no-split file/new file<cr>
 
-    call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern',
+    call unite#custom#source('file_rec,file_rec/async,file_rec/git', 'ignore_pattern',
         \ '\.svg$\|\.ico\|\.png$\|\.jpg$\|\.tmp/\|vendor/\|node_modules/')
+
     call unite#filters#matcher_default#use(['matcher_fuzzy'])
-    let g:unite_source_rec_max_cache_files=3000
+    let g:unite_source_rec_max_cache_files=0
+
+     call unite#custom#source('file_rec,file_rec/async', 'max_candidates', 0)
 
     if executable('ag')
         let g:unite_source_rec_async_command= 'ag --nocolor --nogroup
-            \ --hidden -g "" -G "\.(js|php|css|sass|json|md|txt|html|jade|scss|less|tex)$"'
+            \ --ignore="node_modules/*" --ignore=".git*" --ignore="bower_components"
+            \ --hidden -G "\.(js|php|css|sass|json|md|txt|html|jade|scss|less|tex)$" -g "" '
     endif
 
 endif
