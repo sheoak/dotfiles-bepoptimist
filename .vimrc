@@ -555,21 +555,22 @@ if (!exists('s:plugin_off'))
         \ '\.svg$\|\.ico\|\.png$\|\.jpg$\|\.tmp/\|vendor/\|node_modules/')
 
     call unite#filters#matcher_default#use(['matcher_fuzzy'])
-    let g:unite_source_rec_max_cache_files=0
+    let g:unite_source_rec_max_cache_files=3000
 
-     call unite#custom#source('file_rec,file_rec/async', 'max_candidates', 0)
+    call unite#custom#source('file_rec,file_rec/async', 'max_candidates', 3000)
 
     if executable('ag')
-        let g:unite_source_rec_async_command= 'ag --nocolor --nogroup
-            \ --ignore="node_modules/*" --ignore=".git*" --ignore="bower_components"
-            \ --hidden -G "\.(js|php|css|sass|json|md|txt|html|jade|scss|less|tex)$" -g "" '
+
+        let g:unite_source_rec_async_command=
+                \ ['ag', '--follow', '--nocolor', '--nogroup',
+                \  '--hidden', '-g', '', '--ignore', 'node_modules',
+                \ '--ignore', '.git*',
+                \ '-G', '\.(js|php|css|sass|json|md|txt|html|jade|scss|less|tex)$'
+                \ ]
+
     endif
 
 endif
-"call unite#custom#source('file_rec,file_rec/async', 'max_candidates', 0)
-"let g:unite_source_rec_async_command='ag --nocolor --nogroup --ignore ".hg" --ignore ".svn" --ignore ".git" --ignore ".bzr" --hidden -g ""'
-"nnoremap <leader>l :Unite -no-split -start-insert outline<cr>
-" }}}
 
 " Plugin vim-airline {{{
 " -----------------------------------------------------------------------------
