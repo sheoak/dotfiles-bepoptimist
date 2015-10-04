@@ -90,62 +90,61 @@ else
     Plugin 'altercation/vim-colors-solarized'
     Plugin 'morhetz/gruvbox'
 
+    " dependencies
+    Plugin 'tomtom/tlib_vim'                " utility functions
+    Plugin 'tobyS/vmustache'                " vim templates (for phpDoc)
+    Plugin 'MarcWeber/vim-addon-mw-utils'   " ?
+
     " Favorites
     Plugin 'Shougo/unite.vim'
     Plugin 'Shougo/vimproc.vim'             " Unite deps for file_sync
     Plugin 'Shougo/neomru.vim'              " Unite deps for file_mru
-    Plugin 'tpope/vim-fugitive'             " Git integration
+
     Plugin 'airblade/vim-gitgutter'         " Git gutter on the left
     Plugin 'bling/vim-airline'              " Cool status bar
 
-    "Plugin 'tpope/vim-commentary'
-    Plugin 'tpope/vim-surround'
-    Plugin 'tpope/vim-repeat'
-    Plugin 'tpope/vim-speeddating'
-    Plugin 'sjl/gundo.vim'
-    "Plugin 'kien/ctrlp.vim'
+    Plugin 'tpope/vim-fugitive'             " Git integration
+    Plugin 'tpope/vim-surround'             " motions around words
+    Plugin 'tpope/vim-repeat'               " missing repeat with dot
+    Plugin 'tpope/vim-speeddating'          " inc/dec dates and numbers
+
+    " FIXME: bepo shortcuts
+    Plugin 'tpope/vim-commentary'           " quick comment
+
+    Plugin 'sjl/gundo.vim'                  " save undo when closing file
+    Plugin 'scrooloose/syntastic'           " syntax checking
     Plugin 'mattn/emmet-vim'
     Plugin 'godlygeek/tabular'
-    Plugin 'tomtom/tlib_vim'
-    Plugin 'MarcWeber/vim-addon-mw-utils'
-    Plugin 'sirver/ultisnips'
+    "Plugin 'sirver/ultisnips'
     Plugin 'honza/vim-snippets'
-    "Plugin 'aperezdc/vim-template'
-    Plugin 'sheoak/vim-mucfind'
-    "Plugin 'Valloric/YouCompleteMe'
-    Plugin 'joonty/vdebug'
+    Plugin 'sheoak/vim-mucfind'             " quickly insert mu result
+    Plugin 'joonty/vdebug'                  " multi-language debugger
     " Plugin 'jaredly/vim-debug'
-    Plugin 'tobyS/vmustache'
-    Plugin 'tobyS/pdv'
-
-    Plugin 'scrooloose/syntastic'
 
     " Filetype specific plugins
-    Plugin 'PotatoesMaster/i3-vim-syntax'            " i3
-    Plugin 'digitaltoad/vim-jade'                    " jade
+    Plugin 'PotatoesMaster/i3-vim-syntax'            " i3 config syntax
+    Plugin 'digitaltoad/vim-jade'                    " jade syntax
     Plugin 'plasticboy/vim-markdown'                 " markdown
-    Plugin 'hail2u/vim-css3-syntax'                  " CSS3
-    " Plugin 'cakebaker/scss-syntax.vim'             " SASS. Broken for .sass?
+    Plugin 'hail2u/vim-css3-syntax'                  " CSS3 syntax
     Plugin 'othree/javascript-libraries-syntax.vim'  " Javascript
+    Plugin 'tobyS/pdv'                               " phpDocumentor
     Plugin 'jelera/vim-javascript-syntax'
-    "Plugin 'vim-scripts/JavaScript-Indent'
     Plugin 'burnettk/vim-angular'
-    " Plugin 'pangloss/vim-javascript'
     Plugin 'elzr/vim-json'                           " JSON
-
-    Plugin 'vim-pandoc/vim-pandoc'
+    " Plugin 'tpope/vim-jdaddy' " json manipulation
+    Plugin 'vim-pandoc/vim-pandoc'                   " pandoc
     Plugin 'vim-pandoc/vim-pandoc-syntax'
 
+    "Plugin 'vim-scripts/JavaScript-Indent'
+    "Plugin 'pangloss/vim-javascript'
+    "Plugin 'cakebaker/scss-syntax.vim'             " SASS. Broken for .sass?
+    "Plugin 'aperezdc/vim-template'
+    "Plugin 'Valloric/YouCompleteMe'
 
     " Use local bundles config if available
     if filereadable(expand("~/.vimrc.bundles.local"))
         source ~/.vimrc.bundles.local
     endif
-
-    " TODO: test me!
-    " Plugin 'tpope/vim-projectionist'
-    " Plugin 'tpope/vim-jdaddy'
-    " Plugin 'tpope/vim-unimpaired'
 
     " All of your Plugins must be added before the following line
     call vundle#end()            " required
