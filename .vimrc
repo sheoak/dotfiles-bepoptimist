@@ -545,16 +545,15 @@ if (!exists('s:plugin_off'))
     let g:unite_source_history_yank_enable = 1
 
     " Default Unite buffer, async recursive
-    nnoremap <leader><space> :Unite -no-split -start-insert file_rec/git<cr>
-    "nnoremap <leader>f :Unite -no-split -start-insert file_rec/async:!<cr>
-    nnoremap <leader>f :Unite -no-split -start-insert file_rec/async<cr>
+    nnoremap <leader><space> :Unite -no-split -start-insert file_rec/async<cr>
+    " Git searching
+    nnoremap <leader>f :Unite -no-split -start-insert file_rec/git<cr>
     " Buffer switching
     nnoremap <leader>m :Unite -quick-match buffer<cr>
-
-    nnoremap <leader>j :Unite -no-split buffer<cr>
     nnoremap <leader>l :Unite -no-split -start-insert file_mru<cr>
-    nnoremap <leader>y :Unite -no-split history/yank<cr>
-    nnoremap <leader>n :Unite -no-split file/new file<cr>
+    nnoremap <leader>y :Unite history/yank<cr>
+    nnoremap <leader>n :Unite -no-split file/new directory/new file directory<cr>
+    nnoremap <leader>b :Unite -no-split bookmark<cr>
 
     call unite#custom#source('file_rec,file_rec/async,file_rec/git', 'ignore_pattern',
         \ '\.svg$\|\.ico\|\.png$\|\.jpg$\|\.tmp/\|vendor/\|node_modules/')
