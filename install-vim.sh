@@ -37,3 +37,5 @@ cd ~/.vim/bundle/vimproc.vim/
 make
 cd -
 
+echo "Do not forget to install tidy5 and put 'tidy' in PATH: https://github.com/htacg/tidy-html5"
+

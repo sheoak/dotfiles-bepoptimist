@@ -29,7 +29,7 @@
 " - git:        for vim-fugitive plugin
 " - cmake:      to compile YouComplete plugin
 " - vundle:     https://github.com/gmarik/Vundle.vim
-" - jshint:     for syntastic — npm install jshint
+" - jshint:     for syntastic — npm install -g jshint
 " - ag:         optional but really faster with unite
 "               https://github.com/ggreer/the_silver_searcher
 "
@@ -516,11 +516,16 @@ imap <C-g>g <C-g>,
 
 " Plugin Syntastic {{{
 " -----------------------------------------------------------------------------
+let g:syntastic_html_tidy_exec      = 'tidy'
 let g:syntastic_stl_format          = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 let g:syntastic_enable_perl_checker = 1
 let g:syntastic_enable_signs        = 1
 let g:syntastic_check_on_open       = 1
-let g:syntastic_html_tidy_ignore_errors = ['proprietary attribute "sv-"']
+let g:syntastic_html_tidy_ignore_errors = [
+    \ '<sv-',
+    \ 'discarding unexpected </sv-',
+    \ 'proprietary attribute "sv-"'
+    \ ]
 " }}}
 
 " Plugin TagBar {{{
