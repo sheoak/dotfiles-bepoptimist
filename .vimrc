@@ -21,6 +21,7 @@
 " TODO: remap $ / ^
 " TODO: paste mapping (system/mouse/xclip, unite yank…)
 " TODO: custom templates licence
+" TODO: replace leader to avoid delay with "," map
 "
 " Dependencies:
 " -----------------------------------------------------------------------------
