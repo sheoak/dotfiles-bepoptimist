@@ -359,10 +359,13 @@ if has("autocmd")
 
 
         " Tab settings
-        " FIXME useful?
         autocmd FileType sass         setlocal softtabstop=2 shiftwidth=2 tabstop=2
         autocmd FileType javascript   setlocal softtabstop=0 shiftwidth=4 tabstop=4
         autocmd FileType jade         setlocal softtabstop=2 shiftwidth=2 tabstop=2
+
+        " HTML/CSS mapping
+        autocmd FileType html imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+        autocmd FileType css  imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
         " TODO: check if it works
         autocmd FileType php          setlocal omnifunc=phpcomplete#CompletePHP
@@ -505,8 +508,10 @@ let g:solarized_termtrans=0
 " Plugin Emmet {{{
 " -----------------------------------------------------------------------------
 let g:user_emmet_install_global = 0
-autocmd FileType html EmmetInstall
-"autocmd FileType html,css,scss,sass EmmetInstall
+"autocmd FileType html EmmetInstall
+autocmd FileType html,css,scss,sass EmmetInstall
+let g:user_emmet_leader_key='<C-g>'
+imap <C-g>g <C-g>,
 " }}}
 
 " Plugin Syntastic {{{
