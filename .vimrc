@@ -17,11 +17,10 @@
 "
 " Thank you to all the people behind the plugins I used, it’s awesome!
 "
-" TODO: clean mappings and improve
+" TODO: clean mappings and improve (regroup buffer mappings and git mappings)
 " TODO: remap $ / ^
 " TODO: paste mapping (system/mouse/xclip, unite yank…)
 " TODO: custom templates licence
-" TODO: replace leader to avoid delay with "," map
 "
 " Dependencies:
 " -----------------------------------------------------------------------------
@@ -87,6 +86,7 @@ else
     call vundle#begin()
 
     " Themes
+    Plugin 'endel/vim-github-colorscheme'
     Plugin 'altercation/vim-colors-solarized'
     Plugin 'morhetz/gruvbox'
 
@@ -108,13 +108,14 @@ else
     Plugin 'tpope/vim-repeat'               " missing repeat with dot
     Plugin 'tpope/vim-speeddating'          " inc/dec dates and numbers
 
+    Plugin 'marijnh/tern_for_vim'           " ctags for javascript
     " FIXME: bepo shortcuts
     Plugin 'tpope/vim-commentary'           " quick comment
 
     Plugin 'sjl/gundo.vim'                  " save undo when closing file
     Plugin 'scrooloose/syntastic'           " syntax checking
     Plugin 'mattn/emmet-vim'
-    Plugin 'godlygeek/tabular'
+    Plugin 'godlygeek/tabular'              " must be BEFORE markdown plugin
     "Plugin 'sirver/ultisnips'
     Plugin 'honza/vim-snippets'
     Plugin 'sheoak/vim-mucfind'             " quickly insert mu result
@@ -138,7 +139,7 @@ else
     "Plugin 'vim-scripts/JavaScript-Indent'
     "Plugin 'pangloss/vim-javascript'
     "Plugin 'cakebaker/scss-syntax.vim'             " SASS. Broken for .sass?
-    "Plugin 'aperezdc/vim-template'
+    Plugin 'aperezdc/vim-template'
     "Plugin 'Valloric/YouCompleteMe'
 
     " Use local bundles config if available
@@ -186,11 +187,11 @@ endif
 
 " Editing {{{
 " -----------------------------------------------------------------------------
-set tabstop=4           " number of visual spaces per TAB
-set softtabstop=4       " number of spaces in tab when editing
+set tabstop=4                         " number of visual spaces per TAB
+set softtabstop=4                     " number of spaces in tab when editing
 set shiftwidth=4
-set expandtab           " tabs are spaces
-set listchars=nbsp:·,trail:¤,tab:\ \ 
+set expandtab                         " tabs are spaces
+set listchars=nbsp:·,trail:¤,tab:\ \  " show invisible nbsp/tabs spaces
 set list
 set backspace=indent,eol,start  " allow all backspacing in insert mode
 set clipboard=unnamed           " yank to the system clipboard by default
@@ -211,6 +212,7 @@ if v:version > 703 || v:version == 703 && has("patch541")
                                 " joining two commented lines
 endif
 
+
 " }}}
 
 " Searching {{{
@@ -225,7 +227,7 @@ set smartcase
 " Folding {{{
 " -----------------------------------------------------------------------------
 "set foldenable         " enable folding
-set nofoldenable        "dont fold by default
+set nofoldenable        " dont fold by default
 set foldlevelstart=50   " open most folds by default
 set foldnestmax=2       " 2 nested fold max
 set foldmethod=indent   " fold based on indent level
@@ -234,6 +236,7 @@ set foldmethod=indent   " fold based on indent level
 " UI {{{
 " -----------------------------------------------------------------------------
 set nonumber            " do not show line number
+set relativenumber
 set cursorline          " highlight current line
 set colorcolumn=80
 set showcmd             " display incomplete commands
@@ -335,7 +338,7 @@ if has("autocmd")
         " FIXME: breaks after a while, too many files
         "autocmd BufWinLeave *.* mkview!
         "autocmd BufWinEnter *.* silent loadview
-        "
+
         autocmd BufEnter *.zsh-theme            setlocal filetype=zsh
 
         " Markdown type
@@ -416,29 +419,33 @@ noremap , \
 " Don't use Ex mode, use Q for formatting
 map Q gq
 
+" ESC challenge - replaced by CTRL-C
+inoremap <ESC> <nop>
+
 " Sudo save
 command! W w !sudo tee % > /dev/null
 
 " FN mappings, F5-F12 are taken by debugger
-map <F1> <nop>
+map <F1> :set nofoldenable<CR>
 " Toggle paste mode
 map <F2> :set invpaste<CR>
 " Toggle backgound color
-map <F3> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
-map <F4> <nop>
+noremap <F3> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
+" Toggle numbers
+noremap <F4> :set number!<CR>
 
 " Paste to system/clipboard buffer
-map <leader>v "*p
-map <leader>V "+p
-
+" DEPRECATED ? Clipboard unamed by default (mouse clipboard)
+" map <leader>v "*p
+" map <leader>V "+p
 " }}}
 
 " Navigation mapping {{{
 " -----------------------------------------------------------------------------
 
 " up/down arrow to navigate wrapped lines
-map <up>   gs
-map <down> gt
+inoremap <up>   gs
+inoremap <down> gt
 " cycle buffer forward
 map <Tab> :bn<CR>
 " cycle buffer backward
@@ -453,6 +460,10 @@ map <leader>; :W<CR>
 
 " new tab, ranger style
 map gn :tabe<CR>
+
+" reload vimrc
+nnoremap <leader>ev :e $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " }}}
 
@@ -496,6 +507,11 @@ end
 " }}}z
 
 " }}}
+" for fpath in split(globpath('~/', '.vimrc.*.key*'), '\n')
+" exe 'source' fpath
+" endfor
+"
+" ?>
 
 " Plugins configuration {{{
 " -----------------------------------------------------------------------------
@@ -530,8 +546,8 @@ let g:syntastic_html_tidy_ignore_errors = [
 
 " Plugin TagBar {{{
 " -----------------------------------------------------------------------------
-let g:tagbar_usearrows = 1
-map <leader>t :TagbarToggle<CR>
+" let g:tagbar_usearrows = 1
+" map <leader>t :TagbarToggle<CR>
 " }}}
 
 " Plugin Tabularize {{{
@@ -658,3 +674,6 @@ if filereadable(expand("~/.vimrc.local"))
 endif
 
 " }}}
+"
+
+let g:vim_markdown_folding_disabled=1
