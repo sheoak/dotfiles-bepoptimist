@@ -341,7 +341,7 @@ if has("autocmd")
 
         autocmd BufEnter *.zsh-theme            setlocal filetype=zsh
 
-        " Markdown type
+        " html mix with php
         autocmd BufRead,BufNewFile *.phtml      setlocal filetype=php
 
         " JSON type
@@ -367,8 +367,10 @@ if has("autocmd")
         autocmd FileType jade         setlocal softtabstop=2 shiftwidth=2 tabstop=2
 
         " HTML/CSS mapping
-        autocmd FileType html imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
-        autocmd FileType css  imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+        autocmd FileType html imap <buffer> <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+        autocmd FileType css  imap <buffer> <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+
+        autocmd FileType html         setlocal softtabstop=2 shiftwidth=2 tabstop=2
 
         " TODO: check if it works
         autocmd FileType php          setlocal omnifunc=phpcomplete#CompletePHP
