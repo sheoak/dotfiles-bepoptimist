@@ -1,4 +1,4 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
 " Vim main configuration file
 "
 " Maintainer: sheoak
@@ -57,11 +57,13 @@
 " Tip: You can remap caplocks to ESC, it’s not done here because it’s better
 " to do it system wise, and I use a typematrix, caplocks is far away!
 "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" }}}
 
+" Initialize {{{
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
+" }}}
 
 " Keyboard / keymap specific mapping {{{
 " I use it for typeMatrix mappings and bepo mapping
@@ -69,7 +71,6 @@ set nocompatible
 for fpath in split(globpath('~/', '.vimrc.*.key*'), '\n')
   exe 'source' fpath
 endfor
-
 " }}}
 
 " Vundle {{{
@@ -283,7 +284,6 @@ endif
 
 try
     colorscheme solarized
-    "colorscheme gruvbox
 catch
     colorscheme desert
 endtry
@@ -298,7 +298,6 @@ endif
 if has("syntax")
   syntax on
 endif
-
 
 " }}}
 
@@ -369,7 +368,7 @@ if has("autocmd")
         autocmd FileType css        setlocal omnifunc=csscomplete#CompleteCSS
         autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
-        " autocmd FileType vim          setlocal foldmethod=marker foldlevel=0
+        autocmd FileType vim          setlocal foldmethod=marker foldlevel=0
 
         " Strip whitespace on save on some files
         " autocmd FileType javascript   autocmd BufWritePre <buffer> CleanWhiteSpace
@@ -493,14 +492,9 @@ if has("spell")
 
     augroup END
 end
-" }}}z
 
 " }}}
-" for fpath in split(globpath('~/', '.vimrc.*.key*'), '\n')
-" exe 'source' fpath
-" endfor
-"
-" ?>
+" }}}
 
 " Plugins configuration {{{
 " -----------------------------------------------------------------------------
