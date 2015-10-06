@@ -321,12 +321,6 @@ if has("autocmd")
             \ exe "silent! normal g`\"za" |
         \ endif
 
-        " autoreload vimrc
-        " autocmd bufwritepost .vimrc source %
-
-        "au BufWinLeave * mkview
-        "au BufWinEnter * silent loadview
-
     augroup END
     " }}}
 
@@ -360,25 +354,25 @@ if has("autocmd")
     augroup fileTypes
         au!
 
-
         " Tab settings
-        autocmd FileType sass         setlocal softtabstop=2 shiftwidth=2 tabstop=2
-        autocmd FileType javascript   setlocal softtabstop=0 shiftwidth=4 tabstop=4
-        autocmd FileType jade         setlocal softtabstop=2 shiftwidth=2 tabstop=2
+        autocmd FileType sass       setlocal softtabstop=2 shiftwidth=2 tabstop=2
+        autocmd FileType javascript setlocal softtabstop=0 shiftwidth=4 tabstop=4
+        autocmd FileType jade       setlocal softtabstop=2 shiftwidth=2 tabstop=2
 
         " HTML/CSS mapping
-        autocmd FileType html imap <buffer> <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
-        autocmd FileType css  imap <buffer> <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+        autocmd FileType html,css   imap <buffer> <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
-        autocmd FileType html         setlocal softtabstop=2 shiftwidth=2 tabstop=2
+        autocmd FileType html       setlocal softtabstop=2 shiftwidth=2 tabstop=2
 
-        " TODO: check if it works
-        autocmd FileType php          setlocal omnifunc=phpcomplete#CompletePHP
+        " omnifunc by types
+        autocmd FileType php        setlocal omnifunc=phpcomplete#CompletePHP
+        autocmd FileType css        setlocal omnifunc=csscomplete#CompleteCSS
+        autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
-        autocmd FileType vim          setlocal foldmethod=marker foldlevel=0
+        " autocmd FileType vim          setlocal foldmethod=marker foldlevel=0
 
         " Strip whitespace on save on some files
-        autocmd FileType javascript   autocmd BufWritePre <buffer> CleanWhiteSpace
+        " autocmd FileType javascript   autocmd BufWritePre <buffer> CleanWhiteSpace
 
     augroup END
     " }}}
@@ -399,6 +393,10 @@ command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
 
 command! CleanWhiteSpace silent! %s/\s\+$//
 
+" Sudo save
+" TODO: check if secure
+command! W w !sudo tee % > /dev/null
+
 " }}}
 
 " Mappings {{{
@@ -411,8 +409,6 @@ let mapleader = ","     " default leader is a bad in azerty and bépo keyboards
 noremap \ ,
 noremap , \
 
-"imap <ESC> <ESC>:echo "Use CTRL-C, ESC is disabled!"<CR>
-
 " }}}
 
 " Edition mapping {{{
@@ -422,10 +418,8 @@ noremap , \
 map Q gq
 
 " ESC challenge - replaced by CTRL-C
+" TODO: map one-key only on typematrix
 inoremap <ESC> <nop>
-
-" Sudo save
-command! W w !sudo tee % > /dev/null
 
 " FN mappings, F5-F12 are taken by debugger
 map <F1> :set nofoldenable<CR>
@@ -436,10 +430,6 @@ noremap <F3> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
 " Toggle numbers
 noremap <F4> :set number!<CR>
 
-" Paste to system/clipboard buffer
-" DEPRECATED ? Clipboard unamed by default (mouse clipboard)
-" map <leader>v "*p
-" map <leader>V "+p
 " }}}
 
 " Navigation mapping {{{
@@ -459,9 +449,6 @@ map <leader>q :q<CR>
 map <leader>Q :q!<CR>
 map <leader>, :w<CR>
 map <leader>; :W<CR>
-
-" new tab, ranger style
-map gn :tabe<CR>
 
 " reload vimrc
 nnoremap <leader>ev :e $MYVIMRC<cr>
@@ -602,7 +589,7 @@ endif
 " Plugin vim-airline {{{
 " -----------------------------------------------------------------------------
 set laststatus=2 " Always display the statusline in all windows
-set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
+"set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 "let g:airline_inactive_collapse=1
@@ -611,7 +598,7 @@ let g:airline_powerline_fonts = 1
 
 " Plugin vim-jedi {{{
 " -----------------------------------------------------------------------------
-let g:ycm_min_num_of_chars_for_completion = 2
+" let g:ycm_min_num_of_chars_for_completion = 2
 " }}}
 
 " Plugin Colorpicker {{{
@@ -676,6 +663,3 @@ if filereadable(expand("~/.vimrc.local"))
 endif
 
 " }}}
-"
-
-let g:vim_markdown_folding_disabled=1
