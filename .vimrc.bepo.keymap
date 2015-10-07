@@ -18,7 +18,9 @@
 " | '--------------' | '--------------' | '--------------' | '--------------' |
 "  '----------------' '----------------' '----------------' '----------------'
 "
-" TODO: fix
+" TODO: fix window shortcuts
+" TODO: easy completion (insert mode)
+" TODO: best way to remap surround plugin?
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " bepo configuration, only if it’s current layout {{{
@@ -95,7 +97,7 @@ noremap [k [s
 " ----------------------------------------------------------------------------
 noremap gs gk
 noremap gt gj
-" Prgvious / next / first / last tab
+" Previous / next / first / last tab
 noremap gb gT
 noremap gé gt
 noremap gB :exe "silent! tabfirst"<CR>
@@ -107,29 +109,7 @@ noremap « <
 noremap » >
 " }}}
 
-" autocompletion bépo {{{
-" (right hand) <C-x> + …
-" d: dictionnary (default is k)
-" m: oMni (default is o)
-" n / l / f stay default (normal, line, file)
-"inoremap <C-x><C-m> <C-x><C-o>
-"inoremap <C-x><C-d> <C-x><C-k>
-" }}}
-
-" Spell {{{
-" z= command is hard to type in bépo
-" FIXME « » is taken (remapped <>)
-if has("spell")
-    "map «s z=
-    "map «g zg
-    "map »w zw
-    "map «uw zuw
-    "map «ug zug
-end
-" }}}
-
 " Ex remapping {{{
-" FIXME: gb gé does not work in :Ex
 if has("autocmd")
     augroup netrw_dvorak_fix
         autocmd!
@@ -139,6 +119,8 @@ if has("autocmd")
         noremap <buffer> t j
         noremap <buffer> s k
         noremap <buffer> k s
+        noremap <buffer> gb gT
+        noremap <buffer> gé gt
     endfunction
 endif
 " }}}
@@ -169,5 +151,11 @@ function! s:unite_my_settings()
   nmap <buffer> T         <Plug>(unite_skip_cursor_down)
 
 endfunction"}}}
+
+" Others easier mappings {{{
+
+" Access registers more easily on bepo keyboard
+nnoremap à "
+" }}}
 
 " vim:foldmethod=marker:foldlevel=0
