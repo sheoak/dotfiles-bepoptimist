@@ -442,6 +442,10 @@ noremap <F4> :set number!<CR>
 " Navigation mapping {{{
 " -----------------------------------------------------------------------------
 
+" page up/down
+noremap <BS> <PageUp>
+noremap <Space> <PageDown>
+
 " up/down arrow to navigate wrapped lines
 inoremap <up>   gs
 inoremap <down> gt
