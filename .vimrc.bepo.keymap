@@ -21,13 +21,20 @@
 " TODO: fix window shortcuts
 " TODO: easy completion (insert mode)
 " TODO: best way to remap surround plugin?
+" TODO: check bepo enabled in console?
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " bepo configuration, only if it’s current layout {{{
 " ----------------------------------------------------------------------------
-if empty(system("setxkbmap -print|grep bepo"))
+if executable('setxkbmap') && empty(system("setxkbmap -print|grep bepo"))
     finish
 endif
+
+" disabled
+if exists("g:bepo_disable") && g:bepo_disable
+    finish
+endif
+
 " }}}
 
 " w -> é, easier for motions like daw viw -> daè diè {{{
@@ -40,21 +47,23 @@ onoremap ié iw
 onoremap iÉ iW
 " }}}
 
-" Easier window manipulation with w instead of C-w {{{
+" Easier window manipulation with à instead of C-w {{{
 " ----------------------------------------------------------------------------
-noremap w <C-w>
-noremap W <C-w><C-w>
+noremap à <C-w>
+noremap À <C-w><C-w>
 
 " direct acces to <C-w> with w
-noremap wt <C-w>j
-noremap ws <C-w>k
-noremap wc <C-w>h
-noremap wr <C-w>l
-noremap wd <C-w>d
-noremap wo <C-w>o
-noremap wp <C-w>p
-noremap w<SPACE> :split<CR>
-noremap w<CR> :vsplit<CR>
+noremap àt <C-w>j
+noremap às <C-w>k
+noremap àc <C-w>h
+noremap àr <C-w>l
+" move to the left/right/top/bottom
+noremap àC <C-w>H
+noremap àR <C-w>L
+noremap àT <C-w>J
+noremap àS <C-w>K
+noremap à<SPACE> :split<CR>
+noremap à<CR> :vsplit<CR>
 " }}}
 
 " Home row HJKL -> CTSR {{{
@@ -70,8 +79,8 @@ noremap R L
 noremap T J
 noremap S K
 " Previous / next fold
-noremap zs zj
-noremap zt zk
+noremap zt zj
+noremap zs zk
 " }}}
 
 " Remap home row keys somewhere else {{{
@@ -88,9 +97,6 @@ noremap H R
 " S move to K (Substitute)
 noremap k s
 noremap K S
-" Spelling k move to s
-noremap ]k ]s
-noremap [k [s
 " }}}
 
 " Remap g… {{{
@@ -107,6 +113,25 @@ noremap gÉ :exe "silent! tablast"<CR>
 " <> direct access {{{
 noremap « <
 noremap » >
+" }}}
+
+" autocompletion bépo {{{
+" (right hand) <C-x> + …
+" m: oMni (default is o)
+inoremap <C-x><C-m> <C-x><C-o>
+" inoremap <C-x><C-d> <C-x><C-k>
+" }}}
+
+" Spell {{{
+" z= command is hard to type in bépo
+" FIXME « » is taken (remapped <>)
+if has("spell")
+    "map «s z=
+    "map «g zg
+    "map »w zw
+    "map «uw zuw
+    "map «ug zug
+end
 " }}}
 
 " Ex remapping {{{
@@ -126,8 +151,8 @@ endif
 " }}}
 
 " Plugin Surround {{{
-" bépo mapping
 let g:surround_no_mappings = 1
+" bépo mapping
 nmap ls  <Plug>Csurround
 " same
 nmap ds  <Plug>Dsurround
@@ -141,6 +166,7 @@ xmap gS  <Plug>VgSurround
 " }}}
 
 " Plugin Unite {{{
+" FIXME: "t" map is broken (open tab)
 autocmd! FileType unite call s:unite_my_settings()
 function! s:unite_my_settings()
 
@@ -155,7 +181,11 @@ endfunction"}}}
 " Others easier mappings {{{
 
 " Access registers more easily on bepo keyboard
-nnoremap à "
+"nnoremap à "
 " }}}
+" TODO
+"  nmap æ
+"  nmap œ
+"  nmap €
 
 " vim:foldmethod=marker:foldlevel=0
