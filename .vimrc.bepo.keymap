@@ -112,8 +112,8 @@ noremap » >
 " d: dictionnary (default is k)
 " m: oMni (default is o)
 " n / l / f stay default (normal, line, file)
-inoremap <C-x><C-m> <C-x><C-o>
-inoremap <C-x><C-d> <C-x><C-k>
+"inoremap <C-x><C-m> <C-x><C-o>
+"inoremap <C-x><C-d> <C-x><C-k>
 " }}}
 
 " Spell {{{

@@ -65,14 +65,6 @@
 set nocompatible
 " }}}
 
-" Keyboard / keymap specific mapping {{{
-" I use it for typeMatrix mappings and bepo mapping
-" This will include all files matching ~/.vimrc.*.key*
-for fpath in split(globpath('~/', '.vimrc.*.key*'), '\n')
-  exe 'source' fpath
-endfor
-" }}}
-
 " Vundle {{{
 " -----------------------------------------------------------------------------
 
@@ -156,6 +148,14 @@ filetype plugin indent on    " required
 
 " }}}
 
+" Keyboard / keymap specific mapping {{{
+" I use it for typeMatrix mappings and bepo mapping
+" This will include all files matching ~/.vimrc.*.key*
+for fpath in split(globpath('~/', '.vimrc.*.key*'), '\n')
+  exe 'source' fpath
+endfor
+" }}}
+
 " Basic vim settings {{{
 " -----------------------------------------------------------------------------
 set hidden                     " no alert if current buffer has not been saved
@@ -194,8 +194,8 @@ set shiftwidth=4
 set expandtab                         " tabs are spaces
 set listchars=nbsp:·,trail:¤,tab:\ \  " show invisible nbsp/tabs spaces
 set list
-set backspace=indent,eol,start  " allow all backspacing in insert mode
-set clipboard=unnamed           " yank to the system clipboard by default
+set backspace=indent,eol,start        " allow all backspacing in insert mode
+
 
 set showmatch                   " when inserting a bracket, briefly jump to
                                 " its match
@@ -207,6 +207,13 @@ set nrformats-=octal            " don't treat numbers with leading zeros as
                                 " octal when incrementing/decrementing
 
 set diffopt+=vertical           " start diff mode with vert. splits by default
+
+ " yank to the system clipboard by default
+if has('unnamedplus')
+    set clipboard=unnamed,unnamedplus
+elseif has('clipboard')
+    set clipboard=unnamed
+endif
 
 if v:version > 703 || v:version == 703 && has("patch541")
     set formatoptions+=j        " delete comment char on second line when
@@ -402,7 +409,7 @@ command! W w !sudo tee % > /dev/null
 " -----------------------------------------------------------------------------
 
 " Global mapping {{{
-let mapleader = ","     " default leader is a bad in azerty and bépo keyboards
+let mapleader = ","     " default leader is bad in azerty and bépo keyboards
 
 " remap \ to , instead of using mapleader, to avoid losing ',' map
 noremap \ ,
@@ -416,10 +423,11 @@ noremap , \
 " Don't use Ex mode, use Q for formatting
 map Q gq
 
-" ESC challenge - replaced by CTRL-C
-" TODO: map one-key only on typematrix
-inoremap <ESC> <nop>
+" Sudo save
+command! W w !sudo tee % > /dev/null
 
+" TODO: replace by cleaner mapping using c/l/y/d… + key
+" see imparing by tpope
 " FN mappings, F5-F12 are taken by debugger
 map <F1> :set nofoldenable<CR>
 " Toggle paste mode
@@ -457,6 +465,8 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Spell mappings {{{
 " If you are using bépo, see vimrc.bepo
+"
+" FIXME: this mix non-spell command
 " -----------------------------------------------------------------------------
 if has("spell")
 
@@ -492,8 +502,8 @@ if has("spell")
 
     augroup END
 end
-
 " }}}
+
 " }}}
 
 " Plugins configuration {{{
@@ -580,6 +590,8 @@ if (!exists('s:plugin_off'))
 
 endif
 
+" }}}
+
 " Plugin vim-airline {{{
 " -----------------------------------------------------------------------------
 set laststatus=2 " Always display the statusline in all windows
@@ -656,4 +668,8 @@ if filereadable(expand("~/.vimrc.local"))
     source ~/.vimrc.local
 endif
 
+" }}}
+
+" EXPERIMENTAL {{{
+inoremap ii <Esc>
 " }}}
