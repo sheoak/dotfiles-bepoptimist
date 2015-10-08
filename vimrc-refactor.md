@@ -1,19 +1,81 @@
 
-nmap ,<Backspace>  :call append(line('.')-1, '')<CR>
-nmap ,<Enter>      :call append(line('.'), '')<CR>
-nmap d<Backspace>  sddt
-nmap d<Enter>      tdds
+Plugin "Bim"
 
-nmap dq :q<CR>          " close window
-nmap dQ :q!<CR>         " force close window
-nmap dk :bd<CR>         " close buffer
-nmap dK :bufdo :bd<CR>  " close all buffers
+- Mode bepo / on off (même plugin pour tous les raccourcis)
+- Raccourcis activables par groupes ?
+
+Plugin "vim-typematrix"
+- Backspace / Return taking advantage of
+- Ctrl copy/paste ?
 
 
-nmap <Tab>      " buffer toggle :b#
-                " file explorer ?
-nmap <C-Tab>    " buffer next
-nmap <S-Tab>    " buffer previous
+TODO:
+
+- Spell scheme
+- Window scheme
+    -> move
+    -> create up down left right
+    -> close
+    -> size
+- Tab ?
+- Buffer scheme
+- Register theme
+
+    nnoremap à "
+    nnoremap àà :registers<CR>
+
+
+Plugins:
+
+- TypeMatrix (with toggle key)
+- Bepo mode (with toggle key)
+- Cleaning plugin : white space, retab ?
+- Advanced mappings scheme
+- Mac version
+
+
+Settings: (.vim/vimrc/)
+
+- themes.vimrc
+- plugins.vimrc
+- settings.vimrc
+- filetype.vimrc
+- autocmd.vimrc
+- spell.vimrc
+
+
+    nnoremap ,<Backspace>  :call append(line('.')-1, '')<CR>
+    nnoremap ,<Enter>      :call append(line('.'), '')<CR>
+    nnoremap d<Backspace>  sddt
+    nnoremap d<Enter>      tdds
+
+    nnoremap dq :q<CR>          " close window
+    nnoremap dQ :q!<CR>         " force close window
+    nnoremap dk :bd<CR>         " close buffer
+    nnoremap dK :bufdo :bd<CR>  " close all buffers
+
+
+    " move " to à
+    nnoremap àà :registers<CR>
+    nnoremap à "
+    " nnoremap " ?
+
+
+    nmap <Tab>      " buffer toggle :b#
+                    " file explorer ?
+    nmap <C-Tab>    " buffer next
+    nmap <S-Tab>    " buffer previous
+
+    " bepo
+    " remap è to $
+    nnoremap è $
+    " nnoremap $ ?
+    " nnoremap _ ?
+    " nnoremap —
+    " nnoremap æ
+    " nnoremap œ
+    " nnoremap €
+
 
 - buffers and windows
                     save                        ,,
@@ -35,6 +97,8 @@ nmap yr :registers<CR> " Yanked Registers
 " French specific ?
 " Spell on/off, fix, next… ?
 " Only on typematrix -> optional key
+
+- \`
 œ
 æ
 " only on azerty

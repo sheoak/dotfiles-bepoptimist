@@ -65,14 +65,6 @@
 set nocompatible
 " }}}
 
-" Keyboard / keymap specific mapping {{{
-" I use it for typeMatrix mappings and bepo mapping
-" This will include all files matching ~/.vimrc.*.key*
-for fpath in split(globpath('~/', '.vimrc.*.key*'), '\n')
-  exe 'source' fpath
-endfor
-" }}}
-
 " Vundle {{{
 " -----------------------------------------------------------------------------
 
@@ -111,7 +103,7 @@ else
 
     Plugin 'marijnh/tern_for_vim'           " ctags for javascript
     " FIXME: bepo shortcuts
-    Plugin 'tpope/vim-commentary'           " quick comment
+    " Plugin 'tpope/vim-commentary'           " quick comment
 
     Plugin 'sjl/gundo.vim'                  " save undo when closing file
     Plugin 'scrooloose/syntastic'           " syntax checking
@@ -156,6 +148,14 @@ filetype plugin indent on    " required
 
 " }}}
 
+" Keyboard / keymap specific mapping {{{
+" I use it for typeMatrix mappings and bepo mapping
+" This will include all files matching ~/.vimrc.*.key*
+for fpath in split(globpath('~/', '.vimrc.*.key*'), '\n')
+  exe 'source' fpath
+endfor
+" }}}
+
 " Basic vim settings {{{
 " -----------------------------------------------------------------------------
 set hidden                     " no alert if current buffer has not been saved
@@ -194,8 +194,8 @@ set shiftwidth=4
 set expandtab                         " tabs are spaces
 set listchars=nbsp:·,trail:¤,tab:\ \  " show invisible nbsp/tabs spaces
 set list
-set backspace=indent,eol,start  " allow all backspacing in insert mode
-set clipboard=unnamed           " yank to the system clipboard by default
+set backspace=indent,eol,start        " allow all backspacing in insert mode
+
 
 set showmatch                   " when inserting a bracket, briefly jump to
                                 " its match
@@ -207,6 +207,13 @@ set nrformats-=octal            " don't treat numbers with leading zeros as
                                 " octal when incrementing/decrementing
 
 set diffopt+=vertical           " start diff mode with vert. splits by default
+
+ " yank to the system clipboard by default
+if has('unnamedplus')
+    set clipboard=unnamed,unnamedplus
+elseif has('clipboard')
+    set clipboard=unnamed
+endif
 
 if v:version > 703 || v:version == 703 && has("patch541")
     set formatoptions+=j        " delete comment char on second line when
@@ -231,17 +238,17 @@ set smartcase
 set nofoldenable        " dont fold by default
 set foldlevelstart=50   " open most folds by default
 set foldnestmax=2       " 2 nested fold max
-set foldmethod=indent   " fold based on indent level
+set foldmethod=marker   " fold based on indent level
 " }}}
 
 " UI {{{
 " -----------------------------------------------------------------------------
-set nonumber            " do not show line number
-set relativenumber
+set nonumber            " show line number ?
+set norelativenumber    " show relative number also ?
 set cursorline          " highlight current line
 set colorcolumn=80
 set showcmd             " display incomplete commands
-set noshowmode          " already in airline
+set showmode            " already in airline?
 set lazyredraw          " redraw only when we need to
 set ttyfast             " indicates a fast terminal connection, faster redraw
 set showmatch           " highlight matching [{()}]
@@ -315,7 +322,7 @@ if has("autocmd")
         " Don't do it for commit messages, when the position is invalid, or when
         " inside an event handler (happens when dropping a file on gvim).
         " From https://github.com/thoughtbot/dotfiles/blob/master/vimrc
-        autocmd BufReadPost *
+        au BufReadPost *
         \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
             \ exe "silent! normal g`\"za" |
         \ endif
@@ -329,22 +336,21 @@ if has("autocmd")
 
         " save folding
         " FIXME: breaks after a while, too many files
-        "autocmd BufWinLeave *.* mkview!
-        "autocmd BufWinEnter *.* silent loadview
-
-        autocmd BufEnter *.zsh-theme            setlocal filetype=zsh
+        "au BufWinLeave *.* mkview!
+        "au BufWinEnter *.* silent loadview
+        au BufEnter *.zsh-theme            setlocal filetype=zsh
 
         " html mix with php
-        autocmd BufRead,BufNewFile *.phtml      setlocal filetype=php
+        au BufRead,BufNewFile *.phtml      setlocal filetype=php
 
         " JSON type
-        autocmd BufRead,BufNewFile *.json       setlocal filetype=json
-        autocmd BufRead,BufNewFile .jshintrc    setlocal filetype=json
+        au BufRead,BufNewFile *.json       setlocal filetype=json
+        au BufRead,BufNewFile .jshintrc    setlocal filetype=json
 
         " Mail type
-        autocmd BufRead,BufNewFile *mutt-*      setlocal filetype=mail
+        au BufRead,BufNewFile *mutt-*      setlocal filetype=mail
 
-        autocmd BufEnter Makefile setlocal noexpandtab
+        au BufEnter Makefile setlocal noexpandtab
 
     augroup END
     " }}}
@@ -354,24 +360,37 @@ if has("autocmd")
         au!
 
         " Tab settings
-        autocmd FileType sass       setlocal softtabstop=2 shiftwidth=2 tabstop=2
-        autocmd FileType javascript setlocal softtabstop=0 shiftwidth=4 tabstop=4
-        autocmd FileType jade       setlocal softtabstop=2 shiftwidth=2 tabstop=2
+        au FileType sass,jade,html setlocal
+            \ softtabstop=2
+            \ shiftwidth=2
+            \ tabstop=2
+
+        "au FileType javascript setlocal softtabstop=0 shiftwidth=4 tabstop=4
 
         " HTML/CSS mapping
-        autocmd FileType html,css   imap <buffer> <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
-
-        autocmd FileType html       setlocal softtabstop=2 shiftwidth=2 tabstop=2
+        au FileType html,css
+            \ imap <buffer> <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
         " omnifunc by types
-        autocmd FileType php        setlocal omnifunc=phpcomplete#CompletePHP
-        autocmd FileType css        setlocal omnifunc=csscomplete#CompleteCSS
-        autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+        au FileType php        setlocal omnifunc=phpcomplete#CompletePHP
+        au FileType css        setlocal omnifunc=csscomplete#CompleteCSS
+        au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
-        autocmd FileType vim          setlocal foldmethod=marker foldlevel=0
+        au FileType vim        setlocal foldmethod=marker foldlevel=0
+
+        au FileType text  setlocal
+            \ tw=78
+
+        au FileType markdown setlocal tw=80 formatoptions+=t
+
+        " git commit messages
+        au FileType gitcommit setlocal tw=72 colorcolumn=72
+
+        " Mail: remove annoying trail space detection and set gutter
+        au FileType mail setlocal tw=72 listchars=tab:\ \
 
         " Strip whitespace on save on some files
-        " autocmd FileType javascript   autocmd BufWritePre <buffer> CleanWhiteSpace
+        " au FileType javascript   au BufWritePre <buffer> CleanWhiteSpace
 
     augroup END
     " }}}
@@ -390,10 +409,10 @@ endif " has("autocmd")
 command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
             \ | wincmd p | diffthis
 
+" Clean dirty white space (EOL)
 command! CleanWhiteSpace silent! %s/\s\+$//
 
 " Sudo save
-" TODO: check if secure
 command! W w !sudo tee % > /dev/null
 
 " }}}
@@ -402,56 +421,11 @@ command! W w !sudo tee % > /dev/null
 " -----------------------------------------------------------------------------
 
 " Global mapping {{{
-let mapleader = ","     " default leader is a bad in azerty and bépo keyboards
 
-" remap \ to , instead of using mapleader, to avoid losing ',' map
+" default leader is bad in azerty and bépo keyboards
+" we also remap \ to , to avoid losing "f" reverse repeat
+let mapleader = ","
 noremap \ ,
-noremap , \
-
-" }}}
-
-" Edition mapping {{{
-" -----------------------------------------------------------------------------
-
-" Don't use Ex mode, use Q for formatting
-map Q gq
-
-" ESC challenge - replaced by CTRL-C
-" TODO: map one-key only on typematrix
-inoremap <ESC> <nop>
-
-" FN mappings, F5-F12 are taken by debugger
-map <F1> :set nofoldenable<CR>
-" Toggle paste mode
-map <F2> :set invpaste<CR>
-" Toggle backgound color
-noremap <F3> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
-" Toggle numbers
-noremap <F4> :set number!<CR>
-
-" }}}
-
-" Navigation mapping {{{
-" -----------------------------------------------------------------------------
-
-" up/down arrow to navigate wrapped lines
-inoremap <up>   gs
-inoremap <down> gt
-" cycle buffer forward
-map <Tab> :bn<CR>
-" cycle buffer backward
-map <S-Tab> :bp<CR>
-" close buffer / all buffers / window / all windows
-map <leader>k :bd<CR>
-map <leader>K :bufdo :bd<CR>
-map <leader>q :q<CR>
-map <leader>Q :q!<CR>
-map <leader>, :w<CR>
-map <leader>; :W<CR>
-
-" reload vimrc
-nnoremap <leader>ev :e $MYVIMRC<cr>
-nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " }}}
 
@@ -459,41 +433,18 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 " If you are using bépo, see vimrc.bepo
 " -----------------------------------------------------------------------------
 if has("spell")
-
     command! English setlocal spell! spelllang=en
     command! French  setlocal spell! spelllang=fr
-    command! Nospell setlocal nospell
+    " command! Nospell setlocal nospell
 
     augroup spell
-
         au!
-
-        " For all text files set 'textwidth' to 78 characters.
-        autocmd FileType text  setlocal
-            \ tw=78
-            \ spell spelllang=fr
-
-        autocmd FileType markdown setlocal
-            \ tw=80
-            \ formatoptions+=t
-            \ spell spelllang=en
-
-        " git commit messages
-        autocmd FileType gitcommit setlocal
-            \ tw=72
-            \ colorcolumn=72
-            \ spell spelllang=en
-
-        " Mail: remove annoying trail space detection and set gutter
-        autocmd FileType mail
-            \ setlocal tw=72
-            \ spell spelllang=fr
-            \ listchars=tab:\ \
-
+        au FileType text,mail            setlocal spell spelllang=fr
+        au FileType markdown,gitcommit   setlocal spell spelllang=en
     augroup END
 end
-
 " }}}
+
 " }}}
 
 " Plugins configuration {{{
@@ -507,10 +458,9 @@ let g:solarized_termtrans=0
 " Plugin Emmet {{{
 " -----------------------------------------------------------------------------
 let g:user_emmet_install_global = 0
-"autocmd FileType html EmmetInstall
-autocmd FileType html,css,scss,sass EmmetInstall
-let g:user_emmet_leader_key='<C-g>'
-imap <C-g>g <C-g>,
+au FileType html,css,scss,sass EmmetInstall
+"let g:user_emmet_leader_key='<C-g>'
+"imap <C-g>g <C-g>,
 " }}}
 
 " Plugin Syntastic {{{
@@ -531,17 +481,6 @@ let g:syntastic_html_tidy_ignore_errors = [
 " -----------------------------------------------------------------------------
 " let g:tagbar_usearrows = 1
 " map <leader>t :TagbarToggle<CR>
-" }}}
-
-" Plugin Tabularize {{{
-" -----------------------------------------------------------------------------
-vmap <C-j> :Tabularize/=<CR>
-if exists(":Tabularize")
-  nmap <Leader>= :Tabularize /=<CR>
-  vmap <Leader>= :Tabularize /=<CR>
-  nmap <Leader>: :Tabularize /:\zs<CR>
-  vmap <Leader>: :Tabularize /:\zs<CR>
-endif
 " }}}
 
 " Plugin Unite {{{
@@ -579,6 +518,8 @@ if (!exists('s:plugin_off'))
     endif
 
 endif
+
+" }}}
 
 " Plugin vim-airline {{{
 " -----------------------------------------------------------------------------
@@ -655,5 +596,95 @@ endif
 if filereadable(expand("~/.vimrc.local"))
     source ~/.vimrc.local
 endif
+
+" }}}
+
+" EXPERIMENTAL {{{
+inoremap ii <Esc>
+"nnoremap é <CTRL-w>
+
+" CTRL+Space for C-x
+inoremap <Nul> <C-x>
+
+" s is not that usefull, S is cc, s is xa
+" nnoremap s
+
+" Toggle options, $ has been remap to é
+" Remember: vars start by $
+nnoremap <silent> $n :set number!<CR>
+nnoremap <silent> $r :set relativenumber!<CR>
+nnoremap <silent> $f :set foldenable!<CR>
+nnoremap <silent> $p :set invpaste<CR>
+nnoremap <silent> $b :let &background = ( &background == "dark"? "light" : "dark" )<CR>
+nnoremap <silent> $w :set wrap!<CR>
+
+" Navigation {{{
+" ----------------------------------------------------------------------------
+" page up/down
+noremap <BS> <PageUp>
+noremap <Space> <PageDown>
+" up/down arrow to navigate wrapped lines
+nnoremap <up>   gs
+nnoremap <down> gt
+" }}}
+
+" Window and buffer managment {{{
+" ----------------------------------------------------------------------------
+" Quick buffer/window access
+nnoremap dq :q<CR>
+nnoremap dQ :q!<CR>
+" delete ([K]ill) buffer/force/a[l]l
+nnoremap dk :bd<CR>
+nnoremap dK :bd!<CR>
+nnoremap dl :bufdo bd<CR>
+
+" cycle between the current/last buffer
+nnoremap <Tab> :b#<CR>
+
+" reload vimrc
+nnoremap <leader>ev :e $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" I do not map :w! because it should be used carefully
+map <leader>, :w<CR>
+map <leader>; :W<CR>
+
+" }}}
+"
+" g<return>
+" g<space>
+
+
+" TODO: Spell
+
+" formatting
+" retab
+
+" Don't use Ex mode, use Q for formatting
+map Q gq
+
+" Replace space by non breakable space where it should (French rules)
+nnoremap d<Backspace> :%s/\(\S\) \([:;?!]\)/\1 \2/g<CR>
+nnoremap d<Space> :CleanWhiteSpace<CR>
+" retab
+
+nnoremap d<return> ggdG
+nnoremap y<return> ggyG``
+nnoremap l<return> ggdG``
+
+
+" Plugin Tabularize {{{
+if exists(":Tabularize")
+    vmap <C-j> :Tabularize/=<CR>
+    nmap <Leader>= :Tabularize /=<CR>
+    vmap <Leader>= :Tabularize /=<CR>
+    nmap <Leader>: :Tabularize /:\zs<CR>
+    vmap <Leader>: :Tabularize /:\zs<CR>
+endif
+" }}}
+
+" TODO: remap < «
+" map tab to esc?
+"
 
 " }}}
