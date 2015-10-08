@@ -37,6 +37,18 @@ endif
 
 " }}}
 
+" switch è/$
+nnoremap è $
+nnoremap $ è
+" switch à/"
+nnoremap à "
+nnoremap " à
+
+" BEPO
+" quick window access
+nnoremap € :bn<CR>
+nnoremap œ :bp<CR>
+
 " w -> é, easier for motions like daw viw -> daè diè {{{
 " ----------------------------------------------------------------------------
 noremap é w
@@ -45,25 +57,29 @@ onoremap aé aw
 onoremap aÉ aW
 onoremap ié iw
 onoremap iÉ iW
+vnoremap aé aw
+vnoremap aÉ aW
+vnoremap ié iw
+vnoremap iÉ iW
 " }}}
 
 " Easier window manipulation with à instead of C-w {{{
 " ----------------------------------------------------------------------------
-noremap à <C-w>
-noremap À <C-w><C-w>
+noremap æ <C-w>
+noremap ææ <C-w><C-w>
 
 " direct acces to <C-w> with w
-noremap àt <C-w>j
-noremap às <C-w>k
-noremap àc <C-w>h
-noremap àr <C-w>l
+noremap æt <C-w>j
+noremap æs <C-w>k
+noremap æc <C-w>h
+noremap ær <C-w>l
 " move to the left/right/top/bottom
-noremap àC <C-w>H
-noremap àR <C-w>L
-noremap àT <C-w>J
-noremap àS <C-w>K
-noremap à<SPACE> :split<CR>
-noremap à<CR> :vsplit<CR>
+noremap æC <C-w>H
+noremap æR <C-w>L
+noremap æT <C-w>J
+noremap æS <C-w>K
+noremap æ<SPACE> :split<CR>
+noremap æ<CR> :vsplit<CR>
 " }}}
 
 " Home row HJKL -> CTSR {{{
@@ -85,7 +101,7 @@ noremap zs zk
 
 " Remap home row keys somewhere else {{{
 " ----------------------------------------------------------------------------
-" T move to J (To)
+" T move to J ([J]usqu'à)
 noremap j t
 noremap J T
 " C move to L (Change)
@@ -113,13 +129,6 @@ noremap gÉ :exe "silent! tablast"<CR>
 " <> direct access {{{
 noremap « <
 noremap » >
-" }}}
-
-" autocompletion bépo {{{
-" (right hand) <C-x> + …
-" m: oMni (default is o)
-inoremap <C-x><C-m> <C-x><C-o>
-" inoremap <C-x><C-d> <C-x><C-k>
 " }}}
 
 " Spell {{{
@@ -181,11 +190,7 @@ endfunction"}}}
 " Others easier mappings {{{
 
 " Access registers more easily on bepo keyboard
-"nnoremap à "
-" }}}
-" TODO
-"  nmap æ
-"  nmap œ
-"  nmap €
+nnoremap à "
+nnoremap àà :registers<CR>
 
 " vim:foldmethod=marker:foldlevel=0

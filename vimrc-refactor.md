@@ -1,3 +1,14 @@
+
+Plugin "Bim"
+
+- Mode bepo / on off (même plugin pour tous les raccourcis)
+- Raccourcis activables par groupes ?
+
+Plugin "vim-typematrix"
+- Backspace / Return taking advantage of
+- Ctrl copy/paste ?
+
+
 TODO:
 
 - Spell scheme
