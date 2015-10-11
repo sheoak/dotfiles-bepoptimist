@@ -1,5 +1,4 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
-" Vim main configuration file
+" Vim main configuration file {{{
 "
 " Maintainer: sheoak
 " Version:    O.11
@@ -17,10 +16,10 @@
 "
 " Thank you to all the people behind the plugins I used, it’s awesome!
 "
-" TODO: clean mappings and improve (regroup buffer mappings and git mappings)
-" TODO: remap $ / ^
-" TODO: paste mapping (system/mouse/xclip, unite yank…)
 " TODO: custom templates licence
+" TODO: a vim plugin for french langage, with dict and keymaps
+" FIXME: registers are inconsistents
+" TODO: clean plugins
 "
 " Dependencies:
 " -----------------------------------------------------------------------------
@@ -37,11 +36,8 @@
 "
 " Copy this file to ~/.vimrc as well as other needed files:
 "
-" - .vimrc.typematrix.keyboard if you want to use typematrix mappings
-" - .vimrc.bepo.keymap if you are using bepo layout
 " - .vimrc.local if you want to override settings only on your local machine
 " - .vimrc.bundles.local if you want to add plugins only on your local machine
-" - .vimrc.mac if you are using vim on a mac (experimental)
 "
 " YouComplete: (example on ubuntu)
 " cd ~/.vim/bundle/YouCompleteMe/
@@ -59,14 +55,12 @@
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" }}}
 
-" Initialize {{{
+" Vundle {{{
+" -----------------------------------------------------------------------------
+
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
-" }}}
-
-" Vundle {{{
-" -----------------------------------------------------------------------------
 
 " We want to be able to run without plugins, but print an error
 if !isdirectory($HOME . '/.vim/bundle/Vundle.vim')
