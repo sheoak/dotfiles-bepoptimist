@@ -150,16 +150,15 @@ filetype plugin indent on    " required
 
 " }}}
 
-" Keyboard / keymap specific mapping {{{
-" I use it for typeMatrix mappings and bepo mapping
-" This will include all files matching ~/.vimrc.*.key*
-for fpath in split(globpath('~/', '.vimrc.*.key*'), '\n')
-  exe 'source' fpath
-endfor
-" }}}
-
 " Basic vim settings {{{
 " -----------------------------------------------------------------------------
+
+" Keyboard / keymap specific mapping
+" default leader is bad in azerty and bépo keyboards
+" we also remap \ to , to avoid losing "f" reverse repeat
+let mapleader = ","
+noremap \ ,
+
 set hidden                     " no alert if current buffer has not been saved
 set modeline                   " enable modelines comments
 set modelines=1
@@ -178,6 +177,8 @@ set backupdir=~/.vim/backups,/tmp/
 set directory=~/.vim/backups/swap/,/tmp/
 set writebackup
 set backupskip=/tmp/*,~/.Backups/*,*.tmp/*,*.cache/*
+set sessionoptions-=options     " do not save options
+set viminfo^=!                  " keep some vim history after closing
 
 " Persistent Undo
 " Keep undo history across sessions, by storing in file.
@@ -190,6 +191,10 @@ endif
 
 " Editing {{{
 " -----------------------------------------------------------------------------
+set complete-=i                       " scan current and included files
+set ttimeout
+set ttimeoutlen=100                   " time waited before end of sequence
+set autoread                          " detect file changed outside of vim
 set tabstop=4                         " number of visual spaces per TAB
 set softtabstop=4                     " number of spaces in tab when editing
 set shiftwidth=4
@@ -197,7 +202,6 @@ set expandtab                         " tabs are spaces
 set listchars=nbsp:·,trail:¤,tab:\ \  " show invisible nbsp/tabs spaces
 set list
 set backspace=indent,eol,start        " allow all backspacing in insert mode
-
 
 set showmatch                   " when inserting a bracket, briefly jump to
                                 " its match
@@ -256,7 +260,7 @@ set ttyfast             " indicates a fast terminal connection, faster redraw
 set showmatch           " highlight matching [{()}]
 set ruler               " show the cursor position all the time
 set scrolloff=6         " nb of screen lines to keep above and below the cursor.
-"set sidescrolloff=15
+set sidescrolloff=5
 "set sidescroll=1
 set guioptions=a
 set mouse=a             " enable mouse support
@@ -272,6 +276,8 @@ set wildignore+=*.exe,*.mov,*.msi,*.xls,.ctags,*vim/backups*,*sass_cache*
 set wildignore+=*DS_Store*
 
 set wildmenu            " Better command-line completion
+
+set display+=lastline   " Show as much as possible of long line (no @)
 
 " Add guard around 'wildignorecase' to prevent terminal vim error
 if exists('&wildignorecase')
@@ -367,26 +373,24 @@ if has("autocmd")
             \ shiftwidth=2
             \ tabstop=2
 
+        "TODO: remove me?
         "au FileType javascript setlocal softtabstop=0 shiftwidth=4 tabstop=4
 
         " HTML/CSS mapping
-        au FileType html,css
+        au FileType html,css,sass,less
             \ imap <buffer> <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
         " omnifunc by types
-        au FileType php        setlocal omnifunc=phpcomplete#CompletePHP
-        au FileType css        setlocal omnifunc=csscomplete#CompleteCSS
-        au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+        au FileType php            setlocal omnifunc=phpcomplete#CompletePHP
+        au FileType css,sass,less  setlocal omnifunc=csscomplete#CompleteCSS
+        au FileType javascript     setlocal omnifunc=javascriptcomplete#CompleteJS
 
-        au FileType vim        setlocal foldmethod=marker foldlevel=0
-
-        au FileType text  setlocal
-            \ tw=78
-
-        au FileType markdown setlocal tw=80 formatoptions+=t
-
-        " git commit messages
-        au FileType gitcommit setlocal tw=72 colorcolumn=72
+        " formating by types
+        au FileType vim            setlocal foldmethod=marker foldlevel=0
+        au FileType text           setlocal tw=78
+        " TODO: verify if taken care by plugins
+        au FileType markdown       setlocal tw=80 formatoptions+=t
+        au FileType gitcommit      setlocal tw=72 colorcolumn=72
 
         " Mail: remove annoying trail space detection and set gutter
         au FileType mail setlocal tw=72 listchars=tab:\ \
@@ -419,35 +423,37 @@ command! W w !sudo tee % > /dev/null
 
 " }}}
 
-" Mappings {{{
-" -----------------------------------------------------------------------------
-
-" Global mapping {{{
-
-" default leader is bad in azerty and bépo keyboards
-" we also remap \ to , to avoid losing "f" reverse repeat
-let mapleader = ","
-noremap \ ,
-
-" }}}
-
-" Spell mappings {{{
-" If you are using bépo, see vimrc.bepo
+" Spell configuration {{{
 " -----------------------------------------------------------------------------
 if has("spell")
-    command! English setlocal spell! spelllang=en
-    command! French  setlocal spell! spelllang=fr
-    " command! Nospell setlocal nospell
-
     augroup spell
         au!
         au FileType text,mail            setlocal spell spelllang=fr
         au FileType markdown,gitcommit   setlocal spell spelllang=en
+        au FileType help                 setlocal nospell
     augroup END
 end
 " }}}
 
+inoremap ii <Esc>
+
+" CTRL+Space for C-x
+" Beware of system shortcuts (like keyboard layout toggle)
+" TODO: disable ubuntu CTRL-space
+inoremap <Nul> <C-x>
+
+" s is not that usefull, S is cc, s is xa
+" TODO
+" nnoremap s
+
+" cycle between the current/last buffer
+nnoremap <Tab> :b#<CR>
+
 " }}}
+
+" Don't use Ex mode, use Q for formatting
+map Q gq
+
 
 " Plugins configuration {{{
 " -----------------------------------------------------------------------------
@@ -461,7 +467,7 @@ let g:solarized_termtrans=0
 " -----------------------------------------------------------------------------
 let g:user_emmet_install_global = 0
 au FileType html,css,scss,sass EmmetInstall
-"let g:user_emmet_leader_key='<C-g>'
+let g:user_emmet_leader_key='<C-g>'
 "imap <C-g>g <C-g>,
 " }}}
 
@@ -489,8 +495,11 @@ let g:syntastic_html_tidy_ignore_errors = [
 if (!exists('s:plugin_off'))
     let g:unite_source_history_yank_enable = 1
 
+    " TODO: with current dir/buffer dir
+
     " Default Unite buffer, async recursive
-    nnoremap <leader><space> :Unite -no-split -start-insert file_rec/async<cr>
+    " nnoremap <leader><space> :Unite -no-split -start-insert file_rec/async<cr>
+    nnoremap <leader><space> :Unite -no-split -start-insert file_rec<cr>
     " Git searching
     nnoremap <leader>f :Unite -no-split -start-insert file_rec/git<cr>
     " Buffer switching
@@ -499,6 +508,7 @@ if (!exists('s:plugin_off'))
     nnoremap <leader>y :Unite history/yank<cr>
     nnoremap <leader>n :Unite -no-split file/new directory/new file directory<cr>
     nnoremap <leader>b :Unite -no-split bookmark<cr>
+    nnoremap <leader>a :UniteBookmarkAdd<cr>
 
     call unite#custom#source('file_rec,file_rec/async,file_rec/git', 'ignore_pattern',
         \ '\.svg$\|\.ico\|\.png$\|\.jpg$\|\.tmp/\|vendor/\|node_modules/')
@@ -529,6 +539,9 @@ set laststatus=2 " Always display the statusline in all windows
 "set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
+
 "let g:airline_inactive_collapse=1
 "let g:airline_section_z = "%3p%% %{g:airline_symbols.linenr}%#__accent_bold#%4l%#__restore__#U"
 " }}}
@@ -558,6 +571,12 @@ let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
 nnoremap <buffer> <C-p> :call pdv#DocumentWithSnip()<CR>
 
 " }}}
+"
+" Plugin bim {{{
+let g:bim_remap_commentary = 1
+let g:bim_remap_fugitive   = 1
+let g:bim_remap_surround   = 1
+" }}}
 
 " Vim template {{{
 " -----------------------------------------------------------------------------
@@ -569,17 +588,6 @@ let g:username=system("echo -n `git config --list | grep user.name | cut -d'=' -
 let g:snips_author = username . "<" . email . ">"
 " }}}
 
-" vim-fugitive {{{
-" https://github.com/tpope/vim-fugitive
-" -----------------------------------------------------------------------------
-nmap <leader>gs :Gstatus<CR><C-w>20+
-nmap <leader>ge :Gedit<CR>
-nmap <leader>ga :Gadd<CR>
-nmap <leader>gd :Gdiff<CR>
-nmap <leader>gl :Glog<CR>
-nmap <leader>gp :Gpush<CR>
-nmap <leader>gc :Gcommit<CR>
-" }}}
 
 " vim-pandoc {{{
 let g:pandoc#biblio#sources = 'b'
@@ -589,104 +597,8 @@ let g:pandoc#biblio#sources = 'b'
 
 " Specific settings (keyboard, machine, OS…) {{{
 " -----------------------------------------------------------------------------
-" Mac settings
-if (has("mac") || has("macunix")) && filereadable(expand("~/.vimrc.mac"))
-    source ~/.vimrc.mac
-endif
-
-" Allow overriding these settings
 if filereadable(expand("~/.vimrc.local"))
     source ~/.vimrc.local
 endif
-
-" }}}
-
-" EXPERIMENTAL {{{
-inoremap ii <Esc>
-"nnoremap é <CTRL-w>
-
-" CTRL+Space for C-x
-inoremap <Nul> <C-x>
-
-" s is not that usefull, S is cc, s is xa
-" nnoremap s
-
-" Toggle options, $ has been remap to é
-" Remember: vars start by $
-nnoremap <silent> $n :set number!<CR>
-nnoremap <silent> $r :set relativenumber!<CR>
-nnoremap <silent> $f :set foldenable!<CR>
-nnoremap <silent> $p :set invpaste<CR>
-nnoremap <silent> $b :let &background = ( &background == "dark"? "light" : "dark" )<CR>
-nnoremap <silent> $w :set wrap!<CR>
-
-" Navigation {{{
-" ----------------------------------------------------------------------------
-" page up/down
-noremap <BS> <PageUp>
-noremap <Space> <PageDown>
-" up/down arrow to navigate wrapped lines
-nnoremap <up>   gs
-nnoremap <down> gt
-" }}}
-
-" Window and buffer managment {{{
-" ----------------------------------------------------------------------------
-" Quick buffer/window access
-nnoremap dq :q<CR>
-nnoremap dQ :q!<CR>
-" delete ([K]ill) buffer/force/a[l]l
-nnoremap dk :bd<CR>
-nnoremap dK :bd!<CR>
-nnoremap dl :bufdo bd<CR>
-
-" cycle between the current/last buffer
-nnoremap <Tab> :b#<CR>
-
-" reload vimrc
-nnoremap <leader>ev :e $MYVIMRC<cr>
-nnoremap <leader>sv :source $MYVIMRC<cr>
-
-" I do not map :w! because it should be used carefully
-map <leader>, :w<CR>
-map <leader>; :W<CR>
-
-" }}}
-"
-" g<return>
-" g<space>
-
-
-" TODO: Spell
-
-" formatting
-" retab
-
-" Don't use Ex mode, use Q for formatting
-map Q gq
-
-" Replace space by non breakable space where it should (French rules)
-nnoremap d<Backspace> :%s/\(\S\) \([:;?!]\)/\1 \2/g<CR>
-nnoremap d<Space> :CleanWhiteSpace<CR>
-" retab
-
-nnoremap d<return> ggdG
-nnoremap y<return> ggyG``
-nnoremap l<return> ggdG``
-
-
-" Plugin Tabularize {{{
-if exists(":Tabularize")
-    vmap <C-j> :Tabularize/=<CR>
-    nmap <Leader>= :Tabularize /=<CR>
-    vmap <Leader>= :Tabularize /=<CR>
-    nmap <Leader>: :Tabularize /:\zs<CR>
-    vmap <Leader>: :Tabularize /:\zs<CR>
-endif
-" }}}
-
-" TODO: remap < «
-" map tab to esc?
-"
 
 " }}}
