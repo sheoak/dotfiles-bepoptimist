@@ -72,6 +72,14 @@ else
     set rtp+=~/.vim/bundle/Vundle.vim
     call vundle#begin()
 
+    " My custom plugins
+    " vim-bim muste be before tpope/vim-surround because it disable
+    " surround default mapping due to confict with "c" key remap to "l"
+    Plugin 'sheoak/vim-bim'                         " Bepo keymap
+    Plugin 'sheoak/vim-typematrix'                  " TypeMatrix keymap
+
+    " Plugin 'tpope/vim-sensible'     " Default settings everyone can agree on
+
     " Themes
     Plugin 'endel/vim-github-colorscheme'
     Plugin 'altercation/vim-colors-solarized'
@@ -83,9 +91,9 @@ else
     Plugin 'MarcWeber/vim-addon-mw-utils'   " ?
 
     " Favorites
-    Plugin 'Shougo/unite.vim'
-    Plugin 'Shougo/vimproc.vim'             " Unite deps for file_sync
     Plugin 'Shougo/neomru.vim'              " Unite deps for file_mru
+    Plugin 'Shougo/vimproc.vim'             " Unite deps for file_sync
+    Plugin 'Shougo/unite.vim'
 
     Plugin 'airblade/vim-gitgutter'         " Git gutter on the left
     Plugin 'bling/vim-airline'              " Cool status bar
@@ -96,8 +104,7 @@ else
     Plugin 'tpope/vim-speeddating'          " inc/dec dates and numbers
 
     Plugin 'marijnh/tern_for_vim'           " ctags for javascript
-    " FIXME: bepo shortcuts
-    " Plugin 'tpope/vim-commentary'           " quick comment
+    Plugin 'tpope/vim-commentary'           " quick comment
 
     Plugin 'sjl/gundo.vim'                  " save undo when closing file
     Plugin 'scrooloose/syntastic'           " syntax checking
@@ -110,6 +117,7 @@ else
     " Plugin 'jaredly/vim-debug'
 
     " Filetype specific plugins
+    Plugin 'tmhedberg/matchit'                       " all
     Plugin 'PotatoesMaster/i3-vim-syntax'            " i3 config syntax
     Plugin 'digitaltoad/vim-jade'                    " jade syntax
     Plugin 'plasticboy/vim-markdown'                 " markdown
