@@ -435,8 +435,6 @@ if has("spell")
 end
 " }}}
 
-inoremap ii <Esc>
-
 " CTRL+Space for C-x
 " Beware of system shortcuts (like keyboard layout toggle)
 " TODO: disable ubuntu CTRL-space
@@ -454,6 +452,7 @@ nnoremap <Tab> :b#<CR>
 " Don't use Ex mode, use Q for formatting
 map Q gq
 
+nnoremap "" :registers<CR>
 
 " Plugins configuration {{{
 " -----------------------------------------------------------------------------
