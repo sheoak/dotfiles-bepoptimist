@@ -435,24 +435,18 @@ if has("spell")
 end
 " }}}
 
+" Custom maps {{{
 " CTRL+Space for C-x
 " Beware of system shortcuts (like keyboard layout toggle)
 " TODO: disable ubuntu CTRL-space
 inoremap <Nul> <C-x>
 
-" s is not that usefull, S is cc, s is xa
-" TODO
-" nnoremap s
-
-" cycle between the current/last buffer
-nnoremap <Tab> :b#<CR>
-
-" }}}
-
 " Don't use Ex mode, use Q for formatting
 map Q gq
 
 nnoremap "" :registers<CR>
+
+" }}}
 
 " Plugins configuration {{{
 " -----------------------------------------------------------------------------
@@ -494,7 +488,7 @@ let g:syntastic_html_tidy_ignore_errors = [
 if (!exists('s:plugin_off'))
     let g:unite_source_history_yank_enable = 1
 
-    " TODO: with current dir/buffer dir
+    nnoremap <Tab> :Unite -quick-match buffer<cr>
 
     " Default Unite buffer, async recursive
     " nnoremap <leader><space> :Unite -no-split -start-insert file_rec/async<cr>
@@ -594,7 +588,7 @@ let g:pandoc#biblio#sources = 'b'
 
 " }}} plugins section
 
-" Specific settings (keyboard, machine, OS…) {{{
+" Specific settings for the current machine {{{
 " -----------------------------------------------------------------------------
 if filereadable(expand("~/.vimrc.local"))
     source ~/.vimrc.local
