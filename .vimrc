@@ -94,6 +94,7 @@ else
     Plugin 'Shougo/neomru.vim'              " Unite deps for file_mru
     Plugin 'Shougo/vimproc.vim'             " Unite deps for file_sync
     Plugin 'Shougo/unite.vim'
+    Plugin 'Shougo/neocomplete.vim'
 
     Plugin 'airblade/vim-gitgutter'         " Git gutter on the left
     Plugin 'bling/vim-airline'              " Cool status bar
@@ -384,6 +385,9 @@ if has("autocmd")
         au FileType php            setlocal omnifunc=phpcomplete#CompletePHP
         au FileType css,sass,less  setlocal omnifunc=csscomplete#CompleteCSS
         au FileType javascript     setlocal omnifunc=javascriptcomplete#CompleteJS
+        au FileType python         setlocal omnifunc=pythoncomplete#Complete
+        au FileType html,markdown  setlocal omnifunc=htmlcomplete#CompleteTags
+        au FileType xml            setlocal omnifunc=xmlcomplete#CompleteTags
 
         " formating by types
         au FileType vim            setlocal foldmethod=marker foldlevel=0
@@ -601,4 +605,13 @@ if filereadable(expand("~/.vimrc.local"))
     source ~/.vimrc.local
 endif
 
+" }}}
+
+" NeoComplete {{{
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>neoCompleteCr()<CR>
+function! s:neoCompleteCr()
+  return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
 " }}}
