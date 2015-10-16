@@ -442,9 +442,16 @@ end
 inoremap <Nul> <C-x>
 
 " Don't use Ex mode, use Q for formatting
-map Q gq
+noremap Q gq
 
 nnoremap "" :registers<CR>
+
+
+" new operator pending maps
+
+" [I]nside [N]ext (
+onoremap in( :<c-u>normal! f(vi(<cr>
+onoremap il( :<c-u>normal! F)vi(<cr>
 
 " }}}
 
