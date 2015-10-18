@@ -1,0 +1,345 @@
+# i3 config file for french bépo keyboard
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+#
+# Include
+# - virtualbox mode for Internet Explorer testing
+# - dual screen configuration
+# - conky bar settings (see .conkyrc)
+# - font awesome integration (conky)
+# - custom scripts for reboot/font-size settings…
+#
+# Maintainer: Sheoak <dev@sheoak.fr>
+# v0.1
+
+set $mod Mod4
+
+set beep_new
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below. ISO 10646 = Unicode
+font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+# The font above is very space-efficient, that is, it looks good, sharp and
+# clear in small sizes. However, if you need a lot of unicode glyphs or
+# right-to-left text rendering, you should instead use pango for rendering and
+# chose a FreeType font, such as:
+# font pango:DejaVu Sans Mono 10
+font pango:DejaVu Sans Mono 9
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+
+# ----------------- SHORTCUTS --------------------------------------
+
+# start a terminal
+bindsym $mod+Return exec i3-sensible-terminal
+
+# kill focused window
+bindsym $mod+q kill
+
+# start dmenu (a program launcher)
+# bindsym $mod+d exec i3-dmenu-desktop
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+bindsym $mod+Shift+d exec dmenu_run
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+# change focus
+bindsym $mod+t focus left
+bindsym $mod+s focus down
+bindsym $mod+r focus up
+bindsym $mod+n focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+t move left
+bindsym $mod+Shift+s move down
+bindsym $mod+Shift+r move up
+bindsym $mod+Shift+n move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+c split h
+
+# split in vertical orientation
+bindsym $mod+period split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+k fullscreen
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+b layout stacking
+bindsym $mod+eacute layout tabbed
+bindsym $mod+p layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# focus the parent container
+bindsym $mod+space focus parent
+# focus the child container
+bindsym $mod+BackSpace focus child
+#force_focus_wrapping yes
+
+# switch to workspace
+bindsym $mod+a workspace :Term
+bindsym $mod+u workspace :Web
+bindsym $mod+i workspace :Public
+bindsym $mod+e workspace :Social
+bindsym $mod+comma workspace :Files
+bindsym $mod+at workspace :Media
+
+bindsym $mod+plus workspace :Secondary
+bindsym $mod+minus workspace :IE8
+bindsym $mod+slash workspace :IE9
+bindsym $mod+asterisk workspace :IE10
+
+# Workspaces assignation
+#assign[class="Transmission-gtk"] 5
+#assign [con_mark="mutt"] :Social
+
+
+# move focused container to workspace
+bindsym $mod+Shift+a move container to workspace :Term
+bindsym $mod+Shift+u move container to workspace :Web
+bindsym $mod+Shift+i move container to workspace :Public
+bindsym $mod+Shift+e move container to workspace :Social
+bindsym $mod+Shift+comma move container to workspace :Files
+bindsym $mod+Shift+at move container to workspace :Media
+
+bindsym $mod+Shift+plus move container to workspace :Secondary
+bindsym $mod+Shift+minus move container to workspace :IE8
+bindsym $mod+Shift+slash move container to workspace :IE9
+bindsym $mod+Shift+asterisk move container to workspace :IE10
+
+workspace :Term output DP-1
+workspace :Web output DP-1
+workspace :Public output DP-1
+workspace :Social output DP-1
+workspace :Files output  DP-1
+workspace :Media output  DP-1
+
+workspace :Secondary output HDMI1
+workspace :IE11 output HDMI1
+workspace :IE8 output HDMI1
+workspace :IE9 output HDMI1
+workspace :IE10   output HDMI1
+
+
+# reload the configuration file
+bindsym $mod+Shift+x reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+o restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+p exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+#bindsym $mod+l          exec mpc_toggle
+bindsym XF86AudioPrev   exec mpc prev
+bindsym XF86AudioNext   exec mpc next
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym t resize shrink width 10 px or 10 ppt
+        bindsym s resize grow height 10 px or 10 ppt
+        bindsym r resize shrink height 10 px or 10 ppt
+        bindsym n resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# Virtualbox mode : run vms with different IE versions
+mode "virtualbox" {
+        # These bindings trigger as soon as you enter the virtualbox mode
+
+        # "e" for eight
+        bindsym e exec VBoxSDL -startvm "IE8 - Win7";mode "default"
+        # "n" for "nine"
+        bindsym n exec VBoxSDL -startvm "IE9 - Win7";mode "default"
+        # "t" for "ten"
+        bindsym n exec VBoxSDL -startvm "IE10 - Win8";mode "default"
+        # "l" for "eLeven"
+        bindsym n exec VBoxSDL -startvm "IE11 - Win8.1";mode "default"
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# Make the currently focused window a scratchpad
+bindsym $mod+Control+d move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+Control+space scratchpad show
+
+
+# Cmus bindings (fn keys)
+#bindsym XF86Tools       exec urxvt -e cmus
+#bindsym XF86AudioPlay   exec cmus-remote -p
+# pause
+#bindcode 135      exec cmus-remote -u
+#bindsym XF86AudioPrev   exec cmus-remote -r
+#bindsym XF86AudioNext   exec cmus-remote -n
+
+# Resize mode
+bindsym $mod+o mode "resize"
+# Virtualbox mode
+bindsym $mod+v mode "virtualbox"
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+        #status_command i3status
+        status_command $HOME/Scripts/conky-i3bar
+        #mode hide
+        #hidden_state hide
+        modifier Mod4
+        position bottom
+        tray_output primary
+        font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+        font pango:DejaVu Sans Mono, Icons 11
+
+        colors {
+
+            # solarized theme color
+            background #002b36
+            statusline #839496
+            separator #586e75
+
+            #colorclass <border> <background> <text>
+            focused_workspace  #6c71c4 #073642 #fdf6e3
+            active_workspace   #073642 #073642 #fdf6e3
+            inactive_workspace #586e75 #002b36 #586e75
+            urgent_workspace   #cb4b16 #cb4b16 #fdf6e3
+        }
+}
+
+
+# -------------------- THEME solarized --------------------------
+
+# class                 border  backgr. text    indicator
+client.focused          #93a1a1 #eee8d5 #6c71c4 #6c71c4
+client.focused_inactive #93a1a1 #839496 #073642 #586e75
+client.unfocused        #586e75 #073642 #657b83 #292d2e
+client.urgent           #dc322f #cb4b16 #fdf6e3 #d33682
+
+new_window 1pixel
+
+# -------------------- SPECIFIC SETTINGS ------------------------
+
+# Floating for some apps
+for_window [class="Nautilus" instance="file_progress"]   floating enable
+for_window [class="Gcalctool"]                           floating enable
+#for_window [title="Koala - Notification"]                floating enable
+for_window [title="Fichier en cours de traitement"]      floating enable
+
+
+# Tabbed browsing with vimprobable by default
+for_window [class="Vimprobable2"] focus child, layout tabbed, focus
+
+# ------------------- STARTUP -------------------------------------
+
+# gnome-specific settings (applet)
+exec --no-startup-id /usr/bin/unity-settings-daemon
+#exec --no-startup-id /usr/bin/gnome-settings-daemon
+#exec --no-startup-id /usr/bin/nm-applet
+# offlineimap export
+exec --no-startup-id ~/Scripts/export_x_info.sh
+# bépo power!
+exec --no-startup-id /usr/bin/setxkbmap fr bepo
+exec --no-startup-id sleep 3 && /usr/bin/xmodmap ~/.Xmodmaprc
+# gnome password manager
+exec --no-startup-id export $(gnome-keyring-daemon)
+# automount usb keys
+exec --no-startup-id udisks-glue
+# terminal daemon
+exec --no-startup-id urxvtd -q -o -f
+# music daemon
+#exec --no-startup-id mpd
+exec --no-startup-id xsetroot -solid "#073642"
+
+# default workspace
+exec --no-startup-id i3-msg "workspace :Term"
+
+# autostart
+exec --no-startup-id i3-msg 'workspace :Social; exec mutt;workspace :Term'
+
+# ------------------- FAVS ----------------------------------------
+
+# marks are used to avoid confusion with browser tab name
+
+# vim dev mode
+# bindsym $mod+shift+g exec ~/Scripts/urxvt-i3 vimdev 14
+# bindsym $mod+g   exec i3-msg ['con_mark="vimdev"] focus'
+
+# mutt
+bindsym $mod+shift+m exec ~/Scripts/urxvt-i3 mutt 12
+bindsym $mod+m   exec i3-msg ['con_mark="mutt"] focus'
+bindsym XF86Mail exec i3-msg ['con_mark="mutt"] focus'
+
+# chromium
+bindsym $mod+shift+w exec chromium-browser
+bindsym $mod+w   [class="Chromium"] focus
+
+#Firefox
+bindsym $mod+shift+f exec firefox
+bindsym $mod+f   [class="Firefox"] focus
+bindcode 180     [class="Firefox"] focus
+
+# ncmpcpp
+bindsym $mod+shift+l exec ~/Scripts/urxvt-i3 "ncmpcpp" 14
+bindsym $mod+l  exec i3-msg ['con_mark="ncmpcpp"] focus'
+
+# weechat
+bindsym $mod+shift+apostrophe exec ~/Scripts/urxvt-i3 "weechat" 13
+bindsym $mod+apostrophe  exec i3-msg ['con_mark="weechat"] focus'
+
+# ranger
+bindsym $mod+shift+z exec ~/Scripts/urxvt-i3 "ranger" 14
+bindsym $mod+z  exec i3-msg ['con_mark="ranger"] focus'
+
+# halt / reboot
+bindsym shift+XF86PowerOff  exec sudo ~/.i3/reboot
+bindsym XF86PowerOff        exec sudo ~/.i3/shutdown
+bindsym $mod+Control+k      exec sudo ~/.i3/shutdown
+bindsym $mod+Control+r      exec sudo ~/.i3/reboot
+# Lock screen
+bindsym $mod+Control+l exec i3lock && xset dpms force off
+bindsym Pause exec i3lock && xset dpms force off
+# Screen off
+bindsym XF86Sleep exec "xset dpms force off"
+
+# Screenshot
+bindsym XF86Display exec "scrot ~/Desktop/Screenshot%Y-%m-%d%H:%M:%S.png"
+
+bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
+bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
+bindsym XF86AudioMute exec amixer -q set Master toggle
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
