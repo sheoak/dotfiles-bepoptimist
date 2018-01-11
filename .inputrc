@@ -1,2 +1,5 @@
 set editing-mode vi
 set keymap vi-command
+set show-all-if-ambiguous on
+set show-all-if-unmodified on
+set skip-completed-text on
