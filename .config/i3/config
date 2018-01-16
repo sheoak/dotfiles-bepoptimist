@@ -2,19 +2,35 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 #
 # Include
-# - virtualbox mode for Internet Explorer testing
+# - virtualbox mode for Internet Explorer testing, to configure
 # - dual screen configuration
 # - lemonbar
-# - custom scripts for reboot/font-size settings…
 #
 # Maintainer: Sheoak <dev@sheoak.fr>
 # v0.1.1
 
-# TODO: assign worspace to vars, to avoid font-awesome weirdness
+# ----------------------------------------------------------------------------
+# I3 settings
+# ----------------------------------------------------------------------------
 
-set $mod Mod4
+set $mod Mod1
 
-set beep_new
+# workspaces
+set $W1  1:Term
+set $W2  2:Web
+set $W3  3:Public
+set $W4  4:Social
+set $W5  5:Files
+set $W6  6:Media
+set $W7  7:Secondary
+set $W8  8:IE8
+set $W9  9:IE9
+set $W10 10:IE10
+
+# set with your screen ids (xrandr)
+set $SCREEN1 eDP-1
+set $SCREEN2 HDMI1
+#set beep_new
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
@@ -22,29 +38,56 @@ set beep_new
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
-#font pango:Terminus 8
-font pango:DejaVu Sans Mono 8
-
-#font pango:Terminus 9
+font pango:DejaVu Sans Mono 9
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# ----------------- SHORTCUTS --------------------------------------
+# ----------------------------------------------------------------------------
+# Workspaces
+# ----------------------------------------------------------------------------
 
-# start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+# first monitor workspaces
+workspace $W1 output $SCREEN1
+workspace $W2 output $SCREEN1
+workspace $W3 output $SCREEN1
+workspace $W4 output $SCREEN1
+workspace $W5 output $SCREEN1
+workspace $W6 output $SCREEN1
 
-# kill focused window
-bindsym $mod+q kill
+# second monitor
+workspace $W7  output $SCREEN2
+workspace $W8  output $SCREEN2
+workspace $W9  output $SCREEN2
+workspace $W10 output $SCREEN2
 
-# start dmenu (a program launcher)
-# bindsym $mod+d exec i3-dmenu-desktop
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-bindsym $mod+Shift+d exec dmenu_run
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+# switch to workspace
+bindsym $mod+a        workspace $W1
+bindsym $mod+u        workspace $W2
+bindsym $mod+i        workspace $W3
+bindsym $mod+e        workspace $W4
+bindsym $mod+comma    workspace $W5
+bindsym $mod+at       workspace $W6
+bindsym $mod+plus     workspace $W7
+bindsym $mod+minus    workspace $W8
+bindsym $mod+slash    workspace $W9
+bindsym $mod+asterisk workspace $W10
+
+# move focused container to workspace
+bindsym $mod+Shift+a        move container to workspace $W1
+bindsym $mod+Shift+u        move container to workspace $W2
+bindsym $mod+Shift+i        move container to workspace $W3
+bindsym $mod+Shift+e        move container to workspace $W4
+bindsym $mod+Shift+comma    move container to workspace $W5
+bindsym $mod+Shift+at       move container to workspace $W6
+bindsym $mod+Shift+plus     move container to workspace $W7
+bindsym $mod+Shift+minus    move container to workspace $W8
+bindsym $mod+Shift+slash    move container to workspace $W9
+bindsym $mod+Shift+asterisk move container to workspace $W1
+
+# ----------------------------------------------------------------------------
+# Windows
+# ----------------------------------------------------------------------------
 
 # change focus
 bindsym $mod+t focus left
@@ -71,15 +114,19 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
+# TODO: move to more logical key
 bindsym $mod+c split h
 
 # split in vertical orientation
+# TODO: move to more logical key
 bindsym $mod+period split v
 
 # enter fullscreen mode for the focused container
+# TODO: move to more logical key
 bindsym $mod+k fullscreen
 
 # change container layout (stacked, tabbed, toggle split)
+# TODO: move to more logical key
 bindsym $mod+b layout stacking
 bindsym $mod+eacute layout tabbed
 bindsym $mod+p layout toggle split
@@ -88,69 +135,27 @@ bindsym $mod+p layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # focus the parent container
+# TODO: move and use space for more common operations
 bindsym $mod+space focus parent
 # focus the child container
 bindsym $mod+BackSpace focus child
 #force_focus_wrapping yes
 
-# switch to workspace
-bindsym $mod+a workspace :Term
-bindsym $mod+u workspace :Web
-bindsym $mod+i workspace :Public
-bindsym $mod+e workspace :Social
-bindsym $mod+comma workspace :Files
-bindsym $mod+at workspace :Media
+# Make the currently focused window a scratchpad
+bindsym $mod+Control+d move scratchpad
 
-bindsym $mod+plus workspace :Secondary
-bindsym $mod+minus workspace :IE8
-bindsym $mod+slash workspace :IE9
-bindsym $mod+asterisk workspace :IE10
+# Show the first scratchpad window
+bindsym $mod+Control+space scratchpad show
 
-# Workspaces assignation
-#assign[class="Transmission-gtk"] 5
-#assign [con_mark="mutt"] :Social
+# kill focused window
+bindsym $mod+q kill
 
-# move focused container to workspace
-bindsym $mod+Shift+a move container to workspace :Term
-bindsym $mod+Shift+u move container to workspace :Web
-bindsym $mod+Shift+i move container to workspace :Public
-bindsym $mod+Shift+e move container to workspace :Social
-bindsym $mod+Shift+comma move container to workspace :Files
-bindsym $mod+Shift+at move container to workspace :Media
+# ----------------------------------------------------------------------------
+# Resize window mode
+# ----------------------------------------------------------------------------
 
-bindsym $mod+Shift+plus move container to workspace :Secondary
-bindsym $mod+Shift+minus move container to workspace :IE8
-bindsym $mod+Shift+slash move container to workspace :IE9
-bindsym $mod+Shift+asterisk move container to workspace :IE10
+bindsym $mod+o mode "resize"
 
-# first monitor workspaces
-workspace :Term output DP-1
-workspace :Web output DP-1
-workspace :Public output DP-1
-workspace :Social output DP-1
-workspace :Files output  DP-1
-workspace :Media output  DP-1
-
-# second monitor
-# TODO: make it dynamic, depending on second monitor?
-workspace :Secondary output HDMI1
-workspace :IE11 output HDMI1
-workspace :IE8 output HDMI1
-workspace :IE9 output HDMI1
-workspace :IE10   output HDMI1
-
-# reload the configuration file
-bindsym $mod+Shift+x reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+o restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+p exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-
-#bindsym $mod+l          exec mpc_toggle
-bindsym XF86AudioPrev   exec mpc prev
-bindsym XF86AudioNext   exec mpc next
-
-# resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
@@ -174,7 +179,41 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
+# ----------------------------------------------------------------------------
+# I3 access
+# ----------------------------------------------------------------------------
+
+# reload the configuration file
+bindsym $mod+Shift+x reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+o restart
+
+# exit i3 (logs you out of your X session)
+# TODO: make a keyboard version, with rofi?
+bindsym $mod+Shift+p exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# dmenu replacement with rofi
+bindsym $mod+d exec rofi -show run
+bindsym $mod+Shift+d exec "rofi -combi-modi ssh,run,window  -show combi -modi combi"
+
+# ----------------------------------------------------------------------------
+# 4 fingers swipe command for trackpads
+# ----------------------------------------------------------------------------
+# down
+bindsym --whole-window button9 floating toggle
+# up
+bindsym --whole-window button8 fullscreen
+# left
+bindsym --whole-window button10 workspace prev
+# right
+bindsym --whole-window button11 workspace next
+
+# ----------------------------------------------------------------------------
 # Virtualbox mode : run vms with different IE versions
+# ----------------------------------------------------------------------------
+
+bindsym $mod+v mode "virtualbox"
+
 mode "virtualbox" {
         # These bindings trigger as soon as you enter the virtualbox mode
 
@@ -192,150 +231,130 @@ mode "virtualbox" {
         bindsym Escape mode "default"
 }
 
-# Make the currently focused window a scratchpad
-bindsym $mod+Control+d move scratchpad
+# ----------------------------------------------------------------------------
+# System mode
+# ----------------------------------------------------------------------------
 
-# Show the first scratchpad window
-bindsym $mod+Control+space scratchpad show
+# Screen off
+#bindsym XF86Sleep exec "xset dpms force off"
 
-# Resize mode
-bindsym $mod+o mode "resize"
-# Virtualbox mode
-bindsym $mod+v mode "virtualbox"
+set $Locker i3lock
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-        i3bar_command ~/Scripts/lemonbar/i3_lemonbar.sh
-#        font pango:PowerlineFont 12
-        #status_command i3status
-        #status_command $HOME/Scripts/conky-i3bar
+bindsym $mod+Shift+BackSpace mode "$mode_system"
 
-#        mode hide
-#        hidden_state hide
-#        modifier Mod4
-#        position bottom
-#        tray_output primary
-#        #font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-#        #font pango:DejaVu Sans Mono, Icons 11
-#
-#        colors {
-#
-#            # solarized theme color
-#            background #002b36
-#            statusline #839496
-#            separator #586e75
-#
-#            #colorclass <border> <background> <text>
-#            focused_workspace  #6c71c4 #073642 #fdf6e3
-#            active_workspace   #073642 #073642 #fdf6e3
-#            inactive_workspace #586e75 #002b36 #586e75
-#            urgent_workspace   #cb4b16 #cb4b16 #fdf6e3
-#        }
+mode "$mode_system" {
+
+    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id  systemctl poweroff -i, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
+# Screenshot
+bindsym XF86Display exec "scrot ~/Desktop/Screenshot%Y-%m-%d%H:%M:%S.png"
 
-# -------------------- THEME solarized --------------------------
+bindsym XF86AudioRaiseVolume exec amixer -c0 -D pulse sset Master 5%+ && paplay /usr/share/sounds/freedesktop/stereo/message.oga
+bindsym XF86AudioLowerVolume exec amixer -c0 -D pulse sset Master 5%- && paplay /usr/share/sounds/freedesktop/stereo/message.oga
+bindsym XF86AudioMute        exec amixer -c0 -q set Master toggle && paplay /usr/share/sounds/freedesktop/stereo/message.oga
 
-# class                 border  backgr. text    indicator
-client.focused          #93a1a1 #eee8d5 #6c71c4 #6c71c4
-client.focused_inactive #93a1a1 #839496 #073642 #586e75
-client.unfocused        #586e75 #073642 #657b83 #292d2e
-client.urgent           #dc322f #cb4b16 #fdf6e3 #d33682
+# Sreen brightness controls
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 
-new_window 1pixel
+# Media player controls
+bindsym XF86AudioPause exec mpc toggle
+bindsym XF86AudioNext  exec mpc next
+bindsym XF86AudioPrev  exec mpc prev
 
-# -------------------- SPECIFIC SETTINGS ------------------------
+# [w]ifi with rofi
+# TODO: move me
+bindsym $mod+w      exec ~/dev/system/rofi-wifi-menu/rofi-wifi-menu.sh
+
+# ----------------------------------------------------------------------------
+# Shortcuts
+# ----------------------------------------------------------------------------
+
+# marks are used to avoid confusion with browser tab name
+
+# ----------------------------------------------------------------------------
+# Apps
+# ----------------------------------------------------------------------------
+
+# start a terminal
+bindsym $mod+Return exec i3-sensible-terminal
+
+# [m]utt
+bindsym $mod+shift+m exec ~/.config/i3/urxvt-i3.sh mutt
+bindsym $mod+m   exec i3-msg ['con_mark="mutt"] focus'
+bindsym XF86Mail exec i3-msg ['con_mark="mutt"] focus'
+
+# chromium
+# bindsym $mod+shift+w exec chromium-browser
+# bindsym $mod+w   [class="Chromium"] focus
+
+# Qute[b]rowser
+bindsym $mod+shift+f exec qutebrowser
+# for dev
+bindsym $mod+shift+b exec qutebrowser --enable-webengine-inspector --loglevel vdebug
+
+bindsym $mod+f   [class="qutebrowser"] focus
+bindcode 180     [class="qutebrowser"] focus
+
+# ncmpcpp
+bindsym $mod+shift+l exec ~/.config/i3/urxvt-i3.sh ncmpcpp
+bindsym $mod+l  exec i3-msg ['con_mark="ncmpcpp"] focus'
+
+# ranger
+bindsym $mod+shift+z    exec ~/.config/i3/urxvt-i3.sh ranger
+bindsym $mod+z          exec i3-msg ['con_mark="ranger"] focus'
+
+# ----------------------------------------------------------------------------
+# Specific settings
+# ----------------------------------------------------------------------------
+
+# Workspaces assignation
+assign [con_mark="mutt"] $W4
 
 # Floating for some apps
 for_window [class="Nautilus" instance="file_progress"]   floating enable
 for_window [class="Gcalctool"]                           floating enable
 for_window [title="Fichier en cours de traitement"]      floating enable
+for_window [title="Fichier en cours de traitement"]      floating enable
+for_window [title="Unlock Login Keyring"]                floating enable
 
 # Tabbed browsing with vimprobable by default
-for_window [class="Vimprobable2"] focus child, layout tabbed, focus
+for_window [class="Vimprobable2"]   focus child, layout tabbed, focus
+for_window [class="qutebrowser"]    focus child, layout tabbed, focus
+for_window [class="MPlayer"]        floating enable
 
-# ------------------- STARTUP -------------------------------------
+# ----------------------------------------------------------------------------
+# Theme
+# ----------------------------------------------------------------------------
 
-# gnome-specific settings (applet)
-exec --no-startup-id /usr/bin/unity-settings-daemon
-#exec --no-startup-id /usr/bin/gnome-settings-daemon
-#exec --no-startup-id /usr/bin/nm-applet
-# offlineimap export
-exec --no-startup-id ~/Scripts/export_x_info.sh
-# bépo
-# FIXME
-exec --no-startup-id /usr/bin/setxkbmap fr bepo
-exec --no-startup-id sleep 3 && /usr/bin/xmodmap ~/.Xmodmaprc
-# gnome password manager
-exec --no-startup-id export $(gnome-keyring-daemon)
-# automount usb keys
-exec --no-startup-id udisks-glue
-# terminal daemon
-exec --no-startup-id urxvtd -q -o -f
-# music daemon
-#exec --no-startup-id mpd
-exec --no-startup-id xsetroot -solid "#073642"
+client.focused          #002b36 #586e75 #fdf6e3 #268bd2
+client.focused_inactive #002b36 #073642 #839496 #073642
+client.unfocused        #002b36 #073642 #839496 #073642
+client.urgent           #002b36 #dc322f #fdf6e3 #002b36
+
+new_window 1pixel
+
+# ----------------------------------------------------------------------------
+# Startup
+# ----------------------------------------------------------------------------
 
 # default workspace
-exec --no-startup-id i3-msg "workspace :Term"
+exec --no-startup-id i3-msg "workspace 1:Term"
 
-# autostart
-# FIXME
-exec --no-startup-id i3-msg 'workspace :Social; exec mutt;workspace :Term'
+# lemonbar
+bar {
+    i3bar_command ~/.config/i3/lemonbar/i3_lemonbar.sh
+}
 
-# ------------------- FAVS ----------------------------------------
 
-# marks are used to avoid confusion with browser tab name
-
-# vim dev mode
-# bindsym $mod+shift+g exec ~/Scripts/urxvt-i3 vimdev 14
-# bindsym $mod+g   exec i3-msg ['con_mark="vimdev"] focus'
-
-# mutt
-bindsym $mod+shift+m exec ~/Scripts/urxvt-i3 mutt 12
-bindsym $mod+m   exec i3-msg ['con_mark="mutt"] focus'
-bindsym XF86Mail exec i3-msg ['con_mark="mutt"] focus'
-
-# chromium
-bindsym $mod+shift+w exec chromium-browser
-bindsym $mod+w   [class="Chromium"] focus
-
-#Firefox
-bindsym $mod+shift+f exec firefox
-bindsym $mod+f   [class="Firefox"] focus
-bindcode 180     [class="Firefox"] focus
-
-# ncmpcpp
-bindsym $mod+shift+l exec ~/Scripts/urxvt-i3 "ncmpcpp" 14
-bindsym $mod+l  exec i3-msg ['con_mark="ncmpcpp"] focus'
-
-# weechat
-bindsym $mod+shift+apostrophe exec ~/Scripts/urxvt-i3 "weechat" 13
-bindsym $mod+apostrophe  exec i3-msg ['con_mark="weechat"] focus'
-
-# ranger
-bindsym $mod+shift+z exec ~/Scripts/urxvt-i3 "ranger" 14
-bindsym $mod+z  exec i3-msg ['con_mark="ranger"] focus'
-
-# halt / reboot
-bindsym shift+XF86PowerOff  exec sudo ~/.i3/reboot
-bindsym XF86PowerOff        exec sudo ~/.i3/shutdown
-bindsym $mod+Control+k      exec sudo ~/.i3/shutdown
-bindsym $mod+Control+r      exec sudo ~/.i3/reboot
-# Lock screen
-bindsym $mod+Control+l exec i3lock && xset dpms force off
-bindsym Pause exec i3lock && xset dpms force off
-# Screen off
-bindsym XF86Sleep exec "xset dpms force off"
-
-# Screenshot
-bindsym XF86Display exec "scrot ~/Desktop/Screenshot%Y-%m-%d%H:%M:%S.png"
-
-bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
-bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
-bindsym XF86AudioMute exec amixer -q set Master toggle
-
-# Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
