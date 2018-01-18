@@ -1,0 +1,64 @@
+[general]
+accounts = Myaccount
+maxsyncaccounts = 3
+ui = ttyui
+pythonfile = ~/bin/offlineimap-gpg.py
+# Die after 120 seconds of nothing. Probably the connection died ...
+socktimeout = 60
+
+[Account Myaccount]
+localrepository  = myaccount-local
+remoterepository = myaccount-remote
+autorefresh = 10
+# Quick-syncs do not update if the only changes were to IMAP flags.
+# autorefresh=0.5 together with quick=10 yields
+# 10 quick refreshes between each full refresh, with 0.5 minutes between every 
+# refresh, regardless of type.
+quick=10
+
+[Repository myaccount-local]
+type = Maildir
+localfolders = ~/mail/myaccount
+nametrans = lambda foldername: re.sub ('^gmail\.', '[Gmail]/',
+                               re.sub ('inbox', 'INBOX',
+                               re.sub ('sent', 'Messages envoy&AOk-s',
+                               re.sub ('drafts', 'Brouillons',
+                               re.sub ('spam', 'Spam',
+                               re.sub ('trash', 'Corbeille' , foldername ))))))
+
+[Repository myaccount-remote]
+type = Gmail
+remoteuser = myaccount@gmail.com
+remotepasseval = get_pass("gmail.com/myaccount")
+ssl = yes
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+nametrans = lambda foldername: re.sub ('^\[gmail\]', 'gmail',
+                               re.sub ('messages_envoyés', 'sent',
+                               re.sub ('brouillons', 'drafts',
+                               re.sub ('corbeille', 'trash',
+                               re.sub (' ', '_', foldername.decode('imap4-utf-7').encode('utf-8').lower())))))
+
+folderfilter = lambda foldername: foldername not in ['[Gmail]/Tous les messages']
+
+# avoid creating folders on gmail
+createfolders = False
+
+[mbnames]
+enabled = yes
+filename = ~/.mutt/mailboxes
+header = "mailboxes "
+peritem = "+%(accountname)s/%(foldername)s"
+sep = " "
+footer = "\n"
+
+# Instead of closing the connection once a sync is complete, offlineimap will
+# send empty data to the server to hold the connection open. A value of 60
+# attempts to hold the connection for a minute between syncs (both quick and
+# autorefresh).This setting has no effect if autorefresh and holdconnectionopen
+# are not both set.
+# keepalive = 60
+# OfflineIMAP normally closes IMAP server connections between refreshes if
+# the global option autorefresh is specified.  If you wish it to keep the
+# connection open, set this to true. This setting has no effect if autorefresh
+# is not set.
+# holdconnectionopen = yes
