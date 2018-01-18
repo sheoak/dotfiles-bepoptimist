@@ -291,9 +291,9 @@ bindsym $mod+w      exec ~/dev/system/rofi-wifi-menu/rofi-wifi-menu.sh
 bindsym $mod+Return exec i3-sensible-terminal
 
 # [m]utt
-bindsym $mod+shift+m exec ~/.config/i3/urxvt-i3.sh mutt
-bindsym $mod+m   exec i3-msg ['con_mark="mutt"] focus'
-bindsym XF86Mail exec i3-msg ['con_mark="mutt"] focus'
+bindsym $mod+shift+m exec i3-sensible-terminal -title "mutt" -e mutt
+bindsym $mod+m   exec i3-msg '[title="mutt"] focus'
+bindsym XF86Mail exec i3-msg '[title="mutt"] focus'
 
 # chromium
 # bindsym $mod+shift+w exec chromium-browser
@@ -308,19 +308,19 @@ bindsym $mod+f   [class="qutebrowser"] focus
 bindcode 180     [class="qutebrowser"] focus
 
 # ncmpcpp
-bindsym $mod+shift+l exec ~/.config/i3/urxvt-i3.sh ncmpcpp
-bindsym $mod+l  exec i3-msg ['con_mark="ncmpcpp"] focus'
+bindsym $mod+shift+l exec i3-sensible-terminal -e sh -c "i3-msg mark ncmpcpp && ncmpcpp"
+bindsym $mod+l       exec i3-msg '[con_mark="ncmpcpp"] focus'
 
 # ranger
-bindsym $mod+shift+z    exec ~/.config/i3/urxvt-i3.sh ranger
-bindsym $mod+z          exec i3-msg ['con_mark="ranger"] focus'
+bindsym $mod+shift+z    exec i3-sensible-terminal -title "ranger" -e ranger
+bindsym $mod+z          exec i3-msg '[title="ranger"] focus'
 
 # ----------------------------------------------------------------------------
 # Specific settings
 # ----------------------------------------------------------------------------
 
 # Workspaces assignation
-assign [con_mark="mutt"] $W4
+# assign [title="mutt"] $W4
 
 # Floating for some apps
 for_window [class="Nautilus" instance="file_progress"]   floating enable
