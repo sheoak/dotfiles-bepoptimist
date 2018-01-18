@@ -34,13 +34,19 @@ c.hints.next_regexes.append(r'\bsuivant\b')
 # for no-tab use, letting i3 handle what it does better than qutebrowser
 c.tabs.show = 'multiple'
 
+# do not use tabs
+c.tabs.tabs_are_windows = True
+c.tabs.background = True
+# allow use of 'd' to close window
+c.tabs.last_close = 'close'
+
 # hints customization
 c.fonts.hints = 'Open Sans'
 c.hints.border = '1px solid'
 
 # custom search engines
 c.url.start_pages = 'about:blank'
-c.url.searchengines["DEFAULT"] = "https://lite.qwant.com/?t=web&q={}"
+c.url.searchengines["DEFAULT"] = "https://www.google.fr/search?q={}"
 c.url.searchengines["g"] = "https://www.google.fr/search?q={}"
 c.url.searchengines["q"] = "https://lite.qwant.com/?t=web&q={}"
 c.url.searchengines["a"] = "https://wiki.archlinux.org/?search={}"
@@ -65,6 +71,7 @@ config.bind('gt', 'tab-next')
 config.bind('gT', 'tab-prev')
 
 # always open a new window, never use tabs
+config.bind('j','set-cmd-text -s :open -w ')
 config.bind('O','set-cmd-text -s :open -w ')
 config.bind('F','hint all window')
 
