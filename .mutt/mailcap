@@ -1,0 +1,6 @@
+text/html;  /usr/bin/qutebrowser %s >/dev/null 2>&1; needsterminal
+image/*;   feh --auto-zoom  %s
+application/pdf; zathura %s
+
+text/html;  elinks -dump %s; nametemplate=%s.html; copiousoutput
+application/*; mkdir -p /tmp/mutt \; cp %s /tmp/mutt \; xdg-open /tmp/mutt/$(basename %s) &

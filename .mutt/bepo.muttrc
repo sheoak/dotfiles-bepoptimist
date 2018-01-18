@@ -1,0 +1,36 @@
+
+###################
+## bépo
+bind browser,attach t next-entry
+bind browser,attach s previous-entry
+bind index t next-undeleted
+bind index s previous-undeleted
+bind index D delete-message
+bind generic,index t next-entry
+bind generic,index s previous-entry
+bind browser T next-entry
+bind browser S previous-entry
+bind pager t next-line
+bind pager s previous-line
+bind index,attach j tag-entry
+bind index J tag-pattern
+bind index ^ noop
+bind index ^J untag-pattern
+bind index <Esc>j tag-thread
+bind pager,index w save-message
+bind attach,pager c exit
+bind browser c previous-page
+bind pager h change-folder
+bind generic C top-page
+bind generic R bottom-page
+#bind generic L recall-message
+bind browser r select-entry
+bind index r display-message
+bind pager r view-attachments
+bind attach r view-attach
+bind attach w save-entry
+bind index,pager,attach , reply
+####################
+bind index,pager S half-up
+bind index,pager T half-down
+

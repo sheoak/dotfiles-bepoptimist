@@ -1,0 +1,127 @@
+# private settings
+# set folder      = "$HOME/mail"
+# set spoolfile   = "+myaccount/inbox"
+# set record      = "+myccount/gmail.sent"
+# set postponed   = "+myccount/gmail.drafts"
+# set realname    = "Your name"
+# set from        = "myemail@domain.ltd"
+source ~/.mutt/private.muttrc
+
+# IMAP: offlineimap generated mailboxes
+source ~/.mutt/mailboxes
+
+# bépo mapping
+source ~/.mutt/bepo.muttrc
+
+# theme solarized
+source ~/.mutt/colors/solarized/mutt-colors-solarized-dark-16.muttrc
+
+# gpg settings
+source ~/.mutt/gpg.rc
+
+# Set up mutt to use our local maildir:
+set mbox_type=Maildir
+set sendmail    = /usr/bin/msmtp
+
+set quit=ask-yes
+
+# --------- Basic options
+
+set beep_new=yes
+# Check for mail every minute for current IMAP mailbox every 1 min
+set timeout         = 60
+# Check for new mail in ALL mailboxes every 2 min
+set mail_check      = 120
+
+# --------- Locales and charsets
+
+set send_charset="utf-8"
+set charset="utf-8"
+
+# month / dates in french
+set date_format="%A %d %b %Y à %H:%M:%S (%Z)"
+
+# --------- Compose options
+
+set edit_headers
+set include
+set reply_regexp="^((re|aw|sv|ang):[ \t]*)+"
+set fast_reply=yes
+set copy=yes
+# don't thread messages by subject
+set strict_threads
+# dont wrap mid word
+set smart_wrap
+# Automatically delete messages marked for deletion on exit
+set delete=yes
+set to_chars=" +TCFL"
+
+# ---------- Attachments
+
+set mailcap_path = ~/.mutt/mailcap
+alternative_order text/plain text/html
+auto_view text/html
+
+# clean tmp attachments when changing folder
+folder-hook . `rm -f /tmp/mutt/*`
+
+# ----------- Adress book
+
+## Abook
+set query_command= "abook --mutt-query '%s'"
+macro index,pager  a "<pipe-message>abook --add-email-quiet<return>" "Add this sender to Abook"
+bind editor        <Tab> complete-query
+
+# ----------- Searching (mu)
+
+# Adress lookup with lbdb
+# set query_command="mu cfind --muhome=~/.mu-sent-index --format=mutt-ab '%s'"
+
+# macro index <F4> "<enter-command>unset wait_key<enter><shell-escape>read -p'mu query: ' x; \
+#       mu find --clearlinks --linksdir ~/Mail/mu-search --format links \$x<enter>\
+#       <change-folder-readonly>~/Mail/mu-search\n" "mu find"
+# macro index <F5> "<change-folder-readonly>~/Mail/mu-search\n" "display mu-find results"
+
+#--------- Bind keys
+
+# filtering
+bind index . noop
+macro index .f  "<limit>(~N|~F)<Enter>"  "view new/flag"
+macro index .a  "<limit>~A<Enter>"       "view all"
+
+# quit
+macro index Q   ":set quit=yes\nqy"  "Quit mutt without asking"
+macro browser Q ":set quit=yes\nqqy" "Quit mutt without asking"
+
+bind editor <Tab> complete-query
+bind editor ^T complete
+
+# Index Key Bindings ---------------------------------
+bind index g noop
+bind pager g noop
+bind index gg first-entry
+bind pager gg top
+bind index G last-entry
+bind pager G bottom
+
+# vim-bepo-typematrix-like
+bind index,pager H group-reply
+bind index,pager <Space> next-page
+bind index,pager <BackSpace> previous-page
+bind index,pager ^ change-folder
+#bind pager <shift><Space> tag-message
+macro index c <sync-mailbox><change-folder>?<tab> "Go to the folder menu"
+
+# ----------- Appearance
+
+set index_format="[%Z] %{!%d %b} %1M %-28.28L │ %s"
+
+set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
+
+# Colour definitions when on a mono screen
+mono bold bold
+mono underline underline
+mono indicator reverse
+
+macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"

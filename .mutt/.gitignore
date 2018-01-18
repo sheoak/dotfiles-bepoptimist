@@ -1,0 +1,5 @@
+cache/*
+hcache
+mailboxes
+signature-*
+private.muttrc

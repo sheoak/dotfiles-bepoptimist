@@ -1,0 +1,8 @@
+
+# private settings, do not commit
+set folder      = "$HOME/mail"
+set spoolfile   = "+myaccount/inbox"
+set record      = "+myccount/gmail.sent"
+set postponed   = "+myccount/gmail.drafts"
+set realname    = "Your name"
+set from        = "myemail@domain.ltd"
