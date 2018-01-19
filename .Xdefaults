@@ -1,11 +1,28 @@
 ! Urxvt Settings
 ! Maintainer: sheoak <dev@sheoak.fr>
 
+! Cursor theme
+Xcursor*theme:          aero
+Xcursor*size:           16
+
+! Xft fonts
+Xft.dpi:                 96
+Xft.antialias:           true
+Xft.rgba:                rgb
+Xft.hinting:             true
+Xft.hintstyle:           hintslight
+
+XTerm*bellIsUrgent: true
+
+! ----------------------------------------------------------------------------
+! urxvt
+! ----------------------------------------------------------------------------
+
 URxvt.letterSpace: -1
 
 URxvt*loginShell: true
 
-" https://powerline.readthedocs.org/en/latest/installation/linux.html#font-installation
+! https://powerline.readthedocs.org/en/latest/installation/linux.html#font-installation
 URxvt.font: xft:DejaVu Sans Mono for Powerline:size=11
 
 URxvt.allow_bold:       false
@@ -15,11 +32,6 @@ URxvt.skipBuiltinGlyphs: true
 URxvt.iso14755:          false
 URxvt.iso14755_52:       false
 URxvt.intensityStyles:   false
-Xft.dpi:                 96
-Xft.antialias:           true
-Xft.rgba:                rgb
-Xft.hinting:             true
-Xft.hintstyle:           hintslight
 
 ! Be sure to have unicode support
 URxvt*title:rxvt-unicode
@@ -28,7 +40,6 @@ URxvt*termName:rxvt-unicode
 URxvt*buffered:true
 
 ! For mutt notifications
-XTerm*bellIsUrgent: true
 URxvt*urgentOnBell: true
 URxvt*scrollBar: False
 
@@ -38,10 +49,6 @@ URxvt.dynamicColors:on
 URxvt.inheritPixmap: true
 URxvt.transparent: true
 URxvt.shading:     10
-
-!Cursor theme
-Xcursor*theme:          aero
-Xcursor*size:           16
 
 URxvt*cursorBlink:     false
 URxvt*cursorUnderline: true
@@ -56,9 +63,9 @@ URxvt.tabbed.new-button: no
 URxvt*tabbed.title:      no
 
 ! Activate our custom script for copy/paste and changing font size
-URxvt.perl-ext: default,url-select
+URxvt.perl-ext: default
 URxvt.perl-ext-common: default,resize-font,keyboard-select,clipboard
-URxvt.keysym.C-b: perl:url-select:select_next
+! URxvt.keysym.C-b: perl:url-select:select_next
 
 ! url-select
 URxvt.url-select.launcher: /usr/bin/xdg-open
@@ -72,7 +79,6 @@ URxvt.resize-font.bigger: C-plus
 
 ! Copy / Paste with keyboard
 ! Ctrl+Shift+C / Ctrl+Shift+V to copy/paste
-! in /usr/lib/urxvt/perl/clipboard
 URxvt.keysym.C-C:   perl:clipboard:copy
 URxvt.keysym.C-V:   perl:clipboard:paste
 
