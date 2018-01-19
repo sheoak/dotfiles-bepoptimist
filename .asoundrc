@@ -1,0 +1,12 @@
+# réglage de la carte son par défaut, selon la commande « aplay -l », card = carte et device = périphérique
+defaults.pcm.card 0
+defaults.pcm.device 0
+defaults.ctl.card 0
+
+# fréquence d'échantillonnage
+defaults.pcm.dmix.!rate 44100
+
+# algorithme de re-échantillonnage
+defaults.pcm.!rate_converter "samplerate_medium"
+
+#defaults.pcm.rate_converter "samplerate_best"
