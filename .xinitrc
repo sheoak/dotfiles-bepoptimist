@@ -1,28 +1,22 @@
 #!/bin/sh
-userresources=$HOME/.Xresources
-sysresources=/etc/X11/xinit/.Xresources
+#userresources=$HOME/.Xresources
+#sysresources=/etc/X11/xinit/.Xresources
 #usermodmap=$HOME/.Xmodmap
 #sysmodmap=/etc/X11/xinit/.Xmodmap
 
-# privoxy
-export http_proxy="http://localhost:8118"
-export EDITOR=vim
-export VISUAL=vim
-export TERMINAL=urxvtc
-
 # merge in defaults and keymaps
 
-if [ -f $sysresources ]; then
-    xrdb -merge $sysresources
-fi
+# if [ -f $sysresources ]; then
+#     xrdb -merge $sysresources
+# fi
 
 # if [ -f $sysmodmap ]; then
 #     xmodmap $sysmodmap
 # fi
 
-if [ -f "$userresources" ]; then
-    xrdb -merge "$userresources"
-fi
+# if [ -f "$userresources" ]; then
+#     xrdb -merge "$userresources"
+# fi
 
 # if [ -f "$usermodmap" ]; then
 #     xmodmap "$usermodmap"
@@ -36,6 +30,9 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
+# terminal for graphical environment, we use urxvtd daemon
+export TERMINAL=urxvtc
+
 # keyboard speed
 xset r rate 230 30
 
@@ -45,7 +42,7 @@ setxkbmap -option caps:swapescape
 
 # desktop wallpaper and color
 xsetroot -solid "#073642"
-/usr/bin/feh --bg-scale ~/images/wallpapers/wallpaper.jpg
+/usr/bin/feh --bg-scale --no-fehbg ~/images/wallpapers/wallpaper.jpg
 
 # daemon mode for urxvtd, recommanded here instead of systemd
 /usr/bin/urxvtd -o -q -f
