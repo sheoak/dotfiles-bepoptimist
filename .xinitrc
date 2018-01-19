@@ -37,14 +37,16 @@ export TERMINAL=urxvtc
 xset r rate 230 30
 
 # swap esc and cap locks (macbook air)
-setxkbmap fr bepo
-setxkbmap -option caps:swapescape
+#setxkbmap fr bepo
+#setxkbmap -option caps:swapescape
+setxkbmap -option caps:swapescape fr bepo
 
 # desktop wallpaper and color
-xsetroot -solid "#073642"
+# xsetroot -solid "#073642"
 /usr/bin/feh --bg-scale --no-fehbg ~/images/wallpapers/wallpaper.jpg
 
 # daemon mode for urxvtd, recommanded here instead of systemd
 /usr/bin/urxvtd -o -q -f
+/usr/bin/udiskie -T -q --no-notify --use-udisks2 &
 
 exec i3
