@@ -52,6 +52,8 @@ c.url.searchengines["q"] = "https://lite.qwant.com/?t=web&q={}"
 c.url.searchengines["a"] = "https://wiki.archlinux.org/?search={}"
 c.url.searchengines["w"] = "https://en.wikipedia.org/wiki/{}"
 c.url.searchengines["s"] = "https://www.searx.me/?q={}&category_general=on&time_range=&language=en-us"
+c.url.searchengines["m"] = "http://www.openstreetmap.org/search?query={}"
+c.url.searchengines["gm"] = "https://www.google.fr/maps/place/{}"
 
 c.content.user_stylesheets.append('user.css')
 
