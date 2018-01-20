@@ -1,17 +1,8 @@
-#####################################################
-## this is example key configuration file, copy it ##
-## to ~/.ncmpcpp/keys and set up your preferences  ##
-#####################################################
-##
-## Tips:
-## - it's possible to bind maximum two keys to a command
-## - keys can be defined with a character or a decimal value
-## - a command can be disabled by binding it to 0
-##
-## Note: First bind of volume_up/down
-## will be used to switch between columns.
-##
-#
+# DEPRECATED FORMAT
+# For bepo bindings
+
+
+
 key_up = 259 's'
 #
 key_down = 258 't'
