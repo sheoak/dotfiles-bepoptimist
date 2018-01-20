@@ -47,6 +47,6 @@ setxkbmap -option caps:swapescape fr bepo
 
 # daemon mode for urxvtd, recommanded here instead of systemd
 /usr/bin/urxvtd -o -q -f
-/usr/bin/udiskie -T -q --no-notify --use-udisks2 &
+#/usr/bin/udiskie -T -q --no-notify --use-udisks2 &
 
 exec i3
