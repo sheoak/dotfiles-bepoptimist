@@ -205,8 +205,8 @@ mode "$mode_virtualbox" {
 set $Locker i3lock -c 000000
 set $mode_system   ·   [L]ock    Log[o]ut    [S]uspend    [R]eboot    [P]oweroff   ·
 
-# TODO: add shutdown key
 bindsym $mod+Control+BackSpace mode "$mode_system"
+bindsym XF86PowerOff           mode "$mode_system"
 
 mode "$mode_system" {
     bindsym l exec --no-startup-id $Locker, mode "default"
@@ -249,7 +249,6 @@ mode "$mode_screen" {
 bindsym $mod+Control+r reload
 # restart i3 in place
 bindsym $mod+Control+s restart
-
 
 # dmenu replacement with rofi
 bindsym $mod+d          exec "rofi -show run"
