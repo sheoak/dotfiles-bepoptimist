@@ -7,7 +7,7 @@ tls_trust_file /etc/ssl/certs/ca-certificates.crt
 logfile ~/.msmtp.log
 
 # A mail service
-account gomunochikin
+account myaccount
 host           smtp.domain.ltd
 port           587
 auth on
