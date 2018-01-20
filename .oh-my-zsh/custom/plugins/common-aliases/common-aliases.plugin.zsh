@@ -110,3 +110,6 @@ function timer() { sleep $1 && mplayer ~/music/alarm.mp3 &> /dev/null }
 function trash() { mv "$@" ~/.trash/; }
 function bak() { mv "$@" ~/.backups/; }
 alias trash-clear='rm -rf ~/.trash/*'
+alias automount='/usr/bin/udiskie -T -q --no-notify --use-udisks2 &'
+
+alias usys='systemctl --user '
