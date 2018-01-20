@@ -1,9 +1,0 @@
-#! /bin/sh
-# urxvt-i3.sh
-#
-# Maintainer: sheoak
-# Version:    O.11
-# Run urxvit with title and font-size in arguments
-# Also mark the window for i3 usage
-/usr/bin/urxvt -title "$1" -e sh -c "~/Scripts/small-font.sh $2 && i3-msg mark $1 && $1"
-
