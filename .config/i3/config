@@ -17,11 +17,11 @@ set $mod Mod1
 
 # workspaces
 set $W1  "1: Term"
-set $W2  "2: Work"
+set $W2  "2: Work"
 set $W3  "3: Social"
 set $W4  "4: Web"
 set $W5  "5: Files"
-set $W6  "6: Music"
+set $W6  "6: Medias"
 set $W7  "7: Secondary"
 set $W8  "8: Others"
 set $W9  "9"
@@ -352,15 +352,9 @@ client.placeholder          $bg     $bg         $bg     $bg
 
 # lemonbar
 bar {
-
-    # lemonbar uses too much battery on laptop
-    # i3bar_command ~/.config/i3/lemonbar/i3_lemonbar.sh
-
     position bottom
     strip_workspace_numbers yes
-    # multi screen configuration
-    # tray_output none
-    font pango:DejaVu Sans Mono, FontAwesome 7
+    font pango:DejaVu Sans Mono, FontAwesome 8
     separator_symbol "⋆"
 
     status_command i3status --config ~/.config/i3/i3status.conf
