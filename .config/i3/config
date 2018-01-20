@@ -16,16 +16,16 @@
 set $mod Mod1
 
 # workspaces
-set $W1  "1: Term"
+set $W1  "1: Term"
 set $W2  "2: Work"
-set $W3  "3: Social"
+set $W3  "3: Social"
 set $W4  "4: Web"
-set $W5  "5: Files"
+set $W5  "5: Files"
 set $W6  "6: Music"
 set $W7  "7: Secondary"
-set $W8  "8:IE8"
-set $W9  "9:IE9"
-set $W10 "10:IE10"
+set $W8  "8: Others"
+set $W9  "9"
+set $W10 "10"
 
 # set with your screen ids (xrandr)
 set $SCREEN1 eDP0
@@ -188,7 +188,7 @@ bindsym --whole-window button11 workspace next
 # ----------------------------------------------------------------------------
 # Virtualbox mode : run vms with different IE versions
 # ----------------------------------------------------------------------------
-set $mode_virtualbox   ·     [w]indows       [u]buntu  ·
+set $mode_virtualbox   ·     [w]indows       [u]buntu     ·
 bindsym $mod+Control+v mode "$mode_virtualbox"
 
 mode "$mode_virtualbox" {
@@ -209,7 +209,7 @@ mode "$mode_virtualbox" {
 #bindsym XF86Sleep exec "xset dpms force off"
 
 set $Locker i3lock -c 000000
-set $mode_system   ·    [L]ock     Log[o]ut       [S]uspend      [R]eboot      [P]oweroff     ·
+set $mode_system   ·   [L]ock    Log[o]ut    [S]uspend    [R]eboot    [P]oweroff   ·
 
 # TODO: add shutdown key
 bindsym $mod+Control+BackSpace mode "$mode_system"
@@ -232,15 +232,15 @@ bindsym $mod+Control+l exec $Locker
 # ----------------------------------------------------------------------------
 # Screensaver mode
 # ----------------------------------------------------------------------------
-set $mode_screen     ·   [E]nable      [D]isable       [A]ctivate    ·
+set $mode_screen     ·       [E]nable      [D]isable       [A]ctivate    ·
 
 # Screensaver mode [E]nergy
 bindsym $mod+Control+e mode "$mode_screen"
 
 mode "$mode_screen" {
 
-    bindsym e exec --no-startup-id xset s on, mode "default"
-    bindsym d exec --no-startup-id xset s off, mode "default"
+    bindsym e exec --no-startup-id xset s on +dpms, mode "default"
+    bindsym d exec --no-startup-id xset s off -dpms, mode "default"
     bindsym a exec --no-startup-id xset dpms force off, mode "default"
 
     # back to normal: Enter or Escape
