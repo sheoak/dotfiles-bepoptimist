@@ -382,7 +382,7 @@ bar {
         focused_workspace   $ia        $ia        $tx
         active_workspace    $gn        $ac        $tx
         inactive_workspace  $bg        $fg        $ia
-        urgent_workspace    $ac        $bg        $ac
+        urgent_workspace    $ac        $bg        $hi
     }
 }
 
