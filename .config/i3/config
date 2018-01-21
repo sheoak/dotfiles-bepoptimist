@@ -61,7 +61,7 @@ workspace $W9  output $SCREEN2
 workspace $W10 output $SCREEN2
 
 # default workspace, to avoid "1" by default
-exec --no-startup-id i3-msg "workspace 1:Term"
+exec --no-startup-id i3-msg "workspace $W1"
 
 # switch to workspace
 bindsym $mod+a        workspace $W1
