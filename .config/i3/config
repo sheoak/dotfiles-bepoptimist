@@ -14,6 +14,7 @@
 # ----------------------------------------------------------------------------
 
 set $mod Mod1
+set $term kitty --single-instance 
 
 # workspaces
 set $W1  "1: Term"
@@ -284,10 +285,10 @@ bindsym XF86AudioPrev  exec mpc prev
 # ----------------------------------------------------------------------------
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec $term
 
 # [m]utt
-bindsym $mod+shift+m workspace $W3; exec i3-sensible-terminal -title "mutt" -e mutt
+bindsym $mod+shift+m workspace $W3; exec $term --title "mutt" mutt
 bindsym $mod+m       exec i3-msg '[title="mutt"] focus'
 bindsym XF86Mail     exec i3-msg '[title="mutt"] focus'
 
@@ -300,11 +301,11 @@ bindsym $mod+w   [class="qutebrowser"] focus
 bindcode 180     [class="qutebrowser"] focus
 
 # ncmpcpp ([J]ukebox)
-bindsym $mod+shift+j workspace $w6; exec i3-sensible-terminal -e sh -c "i3-msg mark ncmpcpp && ncmpcpp"
+bindsym $mod+shift+j workspace $w6; exec $term sh -c "i3-msg mark ncmpcpp && ncmpcpp"
 bindsym $mod+j       exec i3-msg '[con_mark="ncmpcpp"] focus'
 
 # ranger ([F]iles
-bindsym $mod+shift+f    exec i3-sensible-terminal -title "ranger" -e ranger
+bindsym $mod+shift+f    exec $term --title "ranger" ranger
 bindsym $mod+f          exec i3-msg '[title="ranger"] focus'
 
 # chromium

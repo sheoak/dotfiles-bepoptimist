@@ -91,7 +91,6 @@ fi
 # Make zsh know about hosts already accessed by SSH
 zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
 
-alias vi=vim
 alias sudo="sudo -E "
 alias ducks='du -cks * | sort -rn | head'
 alias yank='xclip -selection clipboard'
@@ -111,5 +110,9 @@ function trash() { mv "$@" ~/.trash/; }
 function bak() { mv "$@" ~/.backups/; }
 alias trash-clear='rm -rf ~/.trash/*'
 alias automount='/usr/bin/udiskie -T -q --no-notify --use-udisks2 &'
+
+# migration to nvim
+alias vi=nvim
+alias vim=nvim
 
 alias usys='systemctl --user '
