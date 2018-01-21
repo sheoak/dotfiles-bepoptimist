@@ -38,7 +38,7 @@ hide_edge_borders   smart
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
-font pango:DejaVu Sans Mono 9
+font pango:DejaVu Sans Mono 8
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -120,13 +120,14 @@ bindsym $mod+Shift+Right    move right
 bindsym $mod+h split h
 bindsym $mod+v split v
 
-# change container layout (stacked (v)ertical, tabbed (h)orizontal, toggle split (g)rid)
+# change layout (stacked (v)ertical, tabbed (h)orizontal, toggle split (g)rid)
 bindsym $mod+Shift+v     layout stacking
 bindsym $mod+Shift+h     layout tabbed
 bindsym $mod+Shift+g     layout toggle split
 
 # enter fullscreen mode for the focused container
-bindsym $mod+F11 fullscreen
+# TODO: mnemotechnic?
+bindsym $mod+period fullscreen
 
 # focus the parent/child container
 bindsym $mod+p focus parent
@@ -255,7 +256,7 @@ bindsym $mod+Control+s restart
 bindsym $mod+d          exec "rofi -show run"
 bindsym $mod+Shift+d    exec "rofi -combi-modi ssh,run,window -show combi -modi combi"
 # wifi with rofi, executable must be in path
-bindsym $mod+Control+w  exec rofi-wifi-menu
+bindsym $mod+Control+d  exec rofi-wifi-menu
 
 # Screenshot
 # TODO: migrate
@@ -347,11 +348,7 @@ client.urgent               $ac     $ac         $tx     $id
 #border & indicator are ignored
 client.placeholder          $bg     $bg         $bg     $bg
 
-# ----------------------------------------------------------------------------
-# Startup
-# ----------------------------------------------------------------------------
-
-# lemonbar
+# i3bar configuration
 bar {
     position bottom
     strip_workspace_numbers yes
