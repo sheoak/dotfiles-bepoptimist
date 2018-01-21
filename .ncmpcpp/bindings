@@ -36,6 +36,9 @@ def_key "?"
 def_key "/"
   find_item_forward
 
+def_key "u"
+  update_database
+
 def_key "n"
   next_found_item
 
@@ -69,6 +72,9 @@ def_key "shift-tab"
 def_key "a"
   add_item_to_playlist
 
+def_key "ctrl-l"
+  show_lyrics
+
 # panels
 # TODO: device
 # TODO: tag edit
@@ -78,14 +84,20 @@ def_key "a"
 def_key "l"
   show_playlist
 
+def_key "L"
+  show_playlist_editor
+
 def_key "f"
   show_search_engine
+
+def_key "o"
+  show_tag_editor
 
 def_key "b"
   show_browser
 
-#def_key "B"
-#change_browse_mode
+# def_key "B"
+#     change_browse_mode
 
 def_key "m"
   show_media_library
@@ -107,13 +119,22 @@ def_key "<"
 def_key ">"
   next
 
+def_key "w"
+  save_playlist
+
+def_key "e"
+  edit_playlist_name
+
 def_key "d"
   delete_playlist_items
 
 def_key "D"
   clear_playlist
 
-def_key "shift-delete"
+def_key "ctrl-d"
+  delete_stored_playlist
+
+def_key "ctrl-d"
   clear_main_playlist
 
 # like vim repeat
@@ -189,8 +210,6 @@ def_key "down"
 #def_key "d"
 #  delete_browser_items
 #
-#def_key "d"
-#  delete_stored_playlist
 
 #def_key "right"
 #  slave_screen
@@ -287,8 +306,6 @@ def_key "down"
 #def_key "X"
 #  set_crossfade
 #
-#def_key "u"
-#  update_database
 #
 #def_key "ctrl-s"
 #  sort_playlist
@@ -331,8 +348,6 @@ def_key "down"
 #def_key "e"
 #  edit_directory_name
 #
-#def_key "e"
-#  edit_playlist_name
 #
 #def_key "e"
 #  edit_lyrics
@@ -386,8 +401,6 @@ def_key "down"
 #def_key "A"
 #  add
 #
-#def_key "S"
-#  save_playlist
 #
 #def_key "o"
 #  jump_to_playing_song
