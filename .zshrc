@@ -58,7 +58,7 @@ POWERLINE_RIGHT_B="none"
 if [ "$TERM" = "linux" ]; then
     echo -en "\e]PB657b83" # S_base00
     echo -en "\e]PA586e75" # S_base01
-    echo -en "\e]P0073642" # S_base02
+    echo -en "\e]P001252E" # S_base02
     echo -en "\e]P62aa198" # S_cyan
     echo -en "\e]P8002b36" # S_base03
     echo -en "\e]P2859900" # S_green
