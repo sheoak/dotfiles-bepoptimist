@@ -100,7 +100,15 @@ alias gp="git push -u origin master"
 alias itconfig="vim ~/.config/i3/config"
 alias viconfig="vim ~/.vimrc"
 alias pacin='sudo pacman -S'
+
+# Pacman - https://wiki.archlinux.org/index.php/Pacman_Tips
 alias pacsearch='sudo pacman -Ss'
+alias pacupg='sudo pacman -Syu'
+alias pacin='sudo pacman -S'
+alias pacre='sudo pacman -R'
+alias pacloc='pacman -Qi'
+alias paclocs='pacman -Qs'
+alias pacmir='sudo pacman -Syy'
 
 # run offlineimap service before mutt
 alias mutt=neomutt
@@ -116,3 +124,4 @@ alias vi=nvim
 alias vim=nvim
 
 alias usys='systemctl --user '
+alias ytmp3='youtube-dl -x --audio-format mp3 -o "%(title)s.%(ext)s" '

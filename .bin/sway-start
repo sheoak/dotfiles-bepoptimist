@@ -1,0 +1,9 @@
+#! /bin/sh
+export XKB_DEFAULT_LAYOUT=fr
+export XKB_DEFAULT_VARIANT=bepo_latin9
+export XKB_DEFAULT_OPTIONS=caps:swapescape
+export TERMINAL=kitty
+export WLC_REPEAT_DELAY=270
+export WLC_REPEAT_RATE=52
+
+sway -Vd

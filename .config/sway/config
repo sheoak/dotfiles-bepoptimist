@@ -1,0 +1,397 @@
+# i3 config file for french bépo keyboard
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+#
+# Include
+# - virtualbox mode for Internet Explorer testing, to configure
+# - dual screen configuration
+# - lemonbar
+#
+# Maintainer: Sheoak <dev@sheoak.fr>
+# v0.1.1
+
+# ----------------------------------------------------------------------------
+# I3 settings
+# ----------------------------------------------------------------------------
+
+set $mod Mod1
+set $termDetached kitty
+#set $term kitty --single-instance 
+set $term kitty
+
+# autolock timer in minutes
+set $autolock 10
+set $lockalert "notify-send -u critical -t 10000 -- 'Locking screen in 10 seconds'"
+
+# workspaces
+set $W1  "1: Term"
+set $W2  "2: Work"
+set $W3  "3: Social"
+set $W4  "4: Web"
+set $W5  "5: Files"
+set $W6  "6: Medias"
+set $W7  "7: Secondary"
+set $W8  "8: Others"
+set $W9  "9"
+set $W10 "10"
+
+# set with your screen ids (xrandr)
+set $SCREEN1 eDP0
+set $SCREEN2 HDMI1
+
+new_window          pixel 2
+new_float           pixel 3
+hide_edge_borders   smart
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below. ISO 10646 = Unicode
+font pango:DejaVu Sans Mono 8
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# ----------------------------------------------------------------------------
+# Workspaces
+# ----------------------------------------------------------------------------
+
+# first monitor workspaces
+workspace $W1 output $SCREEN1
+workspace $W2 output $SCREEN1
+workspace $W3 output $SCREEN1
+workspace $W4 output $SCREEN1
+workspace $W5 output $SCREEN1
+workspace $W6 output $SCREEN1
+
+# second monitor
+workspace $W7  output $SCREEN2
+workspace $W8  output $SCREEN2
+workspace $W9  output $SCREEN2
+workspace $W10 output $SCREEN2
+
+# default workspace, to avoid "1" by default
+# FIXME: sway doesn't understand var here?
+exec --no-startup-id swaymsg "workspace 1: Term"
+
+# switch to workspace
+bindsym $mod+a        workspace $W1
+bindsym $mod+u        workspace $W2
+bindsym $mod+i        workspace $W3
+bindsym $mod+e        workspace $W4
+bindsym $mod+comma    workspace $W5
+bindsym $mod+at       workspace $W6
+bindsym $mod+plus     workspace $W7
+bindsym $mod+minus    workspace $W8
+bindsym $mod+slash    workspace $W9
+bindsym $mod+asterisk workspace $W10
+
+# move focused container to workspace
+bindsym $mod+Shift+a        move container to workspace $W1
+bindsym $mod+Shift+u        move container to workspace $W2
+bindsym $mod+Shift+i        move container to workspace $W3
+bindsym $mod+Shift+e        move container to workspace $W4
+bindsym $mod+Shift+comma    move container to workspace $W5
+bindsym $mod+Shift+at       move container to workspace $W6
+bindsym $mod+Shift+plus     move container to workspace $W7
+bindsym $mod+Shift+minus    move container to workspace $W8
+bindsym $mod+Shift+slash    move container to workspace $W9
+bindsym $mod+Shift+asterisk move container to workspace $W1
+
+# ----------------------------------------------------------------------------
+# Windows
+# ----------------------------------------------------------------------------
+
+# change focus
+bindsym $mod+t focus left
+bindsym $mod+s focus down
+bindsym $mod+r focus up
+bindsym $mod+n focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left   focus left
+bindsym $mod+Down   focus down
+bindsym $mod+Up     focus up
+bindsym $mod+Right  focus right
+
+# move focused window
+bindsym $mod+Shift+t move left
+bindsym $mod+Shift+s move down
+bindsym $mod+Shift+r move up
+bindsym $mod+Shift+n move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left     move left
+bindsym $mod+Shift+Down     move down
+bindsym $mod+Shift+Up       move up
+bindsym $mod+Shift+Right    move right
+
+# split in horizontal/vertical orientation
+bindsym $mod+h split h
+bindsym $mod+v split v
+
+# change layout (stacked (v)ertical, tabbed (h)orizontal, toggle split (g)rid)
+bindsym $mod+Shift+v     layout stacking
+bindsym $mod+Shift+h     layout tabbed
+bindsym $mod+Shift+g     layout toggle split
+
+# enter fullscreen mode for the focused container
+# TODO: mnemotechnic?
+bindsym $mod+period fullscreen
+
+# focus the parent/child container
+bindsym $mod+p focus parent
+bindsym $mod+c focus child
+
+# Make the currently focused window a scratchpad
+bindsym $mod+Control+space move scratchpad
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# Show the first scratchpad window
+bindsym $mod+space scratchpad show
+
+# kill focused window
+bindsym $mod+BackSpace kill
+
+# ----------------------------------------------------------------------------
+# Resi[z]e window mode
+# ----------------------------------------------------------------------------
+
+bindsym $mod+z mode "resize"
+
+mode "resize" {
+    # These bindings trigger as soon as you enter the resize mode
+    bindsym t       resize shrink width  10 px or 10 ppt
+    bindsym s       resize grow   height 10 px or 10 ppt
+    bindsym r       resize shrink height 10 px or 10 ppt
+    bindsym n       resize grow   width  10 px or 10 ppt
+
+    # same bindings, but for the arrow keys
+    bindsym Left    resize shrink   width  10 px or 10 ppt
+    bindsym Down    resize grow     height 10 px or 10 ppt
+    bindsym Up      resize shrink   height 10 px or 10 ppt
+    bindsym Right   resize grow     width  10 px or 10 ppt
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# ----------------------------------------------------------------------------
+# 4 fingers swipe command for trackpads
+# ----------------------------------------------------------------------------
+# down
+#bindsym  button9 floating toggle
+# up
+#bindsym button8 fullscreen
+# left
+#bindsym button10 workspace prev
+# right
+#bindsym button11 workspace next
+
+# ----------------------------------------------------------------------------
+# Virtualbox mode : run vms with different IE versions
+# ----------------------------------------------------------------------------
+set $mode_virtualbox   ·     [w]indows       [u]buntu     ·
+bindsym $mod+Control+v mode "$mode_virtualbox"
+
+mode "$mode_virtualbox" {
+    bindsym w exec VBoxSDL -startvm "Windows";mode "default"
+    bindsym u exec VBoxSDL -startvm "Ubuntu";mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# ----------------------------------------------------------------------------
+# System mode
+# $mod+Control shortcuts are use for system/i3 calls
+# ----------------------------------------------------------------------------
+
+set $Locker swaylock -c 000000
+set $mode_system   ·   [L]ock    Log[o]ut    [S]uspend    [R]eboot    [P]oweroff   ·
+
+bindsym $mod+Control+BackSpace mode "$mode_system"
+bindsym XF86PowerOff           mode "$mode_system"
+
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym o exec --no-startup-id swaymsg exit, mode "default"
+    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    #bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+    bindsym p exec --no-startup-id  systemctl poweroff -i, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+# we keep a quick lock binding
+bindsym $mod+Control+l exec $Locker
+
+# autolock
+# exec xautolock -notify 10 -notifier "$lockalert" -time $autolock -locker $Locker
+
+# ----------------------------------------------------------------------------
+# Screensaver mode
+# ----------------------------------------------------------------------------
+set $mode_screen     ·       [E]nable      [D]isable       [A]ctivate    ·
+
+# Screensaver mode [E]nergy
+bindsym $mod+Control+e mode "$mode_screen"
+
+mode "$mode_screen" {
+
+    bindsym e exec --no-startup-id xset s on +dpms, mode "default"
+    bindsym d exec --no-startup-id xset s off -dpms, mode "default"
+    bindsym a exec --no-startup-id xset dpms force off, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+# ----------------------------------------------------------------------------
+# I3 access
+# ----------------------------------------------------------------------------
+
+# reload the configuration file
+bindsym $mod+Control+r reload
+# restart i3 in place
+bindsym $mod+Control+s restart
+
+# dmenu replacement with rofi
+# FIXME: -normal-window makes it work on empty desktop but should be fixed
+bindsym $mod+d          exec /usr/bin/rofi -normal-window -show run
+bindsym $mod+shift+d    exec /usr/bin/rofi -normal-window -combi-modi ssh,run,window -show combi -modi combi
+# wifi with rofi, executable must be in path
+bindsym $mod+Control+d  exec rofi-wifi-menu
+
+# Screenshot to default folder (~)
+bindsym XF86Display exec swaygrab
+bindsym $mod+x      exec swaygrab
+
+bindsym XF86AudioRaiseVolume exec amixer -c0 -D pulse sset Master 5%+ && paplay /usr/share/sounds/freedesktop/stereo/message.oga
+bindsym XF86AudioLowerVolume exec amixer -c0 -D pulse sset Master 5%- && paplay /usr/share/sounds/freedesktop/stereo/message.oga
+bindsym XF86AudioMute        exec amixer -c0 -D pulse -q set Master toggle && paplay /usr/share/sounds/freedesktop/stereo/message.oga
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessDown   exec xbacklight -dec 10
+bindsym XF86MonBrightnessUp     exec xbacklight -inc 10
+
+# Media player controls
+bindsym XF86AudioPause exec mpc toggle
+bindsym XF86AudioNext  exec mpc next
+bindsym XF86AudioPrev  exec mpc prev
+
+# keyboard brightness controls
+bindsym XF86KbdBrightnessDown   exec xbacklight -ctrl smc::kbd_backlight -dec 10
+bindsym XF86KbdBrightnessUp     exec xbacklight -ctrl smc::kbd_backlight -inc 10
+
+# ----------------------------------------------------------------------------
+# Shortcuts
+# ----------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------
+# Apps
+# ----------------------------------------------------------------------------
+
+# start a terminal
+bindsym $mod+Return exec $term
+bindsym $mod+shift+Return exec $termDetached
+
+# [m]utt
+bindsym $mod+shift+m workspace $W3; exec $term --title "mutt" mutt
+bindsym $mod+m       exec swaymsg '[title="mutt"] focus'
+bindsym XF86Mail     exec swaymsg '[title="mutt"] focus'
+
+# Qutebrowser ([o] for the shape of the earth de[b]ug)
+bindsym $mod+shift+o exec qutebrowser
+# for dev
+bindsym $mod+shift+b exec qutebrowser --enable-webengine-inspector --loglevel vdebug
+
+bindsym $mod+o   [class="qutebrowser"] focus
+bindcode 180     [class="qutebrowser"] focus
+
+# ncmpcpp ([l]ecteur)
+# you can move to a more logical key for you langage, like [J]ukebox
+#bindsym $mod+shift+l workspace $w6; exec $termDetached -o font_size=10 sh -c "swaymsg mark ncmpcpp && ncmpcpp"
+bindsym $mod+shift+l exec $termDetached -o font_size=10 sh -c "swaymsg mark ncmpcpp && ncmpcpp"
+bindsym $mod+l       exec swaymsg '[con_mark="ncmpcpp"] focus'
+
+# ranger ([F]iles
+bindsym $mod+shift+f    exec $term --title "ranger" ranger
+bindsym $mod+f          exec swaymsg '[title="ranger"] focus'
+
+# chromium
+# bindsym $mod+shift+w exec chromium-browser
+# bindsym $mod+w   [class="Chromium"] focus
+
+# ----------------------------------------------------------------------------
+# Specific settings
+# ----------------------------------------------------------------------------
+
+# load new window (simulate browser tabs) in background
+for_window [class="qutebrowser"] layout tabbed
+no_focus [class="qutebrowser"]
+
+# rofi floating
+for_window [class="Rofi"] floating enable, move down 100px
+
+# ----------------------------------------------------------------------------
+# Theme
+# ----------------------------------------------------------------------------
+
+# ceeriously styled i3
+set $bg     #1d2026
+set $fg     #262c3a
+set $hi     #fce94f
+set $ac     #839496
+set $tx     #2d323d
+set $ia     #9e9e9e
+set $be     #8faf9f
+set $yw     #f8f893
+set $gn     #81c181
+set $rd     #bf9b76
+set $id     #f9f8ff
+set $ce     #ceecee
+set $sl     #7f7f7f
+
+# set some nice colors      border  background  text    indicator
+client.focused              $ac     $ac         $tx     $id
+client.unfocused            $bg     $bg         $ia     $id
+client.focused_inactive     $bg     $bg         $ac     $id
+client.urgent               $ac     $ac         $tx     $id
+#border & indicator are ignored
+client.placeholder          $bg     $bg         $bg     $bg
+
+# i3bar configuration
+bar {
+    position bottom
+    strip_workspace_numbers yes
+    font pango:DejaVu Sans Mono, FontAwesome 7
+    separator_symbol "⋆"
+
+    status_command i3status --config ~/.config/sway/swaybar.conf
+
+    # statusbar colors      border    background  text
+    colors {
+        background          $bg
+        statusline          $sl
+        separator           $tx
+        focused_workspace   $ia        $ia        $tx
+        active_workspace    $gn        $ac        $tx
+        inactive_workspace  $bg        $fg        $ia
+        urgent_workspace    $ac        $bg        $hi
+    }
+}
+
+# macbook trackpad
+input "1452:586:bcm" {
+    tap enabled
+    dwt enabled
+    natural_scroll disabled
+    middle_emulation enabled
+    pointer_accel 1
+}
+
+output "*" background ~/images/wallpapers/wallpaper.jpg fill
