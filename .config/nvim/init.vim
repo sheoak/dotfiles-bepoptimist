@@ -16,9 +16,6 @@
 "
 " Thank you to all the people behind the plugins I used, it’s awesome!
 "
-" TODO: a vim plugin for french langage, with dict and keymaps
-" FIXME: registers are inconsistents
-"
 " Dependencies:
 " -----------------------------------------------------------------------------
 "
@@ -31,6 +28,8 @@
 "
 " copy this file to ~/.vimrc for vim or ~/.local/nvim/init.vim for neovim
 " manually install vim-plug as instructed
+" I don't maintain vim version anymore so you will have to modify some code
+" to make it work.
 "
 " Tip: Setting your keyboard key repeat and speed high will give you a better
 " experince in vim!
@@ -48,21 +47,14 @@ endif
 call plug#begin(s:plug_path)
 
 " My custom plugins
-" vim-bim muste be before tpope/vim-surround because it disable
-" surround default mapping due to confict with "c" key remap to "l"
 Plug 'sheoak/vim-bim'                         " Bepo keymap
-Plug 'sheoak/vim-typematrix'                  " TypeMatrix keymap
 
 " Themes
 Plug 'iCyMind/NeoSolarized'
 
-Plug 'bling/vim-airline'                        " Cool status bar
-Plug 'tpope/vim-surround'                       " motions around words
-Plug 'tpope/vim-repeat'                         " missing repeat with dot
-Plug 'tpope/vim-speeddating'                    " inc/dec dates and numbers
-Plug 'tpope/vim-commentary'                     " quick comment
+" Shougo plugin suite
+Plug 'Shougo/denite.nvim'       " Unite interfaces
 
-Plug 'Shougo/denite.nvim'
 if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -71,19 +63,26 @@ else
     Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
-Plug 'sjl/gundo.vim'
-Plug 'scrooloose/syntastic'
-Plug 'godlygeek/tabular'
-Plug 'sirver/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'arnauddri/vim-lodash-snippets'
-Plug 'aperezdc/vim-template'
-Plug 'justinmk/vim-sneak'
-Plug 'wellle/targets.vim'
-" Plug 'editorconfig/editorconfig-vim'
+" Deoplete deps
+Plug 'wokalski/autocomplete-flow'
+Plug 'zchee/deoplete-jedi'
+Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
+Plug 'kristijanhusak/deoplete-phpactor'
 
-" App integration
-Plug 'tpope/vim-fugitive',     { 'for': 'git' } " Git integration
+Plug 'bling/vim-airline'        " Cool status bar
+Plug 'tpope/vim-surround'       " motions around words
+Plug 'tpope/vim-repeat'         " missing repeat with dot
+Plug 'tpope/vim-speeddating'    " inc/dec dates and numbers
+Plug 'tpope/vim-commentary'     " quick comment
+Plug 'justinmk/vim-sneak'       " Multiline f/F/t/T
+Plug 'wellle/targets.vim'       " Additionnal text objects like cin) or da,
+Plug 'junegunn/goyo.vim'        " Minimalist interface on demand with :Goyo
+Plug 'scrooloose/syntastic'     " Syntax checker for JS, PHP, Python…
+Plug 'sjl/gundo.vim'            " More undo
+Plug 'godlygeek/tabular'        " Formatting with tab
+
+" Git integration
+Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter', { 'for': 'git' } " Git gutter on the left
 
 " Filetype specific plugins
@@ -99,6 +98,13 @@ Plug 'plasticboy/vim-markdown',      { 'for': 'markdown' }
 Plug 'vim-pandoc/vim-pandoc',        { 'for': 'markdown' }
 Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': 'markdown' }
 
+" I only enable thoses when i need them
+" Plug 'editorconfig/editorconfig-vim'
+" Plug 'sirver/ultisnips'
+" Plug 'honza/vim-snippets'
+" Plug 'arnauddri/vim-lodash-snippets'
+" Plug 'aperezdc/vim-template'
+
 " Initialize plugin system
 call plug#end()
 
@@ -111,19 +117,6 @@ let g:python3_host_prog='/usr/bin/python3'
 
 " Basic vim settings {{{
 " -----------------------------------------------------------------------------
-
-" Keyboard / keymap specific mapping
-" default leader is bad in azerty and bépo keyboards
-" we also remap \ to , to avoid losing "f" reverse repeat
-let mapleader = ","
-noremap \ ,
-
-" reset "," in vim-sneak, because taken by leader
-nnoremap <expr> \ sneak#reset(',')
-xnoremap <expr> \ sneak#reset(',')
-onoremap <expr> \ sneak#reset(',')
-nmap \ <Plug>SneakPrevious
-xmap \ <Plug>SneakPrevious
 
 set hidden                     " no alert if current buffer has not been saved
 set modeline                   " enable modelines comments
@@ -316,10 +309,6 @@ if has("autocmd")
     augroup fileDetect
         au!
 
-        " save folding
-        " FIXME: breaks after a while, too many files
-        "au BufWinLeave *.* mkview!
-        "au BufWinEnter *.* silent loadview
         au BufEnter *.zsh-theme            setlocal filetype=zsh
 
         " html mix with php
@@ -347,9 +336,6 @@ if has("autocmd")
             \ shiftwidth=2
             \ tabstop=2
 
-        "TODO: remove me?
-        "au FileType javascript setlocal softtabstop=0 shiftwidth=4 tabstop=4
-
         " HTML/CSS mapping
         au FileType html,css,sass,less
             \ imap <buffer> <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
@@ -365,16 +351,13 @@ if has("autocmd")
         " formating by types
         au FileType vim            setlocal foldmethod=marker foldlevel=0
         au FileType text           setlocal tw=78 formatoptions+=tw
-        " TODO: verify if taken care by plugins
+
         au FileType markdown       setlocal tw=80 formatoptions+=taw
         au FileType gitcommit      setlocal tw=72 colorcolumn=72
                     \ formatoptions+=taw
 
         " Mail: remove annoying trail space detection and set gutter
         au FileType mail setlocal tw=72 listchars=tab:\ \
-
-        " Strip whitespace on save on some files
-        " au FileType javascript   au BufWritePre <buffer> CleanWhiteSpace
 
     augroup END
     " }}}
@@ -414,19 +397,18 @@ end
 " }}}
 
 " Custom maps {{{
-" CTRL+Space for C-x
-" Beware of system shortcuts (like keyboard layout toggle)
-" TODO: disable ubuntu CTRL-space
-inoremap <Nul> <C-x>
 
 " Don't use Ex mode, use Q for formatting
 noremap Q gq
 
+" Unamed register access is rarely useful, remap it
 nnoremap "" :registers<CR>
 
 " pretty print json
 nnoremap æj :%!python -m json.tool<CR>
 
+" ranger style
+nnoremap gn :tabe<CR>
 
 " new operator pending maps
 
@@ -444,6 +426,11 @@ nnoremap gF :e <cfile><CR>
 
 " don't override register when pasting over
 xnoremap p pgvy
+
+" page up/down
+noremap <BS> <PageUp>
+noremap <Space> <PageDown>
+
 " }}}
 
 " Plugins configuration {{{
@@ -517,7 +504,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-g><c-p>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
+let g:pdv_template_dir = $HOME ."/.local/share/nvim/plugged/pdv/templates_snip"
 nnoremap <buffer> <C-p> :call pdv#DocumentWithSnip()<CR>
 
 " }}}
@@ -536,35 +523,107 @@ let g:snips_author = username . "<" . email . ">"
 let g:pandoc#biblio#sources = 'b'
 " }}}
 
-" }}} plugins section
-
-" NeoComplete {{{
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-" inoremap <silent> <CR> <C-r>=<SID>neoCompleteCr()<CR>
-" function! s:neoCompleteCr()
-  " return pumvisible() ? "\<C-y>" : "\<CR>"
-" endfunction
-" }}}
-
-" Sneak {{{
-let g:sneak#use_ic_scs = 1
-" }}}
-
 " {{{ Gundo
 let g:gundo_prefer_python3 = 1
 " }}}
 
+" vim-bim {{{
+let g:bim_map_fugitive = 1
+let g:bim_remap_leader = 1
+" }}}
+"
 " {{{ Deoplete
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
 " }}}
 
-" vim-bim {{{
-let g:bim_map_fugitive = 1
+" {{{ Denite
+call denite#custom#option('default', { 'prompt': '❯' })
+
+call denite#custom#source(
+	\ 'file/rec', 'matchers', ['matcher/fuzzy', 'matcher/project_files', 'matcher/hide_hidden_files'])
+
+call denite#custom#var('file/rec', 'command',
+	\ ['ag', '--follow', '--hidden', '--nocolor', '--nogroup', '-g', ''])
+
+call denite#custom#map(
+      \ 'insert',
+      \ '<C-n>',
+      \ '<denite:move_to_next_line>',
+      \ 'noremap'
+      \)
+call denite#custom#map(
+      \ 'insert',
+      \ '<C-p>',
+      \ '<denite:move_to_previous_line>',
+      \ 'noremap'
+      \)
+
+" Ag command on grep source
+call denite#custom#var('grep', 'command', ['ag'])
+call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'pattern_opt', [])
+call denite#custom#var('grep', 'separator', ['--'])
+call denite#custom#var('grep', 'final_opts', [])
+
+nnoremap ,<Space> :<C-u>DeniteProjectDir file/rec<CR>
+nnoremap ,b :<C-u>Denite buffer<CR>
+nnoremap ,w :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
+nnoremap ,/ :<C-u>DeniteProjectDir grep:. -mode=normal<CR>
+nnoremap ,f :<C-u>DeniteBufferDir file_rec<CR>
+nnoremap ,r :<C-u>Denite register<CR>
+nnoremap ,m :<C-u>Denite menu<CR>
+
+call denite#custom#alias('source', 'file/rec/git', 'file/rec')
+call denite#custom#var('file/rec/git', 'command',
+    \ ['git', 'ls-files', '-co', '--exclude-standard'])
+nnoremap <silent> ,g :<C-u>DeniteBufferDir
+    \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`<CR>
+
+" Add custom menus
+let s:menus = {}
+
+let s:menus.vim = {
+    \ 'description': 'Edit vim configuration'
+    \ }
+let s:menus.vim.file_candidates = [
+    \ ['init.vim',      '~/.config/nvim/init.vim'],
+    \ ['vim-bim',       '~/.local/share/nvim/plugged/vim-bim/plugin/bim.vim'],
+    \ ['vim-bim after', '~/.local/share/nvim/plugged/vim-bim/plugin/bim.vim']
+    \ ]
+
+let s:menus.zsh = {
+    \ 'description': 'Edit zsh configuration'
+    \ }
+let s:menus.zsh.file_candidates = [
+    \ ['zshrc',  '~/.zshrc'],
+    \ ['zshenv', '~/.zshenv'],
+    \ ['custom', '~/.oh-my-zsh/custom/plugins/common-aliases/common-aliases.plugin.zsh'],
+    \ ]
+
+let s:menus.system = {
+    \ 'description': 'Edit system configuration'
+    \ }
+let s:menus.system.file_candidates = [
+    \ ['mkinitpcio',    '/etc/mkinitcpio.conf'],
+    \ ['grub',          '/etc/default/grub'],
+    \ ['fstab',         '/etc/fstabc'],
+    \ ]
+
+call denite#custom#var('menu', 'menus', s:menus)
+
 " }}}
 
 " editorconfig {{{
 " let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 " }}}
-"
+
+" goyo {{{
+let g:goyo_height='90%'
+let g:goyo_width=80
+let g:goyo_linenr=1
+" }}}
+
+" }}} plugins section
+

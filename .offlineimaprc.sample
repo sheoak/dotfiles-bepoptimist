@@ -1,12 +1,12 @@
 [general]
-accounts = Myaccount
+accounts = MyAccountName
 maxsyncaccounts = 3
 ui = ttyui
 pythonfile = ~/bin/offlineimap-gpg.py
 # Die after 120 seconds of nothing. Probably the connection died ...
 socktimeout = 60
 
-[Account Myaccount]
+[Account MyAccountName]
 localrepository  = myaccount-local
 remoterepository = myaccount-remote
 autorefresh = 10
@@ -27,9 +27,9 @@ nametrans = lambda foldername: re.sub ('^gmail\.', '[Gmail]/',
                                re.sub ('trash', 'Corbeille' , foldername ))))))
 
 [Repository myaccount-remote]
-type = Gmail
+type = IMAP
+remotehost = imap.gmail.com
 remoteuser = myaccount@gmail.com
-remotepasseval = get_pass("gmail.com/myaccount")
 ssl = yes
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 nametrans = lambda foldername: re.sub ('^\[gmail\]', 'gmail',
@@ -43,22 +43,17 @@ folderfilter = lambda foldername: foldername not in ['[Gmail]/Tous les messages'
 # avoid creating folders on gmail
 createfolders = False
 
+auth_mechanisms = XOAUTH2
+oauth2_client_id_eval = get_pass('gmail.com/myaccount-id')
+oauth2_client_secret_eval = get_pass('gmail.com/myaccount-secret')
+oauth2_request_url = https://accounts.google.com/o/oauth2/token
+oauth2_refresh_token_eval = get_pass('gmail.com/myaccount-token')
+
 [mbnames]
 enabled = yes
 filename = ~/.mutt/mailboxes
 header = "mailboxes "
-peritem = "+%(accountname)s/%(foldername)s"
+#peritem = "+%(accountname)s/%(foldername)s"
+peritem = "+%(foldername)s"
 sep = " "
 footer = "\n"
-
-# Instead of closing the connection once a sync is complete, offlineimap will
-# send empty data to the server to hold the connection open. A value of 60
-# attempts to hold the connection for a minute between syncs (both quick and
-# autorefresh).This setting has no effect if autorefresh and holdconnectionopen
-# are not both set.
-# keepalive = 60
-# OfflineIMAP normally closes IMAP server connections between refreshes if
-# the global option autorefresh is specified.  If you wish it to keep the
-# connection open, set this to true. This setting has no effect if autorefresh
-# is not set.
-# holdconnectionopen = yes

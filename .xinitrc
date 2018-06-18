@@ -1,26 +1,4 @@
 #!/bin/sh
-#userresources=$HOME/.Xresources
-#sysresources=/etc/X11/xinit/.Xresources
-#usermodmap=$HOME/.Xmodmap
-#sysmodmap=/etc/X11/xinit/.Xmodmap
-
-# merge in defaults and keymaps
-
-# if [ -f $sysresources ]; then
-#     xrdb -merge $sysresources
-# fi
-
-# if [ -f $sysmodmap ]; then
-#     xmodmap $sysmodmap
-# fi
-
-# if [ -f "$userresources" ]; then
-#     xrdb -merge "$userresources"
-# fi
-
-# if [ -f "$usermodmap" ]; then
-#     xmodmap "$usermodmap"
-# fi
 
 # start some nice programs
 if [ -d /etc/X11/xinit/xinitrc.d ] ; then
@@ -30,23 +8,28 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-# terminal for graphical environment, we use urxvtd daemon
+# terminal for graphical environment, we use kitty
 export TERMINAL=kitty
 
 # keyboard speed
-xset r rate 230 30
+xset r rate 260 52
+
+# mouse speed
+xinput --set-prop  17 'libinput Accel Speed' 0.9
 
 # swap esc and cap locks (macbook air)
-#setxkbmap fr bepo
-#setxkbmap -option caps:swapescape
 setxkbmap -option caps:swapescape fr bepo
 
 # desktop wallpaper and color
-# xsetroot -solid "#073642"
-/usr/bin/feh --bg-scale --no-fehbg ~/images/wallpapers/wallpaper.jpg
+/usr/bin/feh --bg-scale --no-fehbg ~/images/wallpapers/zelda2.jpg
+
+# redshift/dunst autostart fail because X is not ready yet
+#redshift
+systemctl --user import-environment DISPLAY
+/usr/bin/dunst &
 
 # daemon mode for urxvtd, recommanded here instead of systemd
-/usr/bin/urxvtd -o -q -f
 #/usr/bin/udiskie -T -q --no-notify --use-udisks2 &
+/usr/bin/compton -b
 
 exec i3

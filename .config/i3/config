@@ -14,7 +14,12 @@
 # ----------------------------------------------------------------------------
 
 set $mod Mod1
+set $termDetached kitty
 set $term kitty --single-instance 
+
+# autolock timer in minutes
+set $autolock 10
+set $lockalert "notify-send -u critical -t 10000 -- 'Locking screen in 10 seconds'"
 
 # workspaces
 set $W1  "1: Term"
@@ -32,8 +37,8 @@ set $W10 "10"
 set $SCREEN1 eDP0
 set $SCREEN2 HDMI1
 
-new_window          pixel 1
-new_float           pixel 4
+new_window          pixel 2
+new_float           pixel 3
 hide_edge_borders   smart
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -201,9 +206,6 @@ mode "$mode_virtualbox" {
 # $mod+Control shortcuts are use for system/i3 calls
 # ----------------------------------------------------------------------------
 
-# Screen off
-#bindsym XF86Sleep exec "xset dpms force off"
-
 set $Locker i3lock -c 000000
 set $mode_system   ·   [L]ock    Log[o]ut    [S]uspend    [R]eboot    [P]oweroff   ·
 
@@ -224,6 +226,9 @@ mode "$mode_system" {
 }
 # we keep a quick lock binding
 bindsym $mod+Control+l exec $Locker
+
+# autolock
+# exec xautolock -notify 10 -notifier "$lockalert" -time $autolock -locker $Locker
 
 # ----------------------------------------------------------------------------
 # Screensaver mode
@@ -287,23 +292,25 @@ bindsym XF86AudioPrev  exec mpc prev
 
 # start a terminal
 bindsym $mod+Return exec $term
+bindsym $mod+shift+Return exec $termDetached
 
 # [m]utt
 bindsym $mod+shift+m workspace $W3; exec $term --title "mutt" mutt
 bindsym $mod+m       exec i3-msg '[title="mutt"] focus'
 bindsym XF86Mail     exec i3-msg '[title="mutt"] focus'
 
-# Qutebrowser ([www]/[b]rowse)
-bindsym $mod+shift+w exec qutebrowser
+# Qutebrowser ([o] for the shape of the earth de[b]ug)
+bindsym $mod+shift+o exec qutebrowser
 # for dev
 bindsym $mod+shift+b exec qutebrowser --enable-webengine-inspector --loglevel vdebug
 
-bindsym $mod+w   [class="qutebrowser"] focus
+bindsym $mod+o   [class="qutebrowser"] focus
 bindcode 180     [class="qutebrowser"] focus
 
-# ncmpcpp ([J]ukebox)
-bindsym $mod+shift+j workspace $w6; exec $term sh -c "i3-msg mark ncmpcpp && ncmpcpp"
-bindsym $mod+j       exec i3-msg '[con_mark="ncmpcpp"] focus'
+# ncmpcpp ([l]ecteur)
+# you can move to a more logical key for you langage, like [J]ukebox
+bindsym $mod+shift+l workspace $w6; exec $termDetached -o font_size=10 sh -c "i3-msg mark ncmpcpp && ncmpcpp"
+bindsym $mod+l       exec i3-msg '[con_mark="ncmpcpp"] focus'
 
 # ranger ([F]iles
 bindsym $mod+shift+f    exec $term --title "ranger" ranger
@@ -352,7 +359,7 @@ client.placeholder          $bg     $bg         $bg     $bg
 bar {
     position bottom
     strip_workspace_numbers yes
-    font pango:DejaVu Sans Mono, FontAwesome 8
+    font pango:DejaVu Sans Mono, FontAwesome 7
     separator_symbol "⋆"
 
     status_command i3status --config ~/.config/i3/i3status.conf
@@ -368,5 +375,3 @@ bar {
         urgent_workspace    $ac        $bg        $hi
     }
 }
-
-

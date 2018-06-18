@@ -3,6 +3,7 @@
 # Maintainer: sheoak
 # Version:    O.11
 
+# bepo keys
 c   next-tag
 C   prev-tag
 t   forw-line

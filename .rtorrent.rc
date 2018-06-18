@@ -1,0 +1,15 @@
+
+directory = ~/downloads/torrents/
+session = ~/.rtorrent.session
+
+encryption = require,require_RC4,allow_incoming,try_outgoing
+
+dht = disable
+
+max_peers=100
+max_peers_seed=100
+max_uploads=2
+upload_rate=150
+
+use_udp_trackers=no
+port_range = 55556-55556

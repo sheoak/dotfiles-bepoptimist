@@ -21,8 +21,8 @@ map [normal]     <C-t> scroll half-down
 map [normal]     <C-c> rotate rotate-ccw
 map [normal]     <C-r> rotate rotate-cw
 
-map [normal]     <bs>    full up
-map [normal]     <enter> full down
+map [normal]     <BackSpace>   scroll full-up
+map [normal]     <Return>      scroll full-down
 
 map [normal]     w zoom to width
 map [normal]     h reload

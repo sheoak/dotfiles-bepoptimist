@@ -7,6 +7,20 @@
 # Author: sheoak <dev@sheoak.fr>
 
 # ---------------------------------------------------------------------------
+# Custom search engines
+# ---------------------------------------------------------------------------
+c.url.start_pages = 'about:blank'
+c.url.searchengines["DEFAULT"] = "https://www.google.fr/search?q={}"
+c.url.searchengines["g"] = "https://www.google.fr/search?q={}"
+c.url.searchengines["q"] = "https://lite.qwant.com/?t=web&q={}"
+c.url.searchengines["a"] = "https://wiki.archlinux.org/?search={}"
+c.url.searchengines["w"] = "https://en.wikipedia.org/wiki/{}"
+c.url.searchengines["wa"] = "https://wiki.archlinux.org/index.php?search={}"
+c.url.searchengines["s"] = "https://www.searx.me/?q={}&category_general=on&time_range=&language=en-us"
+c.url.searchengines["m"] = "http://www.openstreetmap.org/search?query={}"
+c.url.searchengines["gm"] = "https://www.google.fr/maps/place/{}"
+
+# ---------------------------------------------------------------------------
 # BEPO
 # ---------------------------------------------------------------------------
 config.bind('<Ctrl-c>',  'scroll left')
@@ -44,18 +58,13 @@ c.tabs.last_close = 'close'
 c.fonts.hints = 'Open Sans'
 c.hints.border = '1px solid'
 
-# custom search engines
-c.url.start_pages = 'about:blank'
-c.url.searchengines["DEFAULT"] = "https://www.google.fr/search?q={}"
-c.url.searchengines["g"] = "https://www.google.fr/search?q={}"
-c.url.searchengines["q"] = "https://lite.qwant.com/?t=web&q={}"
-c.url.searchengines["a"] = "https://wiki.archlinux.org/?search={}"
-c.url.searchengines["w"] = "https://en.wikipedia.org/wiki/{}"
-c.url.searchengines["s"] = "https://www.searx.me/?q={}&category_general=on&time_range=&language=en-us"
-c.url.searchengines["m"] = "http://www.openstreetmap.org/search?query={}"
-c.url.searchengines["gm"] = "https://www.google.fr/maps/place/{}"
-
+# custom CSS
 c.content.user_stylesheets.append('user.css')
+
+# ad blocking
+#config.set('content.host_blocking', True);
+c.content.host_blocking.lists = ['https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/social/hosts']
+config.bind(',h', 'config-cycle -t -p content.host_blocking.enabled')
 
 # nothing is more annoying than a mouse, except autoplay
 c.qt.args.append('autoplay-policy=user-gesture-required')
@@ -75,6 +84,7 @@ config.bind('gT', 'tab-prev')
 # always open a new window, never use tabs
 config.bind('j','set-cmd-text -s :open -w ')
 config.bind('O','set-cmd-text -s :open -w ')
+config.bind('<Ctrl-Shift-p>', 'set-cmd-text -s :open -p ')
 config.bind('F','hint all window')
 
 config.bind('<Backspace>','scroll-page 0 -1')

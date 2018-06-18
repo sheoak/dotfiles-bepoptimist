@@ -1,4 +1,4 @@
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
@@ -7,6 +7,7 @@ plugins=(
   vi-mode
   colored-man-pages
   common-aliases
+  gpg-agent
 )
 
 # Path to your oh-my-zsh installation.
@@ -19,8 +20,13 @@ export http_proxy="http://localhost:8118"
 export EDITOR=nvim
 export VISUAL=nvim
 
+# for neomutt/urlscan
+export BROWSER=qutebrowser
+
 # use lesspipe
 export LESSOPEN="|lesspipe.sh %s"
+# no less history
+export LESSHISTFILE=/dev/null
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -58,7 +64,7 @@ POWERLINE_RIGHT_B="none"
 if [ "$TERM" = "linux" ]; then
     echo -en "\e]PB657b83" # S_base00
     echo -en "\e]PA586e75" # S_base01
-    echo -en "\e]P001252E" # S_base02
+    echo -en "\e]P0000C0F" # S_base02
     echo -en "\e]P62aa198" # S_cyan
     echo -en "\e]P8002b36" # S_base03
     echo -en "\e]P2859900" # S_green
@@ -76,5 +82,11 @@ if [ "$TERM" = "linux" ]; then
 fi
 
 source $ZSH/oh-my-zsh.sh
+
+# move history file in a cleaner place
+HISTFILE=~/.local/share/zsh/zsh_history
+
+# custom alias in :
+# ~/.oh-my-zsh/custom/plugins/common-aliases/common-aliases.plugin.zsh
 
 [[ -s $HOME/.zshrc.local ]] && source "$HOME/.zshrc.local"

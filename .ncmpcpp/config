@@ -18,7 +18,7 @@
 ## MPD clients (eg. ncmpc) also use that location.
 ##
 #
-lyrics_directory = ~/music/albums/.lyrics
+lyrics_directory = ~/public/Albums/.lyrics
 
 ##### connection settings #####
 #
@@ -30,7 +30,7 @@ mpd_connection_timeout = 5
 #
 ## Needed for tag editor and file operations to work.
 ##
-mpd_music_dir = ~/music/albums/
+mpd_music_dir = ~/public/Albums/
 #
 #mpd_crossfade_time = 5
 #

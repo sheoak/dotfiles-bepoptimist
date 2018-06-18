@@ -12,29 +12,20 @@
 cd `dirname $0`
 DOTFILES="`pwd`"
 
-if [ ! -d ~/.vim/bundle/Vundle.vim/ ];
+# vim-plug install
+if [ ! -d ~/.local/share/nvim/site/autoload/plug.vim/ ];
 then
-    # vundle install
-    git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
-# link spell files
-mkdir -p $HOME/.vim/spell/
-ln -s $DOTFILES/.vim/spell/* $HOME/.vim/spell/
+# for deoplete
+sudo pip3 install neovim
 
 # install vundle plugins
-vim +PluginInstall +qall
+vim +PlugInstall +qall
+vim +UpdateRemotePlugin +qall
 
-cd -
-
-# make YouComplete plugin
-cd ~/.vim/bundle/YouCompleteMe/
-./install.sh
-cd -
-
-# make vimproc plugin
-cd ~/.vim/bundle/vimproc.vim/
-make
 cd -
 
 echo "Do not forget to install tidy5 and put 'tidy' in PATH: https://github.com/htacg/tidy-html5"
