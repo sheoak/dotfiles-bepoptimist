@@ -17,6 +17,7 @@ awesome-terminal-fonts
 bash
 bbswitch
 bc
+bind-tools
 bison
 bumblebee
 bzip2
@@ -78,6 +79,7 @@ jfsutils
 kitty
 less
 lesspipe
+lib32-nvidia-utils
 libva-utils
 licenses
 linux
@@ -188,6 +190,7 @@ winetricks
 wpa_actiond
 wpa_supplicant
 xautolock
+xf86-video-intel
 xf86-video-vesa
 xfsprogs
 xorg-docs
