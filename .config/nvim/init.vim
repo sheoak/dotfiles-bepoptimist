@@ -593,13 +593,17 @@ let s:menus.vim.file_candidates = [
     \ ['vim-bim after', '~/.local/share/nvim/plugged/vim-bim/plugin/bim.vim']
     \ ]
 
-let s:menus.zsh = {
-    \ 'description': 'Edit zsh configuration'
+let s:menus.user = {
+    \ 'description': 'Edit user configuration'
     \ }
-let s:menus.zsh.file_candidates = [
+let s:menus.user.file_candidates = [
     \ ['zshrc',  '~/.zshrc'],
     \ ['zshenv', '~/.zshenv'],
-    \ ['custom', '~/.oh-my-zsh/custom/plugins/common-aliases/common-aliases.plugin.zsh'],
+    \ ['custom zsh', '~/.oh-my-zsh/custom/plugins/common-aliases/common-aliases.plugin.zsh'],
+    \ ['i3', '~/.config/i3/config'],
+    \ ['i3 status', '~/.config/i3/i3status.conf'],
+    \ ['qutebrowser', '~/.config/qutebrowser/config.py'],
+    \ ['kitty', '~/.config/kitty/kitty.conf']
     \ ]
 
 let s:menus.system = {
@@ -608,7 +612,7 @@ let s:menus.system = {
 let s:menus.system.file_candidates = [
     \ ['mkinitpcio',    '/etc/mkinitcpio.conf'],
     \ ['grub',          '/etc/default/grub'],
-    \ ['fstab',         '/etc/fstabc'],
+    \ ['fstab',         '/etc/fstabc']
     \ ]
 
 call denite#custom#var('menu', 'menus', s:menus)
