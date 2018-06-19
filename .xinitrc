@@ -11,25 +11,26 @@ fi
 # terminal for graphical environment, we use kitty
 export TERMINAL=kitty
 
-# keyboard speed
+# keyboard/mouse speed
 xset r rate 260 52
-
-# mouse speed
-xinput --set-prop 'ELAN1201:00 04F3:3098 Touchpad' 'libinput Accel Speed'  0.8
 
 # swap esc and cap locks (macbook air)
 setxkbmap -option caps:swapescape fr bepo
 
 # desktop wallpaper and color
-/usr/bin/feh --bg-scale --no-fehbg ~/images/wallpapers/zelda2.jpg
+/usr/bin/feh --bg-scale --no-fehbg ~/.wallpaper.jpg
 
-# redshift/dunst autostart fail because X is not ready yet
-#redshift
+# notifications
 systemctl --user import-environment DISPLAY
 /usr/bin/dunst &
 
-# daemon mode for urxvtd, recommanded here instead of systemd
-#/usr/bin/udiskie -T -q --no-notify --use-udisks2 &
 /usr/bin/compton -b
+
+#/usr/bin/udiskie -T -q --no-notify --use-udisks2 &
+
+# local system configuration
+if [ -f ~/.xinitrc.local ]; then
+    source ~/.xinitrc.local
+fi
 
 exec i3
