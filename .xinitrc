@@ -15,7 +15,7 @@ export TERMINAL=kitty
 xset r rate 260 52
 
 # mouse speed
-xinput --set-prop  17 'libinput Accel Speed' 0.9
+xinput --set-prop 'ELAN1201:00 04F3:3098 Touchpad' 'libinput Accel Speed'  0.8
 
 # swap esc and cap locks (macbook air)
 setxkbmap -option caps:swapescape fr bepo
