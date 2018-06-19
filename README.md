@@ -1,5 +1,5 @@
-dotfiles
-========
+The bépo keyboard addict dotfiles repository
+============================================
 
 Various linux configuration files — lot of them using bépo layout and/or 
 vim-styles shortcuts.
