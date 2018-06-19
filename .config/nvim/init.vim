@@ -213,7 +213,9 @@ set foldmethod=marker   " fold based on indent level
 " -----------------------------------------------------------------------------
 set nonumber            " show line number ?
 set norelativenumber    " show relative number also ?
-set cursorline          " highlight current line
+
+" Disabled due to a bug (freeze) with matching pairs
+set nocursorline        " highlight current line
 set colorcolumn=80
 set showcmd             " display incomplete commands
 set showmode            " already in airline?
@@ -523,6 +525,19 @@ let g:snips_author = username . "<" . email . ">"
 let g:pandoc#biblio#sources = 'b'
 " }}}
 
+" NeoComplete {{{
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+" inoremap <silent> <CR> <C-r>=<SID>neoCompleteCr()<CR>
+" function! s:neoCompleteCr()
+  " return pumvisible() ? "\<C-y>" : "\<CR>"
+" endfunction
+" }}}
+
+" Sneak {{{
+let g:sneak#use_ic_scs = 1
+" }}}
+
 " {{{ Gundo
 let g:gundo_prefer_python3 = 1
 " }}}
@@ -531,7 +546,7 @@ let g:gundo_prefer_python3 = 1
 let g:bim_map_fugitive = 1
 let g:bim_remap_leader = 1
 " }}}
-"
+
 " {{{ Deoplete
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
@@ -603,7 +618,8 @@ let s:menus.user.file_candidates = [
     \ ['i3', '~/.config/i3/config'],
     \ ['i3 status', '~/.config/i3/i3status.conf'],
     \ ['qutebrowser', '~/.config/qutebrowser/config.py'],
-    \ ['kitty', '~/.config/kitty/kitty.conf']
+    \ ['kitty', '~/.config/kitty/kitty.conf'],
+    \ ['mutt', '~/.muttrc']
     \ ]
 
 let s:menus.system = {
