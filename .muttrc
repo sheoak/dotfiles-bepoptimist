@@ -61,6 +61,7 @@ set to_chars=" +TCFL"
 set mailcap_path = ~/.mutt/mailcap
 auto_view text/html
 alternative_order text/plain text/enriched text/html
+bind attach <return>  view-mailcap
 
 # clean tmp attachments when changing folder
 folder-hook . `rm -f /tmp/mutt/*`
