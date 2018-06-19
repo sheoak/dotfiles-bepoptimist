@@ -8,10 +8,15 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
+# local system configuration
+if [ -f ~/.xinitrc.local ]; then
+    source ~/.xinitrc.local
+fi
+
 # terminal for graphical environment, we use kitty
 export TERMINAL=kitty
 
-# keyboard/mouse speed
+# keyboard speed
 xset r rate 260 52
 
 # swap esc and cap locks (macbook air)
@@ -21,16 +26,11 @@ setxkbmap -option caps:swapescape fr bepo
 /usr/bin/feh --bg-scale --no-fehbg ~/.wallpaper.jpg
 
 # notifications
-systemctl --user import-environment DISPLAY
 /usr/bin/dunst &
 
 /usr/bin/compton -b
 
 #/usr/bin/udiskie -T -q --no-notify --use-udisks2 &
 
-# local system configuration
-if [ -f ~/.xinitrc.local ]; then
-    source ~/.xinitrc.local
-fi
 
 exec i3
