@@ -8,7 +8,7 @@ This is a keyboard oriented configuration based on i3 (currently testing
 sway/wayland).
 
 Most of the work on bépo configuration is made in my 
-[vim-bim](https://github.com/sheoak/vim-bim) plugin).
+[vim-bepoptimist](https://github.com/sheoak/vim-bepoptimist) plugin).
 I'm still experiencing a lot on it, it might be unstable. Any participation is 
 welcome if you're a bépo enthousiast.
 
@@ -26,7 +26,8 @@ welcome if you're a bépo enthousiast.
 - qutebrowser
 - i3 window manager
 - screen
-- neovim (see my [vim-bim](https://github.com/sheoak/vim-bim) plugin)
+- neovim (see my plugin [vim-bepoptimist](https://github.com/sheoak/vim-bepoptimist)
+- plugin)
 - neomutt (see ~/.mutt/bepo.muttrc)
 
 
