@@ -8,7 +8,7 @@ This is a keyboard oriented configuration based on i3 (currently testing
 sway/wayland).
 
 Most of the work on bépo configuration is made in my 
-[vim-bepoptimist](https://github.com/sheoak/vim-bepoptimist) plugin).
+[vim-bepoptimist](https://github.com/sheoak/vim-bepoptimist) plugin.
 I'm still experiencing a lot on it, it might be unstable. Any participation is 
 welcome if you're a bépo enthousiast.
 
@@ -64,4 +64,4 @@ I'm leaving those files but will not maintain them anymore:
 # Tips
 
 Nice way to store your dotfiles:
-[https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/]
+https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/
