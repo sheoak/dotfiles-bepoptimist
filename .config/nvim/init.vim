@@ -262,15 +262,7 @@ else
     set background=dark
 endif
 
-
-" Color for xiterm, rxvt, nxterm, color-xterm:
-" if has("terminfo") && g:colors_name == 'solarized'
-"     set t_Co=16     " better for solarized theme
-" else
-"     set t_Co=256
-" endif
 if $TERM == 'linux'
-    " set t_Co=256
     colorscheme NeoSolarized
 else
     try
@@ -439,10 +431,6 @@ noremap <Space> <PageDown>
 " Plugins configuration {{{
 " -----------------------------------------------------------------------------
 
-" Plugin vim-solarized {{{
-" -----------------------------------------------------------------------------
-" }}}
-
 " Plugin Emmet {{{
 " -----------------------------------------------------------------------------
 let g:user_emmet_install_global = 0
@@ -465,23 +453,14 @@ let g:syntastic_html_tidy_ignore_errors = [
     \ ]
 " }}}
 
-" Plugin TagBar {{{
-" -----------------------------------------------------------------------------
-" let g:tagbar_usearrows = 1
-" map <leader>t :TagbarToggle<CR>
-" }}}
-
 " Plugin vim-airline {{{
 " -----------------------------------------------------------------------------
 set laststatus=2 " Always display the statusline in all windows
-"set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
 
-"let g:airline_inactive_collapse=1
-"let g:airline_section_z = "%3p%% %{g:airline_symbols.linenr}%#__accent_bold#%4l%#__restore__#U"
 " }}}
 
 " Plugin vim-jedi {{{
@@ -526,15 +505,6 @@ let g:snips_author = username . "<" . email . ">"
 let g:pandoc#biblio#sources = 'b'
 " }}}
 
-" NeoComplete {{{
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-" inoremap <silent> <CR> <C-r>=<SID>neoCompleteCr()<CR>
-" function! s:neoCompleteCr()
-  " return pumvisible() ? "\<C-y>" : "\<CR>"
-" endfunction
-" }}}
-
 " Sneak {{{
 let g:sneak#use_ic_scs = 1
 " }}}
@@ -543,7 +513,7 @@ let g:sneak#use_ic_scs = 1
 let g:gundo_prefer_python3 = 1
 " }}}
 
-" vim-bim {{{
+" vim-bepoptimist {{{
 let g:bim_map_fugitive = 1
 let g:bim_remap_leader = 1
 " }}}
@@ -634,10 +604,6 @@ let s:menus.system.file_candidates = [
 
 call denite#custom#var('menu', 'menus', s:menus)
 
-" }}}
-
-" editorconfig {{{
-" let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 " }}}
 
 " goyo {{{
