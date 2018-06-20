@@ -53,7 +53,7 @@ welcome if you're a bépo enthousiast.
 
 # Dropped support
 
-I'm leaving this file but will not maintain them anymore:
+I'm leaving those files but will not maintain them anymore:
 
 - vimium
 - vimb
