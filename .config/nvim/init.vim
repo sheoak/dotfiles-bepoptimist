@@ -47,7 +47,7 @@ endif
 call plug#begin(s:plug_path)
 
 " My custom plugins
-Plug 'sheoak/vim-bim'                         " Bepo keymap
+Plug 'sheoak/vim-bepoptimist'                         " Bepo keymap
 
 " Themes
 Plug 'iCyMind/NeoSolarized'
@@ -65,7 +65,6 @@ endif
 
 " Deoplete deps
 Plug 'wokalski/autocomplete-flow'
-Plug 'zchee/deoplete-jedi'
 Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
 Plug 'kristijanhusak/deoplete-phpactor'
 
@@ -86,6 +85,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter', { 'for': 'git' } " Git gutter on the left
 
 " Filetype specific plugins
+Plug 'davidhalter/jedi',             { 'for': 'python' }
+Plug 'zchee/deoplete-jedi',          { 'for': 'python' }
 Plug 'PotatoesMaster/i3-vim-syntax', { 'for': 'i3' }
 Plug 'digitaltoad/vim-jade',         { 'for': 'jade' }
 Plug 'hail2u/vim-css3-syntax',       { 'for': 'css' }
@@ -582,13 +583,13 @@ call denite#custom#var('grep', 'pattern_opt', [])
 call denite#custom#var('grep', 'separator', ['--'])
 call denite#custom#var('grep', 'final_opts', [])
 
-nnoremap ,<Space> :<C-u>DeniteProjectDir file/rec<CR>
-nnoremap ,b :<C-u>Denite buffer<CR>
-nnoremap ,w :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
-nnoremap ,/ :<C-u>DeniteProjectDir grep:. -mode=normal<CR>
-nnoremap ,f :<C-u>DeniteBufferDir file_rec<CR>
-nnoremap ,r :<C-u>Denite register<CR>
-nnoremap ,m :<C-u>Denite menu<CR>
+nnoremap <Tab> :<C-u>DeniteProjectDir file/rec<CR>
+nnoremap <leader>b :<C-u>Denite buffer<CR>
+nnoremap <leader>s :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
+nnoremap <leader>S :<C-u>DeniteProjectDir grep:. -mode=normal<CR>
+nnoremap <leader>f :<C-u>DeniteBufferDir file_rec<CR>
+nnoremap <leader>r :<C-u>Denite register<CR>
+nnoremap <leader>m :<C-u>Denite menu<CR>
 
 call denite#custom#alias('source', 'file/rec/git', 'file/rec')
 call denite#custom#var('file/rec/git', 'command',
@@ -603,9 +604,9 @@ let s:menus.vim = {
     \ 'description': 'Edit vim configuration'
     \ }
 let s:menus.vim.file_candidates = [
-    \ ['init.vim',      '~/.config/nvim/init.vim'],
-    \ ['vim-bim',       '~/.local/share/nvim/plugged/vim-bim/plugin/bim.vim'],
-    \ ['vim-bim after', '~/.local/share/nvim/plugged/vim-bim/plugin/bim.vim']
+    \ ['init.vim'          , '~/.config/nvim/init.vim']                                                  ,
+    \ ['bepoptimist'       , '~/.local/share/nvim/plugged/vim-bepoptimist/plugin/bepoptimist.vim']       ,
+    \ ['bepoptimist after' , '~/.local/share/nvim/plugged/vim-bepoptimist/after/plugin/bepoptimist.vim']
     \ ]
 
 let s:menus.user = {
