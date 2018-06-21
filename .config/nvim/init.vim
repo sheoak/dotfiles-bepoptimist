@@ -63,7 +63,8 @@ else
     Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
-" Deoplete deps
+" Deoplete deps/addons
+Plug 'Shougo/neomru.vim'
 Plug 'wokalski/autocomplete-flow'
 Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
 Plug 'kristijanhusak/deoplete-phpactor'
@@ -528,9 +529,6 @@ call denite#custom#option('default', { 'prompt': '❯' })
 
 call denite#custom#source(
 	\ 'file/rec', 'matchers', ['matcher/fuzzy', 'matcher/project_files', 'matcher/hide_hidden_files'])
-
-call denite#custom#var('file/rec', 'command',
-	\ ['ag', '--follow', '--hidden', '--nocolor', '--nogroup', '-g', ''])
 
 call denite#custom#map(
       \ 'insert',
