@@ -78,7 +78,7 @@ Plug 'wellle/targets.vim'       " Additionnal text objects like cin) or da,
 Plug 'junegunn/goyo.vim'        " Minimalist interface on demand with :Goyo
 Plug 'scrooloose/syntastic'     " Syntax checker for JS, PHP, Python…
 Plug 'sjl/gundo.vim'            " More undo
-Plug 'godlygeek/tabular'        " Formatting with tab
+Plug 'junegunn/vim-easy-align'  " Align tabs
 
 " Git integration
 Plug 'tpope/vim-fugitive'
