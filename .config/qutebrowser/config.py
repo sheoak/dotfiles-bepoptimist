@@ -77,8 +77,7 @@ c.hints.border = '1px solid'
 c.content.user_stylesheets.append('user.css')
 
 # ad blocking
-#config.set('content.host_blocking', True);
-c.content.host_blocking.lists = ['https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/social/hosts']
+c.content.host_blocking.lists = ['https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts']
 config.bind(',h', 'config-cycle -t -p content.host_blocking.enabled')
 
 # nothing is more annoying than a mouse, except autoplay
