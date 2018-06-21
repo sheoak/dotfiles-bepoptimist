@@ -6,32 +6,47 @@
 #
 # Author: sheoak <dev@sheoak.fr>
 
+# customize:
+
+# where to save youtube videos/mp3 extract from youtube
+yt_video_path = '~/videos/youtube'
+yt_mp3_path = '~/videos/youtube/mp3'
+
+# how to download youtube videos/extract mp3
+yt_download_cmd = "youtube-dl -o '" + yt_video_path + "/%(title)s.%(ext)s'"
+yt_download_mp3_cmd = "youtube-dl --extract-audio -o '" + yt_mp3_path + "/%(title)s.%(ext)s'"
+
 # ---------------------------------------------------------------------------
 # Custom search engines
 # ---------------------------------------------------------------------------
-c.url.start_pages = 'about:blank'
+c.url.start_pages              = 'about:blank'
 c.url.searchengines["DEFAULT"] = "https://www.google.fr/search?q={}"
-c.url.searchengines["g"] = "https://www.google.fr/search?q={}"
-c.url.searchengines["q"] = "https://lite.qwant.com/?t=web&q={}"
-c.url.searchengines["a"] = "https://wiki.archlinux.org/?search={}"
-c.url.searchengines["w"] = "https://en.wikipedia.org/wiki/{}"
-c.url.searchengines["wa"] = "https://wiki.archlinux.org/index.php?search={}"
-c.url.searchengines["s"] = "https://www.searx.me/?q={}&category_general=on&time_range=&language=en-us"
-c.url.searchengines["m"] = "http://www.openstreetmap.org/search?query={}"
-c.url.searchengines["gm"] = "https://www.google.fr/maps/place/{}"
+c.url.searchengines["g"]       = "https://www.google.fr/search?q={}"
+c.url.searchengines["q"]       = "https://lite.qwant.com/?t=web&q={}"
+c.url.searchengines["a"]       = "https://wiki.archlinux.org/?search={}"
+c.url.searchengines["w"]       = "https://en.wikipedia.org/wiki/{}"
+c.url.searchengines["wa"]      = "https://wiki.archlinux.org/index.php?search={}"
+c.url.searchengines["s"]       = "https://www.searx.me/?q={}&category_general=on&time_range=&language=en-us"
+c.url.searchengines["m"]       = "http://www.openstreetmap.org/search?query={}"
+c.url.searchengines["gm"]      = "https://www.google.fr/maps/place/{}"
 
 # ---------------------------------------------------------------------------
 # BEPO
 # ---------------------------------------------------------------------------
-config.bind('<Ctrl-c>',  'scroll left')
-config.bind('<Ctrl-r>',  'scroll right')
-config.bind('<Ctrl-s>',  'scroll-page 0 -1')
-config.bind('<Ctrl-t>',  'scroll-page 0 1')
-config.bind('s',         'scroll up')
-config.bind('t',         'scroll down')
-config.bind('c',         'back')
-config.bind('r',         'forward')
-config.bind('h',         'reload -f')
+config.bind('s', 'scroll up')
+config.bind('t', 'scroll down')
+config.bind('c', 'back')
+config.bind('r', 'forward')
+# left hand control, nice when using mouse
+config.bind('«', 'back')
+config.bind('»', 'forward')
+
+config.bind('C', 'scroll left')
+config.bind('R', 'scroll right')
+config.bind('S', 'scroll-page 0 -1')
+config.bind('T', 'scroll-page 0 1')
+
+config.bind('<Ctrl-R>', 'reload -f')
 
 # hints for bepo
 c.hints.chars = 'aiuectsrn'
@@ -48,7 +63,7 @@ c.hints.next_regexes.append(r'\bsuivant\b')
 # for no-tab use, letting i3 handle what it does better than qutebrowser
 c.tabs.show = 'multiple'
 
-# do not use tabs
+# do not use tabs, i3 handles it better
 c.tabs.tabs_are_windows = True
 c.tabs.background = True
 # allow use of 'd' to close window
@@ -73,27 +88,68 @@ c.qt.args.append('autoplay-policy=user-gesture-required')
 config.set('downloads.location.directory', '~/downloads/')
 config.set('hints.min_chars', 1)
 
-# missing yank selection
-config.bind('yv', 'yank selection')
-config.bind('yV', 'yank -s selection')
+config.bind('F','hint all window')
 
-# in case an annoying tab pops in, vim style navigation
-config.bind('gt', 'tab-next')
-config.bind('gT', 'tab-prev')
+# ------------------------------------------------------------
+# I use the same shotcuts as in vim as much as possible (bepo)
+# ------------------------------------------------------------
 
 # always open a new window, never use tabs
 config.bind('j','set-cmd-text -s :open -w ')
 config.bind('O','set-cmd-text -s :open -w ')
+
+# Firefox like shortcuts
 config.bind('<Ctrl-Shift-p>', 'set-cmd-text -s :open -p ')
-config.bind('F','hint all window')
 
 config.bind('<Backspace>','scroll-page 0 -1')
 config.bind('<Return>','scroll-page 0 1')
 config.bind('u','undo')
 
+# ----------------------------------------------------------------------------
+# g* shotcuts: [g]o to…
+# ----------------------------------------------------------------------------
+# in case an annoying tab pops in, vim style navigation
+config.bind('gt', 'tab-next')
+config.bind('gT', 'tab-prev')
+
 # open video in mpv
 config.bind('gm', 'spawn mpv {url}')
 config.bind('gM', 'hint links spawn mpv {hint-url}')
+
+# ----------------------------------------------------------------------------
+# y* additionnal shortcuts
+# ----------------------------------------------------------------------------
+
+# missing yank selection
+config.bind('yv', 'yank selection')
+config.bind('yV', 'yank -s selection')
+
+# ----------------------------------------------------------------------------
+# y* download shortcuts
+# ----------------------------------------------------------------------------
+
+# Clear the download list quickly
+config.bind('$$',  'download-clear')
+config.bind('$c',  'download-cancel')
+config.bind('$o',  'download-open')
+config.bind('$r',  'download-retry')
+config.bind('$D',  'download-delete')
+config.bind('$d',  'download-remove')
+config.bind('$u',  ':set-cmd-text :download ')
+
+# yv : youtube to video
+config.bind('$yv', 'spawn ' + yt_download_cmd + ' {url}')
+# ym : youtube to mp3
+config.bind('$ym', 'spawn ' + yt_download_mp3_cmd + ' {url}')
+
+# dangerous shortcut if you forget to go in insert mode…
+# i3 shortcut works or ctrl-d (as we remapped it)
+# Ctrl-q still closes all windows
+config.unbind('d')
+config.bind('<Ctrl-d>', 'tab-close')
+
+# Quick access to history
+config.bind('<Ctrl-h>',  'history')
 
 # Solarized theme by YouNeverWalkAlone
 # https://www.reddit.com/r/qutebrowser/comments/77eqiq/solarized_or_base16_color_theme_for_qutebrowser/
