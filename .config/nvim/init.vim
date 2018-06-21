@@ -517,6 +517,7 @@ let g:gundo_prefer_python3 = 1
 " vim-bepoptimist {{{
 let g:bim_map_fugitive = 1
 let g:bim_remap_leader = 1
+let g:surround_no_mappings = 1
 " }}}
 
 " {{{ Deoplete
