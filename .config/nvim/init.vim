@@ -543,44 +543,52 @@ call denite#custom#map(
       \ 'noremap'
       \)
 
-" Ag command on grep source
-call denite#custom#var('grep', 'command', ['ag'])
-call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
-call denite#custom#var('grep', 'recursive_opts', [])
-call denite#custom#var('grep', 'pattern_opt', [])
-call denite#custom#var('grep', 'separator', ['--'])
-call denite#custom#var('grep', 'final_opts', [])
-
-nnoremap <Tab> :<C-u>DeniteProjectDir file/rec<CR>
-nnoremap <leader>b :<C-u>Denite buffer<CR>
-nnoremap <leader>s :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
-nnoremap <leader>S :<C-u>DeniteProjectDir grep:. -mode=normal<CR>
-nnoremap <leader>f :<C-u>DeniteBufferDir file_rec<CR>
-nnoremap <leader>r :<C-u>Denite register<CR>
-nnoremap <leader>m :<C-u>Denite menu<CR>
-
+" Denite for git
 call denite#custom#alias('source', 'file/rec/git', 'file/rec')
 call denite#custom#var('file/rec/git', 'command',
     \ ['git', 'ls-files', '-co', '--exclude-standard'])
 nnoremap <silent> ,g :<C-u>DeniteBufferDir
     \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`<CR>
 
+" Ag command on grep source
+if (executable('ag'))
+    call denite#custom#var('file/rec', 'command',
+        \ ['ag', '--follow', '--hidden', '--nocolor', '--nogroup', '-g', ''])
+
+    call denite#custom#var('grep', 'command', ['ag'])
+    call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
+    call denite#custom#var('grep', 'recursive_opts', [])
+    call denite#custom#var('grep', 'pattern_opt', [])
+    call denite#custom#var('grep', 'separator', ['--'])
+    call denite#custom#var('grep', 'final_opts', [])
+endif
+
+nnoremap <Tab> :<C-u>DeniteProjectDir file/rec<CR>
+nnoremap \b :<C-u>Denite buffer<CR>
+nnoremap \s :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
+nnoremap \S :<C-u>DeniteProjectDir grep:. -mode=normal<CR>
+nnoremap \f :<C-u>DeniteBufferDir file_rec<CR>
+nnoremap \r :<C-u>Denite register<CR>
+nnoremap \m :<C-u>Denite menu:bookmarks<CR>
+" history
+nnoremap \h :<C-u>Denite file_mru<CR>
+nnoremap \d :<C-u>Denite directory_mru<CR>
+nnoremap \c :<C-u>Denite command_history<CR>
+
 " Add custom menus
+" TODO: a bookmark plugin for denite would be better
 let s:menus = {}
 
-let s:menus.vim = {
-    \ 'description': 'Edit vim configuration'
-    \ }
-let s:menus.vim.file_candidates = [
+let s:menus.bookmarks = {
+    \ 'description': 'Bookmarks'
+\ }
+let s:menus.bookmarks.file_candidates = [
     \ ['init.vim'          , '~/.config/nvim/init.vim']                                                  ,
     \ ['bepoptimist'       , '~/.local/share/nvim/plugged/vim-bepoptimist/plugin/bepoptimist.vim']       ,
-    \ ['bepoptimist after' , '~/.local/share/nvim/plugged/vim-bepoptimist/after/plugin/bepoptimist.vim']
-    \ ]
-
-let s:menus.user = {
-    \ 'description': 'Edit user configuration'
-    \ }
-let s:menus.user.file_candidates = [
+    \ ['bepoptimist after' , '~/.local/share/nvim/plugged/vim-bepoptimist/after/plugin/bepoptimist.vim'],
+    \ ['mkinitpcio',    '/etc/mkinitcpio.conf'],
+    \ ['grub',          '/etc/default/grub'],
+    \ ['fstab',         '/etc/fstabc'],
     \ ['zshrc',  '~/.zshrc'],
     \ ['zshenv', '~/.zshenv'],
     \ ['custom zsh', '~/.oh-my-zsh/custom/plugins/common-aliases/common-aliases.plugin.zsh'],
@@ -589,16 +597,7 @@ let s:menus.user.file_candidates = [
     \ ['qutebrowser', '~/.config/qutebrowser/config.py'],
     \ ['kitty', '~/.config/kitty/kitty.conf'],
     \ ['mutt', '~/.muttrc']
-    \ ]
-
-let s:menus.system = {
-    \ 'description': 'Edit system configuration'
-    \ }
-let s:menus.system.file_candidates = [
-    \ ['mkinitpcio',    '/etc/mkinitcpio.conf'],
-    \ ['grub',          '/etc/default/grub'],
-    \ ['fstab',         '/etc/fstabc']
-    \ ]
+\ ]
 
 call denite#custom#var('menu', 'menus', s:menus)
 
