@@ -102,6 +102,10 @@ Plug 'plasticboy/vim-markdown',      { 'for': 'markdown' }
 Plug 'vim-pandoc/vim-pandoc',        { 'for': 'markdown' }
 Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': 'markdown' }
 
+" now testing
+Plug 'jaxbot/browserlink.vim',       { 'for': ['html', 'css', 'js'] }
+Plug 'tpope/vim-obsession'
+
 " I only enable thoses when i need them
 " Plug 'editorconfig/editorconfig-vim'
 " Plug 'sirver/ultisnips'
