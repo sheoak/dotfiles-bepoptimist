@@ -69,7 +69,9 @@ Plug 'wokalski/autocomplete-flow'
 Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
 Plug 'kristijanhusak/deoplete-phpactor'
 
-Plug 'bling/vim-airline'        " Cool status bar
+Plug 'vim-airline/vim-airline'   " Cool status bar
+Plug 'vim-airline/vim-airline-themes'
+
 Plug 'tpope/vim-surround'       " motions around words
 Plug 'tpope/vim-repeat'         " missing repeat with dot
 Plug 'tpope/vim-speeddating'    " inc/dec dates and numbers
@@ -461,7 +463,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
-
+let g:airline_theme='solarized'
 " }}}
 
 " Plugin vim-jedi {{{
