@@ -47,7 +47,7 @@ endif
 call plug#begin(s:plug_path)
 
 " My custom plugins
-Plug 'sheoak/vim-bepoptimist'                         " Bepo keymap
+Plug 'sheoak/vim-bepoptimist'   " Bepo keymap
 
 " Themes
 Plug 'iCyMind/NeoSolarized'
@@ -82,6 +82,7 @@ Plug 'junegunn/goyo.vim'        " Minimalist interface on demand with :Goyo
 Plug 'scrooloose/syntastic'     " Syntax checker for JS, PHP, Python…
 Plug 'sjl/gundo.vim'            " More undo
 Plug 'junegunn/vim-easy-align'  " Align tabs
+Plug 'tpope/vim-obsession'      " session managment
 
 " Git integration
 Plug 'tpope/vim-fugitive'
@@ -95,16 +96,17 @@ Plug 'digitaltoad/vim-jade',         { 'for': 'jade' }
 Plug 'hail2u/vim-css3-syntax',       { 'for': 'css' }
 Plug 'mattn/emmet-vim',              { 'for': ['html','css'] }
 Plug 'tmhedberg/matchit',            { 'for': ['html', 'xml'] }
-Plug 'tobyS/pdv' ,                   { 'for': 'php' }      " phpDocumentor
+" live update css/html/js
+Plug 'jaxbot/browserlink.vim',       { 'for': ['html', 'css', 'js'] }
+" phpDocumentor
+Plug 'tobyS/pdv' ,                   { 'for': 'php' }
+
+" Missing syntax
 Plug 'jelera/vim-javascript-syntax', { 'for': 'js' }
 Plug 'elzr/vim-json',                { 'for': 'json' }
 Plug 'plasticboy/vim-markdown',      { 'for': 'markdown' }
 Plug 'vim-pandoc/vim-pandoc',        { 'for': 'markdown' }
 Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': 'markdown' }
-
-" now testing
-Plug 'jaxbot/browserlink.vim',       { 'for': ['html', 'css', 'js'] }
-Plug 'tpope/vim-obsession'
 
 " I only enable thoses when i need them
 " Plug 'editorconfig/editorconfig-vim'
@@ -245,6 +247,7 @@ set linebreak           " Wrap lines at convenient points
 set wildignore+=*.o,*.obj,.git,*.jpg,*.png,*.gif,*.pdf,*.doc,*.swp,*.swf,*.bak
 set wildignore+=*.zip,*.tar,*.gz,*.ico,*.ttf,*.eot,*/tmp/*,*/node_modules/*
 set wildignore+=*.exe,*.mov,*.msi,*.xls,.ctags,*vim/backups*,*sass_cache*
+set wildignore+=*.woff,*.woff2,*.ttf,*.eot
 set wildignore+=*DS_Store*
 
 set wildmenu            " Better command-line completion
@@ -400,14 +403,20 @@ end
 
 " Custom maps {{{
 
+" note that \ is not leader in this configuration (, is)
+" and , has been moved to ’, taking advantage of bepo (see bepoptimist plugin)
+
 " Don't use Ex mode, use Q for formatting
 noremap Q gq
 
-" Unamed register access is rarely useful, remap it
-nnoremap "" :registers<CR>
+" search word under cursor
+nnoremap \\ :%s/\<<C-r><C-w>\>/
+
+" [O]rder all css properties
+nnoremap \o :<C-u>g/{/ .+1,/}/-1 sort<CR>
 
 " pretty print json
-nnoremap æj :%!python -m json.tool<CR>
+nnoremap \j :%!python -m json.tool<CR>
 
 " ranger style
 nnoremap gn :tabe<CR>
@@ -448,16 +457,28 @@ let g:user_emmet_leader_key='<C-y>'
 
 " Plugin Syntastic {{{
 " -----------------------------------------------------------------------------
-let g:syntastic_html_tidy_exec      = 'tidy'
 let g:syntastic_stl_format          = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 let g:syntastic_enable_perl_checker = 1
 let g:syntastic_enable_signs        = 1
 let g:syntastic_check_on_open       = 1
-let g:syntastic_html_tidy_ignore_errors = [
-    \ '<sv-',
-    \ 'discarding unexpected </sv-',
-    \ 'proprietary attribute "sv-"'
-    \ ]
+
+" let g:syntastic_html_tidy_exec      = 'tidy'
+" let g:syntastic_html_tidy_ignore_errors = [
+"     \ '<sv-',
+"     \ 'discarding unexpected </sv-',
+"     \ 'proprietary attribute "sv-"'
+"     \ ]
+
+" configure syntastic checkers
+let g:syntastic_html_checkers  = ['validator']
+let g:syntastic_js_checkers    = ['jshint']
+let g:syntastic_css_checkers   = ['csslint']
+let g:syntastic_php_checkers   = ['php']
+
+" ignore some annoying rules in csslint
+let g:syntastic_css_csslint_args = 
+    \ " --ignore=ids,box-model,box-sizing,universal-selector,bulletproof-font-face"
+
 " }}}
 
 " Plugin vim-airline {{{
@@ -520,9 +541,14 @@ let g:sneak#use_ic_scs = 1
 let g:gundo_prefer_python3 = 1
 " }}}
 
-" vim-bepoptimist {{{
-let g:bim_map_fugitive = 1
-let g:bim_remap_leader = 1
+" Bepoptimist {{{
+let g:bim_map_fugitive     = 1
+let g:bim_remap_leader     = 1
+" switch : and . — it might feels strange at first but it was huge improvement
+" for me
+let g:bim_switch_command   = 1
+" we need to tell surround that Bepoptimist is going to map it
+" and this need to happens in init.vim before surround is loaded
 let g:surround_no_mappings = 1
 " }}}
 
@@ -554,13 +580,11 @@ call denite#custom#map(
 call denite#custom#alias('source', 'file/rec/git', 'file/rec')
 call denite#custom#var('file/rec/git', 'command',
     \ ['git', 'ls-files', '-co', '--exclude-standard'])
-nnoremap <silent> ,g :<C-u>DeniteBufferDir
-    \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`<CR>
 
 " Ag command on grep source
 if (executable('ag'))
     call denite#custom#var('file/rec', 'command',
-        \ ['ag', '--follow', '--hidden', '--nocolor', '--nogroup', '-g', ''])
+        \ ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])
 
     call denite#custom#var('grep', 'command', ['ag'])
     call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
@@ -570,17 +594,24 @@ if (executable('ag'))
     call denite#custom#var('grep', 'final_opts', [])
 endif
 
-nnoremap <Tab> :<C-u>DeniteProjectDir file/rec<CR>
-nnoremap \b :<C-u>Denite buffer<CR>
-nnoremap \s :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
-nnoremap \S :<C-u>DeniteProjectDir grep:. -mode=normal<CR>
-nnoremap \f :<C-u>DeniteBufferDir file_rec<CR>
-nnoremap \r :<C-u>Denite register<CR>
-nnoremap \m :<C-u>Denite menu:bookmarks<CR>
+nnoremap <Tab> :<C-u>Denite buffer<CR>
+nnoremap ,<Space> :<C-u>DeniteProjectDir file/rec<CR>
+nnoremap ,c :<C-u>Denite command_history<CR>
+nnoremap ,d :<C-u>Denite directory_mru<CR>
+nnoremap ,f :<C-u>Denite file/rec<CR>
+" find in git files if exists
+nnoremap ,g :<C-u>DeniteBufferDir
+    \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`<CR>
 " history
-nnoremap \h :<C-u>Denite file_mru<CR>
-nnoremap \d :<C-u>Denite directory_mru<CR>
-nnoremap \c :<C-u>Denite command_history<CR>
+nnoremap ,h :<C-u>Denite file_mru<CR>
+nnoremap ,m :<C-u>Denite menu:bookmarks<CR>
+nnoremap ,r :<C-u>Denite register<CR>
+nnoremap ,s :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
+nnoremap ,S :<C-u>DeniteProjectDir grep:. -mode=normal<CR>
+
+" Unamed register access is rarely useful, remap it
+nnoremap "" :<C-u>Denite registers<CR>
+
 
 " Add custom menus
 " TODO: a bookmark plugin for denite would be better
