@@ -48,6 +48,21 @@ config.bind('T', 'scroll-page 0 1')
 
 config.bind('<Ctrl-R>', 'reload -f')
 
+# CARET Mode -----------------------------------------------------------------
+config.bind('s', 'move-to-prev-line', 'caret')
+config.bind('t', 'move-to-next-line', 'caret')
+config.bind('c', 'move-to-prev-char', 'caret')
+config.bind('r', 'move-to-next-char', 'caret')
+
+config.bind('S', 'scroll up', 'caret')
+config.bind('T', 'scroll down', 'caret')
+config.bind('C', 'scroll left', 'caret')
+config.bind('R', 'scroll right', 'caret')
+
+# move c to l like in vim
+config.bind('l', 'enter-mode normal', 'caret')
+# ----------------------------------------------------------------------------
+
 # hints for bepo
 c.hints.chars = 'aiuectsrn'
 
