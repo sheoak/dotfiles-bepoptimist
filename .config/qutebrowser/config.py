@@ -19,15 +19,18 @@ download_path_tabs  = '~/music/tabs'
 download_path_pdf   = '~/downloads'
 
 # commands to download youtube videos/extract mp3
-yt_download_cmd = "youtube-dl -o '" + download_path_video + "/%(title)s.%(ext)s'"
+yt_download_cmd     = "youtube-dl -o '" + download_path_video + "/%(title)s.%(ext)s'"
 yt_download_mp3_cmd = "youtube-dl --extract-audio -o '" + download_path_music + "/%(title)s.%(ext)s'"
+
+# fonts are very small on hidpi
+c.zoom.default = 125;
+
+# I have many graphical bugs with webengine…
+# c.backend = 'webkit'
 
 # ----------------------------------------------------------------------------
 # General settings
 # ----------------------------------------------------------------------------
-
-# I have many bugs with webengine…
-c.backend = 'webkit'
 
 # nothing is more annoying than a mouse, except autoplay
 c.qt.args.append('autoplay-policy=user-gesture-required')
@@ -87,6 +90,9 @@ config.bind('T', 'scroll-page 0 1')
 
 # we need to move the reload key
 config.bind('<Ctrl-R>', 'reload -f')
+# h alone is a little bit dangerous if escaping insert mode by mistake
+config.unbind('h')
+config.bind('hh', 'reload')
 
 # CARET Mode -----------------------------------------------------------------
 config.bind('s', 'move-to-prev-line', 'caret')
@@ -123,7 +129,7 @@ config.bind('>', 'navigate next')
 # ---------------------------------------------------------------------------
 # Misc. bindings
 # ---------------------------------------------------------------------------
-config.bind('F','hint all window')
+config.bind('F', 'hint all window')
 # d is a dangerous shortcut if you forget to go in insert mode…
 # i3 shortcut works or dd
 # Ctrl-q still closes all windows
@@ -138,12 +144,12 @@ config.bind('e', 'open-editor')
 # Firefox like shortcuts for private window
 config.bind('<Ctrl-Shift-p>', 'set-cmd-text -s :open -p ')
 
-config.bind('<Backspace>','scroll-page 0 -1')
-config.bind('<Return>','scroll-page 0 1')
-config.bind('u','undo')
+config.bind('<Backspace>', 'scroll-page 0 -1')
+config.bind('<Return>', 'scroll-page 0 1')
 
-# quickly load bookmarks list
-config.bind('<Tab>',  'set-cmd-text :bookmark-load ')
+# like vim
+config.bind('u', 'undo')
+config.bind('!', 'set-cmd-text -s :spawn')
 
 # ---------------------------------------------------------------------------
 # Tab and window settingTab and window settings
@@ -188,25 +194,51 @@ config.bind(',h', 'config-cycle -t -p content.host_blocking.enabled')
 # developer mode (for inspector)
 config.bind(',d', 'config-cycle -t -p content.developer_extras')
 
+# toggle private mode for next openned window
+config.bind(',p', 'config-cycle -t -p content.private_browsing')
+
+# ---------------------------------------------------------------------------
+# Bookmarks (b) / quickmarks (a)
+# ---------------------------------------------------------------------------
+
+config.bind('aa', ':set-cmd-text -s :quickmark-add {url}')
+config.bind('ab', 'open qute://bookmarks#quickmarks')
+config.bind('aB', 'open -w qute://bookmarks#quickmarks')
+config.bind('ad', ':quickmark-del')
+config.bind('aD', 'set-cmd-text -s :quickmark-del')
+config.bind('al', 'set-cmd-text -s :quickmark-load')
+config.bind('aL', 'set-cmd-text -s :quickmark-load -w')
+config.bind('<Tab>', 'set-cmd-text -s :quickmark-load')
+
+config.unbind('b')
+config.bind('ba', 'bookmark-add')
+config.bind('bb', 'open qute://bookmarks#bookmarks')
+config.bind('bB', 'open -w qute://bookmarks#bookmarks')
+config.bind('bd', 'bookmark-del')
+config.bind('bl', 'set-cmd-text -s :bookmark-load')
+config.bind('bL', 'set-cmd-text -s :bookmark-load -w')
+
 # ----------------------------------------------------------------------------
 # g* shotcuts: [g]o to…
 # ----------------------------------------------------------------------------
 
 # Quick access to…
-config.bind('gb',  'open qute://bookmarks')
-config.bind('gc',  'open qute://settings')
-config.bind('ge',  'config-edit')
-config.bind('gs',  'config-source')
-config.bind('gi',  'inspector')
-config.bind('gh',  'history')
+# config.bind('gb',  'open qute://bookmarks')
+config.bind('gc', 'open qute://settings')
+config.bind('gC', 'open -w qute://settings')
+config.bind('ge', 'config-edit')
+config.bind('gs', 'config-source')
+config.bind('gi', 'inspector')
+config.bind('gh', 'history')
+config.bind('gH', 'history -w')
 
 # we use k for help as in vim (K) because h is taken
-config.bind('gk',  'set-cmd-text :help ')
-config.bind('gK', 'open https://qutebrowser.org/doc/help/settings.html')
+config.bind('gk', 'set-cmd-text -s :help')
+config.bind('gK','open https://qutebrowser.org/doc/help/settings.html')
 
 # Printing…
-config.bind('gp',  'print --preview')
-config.bind('gP',  'print')
+config.bind('gp', 'print --preview')
+config.bind('gP', 'print')
 
 # open video in mpv
 config.bind('gm', 'spawn mpv {url}')
@@ -250,17 +282,16 @@ config.bind('lym', 'spawn ' + yt_download_mp3_cmd + ' {url}')
 c.content.user_stylesheets.append('user.css')
 
 # fonts configuration
-c.fonts.monospace           = '11px Deja Vu Sans Mono'
-c.fonts.hints               = '11px Deja Vu Sans Mono'
-c.fonts.prompts             = '11px Deja Vu Sans Mono'
-c.fonts.messages.error      = '11px Deja Vu Sans Mono'
-c.fonts.messages.info       = '11px Deja Vu Sans Mono'
-c.fonts.messages.warning    = '11px Deja Vu Sans Mono'
-c.fonts.hints               = '11px Deja Vu Sans Mono'
-c.fonts.statusbar           = '11px Deja Vu Sans Mono'
-c.fonts.completion.entry    = '11px Deja Vu Sans Mono'
-c.fonts.completion.category = '11px Deja Vu Sans Mono'
-c.fonts.downloads           = '11px Deja Vu Sans Mono'
+c.fonts.monospace           = '18px Deja Vu Sans Mono'
+c.fonts.prompts             = '16px'
+c.fonts.messages.error      = '16px Hack'
+c.fonts.messages.info       = '16px'
+c.fonts.messages.warning    = '16px'
+c.fonts.hints               = '16px Hack'
+c.fonts.statusbar           = '16px Hack'
+c.fonts.completion.entry    = '14px Hack'
+c.fonts.completion.category = '14px'
+c.fonts.downloads           = '14px'
 c.hints.border              = '1px solid'
 
 # Solarized theme by YouNeverWalkAlone
