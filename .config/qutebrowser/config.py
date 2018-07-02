@@ -6,17 +6,31 @@
 #
 # Author: sheoak <dev@sheoak.fr>
 
-# customize:
+# ----------------------------------------------------------------------------
+# System Configuration
+# You probably want to edit this section with your own values
+# ----------------------------------------------------------------------------
 
-# where to save youtube videos/mp3 extract from youtube
-yt_video_path = '~/videos/youtube'
-yt_mp3_path = '~/videos/youtube/mp3'
-guitartab_download_path = '~/music/tabs'
-pdf_download_path = '~/downloads'
+# where to save …
+download_path       = '~/downloads'
+download_path_video = '~/videos/youtube'
+download_path_music = '~/videos/youtube/mp3'
+download_path_tabs  = '~/music/tabs'
+download_path_pdf   = '~/downloads'
 
-# how to download youtube videos/extract mp3
-yt_download_cmd = "youtube-dl -o '" + yt_video_path + "/%(title)s.%(ext)s'"
-yt_download_mp3_cmd = "youtube-dl --extract-audio -o '" + yt_mp3_path + "/%(title)s.%(ext)s'"
+# commands to download youtube videos/extract mp3
+yt_download_cmd = "youtube-dl -o '" + download_path_video + "/%(title)s.%(ext)s'"
+yt_download_mp3_cmd = "youtube-dl --extract-audio -o '" + download_path_music + "/%(title)s.%(ext)s'"
+
+# ----------------------------------------------------------------------------
+# General settings
+# ----------------------------------------------------------------------------
+
+# I have many bugs with webengine…
+c.backend = 'webkit'
+
+# nothing is more annoying than a mouse, except autoplay
+c.qt.args.append('autoplay-policy=user-gesture-required')
 
 # ---------------------------------------------------------------------------
 # Custom search engines
@@ -34,21 +48,44 @@ c.url.searchengines["m"]       = "http://www.openstreetmap.org/search?query={}"
 c.url.searchengines["gm"]      = "https://www.google.fr/maps/place/{}"
 
 # ---------------------------------------------------------------------------
-# BEPO
+# Custom folders
 # ---------------------------------------------------------------------------
+config.set('downloads.location.directory', download_path)
+config.set('downloads.position', 'bottom')
+config.set('downloads.location.prompt', False)
+config.set('downloads.remove_finished', 20000)
+config.set('hints.min_chars', 1)
+
+# ----------------------------------------------------------------------------
+# Privacy
+# ----------------------------------------------------------------------------
+# reduce fingerprint, but still quite unique…
+#c.content.headers.user_agent = 'Mozilla/5.0 (Windows NT 6.1; rv:52.0) Gecko/20100101 Firefox/52.0'
+#c.content.headers.accept_language = 'en-US,en;q=0.5'
+#c.content.headers.custom = {"accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"}
+#c.content.webgl = False
+
+# ---------------------------------------------------------------------------
+# BEPO bindings
+# ---------------------------------------------------------------------------
+
+# remap homerow for bépo
 config.bind('s', 'scroll up')
 config.bind('t', 'scroll down')
 config.bind('c', 'back')
 config.bind('r', 'forward')
+
 # left hand control, nice when using mouse
 config.bind('«', 'back')
 config.bind('»', 'forward')
 
+# remap uppercase homerow for bépo
 config.bind('C', 'scroll left')
 config.bind('R', 'scroll right')
 config.bind('S', 'scroll-page 0 -1')
 config.bind('T', 'scroll-page 0 1')
 
+# we need to move the reload key
 config.bind('<Ctrl-R>', 'reload -f')
 
 # CARET Mode -----------------------------------------------------------------
@@ -62,15 +99,19 @@ config.bind('T', 'scroll down', 'caret')
 config.bind('C', 'scroll left', 'caret')
 config.bind('R', 'scroll right', 'caret')
 
-# move c to l like in vim
-config.bind('l', 'enter-mode normal', 'caret')
+# move c to ç (i don’t need it)
+# config.bind('ç', 'enter-mode normal', 'caret')
 # ----------------------------------------------------------------------------
 
 # hints for bepo
 c.hints.chars = 'aiuectsrn'
 
+# switch : and .
+config.bind(':', 'repeat-command')
+config.bind('.', 'set-cmd-text :')
+
 # ---------------------------------------------------------------------------
-# FRENCH
+# FRENCH Settings
 # ---------------------------------------------------------------------------
 
 # french next/prev links
@@ -79,6 +120,35 @@ c.hints.next_regexes.append(r'\bsuivant\b')
 config.bind('<', 'navigate prev')
 config.bind('>', 'navigate next')
 
+# ---------------------------------------------------------------------------
+# Misc. bindings
+# ---------------------------------------------------------------------------
+config.bind('F','hint all window')
+# d is a dangerous shortcut if you forget to go in insert mode…
+# i3 shortcut works or dd
+# Ctrl-q still closes all windows
+config.unbind('d')
+config.bind('<Ctrl-d>', 'tab-close')
+config.bind('dd', 'tab-close')
+config.bind('da', 'window-only')
+
+# edit with nvim (use ctrl-e in insert mode)
+config.bind('e', 'open-editor')
+
+# Firefox like shortcuts for private window
+config.bind('<Ctrl-Shift-p>', 'set-cmd-text -s :open -p ')
+
+config.bind('<Backspace>','scroll-page 0 -1')
+config.bind('<Return>','scroll-page 0 1')
+config.bind('u','undo')
+
+# quickly load bookmarks list
+config.bind('<Tab>',  'set-cmd-text :bookmark-load ')
+
+# ---------------------------------------------------------------------------
+# Tab and window settingTab and window settings
+# ---------------------------------------------------------------------------
+
 # just in case something opens a tab, but the conf is made
 # for no-tab use, letting i3 handle what it does better than qutebrowser
 c.tabs.show = 'multiple'
@@ -86,67 +156,8 @@ c.tabs.show = 'multiple'
 # do not use tabs, i3 handles it better
 c.tabs.tabs_are_windows = True
 c.tabs.background = True
-# allow use of 'd' to close window
+# allow use of 'dd' to close window
 c.tabs.last_close = 'close'
-
-# hints customization
-c.fonts.monospace = '10px Terminess'
-c.fonts.hints = '12px Terminess'
-c.fonts.prompts = '12px Terminess'
-c.fonts.messages.error = '12px Terminess'
-c.fonts.messages.info = '12px Terminess'
-c.fonts.messages.warning = '12px Terminess'
-c.fonts.hints = '12px Terminess'
-c.fonts.statusbar = '12px Terminess'
-c.fonts.completion.entry= '12px Terminess'
-c.fonts.completion.category = '12px Terminess'
-c.fonts.downloads = '12px Terminess'
-c.hints.border = '1px solid'
-
-# custom CSS
-c.content.user_stylesheets.append('user.css')
-
-# ad blocking
-c.content.host_blocking.lists = ['https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts']
-config.bind(',h', 'config-cycle -t -p content.host_blocking.enabled')
-
-# nothing is more annoying than a mouse, except autoplay
-c.qt.args.append('autoplay-policy=user-gesture-required')
-
-# custom folders
-config.set('downloads.location.directory', '~/downloads/')
-config.set('downloads.position', 'bottom')
-config.set('downloads.location.prompt', False)
-config.set('downloads.remove_finished', 20000)
-config.set('hints.min_chars', 1)
-
-config.bind('F','hint all window')
-
-# ------------------------------------------------------------
-# I use the same shotcuts as in vim as much as possible (bepo)
-# ------------------------------------------------------------
-
-# always open a new window, never use tabs
-config.bind('j','set-cmd-text -s :open -w ')
-config.bind('O','set-cmd-text -s :open -w ')
-
-# Firefox like shortcuts
-config.bind('<Ctrl-Shift-p>', 'set-cmd-text -s :open -p ')
-
-config.bind('<Backspace>','scroll-page 0 -1')
-config.bind('<Return>','scroll-page 0 1')
-config.bind('u','undo')
-
-# ----------------------------------------------------------------------------
-# g* shotcuts: [g]o to…
-# ----------------------------------------------------------------------------
-
-# Quick access to history
-config.bind('gh',  'history')
-
-# open video in mpv
-config.bind('gm', 'spawn mpv {url}')
-config.bind('gM', 'hint links spawn mpv {hint-url}')
 
 # unbind tab stuff…
 config.unbind('g$')
@@ -162,6 +173,45 @@ config.unbind('gO')
 config.bind('gt', 'tab-next')
 config.bind('gT', 'tab-prev')
 
+# always open a new window, never use tabs
+# config.bind('j','set-cmd-text -s :open -w ')
+config.bind('O','set-cmd-text -s :open -w ')
+
+# ---------------------------------------------------------------------------
+# Cycle options using ,
+# ---------------------------------------------------------------------------
+
+# ad blocking
+c.content.host_blocking.lists = ['https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts']
+config.bind(',h', 'config-cycle -t -p content.host_blocking.enabled')
+
+# developer mode (for inspector)
+config.bind(',d', 'config-cycle -t -p content.developer_extras')
+
+# ----------------------------------------------------------------------------
+# g* shotcuts: [g]o to…
+# ----------------------------------------------------------------------------
+
+# Quick access to…
+config.bind('gb',  'open qute://bookmarks')
+config.bind('gc',  'open qute://settings')
+config.bind('ge',  'config-edit')
+config.bind('gs',  'config-source')
+config.bind('gi',  'inspector')
+config.bind('gh',  'history')
+
+# we use k for help as in vim (K) because h is taken
+config.bind('gk',  'set-cmd-text :help ')
+config.bind('gK', 'open https://qutebrowser.org/doc/help/settings.html')
+
+# Printing…
+config.bind('gp',  'print --preview')
+config.bind('gP',  'print')
+
+# open video in mpv
+config.bind('gm', 'spawn mpv {url}')
+config.bind('gM', 'hint links spawn mpv {hint-url}')
+
 # ----------------------------------------------------------------------------
 # y* additionnal shortcuts
 # ----------------------------------------------------------------------------
@@ -171,36 +221,47 @@ config.bind('yv', 'yank selection')
 config.bind('yV', 'yank -s selection')
 
 # ----------------------------------------------------------------------------
-# y* download shortcuts
+# Download shortcuts
 # ----------------------------------------------------------------------------
 
 # Clear the download list quickly
-config.bind('$$',  'download-clear')
-config.bind('$c',  'download-cancel')
-config.bind('$o',  'download-open')
-config.bind('$r',  'download-retry')
-config.bind('$D',  'download-delete')
-config.bind('$d',  'download-remove')
-config.bind('$u',  ':set-cmd-text :download ')
+config.bind('ll',  'download-clear')
+config.bind('lc',  'download-cancel')
+config.bind('lo',  'download-open')
+config.bind('lr',  'download-retry')
+config.bind('lD',  'download-delete')
+config.bind('ld',  'download-remove')
+config.bind('lu',  ':set-cmd-text :download ')
 # downloads guitar tabs as pdf (ask for file name)
-config.bind('$t',  ':set-cmd-text :print --pdf ' + guitartab_download_path + '/')
+config.bind('lt',  ':set-cmd-text :print --pdf ' + download_path_tabs + '/')
 # download as pdf
-config.bind('$p',  ':set-cmd-text :print --pdf ' + pdf_download_path + '/')
+config.bind('lp',  ':set-cmd-text :print --pdf ' + download_path_pdf + '/')
 
 # yv : youtube to video
-config.bind('$yv', 'spawn ' + yt_download_cmd + ' {url}')
+config.bind('lyv', 'spawn ' + yt_download_cmd + ' {url}')
 # ym : youtube to mp3
-config.bind('$ym', 'spawn ' + yt_download_mp3_cmd + ' {url}')
+config.bind('lym', 'spawn ' + yt_download_mp3_cmd + ' {url}')
 
-# dangerous shortcut if you forget to go in insert mode…
-# i3 shortcut works or dd
-# Ctrl-q still closes all windows
-config.unbind('d')
-config.bind('dd', 'tab-close')
-config.bind('da', 'window-only')
+# ----------------------------------------------------------------------------
+# Styles
+# ----------------------------------------------------------------------------
 
-# edit with nvim
-config.bind('e', 'open-editor')
+# custom CSS
+c.content.user_stylesheets.append('user.css')
+
+# fonts configuration
+c.fonts.monospace           = '11px Deja Vu Sans Mono'
+c.fonts.hints               = '11px Deja Vu Sans Mono'
+c.fonts.prompts             = '11px Deja Vu Sans Mono'
+c.fonts.messages.error      = '11px Deja Vu Sans Mono'
+c.fonts.messages.info       = '11px Deja Vu Sans Mono'
+c.fonts.messages.warning    = '11px Deja Vu Sans Mono'
+c.fonts.hints               = '11px Deja Vu Sans Mono'
+c.fonts.statusbar           = '11px Deja Vu Sans Mono'
+c.fonts.completion.entry    = '11px Deja Vu Sans Mono'
+c.fonts.completion.category = '11px Deja Vu Sans Mono'
+c.fonts.downloads           = '11px Deja Vu Sans Mono'
+c.hints.border              = '1px solid'
 
 # Solarized theme by YouNeverWalkAlone
 # https://www.reddit.com/r/qutebrowser/comments/77eqiq/solarized_or_base16_color_theme_for_qutebrowser/
