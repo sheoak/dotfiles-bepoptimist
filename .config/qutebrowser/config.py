@@ -11,6 +11,8 @@
 # where to save youtube videos/mp3 extract from youtube
 yt_video_path = '~/videos/youtube'
 yt_mp3_path = '~/videos/youtube/mp3'
+guitartab_download_path = '~/music/tabs'
+pdf_download_path = '~/downloads'
 
 # how to download youtube videos/extract mp3
 yt_download_cmd = "youtube-dl -o '" + yt_video_path + "/%(title)s.%(ext)s'"
@@ -22,6 +24,7 @@ yt_download_mp3_cmd = "youtube-dl --extract-audio -o '" + yt_mp3_path + "/%(titl
 c.url.start_pages              = 'about:blank'
 c.url.searchengines["DEFAULT"] = "https://www.google.fr/search?q={}"
 c.url.searchengines["g"]       = "https://www.google.fr/search?q={}"
+c.url.searchengines["y"]       = "https://www.youtube.com/results?search_query={}"
 c.url.searchengines["q"]       = "https://lite.qwant.com/?t=web&q={}"
 c.url.searchengines["a"]       = "https://wiki.archlinux.org/?search={}"
 c.url.searchengines["w"]       = "https://en.wikipedia.org/wiki/{}"
@@ -73,6 +76,8 @@ c.hints.chars = 'aiuectsrn'
 # french next/prev links
 c.hints.prev_regexes.append(r'\bprécédent\b')
 c.hints.next_regexes.append(r'\bsuivant\b')
+config.bind('<', 'navigate prev')
+config.bind('>', 'navigate next')
 
 # just in case something opens a tab, but the conf is made
 # for no-tab use, letting i3 handle what it does better than qutebrowser
@@ -85,7 +90,17 @@ c.tabs.background = True
 c.tabs.last_close = 'close'
 
 # hints customization
-c.fonts.hints = 'Open Sans'
+c.fonts.monospace = '10px Terminess'
+c.fonts.hints = '12px Terminess'
+c.fonts.prompts = '12px Terminess'
+c.fonts.messages.error = '12px Terminess'
+c.fonts.messages.info = '12px Terminess'
+c.fonts.messages.warning = '12px Terminess'
+c.fonts.hints = '12px Terminess'
+c.fonts.statusbar = '12px Terminess'
+c.fonts.completion.entry= '12px Terminess'
+c.fonts.completion.category = '12px Terminess'
+c.fonts.downloads = '12px Terminess'
 c.hints.border = '1px solid'
 
 # custom CSS
@@ -100,6 +115,9 @@ c.qt.args.append('autoplay-policy=user-gesture-required')
 
 # custom folders
 config.set('downloads.location.directory', '~/downloads/')
+config.set('downloads.position', 'bottom')
+config.set('downloads.location.prompt', False)
+config.set('downloads.remove_finished', 20000)
 config.set('hints.min_chars', 1)
 
 config.bind('F','hint all window')
@@ -122,13 +140,27 @@ config.bind('u','undo')
 # ----------------------------------------------------------------------------
 # g* shotcuts: [g]o to…
 # ----------------------------------------------------------------------------
-# in case an annoying tab pops in, vim style navigation
-config.bind('gt', 'tab-next')
-config.bind('gT', 'tab-prev')
+
+# Quick access to history
+config.bind('gh',  'history')
 
 # open video in mpv
 config.bind('gm', 'spawn mpv {url}')
 config.bind('gM', 'hint links spawn mpv {hint-url}')
+
+# unbind tab stuff…
+config.unbind('g$')
+config.unbind('g0')
+config.unbind('gl')
+config.unbind('gr')
+config.unbind('ga')
+config.unbind('g^')
+config.unbind('gC')
+config.unbind('gO')
+
+# but in case an annoying tab pops in, vim style navigation
+config.bind('gt', 'tab-next')
+config.bind('gT', 'tab-prev')
 
 # ----------------------------------------------------------------------------
 # y* additionnal shortcuts
@@ -150,6 +182,10 @@ config.bind('$r',  'download-retry')
 config.bind('$D',  'download-delete')
 config.bind('$d',  'download-remove')
 config.bind('$u',  ':set-cmd-text :download ')
+# downloads guitar tabs as pdf (ask for file name)
+config.bind('$t',  ':set-cmd-text :print --pdf ' + guitartab_download_path + '/')
+# download as pdf
+config.bind('$p',  ':set-cmd-text :print --pdf ' + pdf_download_path + '/')
 
 # yv : youtube to video
 config.bind('$yv', 'spawn ' + yt_download_cmd + ' {url}')
@@ -157,13 +193,14 @@ config.bind('$yv', 'spawn ' + yt_download_cmd + ' {url}')
 config.bind('$ym', 'spawn ' + yt_download_mp3_cmd + ' {url}')
 
 # dangerous shortcut if you forget to go in insert mode…
-# i3 shortcut works or ctrl-d (as we remapped it)
+# i3 shortcut works or dd
 # Ctrl-q still closes all windows
 config.unbind('d')
-config.bind('<Ctrl-d>', 'tab-close')
+config.bind('dd', 'tab-close')
+config.bind('da', 'window-only')
 
-# Quick access to history
-config.bind('<Ctrl-h>',  'history')
+# edit with nvim
+config.bind('e', 'open-editor')
 
 # Solarized theme by YouNeverWalkAlone
 # https://www.reddit.com/r/qutebrowser/comments/77eqiq/solarized_or_base16_color_theme_for_qutebrowser/
