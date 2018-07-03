@@ -479,10 +479,6 @@ let g:syntastic_js_checkers    = ['jshint']
 let g:syntastic_css_checkers   = ['csslint']
 let g:syntastic_php_checkers   = ['php']
 
-" ignore some annoying rules in csslint
-let g:syntastic_css_csslint_args = 
-    \ " --ignore=ids,box-model,box-sizing,universal-selector,bulletproof-font-face"
-
 " }}}
 
 " Plugin vim-airline {{{
