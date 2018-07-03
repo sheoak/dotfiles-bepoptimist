@@ -108,6 +108,10 @@ Plug 'plasticboy/vim-markdown',      { 'for': 'markdown' }
 Plug 'vim-pandoc/vim-pandoc',        { 'for': 'markdown' }
 Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': 'markdown' }
 
+Plug 'francoiscabrol/ranger.vim'
+Plug 'rbgrouleff/bclose.vim'
+
+
 " I only enable thoses when i need them
 " Plug 'editorconfig/editorconfig-vim'
 " Plug 'sirver/ultisnips'
@@ -594,6 +598,7 @@ if (executable('ag'))
     call denite#custom#var('grep', 'final_opts', [])
 endif
 
+" TODO: remap CTRL-i to something nice
 nnoremap <Tab> :<C-u>Denite buffer<CR>
 nnoremap ,<Space> :<C-u>DeniteProjectDir file/rec<CR>
 nnoremap ,c :<C-u>Denite command_history<CR>
@@ -645,6 +650,13 @@ call denite#custom#var('menu', 'menus', s:menus)
 let g:goyo_height='90%'
 let g:goyo_width=80
 let g:goyo_linenr=1
+" }}}
+
+" ranger {{{
+let g:ranger_map_keys = 0
+nnoremap ,e :Ranger<CR>
+" open ranger when vim open a directory
+let g:ranger_replace_netrw = 1
 " }}}
 
 " }}} plugins section
