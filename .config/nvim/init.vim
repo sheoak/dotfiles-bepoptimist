@@ -94,7 +94,9 @@ Plug 'zchee/deoplete-jedi',          { 'for': 'python' }
 Plug 'PotatoesMaster/i3-vim-syntax', { 'for': 'i3' }
 Plug 'digitaltoad/vim-jade',         { 'for': 'jade' }
 Plug 'hail2u/vim-css3-syntax',       { 'for': 'css' }
-Plug 'mattn/emmet-vim',              { 'for': ['html','css'] }
+Plug 'digitaltoad/vim-pug',          { 'for': 'pug' }
+Plug 'jlong/sass-convert.vim',       { 'for': [ 'css', 'scss', 'sass' ] }
+Plug 'mattn/emmet-vim',              { 'for': ['html','css', 'scss', 'sass'] }
 Plug 'tmhedberg/matchit',            { 'for': ['html', 'xml'] }
 " live update css/html/js
 Plug 'jaxbot/browserlink.vim',       { 'for': ['html', 'css', 'js'] }
@@ -108,9 +110,9 @@ Plug 'plasticboy/vim-markdown',      { 'for': 'markdown' }
 Plug 'vim-pandoc/vim-pandoc',        { 'for': 'markdown' }
 Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': 'markdown' }
 
+" ranger integration
 Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
-
 
 " I only enable thoses when i need them
 " Plug 'editorconfig/editorconfig-vim'
@@ -340,7 +342,7 @@ if has("autocmd")
         au!
 
         " Tab settings
-        au FileType sass,jade,html setlocal
+        au FileType sass,pug,html setlocal
             \ softtabstop=2
             \ shiftwidth=2
             \ tabstop=2
@@ -603,19 +605,19 @@ endif
 
 " TODO: remap CTRL-i to something nice
 nnoremap <Tab> :<C-u>Denite buffer<CR>
-nnoremap ,<Space> :<C-u>DeniteProjectDir file/rec<CR>
-nnoremap ,c :<C-u>Denite command_history<CR>
-nnoremap ,d :<C-u>Denite directory_mru<CR>
-nnoremap ,f :<C-u>Denite file/rec<CR>
+nnoremap <leader><Space> :<C-u>DeniteProjectDir file/rec<CR>
+nnoremap <leader>c :<C-u>Denite command_history<CR>
+nnoremap <leader>d :<C-u>Denite directory_mru<CR>
+nnoremap <leader>f :<C-u>Denite file/rec<CR>
 " find in git files if exists
-nnoremap ,g :<C-u>DeniteBufferDir
+nnoremap <leader>g :<C-u>DeniteBufferDir
     \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`<CR>
 " history
-nnoremap ,h :<C-u>Denite file_mru<CR>
-nnoremap ,m :<C-u>Denite menu:bookmarks<CR>
-nnoremap ,r :<C-u>Denite register<CR>
-nnoremap ,s :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
-nnoremap ,S :<C-u>DeniteProjectDir grep:. -mode=normal<CR>
+nnoremap <leader>h :<C-u>Denite file_mru<CR>
+nnoremap <leader>m :<C-u>Denite menu:bookmarks<CR>
+nnoremap <leader>r :<C-u>Denite register<CR>
+nnoremap <leader>s :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
+nnoremap <leader>S :<C-u>DeniteProjectDir grep:. -mode=normal<CR>
 
 " Unamed register access is rarely useful, remap it
 nnoremap "" :<C-u>Denite registers<CR>
