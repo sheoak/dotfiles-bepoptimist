@@ -410,6 +410,13 @@ end
 " note that \ is not leader in this configuration (, is)
 " and , has been moved to ’, taking advantage of bepo (see bepoptimist plugin)
 
+" default leader is bad in azerty and bépo keyboards
+" bepoptimist plugin will take care of moving , and ; to < and >
+" it's better to set the leader here than in plugins to avoid issues
+let mapleader = ","
+" Quick save with new leader
+noremap <leader>, :w<CR>
+
 " Don't use Ex mode, use Q for formatting
 noremap Q gq
 
@@ -543,7 +550,7 @@ let g:gundo_prefer_python3 = 1
 
 " Bepoptimist {{{
 let g:bim_map_fugitive     = 1
-let g:bim_remap_leader     = 1
+" let g:bim_remap_leader     = 1
 " switch : and . — it might feels strange at first but it was huge improvement
 " for me
 let g:bim_switch_command   = 1
