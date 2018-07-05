@@ -4,16 +4,42 @@
 # Include
 # - virtualbox mode for Internet Explorer testing, to configure
 # - dual screen configuration
-# - lemonbar
 #
 # Maintainer: Sheoak <dev@sheoak.fr>
 # v0.1.1
+#
+# Free keys:
+# win+ all keys but F7-9
 
 # ----------------------------------------------------------------------------
 # I3 settings
 # ----------------------------------------------------------------------------
 
+# i3 modifiers
 set $mod Mod1
+set $win Mod4
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# leave this on top because it can be override by workspace settings
+gaps inner 15
+gaps outer -5
+smart_gaps on
+smart_borders no_gaps
+new_window          pixel 1
+new_float           pixel 3
+hide_edge_borders   smart
+
+# for i3-gaps
+for_window [class="^.*"] border pixel 1
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below. ISO 10646 = Unicode
+font pango:DejaVu Sans Mono 8
+
+# ----------------------------------------------------------------------------
+# commands
+# ----------------------------------------------------------------------------
 set $termDetached kitty
 set $term kitty --single-instance 
 
@@ -21,7 +47,9 @@ set $term kitty --single-instance
 set $autolock 10
 set $lockalert "notify-send -u critical -t 10000 -- 'Locking screen in 10 seconds'"
 
+# ----------------------------------------------------------------------------
 # workspaces
+# ----------------------------------------------------------------------------
 set $W1  "1: Term"
 set $W2  "2: Work"
 set $W3  "3: Social"
@@ -36,17 +64,6 @@ set $W10 "10"
 # set with your screen ids (xrandr)
 set $SCREEN1 eDP0
 set $SCREEN2 HDMI1
-
-new_window          pixel 2
-new_float           pixel 3
-hide_edge_borders   smart
-
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below. ISO 10646 = Unicode
-font pango:DejaVu Sans Mono 8
-
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
 
 # ----------------------------------------------------------------------------
 # Workspaces
@@ -65,6 +82,14 @@ workspace $W7  output $SCREEN2
 workspace $W8  output $SCREEN2
 workspace $W9  output $SCREEN2
 workspace $W10 output $SCREEN2
+
+# small gap for social
+workspace $W3 gaps inner 10
+workspace $W3 gaps outer 0
+
+# no gap for browser
+workspace $W4 gaps inner 0
+workspace $W4 gaps outer 0
 
 # default workspace, to avoid "1" by default
 exec --no-startup-id i3-msg "workspace $W1"
@@ -149,6 +174,7 @@ bindsym $mod+space scratchpad show
 
 # kill focused window
 bindsym $mod+BackSpace kill
+bindsym $mod+q kill
 
 # ----------------------------------------------------------------------------
 # Resi[z]e window mode
@@ -242,14 +268,52 @@ mode "$mode_screen" {
 
     bindsym e exec --no-startup-id xset s on +dpms, mode "default"
     bindsym d exec --no-startup-id xset s off -dpms, mode "default"
-    bindsym a exec --no-startup-id xset dpms force off, mode "default"
+    bindsym a exec --no-startup-id sleep 1 && xset dpms force off, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
+
 # ----------------------------------------------------------------------------
-# I3 access
+# Gaps mode
+# ----------------------------------------------------------------------------
+set $mode_gaps Inner Gaps: +|-|r Outer Gaps: «|»|R (local)
+bindsym $mod+j mode "$mode_gaps"
+
+mode "$mode_gaps" {
+
+        bindsym guillemotleft  gaps inner current minus 5
+        bindsym guillemotright gaps inner current plus 5
+        bindsym r              gaps inner current set 0
+
+        bindsym plus    gaps outer current plus 5
+        bindsym minus   gaps outer current minus 5
+        bindsym Shift+r gaps outer current set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+set $mode_gaps_all Inner Gaps: +|-|r Outer Gaps: «|»|R (global)
+bindsym $mod+shift+j mode "$mode_gaps_all"
+
+mode "$mode_gaps" {
+
+        bindsym Shift+guillemotright gaps inner all plus 5
+        bindsym Shift+guillemotleft  gaps inner all minus 5
+        bindsym r                    gaps inner all set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+r     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# ----------------------------------------------------------------------------
+# Shortcuts: I3 access
 # ----------------------------------------------------------------------------
 
 # reload the configuration file
@@ -257,68 +321,88 @@ bindsym $mod+Control+r reload
 # restart i3 in place
 bindsym $mod+Control+s restart
 
-# dmenu replacement with rofi
-bindsym $mod+d          exec "rofi -show run"
-bindsym $mod+Shift+d    exec "rofi -combi-modi ssh,run,window -show combi -modi combi"
+# dmenu replacement with rofi, see ~/.Xresources for configuration
+bindsym $mod+d exec "rofi -show run"
+# with ssh, commands
+bindsym $mod+Shift+d exec "rofi -combi-modi ssh,run -show combi -modi combi"
+# search web from rofi
+bindsym $mod+ctrl+d exec echo "" | rofi -dmenu -p "Search" -lines 0 | xargs -I{} qutebrowser \{\}
+# window search with rofi, larger for window titles
+bindsym $mod+Tab exec "rofi -width 80 -combi-modi ,window -show combi -modi combi"
+
+# toggle i3bar
+bindsym $mod+ccedilla bar mode toggle
+
 # wifi with rofi, executable must be in path
-bindsym $mod+Control+d  exec rofi-wifi-menu
+# bindsym $mod+Control+d  exec rofi-wifi-menu
+
+# ----------------------------------------------------------------------------
+# Shortcuts: Multimedia keys
+# ----------------------------------------------------------------------------
 
 # Screenshot
-# TODO: migrate
 bindsym XF86Display exec "scrot ~/Desktop/Screenshot%Y-%m-%d%H:%M:%S.png"
+bindsym $win+F1     exec "scrot ~/Desktop/Screenshot%Y-%m-%d%H:%M:%S.png"
 
 bindsym XF86AudioRaiseVolume exec amixer -c0 -D pulse sset Master 5%+ && paplay /usr/share/sounds/freedesktop/stereo/message.oga
 bindsym XF86AudioLowerVolume exec amixer -c0 -D pulse sset Master 5%- && paplay /usr/share/sounds/freedesktop/stereo/message.oga
 bindsym XF86AudioMute        exec amixer -c0 -D pulse -q set Master toggle && paplay /usr/share/sounds/freedesktop/stereo/message.oga
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessDown   exec xbacklight -dec 10
-bindsym XF86MonBrightnessUp     exec xbacklight -inc 10
+#bindsym XF86MonBrightnessDown   exec xbacklight -dec 10
+#bindsym XF86MonBrightnessUp     exec xbacklight -inc 10
+bindsym $win+F7 exec xbacklight -dec 10
+bindsym $win+F8 exec xbacklight -inc 10
+bindsym $win+F9 exec xset dpms force off
 
 # Media player controls
 bindsym XF86AudioPause exec mpc toggle
 bindsym XF86AudioNext  exec mpc next
 bindsym XF86AudioPrev  exec mpc prev
 
-# TODO: add keyboard backlight bindings (problem with root access)
-
 # ----------------------------------------------------------------------------
-# Shortcuts
-# ----------------------------------------------------------------------------
-
-# ----------------------------------------------------------------------------
-# Apps
+# Shortcuts: Apps
 # ----------------------------------------------------------------------------
 
 # start a terminal
 bindsym $mod+Return exec $term
-bindsym $mod+shift+Return exec $termDetached
+bindsym $mod+shift+Return exec $termDetached -o font_size=8
 
 # [m]utt
-bindsym $mod+shift+m workspace $W3; exec $term --title "mutt" mutt
+# TODO: open if not openned yet
+bindsym $mod+shift+m workspace $W3; exec $termDetached -o font_size=9 --title "mutt" mutt
 bindsym $mod+m       exec i3-msg '[title="mutt"] focus'
 bindsym XF86Mail     exec i3-msg '[title="mutt"] focus'
 
-# Qutebrowser ([o] for the shape of the earth de[b]ug)
-bindsym $mod+shift+o exec qutebrowser
-# for dev
-bindsym $mod+shift+b exec qutebrowser --enable-webengine-inspector --loglevel vdebug
+bindsym $mod+shift+b workspace $W3; exec messengerfordesktop
+bindsym $mod+b       exec i3-msg '[title="Messenger for Desktop"] focus'
 
-bindsym $mod+o   [class="qutebrowser"] focus
-bindcode 180     [class="qutebrowser"] focus
+# Qutebrowser
+# Exceptionnaly we don't use shift because it's commonly use, we keep it
+# for developper mode
+bindsym $mod+o exec qutebrowser
+# for dev
+bindsym $mod+shift+o exec qutebrowser --enable-webengine-inspector --loglevel vdebug
 
 # ncmpcpp ([l]ecteur)
 # you can move to a more logical key for you langage, like [J]ukebox
-bindsym $mod+shift+l workspace $w6; exec $termDetached -o font_size=10 sh -c "i3-msg mark ncmpcpp && ncmpcpp"
+# TODO: open if not openned yet
+bindsym $mod+shift+l workspace $w6; exec $termDetached -o font_size=8 sh -c "i3-msg mark ncmpcpp && ncmpcpp"
 bindsym $mod+l       exec i3-msg '[con_mark="ncmpcpp"] focus'
 
 # ranger ([F]iles
 bindsym $mod+shift+f    exec $term --title "ranger" ranger
 bindsym $mod+f          exec i3-msg '[title="ranger"] focus'
 
+# Mouse
+# The middle button over a titlebar kills the window
+bindsym --release button2 kill
+# The middle button and a modifer over any part of the window kills the window
+bindsym --whole-window $mod+button2 kill
+
 # chromium
-# bindsym $mod+shift+w exec chromium-browser
-# bindsym $mod+w   [class="Chromium"] focus
+bindsym $mod+shift+w exec chromium-browser
+bindsym $mod+w   [class="Chromium"] focus
 
 # ----------------------------------------------------------------------------
 # Specific settings
@@ -328,32 +412,34 @@ bindsym $mod+f          exec i3-msg '[title="ranger"] focus'
 for_window [class="qutebrowser"] layout tabbed
 no_focus [class="qutebrowser"]
 
+for_window [class="^Pidgin$" window_role="^conversation$"] resize grow width 0 px or 30 ppt
+
 # ----------------------------------------------------------------------------
 # Theme
 # ----------------------------------------------------------------------------
 
-# ceeriously styled i3
-set $bg     #1d2026
-set $fg     #262c3a
-set $hi     #fce94f
-set $ac     #839496
-set $tx     #2d323d
-set $ia     #9e9e9e
-set $be     #8faf9f
-set $yw     #f8f893
-set $gn     #81c181
-set $rd     #bf9b76
-set $id     #f9f8ff
-set $ce     #ceecee
-set $sl     #7f7f7f
+set $bg #282828AA
+set $red #cc241d
+set $green #98971a
+set $yellow #d79921
+set $blue #458588
+set $purple #b16286
+set $aqua #689d68
+set $gray #a89984
+set $darkgray #1d2021
 
-# set some nice colors      border  background  text    indicator
-client.focused              $ac     $ac         $tx     $id
-client.unfocused            $bg     $bg         $ia     $id
-client.focused_inactive     $bg     $bg         $ac     $id
-client.urgent               $ac     $ac         $tx     $id
-#border & indicator are ignored
-client.placeholder          $bg     $bg         $bg     $bg
+set $aquat #689d68BB
+set $bluet #458588BB
+set $darkgrayt #1d2021BB
+
+set $transparent #28282877
+
+# blue gruvbox
+# class                 border|backgr|text|indicator|child_border
+client.focused          $bluet $bluet $darkgray $purple $yellow
+client.focused_inactive $darkgray $darkgray $gray $purple $darkgray
+client.unfocused        $darkgray $darkgray $gray $purple $darkgray
+client.urgent           $red $red $white $red $red
 
 # i3bar configuration
 bar {
@@ -362,16 +448,27 @@ bar {
     font pango:DejaVu Sans Mono, FontAwesome 7
     separator_symbol "⋆"
 
+    height 22
+
     status_command i3status --config ~/.config/i3/i3status.conf
+    i3bar_command i3bar -t
 
     # statusbar colors      border    background  text
     colors {
-        background          $bg
-        statusline          $sl
-        separator           $tx
-        focused_workspace   $ia        $ia        $tx
-        active_workspace    $gn        $ac        $tx
-        inactive_workspace  $bg        $fg        $ia
-        urgent_workspace    $ac        $bg        $hi
+
+        # bar background color
+        background $transparent
+
+        # text color used for blocks that do not have a color specified.
+        statusline $gray
+
+        # workspaces section
+        #                    border     backgr.     text
+        focused_workspace    $bluet     $bluet      $darkgray
+        inactive_workspace   $darkgrayt $darkgrayt  $gray
+        active_workspace     $darkgray  $darkgrayt  $yellow
+        urgent_workspace     $yellow    $yellow     $bg
     }
 }
+
+
