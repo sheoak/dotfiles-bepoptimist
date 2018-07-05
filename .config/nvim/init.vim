@@ -552,10 +552,11 @@ let g:gundo_prefer_python3 = 1
 
 " Bepoptimist {{{
 let g:bim_map_fugitive     = 1
-" let g:bim_remap_leader     = 1
+
 " switch : and . — it might feels strange at first but it was huge improvement
-" for me
-let g:bim_switch_command   = 1
+" for me. Sadly it’s not compatible with vim-repeat for now so I disabled it
+" let g:bim_switch_command   = 1
+"
 " we need to tell surround that Bepoptimist is going to map it
 " and this need to happens in init.vim before surround is loaded
 let g:surround_no_mappings = 1
