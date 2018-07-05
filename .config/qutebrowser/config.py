@@ -26,7 +26,7 @@ yt_download_mp3_cmd = "youtube-dl --extract-audio -o '" + download_path_music + 
 c.zoom.default = 125;
 
 # I have many graphical bugs with webengine…
-# c.backend = 'webkit'
+c.backend = 'webkit'
 
 # ----------------------------------------------------------------------------
 # General settings
