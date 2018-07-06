@@ -208,7 +208,6 @@ config.bind('ad', ':quickmark-del')
 config.bind('aD', 'set-cmd-text -s :quickmark-del')
 config.bind('al', 'set-cmd-text -s :quickmark-load')
 config.bind('aL', 'set-cmd-text -s :quickmark-load -w')
-config.bind('<Tab>', 'set-cmd-text -s :quickmark-load')
 
 config.unbind('b')
 config.bind('ba', 'bookmark-add')
