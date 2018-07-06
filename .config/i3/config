@@ -184,16 +184,28 @@ bindsym $mod+z mode "resize"
 
 mode "resize" {
     # These bindings trigger as soon as you enter the resize mode
-    bindsym t       resize shrink width  10 px or 10 ppt
-    bindsym s       resize grow   height 10 px or 10 ppt
-    bindsym r       resize shrink height 10 px or 10 ppt
-    bindsym n       resize grow   width  10 px or 10 ppt
+    bindsym t        resize shrink width  10 px or 10 ppt
+    bindsym s        resize grow   height 10 px or 10 ppt
+    bindsym r        resize shrink height 10 px or 10 ppt
+    bindsym n        resize grow   width  10 px or 10 ppt
+
+    # Fine tuning
+    bindsym Shift+t  resize shrink width  1 px or 1 ppt
+    bindsym Shift+s  resize grow   height 1 px or 1 ppt
+    bindsym Shift+r  resize shrink height 1 px or 1 ppt
+    bindsym Shift+n  resize grow   width  1 px or 1 ppt
 
     # same bindings, but for the arrow keys
     bindsym Left    resize shrink   width  10 px or 10 ppt
     bindsym Down    resize grow     height 10 px or 10 ppt
     bindsym Up      resize shrink   height 10 px or 10 ppt
     bindsym Right   resize grow     width  10 px or 10 ppt
+
+    # Fine tuning with arrow keys
+    bindsym Shift+Left   resize shrink width  1 px or 1 ppt
+    bindsym Shift+Down   resize grow   height 1 px or 1 ppt
+    bindsym Shift+Up     resize shrink height 1 px or 1 ppt
+    bindsym Shift+Right  resize grow   width  1 px or 1 ppt
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
