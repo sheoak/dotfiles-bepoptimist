@@ -23,19 +23,19 @@ floating_modifier $mod
 
 # leave this on top because it can be override by workspace settings
 gaps inner 15
-gaps outer -5
+gaps outer 0
 smart_gaps on
-smart_borders no_gaps
-new_window          pixel 1
-new_float           pixel 3
+smart_borders on
+new_window          pixel 2
+new_float           pixel 7
 hide_edge_borders   smart
 
 # for i3-gaps
-for_window [class="^.*"] border pixel 1
+for_window [class="^.*"] border pixel 2
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
-font pango:DejaVu Sans Mono 8
+font pango:DejaVu Sans Mono 7
 
 # ----------------------------------------------------------------------------
 # commands
@@ -87,7 +87,9 @@ workspace $W10 output $SCREEN2
 workspace $W3 gaps inner 10
 workspace $W3 gaps outer 0
 
-# no gap for browser
+# no gap for browser and workspace
+workspace $W2 gaps inner 0
+workspace $W2 gaps outer 0
 workspace $W4 gaps inner 0
 workspace $W4 gaps outer 0
 
@@ -413,7 +415,7 @@ bindsym --release button2 kill
 bindsym --whole-window $mod+button2 kill
 
 # chromium
-bindsym $mod+shift+w exec chromium-browser
+bindsym $mod+shift+w exec chromium
 bindsym $mod+w   [class="Chromium"] focus
 
 # ----------------------------------------------------------------------------
@@ -429,7 +431,6 @@ for_window [class="^Pidgin$" window_role="^conversation$"] resize grow width 0 p
 # ----------------------------------------------------------------------------
 # Theme
 # ----------------------------------------------------------------------------
-
 set $bg #282828AA
 set $red #cc241d
 set $green #98971a
@@ -442,16 +443,18 @@ set $darkgray #1d2021
 
 set $aquat #689d68BB
 set $bluet #458588BB
-set $darkgrayt #1d2021BB
+set $darkgrayt #1d2021DD
+set $yellowt #d79921BB
+set $red #cc241dBB
 
 set $transparent #28282877
 
 # blue gruvbox
 # class                 border|backgr|text|indicator|child_border
-client.focused          $bluet $bluet $darkgray $purple $yellow
-client.focused_inactive $darkgray $darkgray $gray $purple $darkgray
-client.unfocused        $darkgray $darkgray $gray $purple $darkgray
-client.urgent           $red $red $white $red $red
+client.focused          $aquat $bluet $darkgray $bluet $yellowt
+client.focused_inactive $bluet $bluet $darkgray $darkgray $transparent
+client.unfocused        $bluet $darkgrayt $gray $darkgray $transparent
+client.urgent           $redt $redt $white $red $redt
 
 # i3bar configuration
 bar {
