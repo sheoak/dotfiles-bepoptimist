@@ -19,12 +19,9 @@ then
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
-# for deoplete
-sudo pip3 install neovim
-
 # install vundle plugins
-vim +PlugInstall +qall
-vim +UpdateRemotePlugin +qall
+nvim +PlugInstall +qall
+nvim +UpdateRemotePlugin +qall
 
 cd -
 
