@@ -313,7 +313,7 @@ mode "$mode_gaps" {
 set $mode_gaps_all Inner Gaps: +|-|r Outer Gaps: «|»|R (global)
 bindsym $mod+shift+j mode "$mode_gaps_all"
 
-mode "$mode_gaps" {
+mode "$mode_gaps_all" {
 
         bindsym Shift+guillemotright gaps inner all plus 5
         bindsym Shift+guillemotleft  gaps inner all minus 5
