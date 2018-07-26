@@ -328,6 +328,32 @@ mode "$mode_gaps_all" {
 }
 
 # ----------------------------------------------------------------------------
+# MPC mode
+# ----------------------------------------------------------------------------
+set $mode_mpc MPC: [p] play/pause, [u] update, [f/r] forward, [b/B] backward, [n/N] next/previous
+bindsym $mod+Control+m mode "$mode_mpc"
+
+mode "$mode_mpc" {
+
+        bindsym p exec mpc toggle
+
+        # next/previous
+        bindsym n exec mpc next
+        bindsym Shift+n exec mpc prev
+
+        # seek
+        bindsym f exec mpc seek +00:00:01
+        bindsym b exec mpc seek -00:00:01
+        bindsym Shift+f exec mpc seek +00:00:10
+        bindsym Shift+b exec mpc seek -00:00:10
+
+        bindsym u exec mpc update
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# ----------------------------------------------------------------------------
 # Shortcuts: I3 access
 # ----------------------------------------------------------------------------
 
