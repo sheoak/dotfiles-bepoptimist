@@ -277,11 +277,11 @@ def_key "down"
 #def_key "backspace"
 #  replay_song
 #
-#def_key "f"
-#  seek_forward
+def_key "right"
+  seek_forward
 #
-#def_key "b"
-#  seek_backward
+def_key "left"
+  seek_backward
 
 #def_key "y"
 #  save_tag_changes
