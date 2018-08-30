@@ -151,6 +151,11 @@ config.bind('<Return>', 'scroll-page 0 1')
 config.bind('u', 'undo')
 config.bind('!', 'set-cmd-text -s :spawn')
 
+# pwdhash. F2 is for firefox plugin like shortcut
+# https://www.reddit.com/r/qutebrowser/comments/6gwfhf/solution_for_password_manager/
+config.bind('<F2>', 'jseval --file ~/.config/qutebrowser/qute-pwdhash.js', 'insert')
+config.bind('<Ctrl-h>', 'jseval --file ~/.config/qutebrowser/qute-pwdhash.js', 'insert')
+
 # ---------------------------------------------------------------------------
 # Tab and window settingTab and window settings
 # ---------------------------------------------------------------------------
