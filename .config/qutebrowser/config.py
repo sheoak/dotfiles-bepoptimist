@@ -23,10 +23,10 @@ yt_download_cmd     = "youtube-dl -o '" + download_path_video + "/%(title)s.%(ex
 yt_download_mp3_cmd = "youtube-dl --extract-audio -o '" + download_path_music + "/%(title)s.%(ext)s'"
 
 # fonts are very small on hidpi
-c.zoom.default = 125;
+c.zoom.default = 86;
 
 # I have many graphical bugs with webengine…
-c.backend = 'webkit'
+#c.backend = 'webkit'
 
 # ----------------------------------------------------------------------------
 # General settings
@@ -281,16 +281,16 @@ config.bind('lym', 'spawn ' + yt_download_mp3_cmd + ' {url}')
 c.content.user_stylesheets.append('user.css')
 
 # fonts configuration
-c.fonts.monospace           = '18px Deja Vu Sans Mono'
-c.fonts.prompts             = '16px'
-c.fonts.messages.error      = '16px Hack'
-c.fonts.messages.info       = '16px'
-c.fonts.messages.warning    = '16px'
-c.fonts.hints               = '16px Hack'
-c.fonts.statusbar           = '16px Hack'
-c.fonts.completion.entry    = '14px Hack'
-c.fonts.completion.category = '14px'
-c.fonts.downloads           = '14px'
+c.fonts.monospace           = '12px Deja Vu Sans Mono'
+c.fonts.prompts             = '10px'
+c.fonts.messages.error      = '10px Hack'
+c.fonts.messages.info       = '10px'
+c.fonts.messages.warning    = '10px'
+c.fonts.hints               = '10px Hack'
+c.fonts.statusbar           = '11px Hack'
+c.fonts.completion.entry    = '10px Hack'
+c.fonts.completion.category = '10px'
+c.fonts.downloads           = '10px'
 c.hints.border              = '1px solid'
 
 # Solarized theme by YouNeverWalkAlone
