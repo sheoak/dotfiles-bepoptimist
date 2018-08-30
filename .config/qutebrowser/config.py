@@ -157,7 +157,7 @@ config.bind('<F2>', 'jseval --file ~/.config/qutebrowser/qute-pwdhash.js', 'inse
 config.bind('<Ctrl-h>', 'jseval --file ~/.config/qutebrowser/qute-pwdhash.js', 'insert')
 
 # ---------------------------------------------------------------------------
-# Tab and window settingTab and window settings
+# Tab and window setting
 # ---------------------------------------------------------------------------
 
 # just in case something opens a tab, but the conf is made
@@ -185,7 +185,6 @@ config.bind('gt', 'tab-next')
 config.bind('gT', 'tab-prev')
 
 # always open a new window, never use tabs
-# config.bind('j','set-cmd-text -s :open -w ')
 config.bind('O','set-cmd-text -s :open -w ')
 
 # ---------------------------------------------------------------------------
@@ -193,7 +192,7 @@ config.bind('O','set-cmd-text -s :open -w ')
 # ---------------------------------------------------------------------------
 
 # ad blocking
-c.content.host_blocking.lists = ['https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts']
+#c.content.host_blocking.lists = ['https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts']
 config.bind(',h', 'config-cycle -t -p content.host_blocking.enabled')
 
 # developer mode (for inspector)
