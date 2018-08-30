@@ -5,9 +5,8 @@
 plugins=(
   git
   vi-mode
-  colored-man-pages
   common-aliases
-  gpg-agent
+  bepoptimist
 )
 
 # Path to your oh-my-zsh installation.
