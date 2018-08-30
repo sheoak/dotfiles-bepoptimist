@@ -9,12 +9,21 @@ plugins=(
   bepoptimist
 )
 
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
-export PATH="$PATH:$HOME/bin:$HOME/.gem/ruby/2.5.0/bin"
+# bug with completion security check
+ZSH_DISABLE_COMPFIX=true
+
+# Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
+export KEYTIMEOUT=1
+
+export GPG_TTY=`tty`
+echo "UPDATESTARTUPTTY" | gpg-connect-agent > /dev/null 2>&1
 
 # privoxy
 export http_proxy="http://localhost:8118"
+
+# Path to your oh-my-zsh installation.
+export ZSH=$HOME/.oh-my-zsh
+export PATH="$PATH:$HOME/bin:$HOME/.gem/ruby/2.5.0/bin:$HOME/.local/bin"
 
 export EDITOR=nvim
 export VISUAL=nvim
@@ -27,10 +36,14 @@ export LESSOPEN="|lesspipe.sh %s"
 # no less history
 export LESSHISTFILE=/dev/null
 
+# custom node path
+export PATH="$PATH:$HOME/.local/share/npm/bin"
+export NODE_PATH="$NODE_PATH:$HOME/.local/share/npm/lib/node_modules"
+
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="agnoster"
+ZSH_THEME="agnoster-custom"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -80,12 +93,16 @@ if [ "$TERM" = "linux" ]; then
     clear # against bg artifacts
 fi
 
+# gruvbox colors from vim plugin
+source ~/.local/share/nvim/plugged/gruvbox/gruvbox_256palette.sh
+
 source $ZSH/oh-my-zsh.sh
 
 # move history file in a cleaner place
 HISTFILE=~/.local/share/zsh/zsh_history
 
 # custom alias in :
-# ~/.oh-my-zsh/custom/plugins/common-aliases/common-aliases.plugin.zsh
+# ~/.oh-my-zsh/custom/plugins/common-aliases/
+# ~/.oh-my-zsh/custom/plugins/bepoptimist/
 
 [[ -s $HOME/.zshrc.local ]] && source "$HOME/.zshrc.local"
