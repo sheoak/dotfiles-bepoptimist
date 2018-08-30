@@ -51,6 +51,7 @@ Plug 'sheoak/vim-bepoptimist'   " Bepo keymap
 
 " Themes
 Plug 'iCyMind/NeoSolarized'
+Plug 'morhetz/gruvbox'
 
 " Shougo plugin suite
 Plug 'Shougo/denite.nvim'       " Unite interfaces
@@ -65,9 +66,8 @@ endif
 
 " Deoplete deps/addons
 Plug 'Shougo/neomru.vim'
-Plug 'wokalski/autocomplete-flow'
-Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
-Plug 'kristijanhusak/deoplete-phpactor'
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
 
 Plug 'vim-airline/vim-airline'   " Cool status bar
 Plug 'vim-airline/vim-airline-themes'
@@ -76,35 +76,38 @@ Plug 'tpope/vim-surround'       " motions around words
 Plug 'tpope/vim-repeat'         " missing repeat with dot
 Plug 'tpope/vim-speeddating'    " inc/dec dates and numbers
 Plug 'tpope/vim-commentary'     " quick comment
-Plug 'justinmk/vim-sneak'       " Multiline f/F/t/T
+"Plug 'justinmk/vim-sneak'       " Multiline f/F/t/T
 Plug 'wellle/targets.vim'       " Additionnal text objects like cin) or da,
 Plug 'junegunn/goyo.vim'        " Minimalist interface on demand with :Goyo
 Plug 'scrooloose/syntastic'     " Syntax checker for JS, PHP, Python…
 Plug 'sjl/gundo.vim'            " More undo
 Plug 'junegunn/vim-easy-align'  " Align tabs
 Plug 'tpope/vim-obsession'      " session managment
+Plug 'editorconfig/editorconfig-vim'
 
 " Git integration
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter', { 'for': 'git' } " Git gutter on the left
+Plug 'airblade/vim-gitgutter'  " Git gutter on the left
 
 " Filetype specific plugins
 Plug 'davidhalter/jedi',             { 'for': 'python' }
 Plug 'zchee/deoplete-jedi',          { 'for': 'python' }
 Plug 'PotatoesMaster/i3-vim-syntax', { 'for': 'i3' }
-Plug 'digitaltoad/vim-jade',         { 'for': 'jade' }
 Plug 'hail2u/vim-css3-syntax',       { 'for': 'css' }
 Plug 'digitaltoad/vim-pug',          { 'for': 'pug' }
 Plug 'jlong/sass-convert.vim',       { 'for': [ 'css', 'scss', 'sass' ] }
 Plug 'mattn/emmet-vim',              { 'for': ['html','css', 'scss', 'sass'] }
 Plug 'tmhedberg/matchit',            { 'for': ['html', 'xml'] }
 " live update css/html/js
-Plug 'jaxbot/browserlink.vim',       { 'for': ['html', 'css', 'js'] }
+Plug 'jaxbot/browserlink.vim',       { 'for': ['html', 'css', 'js', 'sass', 'scss'] }
 " phpDocumentor
-Plug 'tobyS/pdv' ,                   { 'for': 'php' }
+Plug 'tobyS/pdv' ,                       { 'for': 'php' }
+Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
+Plug 'kristijanhusak/deoplete-phpactor', { 'for': 'php' }
 
 " Missing syntax
 Plug 'jelera/vim-javascript-syntax', { 'for': 'js' }
+Plug 'wokalski/autocomplete-flow',   { 'for': 'js' }
 Plug 'elzr/vim-json',                { 'for': 'json' }
 Plug 'plasticboy/vim-markdown',      { 'for': 'markdown' }
 Plug 'vim-pandoc/vim-pandoc',        { 'for': 'markdown' }
@@ -113,9 +116,9 @@ Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': 'markdown' }
 " ranger integration
 Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
+Plug 'ap/vim-css-color'
 
 " I only enable thoses when i need them
-" Plug 'editorconfig/editorconfig-vim'
 " Plug 'sirver/ultisnips'
 " Plug 'honza/vim-snippets'
 " Plug 'arnauddri/vim-lodash-snippets'
@@ -142,6 +145,7 @@ set fileformat=unix            " unix format by default, of course
 set visualbell                 " no sounds
 set noerrorbells
 set shell=zsh                  " shell zsh by default
+
 " }}}
 
 " Backup / history / undo {{{
@@ -279,10 +283,12 @@ else
 endif
 
 if $TERM == 'linux'
-    colorscheme NeoSolarized
+    "colorscheme NeoSolarized
+    colorscheme gruvbox
 else
     try
-        colorscheme NeoSolarized
+        "colorscheme NeoSolarized
+        colorscheme gruvbox
     catch
         colorscheme desert
     endtry
@@ -459,6 +465,8 @@ noremap <Space> <PageDown>
 
 " Plugins configuration {{{
 " -----------------------------------------------------------------------------
+let loaded_matchparen = 1
+
 
 " Plugin Emmet {{{
 " -----------------------------------------------------------------------------
@@ -497,7 +505,8 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline_theme='solarized'
+"let g:airline_theme='solarized'
+let g:airline_theme='gruvbox'
 " }}}
 
 " Plugin vim-jedi {{{
@@ -565,6 +574,7 @@ let g:surround_no_mappings = 1
 " {{{ Deoplete
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
+let g:neosnippet#enable_completed_snippet = 1 
 " }}}
 
 " {{{ Denite
@@ -583,6 +593,13 @@ call denite#custom#map(
       \ 'insert',
       \ '<C-p>',
       \ '<denite:move_to_previous_line>',
+      \ 'noremap'
+      \)
+
+call denite#custom#map(
+      \ 'insert',
+      \ '<C-t>',
+      \ '<denite:do_action:tabopen>',
       \ 'noremap'
       \)
 
@@ -663,6 +680,7 @@ let g:ranger_map_keys = 0
 nnoremap ,e :Ranger<CR>
 " open ranger when vim open a directory
 let g:ranger_replace_netrw = 1
+
 " }}}
 
 " }}} plugins section
