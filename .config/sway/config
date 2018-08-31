@@ -34,6 +34,15 @@ input "1267:12440:ELAN1201:00_04F3:3098_To" {
     accel_profile adaptive
 }
 
+# macbook trackpad
+input "1452:586:bcm" {
+    tap enabled
+    dwt enabled
+    natural_scroll disabled
+    middle_emulation enabled
+    pointer_accel 1
+}
+
 # logitech wireless mouse
 input "1133:50479:Logitech_USB_Re" {
     pointer_accel 1
@@ -76,7 +85,7 @@ for_window [class="^.*"] border pixel 1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
-font pango:DejaVu Sans Mono 11
+font pango:DejaVu Sans Mono 8
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -292,8 +301,8 @@ bindsym $mod+Control+r reload
 bindsym $mod+Control+s restart
 
 # dmenu replacement with rofi
-bindsym $mod+d          exec "rofi -show run"
-bindsym $mod+Shift+d    exec "rofi -combi-modi ssh,run,window -show combi -modi combi"
+bindsym $mod+d          exec rofi -show run
+bindsym $mod+Shift+d    exec rofi -combi-modi ssh,run,window -show combi -modi combi
 # wifi with rofi, executable must be in path
 bindsym $mod+Control+d  exec rofi-wifi-menu
 
@@ -432,10 +441,10 @@ client.urgent           $red $red $white $red $red
 bar {
     position bottom
     strip_workspace_numbers yes
-    font pango:DejaVu Sans Mono, FontAwesome 9
+    font pango:DejaVu Sans Mono, FontAwesome 7
     separator_symbol "⋆"
 
-    height 25
+    height 18
 
     status_command i3status --config ~/.config/i3/i3status.conf
     i3bar_command i3bar -t
