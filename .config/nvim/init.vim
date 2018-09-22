@@ -638,7 +638,7 @@ nnoremap <leader>s :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
 nnoremap <leader>S :<C-u>DeniteProjectDir grep:. -mode=normal<CR>
 
 " Unamed register access is rarely useful, remap it
-nnoremap "" :<C-u>Denite registers<CR>
+nnoremap "" :<C-u>Denite register<CR>
 
 
 " Add custom menus
