@@ -1,6 +1,20 @@
+# vi:syntax=sh
 
 directory = ~/downloads/torrents/
 session = ~/.rtorrent.session
+
+schedule2 = watch_directory_foo, 20, 10, "load.start_verbose=~/downloads/torrents/watch/*.torrent"
+
+
+network.port_range.set = 49164-49164
+
+protocol.encryption.set = allow_incoming,try_outgoing,enable_retry
+
+dht.mode.set = auto
+dht.port.set = 6881
+protocol.pex.set= yes
+
+schedule2 = low_diskspace,5,60,((close_low_diskspace,100M))
 
 encryption = require,require_RC4,allow_incoming,try_outgoing
 
@@ -11,5 +25,20 @@ max_peers_seed=100
 max_uploads=2
 upload_rate=150
 
-use_udp_trackers=no
 port_range = 55556-55556
+
+throttle.min_peers.normal.set = 40
+throttle.max_peers.normal.set = 52
+
+throttle.min_peers.seed.set = 10
+throttle.max_peers.seed.set = 52
+
+throttle.max_uploads.set = 8
+
+throttle.global_down.max_rate.set = 200
+throttle.global_up.max_rate.set = 28
+
+pieces.hash.on_completion.set = yes
+
+
+
