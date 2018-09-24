@@ -33,6 +33,9 @@ alias -g CA="2>&1 | cat -A"
 alias -g NE="2> /dev/null"
 alias -g NUL="> /dev/null 2>&1"
 
+# custom
+alias -g C='| xclip -selection clipboard'
+
 alias df="df -h"
 alias du="du -h"
 alias dud='du -d 1 -h'
@@ -129,3 +132,12 @@ alias vim=nvim
 
 alias usys='systemctl --user '
 alias ytmp3='youtube-dl -x --audio-format mp3 -o "%(title)s.%(ext)s" '
+alias youtube-dl='youtube-dl --audio-format ogg --audio-quality 7 --prefer-free-formats --restrict-filenames '
+alias youtube-quickdl="youtube-dl --audio-quality 7 --prefer-free-formats --restrict-filenames -o '~/videos/youtube/%(title)s.%(ext)s' "
+
+# project manager
+# https://github.com/eivind88/prm
+alias pm='. ~/bin/prm/prm.sh'
+
+alias z='zathura'
+
