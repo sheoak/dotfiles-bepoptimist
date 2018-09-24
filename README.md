@@ -13,6 +13,39 @@ I'm still experiencing a lot on it, it might be unstable. Any participation is
 welcome if you're a bépo enthousiast.
 
 
+# Tip
+
+You can easily install it by forking it and then using 
+[this method explained on atlassian.com](https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/).
+In short:
+
+    $ cd ~
+    # the following alias is included in ~/.zshrc
+    $ alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+    $ echo ".cfg" >> .gitignore
+    $ config checkout
+
+If you get errors, backup and start again
+
+    $ mkdir -p .config-backup && \
+    config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | \
+    xargs -I{} mv {} .config-backup/{}
+    $ config checkout
+
+Some settings:
+
+    $ config config --local status.showUntrackedFiles no
+
+You can now do for example:
+
+    config status
+    config add .vimrc
+    config commit -m "Add vimrc"
+    config add .bashrc
+    config commit -m "Add bashrc"
+    config push
+
+
 # Bepo keyboard oriented configurations:
 
 - mpv
