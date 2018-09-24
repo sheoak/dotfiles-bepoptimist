@@ -118,6 +118,9 @@ Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'ap/vim-css-color'
 
+" Grammar
+Plug 'rhysd/vim-grammarous'
+
 " I only enable thoses when i need them
 " Plug 'sirver/ultisnips'
 " Plug 'honza/vim-snippets'
