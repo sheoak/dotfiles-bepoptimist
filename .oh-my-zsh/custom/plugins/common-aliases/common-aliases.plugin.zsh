@@ -95,8 +95,6 @@ alias sudo="sudo -E "
 alias ducks='du -cks * | sort -rn | head'
 alias yank='xclip -selection clipboard'
 alias feh='feh -B black -FZx '
-alias gc="git commit -am $1"
-alias gp="git push -u origin master"
 alias itconfig="vim ~/.config/i3/config"
 alias viconfig="vim ~/.vimrc"
 alias pacin='sudo pacman -S'
@@ -113,7 +111,13 @@ alias pacmir='sudo pacman -Syy'
 # run offlineimap service before mutt
 alias mutt=neomutt
 
-function timer() { sleep $1 && mplayer ~/music/alarm.mp3 &> /dev/null }
+# set an ad-hoc GUI timer
+function timer() {
+  local N=$1; shift
+
+  (sleep $N && notify-send "${*:-BING}" && mpc play) &
+  echo "timer set for $N"
+}
 function trash() { mv "$@" ~/.trash/; }
 function bak() { mv "$@" ~/.backups/; }
 alias trash-clear='rm -rf ~/.trash/*'
