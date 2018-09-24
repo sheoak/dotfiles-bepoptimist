@@ -372,7 +372,7 @@ if has("autocmd")
         au FileType vim            setlocal foldmethod=marker foldlevel=0
         au FileType text           setlocal tw=78 formatoptions+=tw
 
-        au FileType markdown       setlocal tw=80 formatoptions+=taw
+        au FileType markdown       setlocal tw=80 formatoptions+=tw
         au FileType gitcommit      setlocal tw=72 colorcolumn=72
                     \ formatoptions+=taw
 
