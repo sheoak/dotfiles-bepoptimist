@@ -19,6 +19,9 @@ then
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
+# create backups dir
+mkdir -p ~/.local/share/nvim/{backups,undo,swap}
+
 # install vundle plugins
 nvim +PlugInstall +qall
 nvim +UpdateRemotePlugin +qall
