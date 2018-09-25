@@ -138,6 +138,15 @@ alias youtube-quickdl="youtube-dl --audio-quality 7 --prefer-free-formats --rest
 # project manager
 # https://github.com/eivind88/prm
 alias pm='. ~/bin/prm/prm.sh'
-
+alias pms='pm start '
+alias pmq='pm stop '
 alias z='zathura'
 
+# dotfiles managment shortcuts
+alias c='config'
+alias cst='config status'
+alias cadd='config add '
+alias cpatch='config add -p '
+alias cpush='config push '
+alias cpull='config pull '
+alias ccommit='config commit'
