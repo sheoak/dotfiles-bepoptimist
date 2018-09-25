@@ -155,19 +155,24 @@ set shell=zsh                  " shell zsh by default
 " -----------------------------------------------------------------------------
 set history=500                " keep 500 lines of command line history
 set backup
-set backupdir=~/.vim/backups,/tmp/
-set directory=~/.vim/backups/swap/,/tmp/
+set swapfile
+" you need to create backups and undo directory
+" XDG_DATA_HOME may not be defined so we use home
+set backupdir=$HOME/.local/share/nvim/backups,$HOME/.backups/,/tmp/
+" the last // will add the absolute path to the file
+set directory=$HOME/.local/share/nvim/swap//,$HOME/.backups//,/tmp//
 set writebackup
-set backupskip=/tmp/*,~/.Backups/*,*.tmp/*,*.cache/*
+set backupskip=/tmp/*,$HOME/backups/*,*.tmp/*,*.cache/*
 set sessionoptions-=options     " do not save options
 set viminfo^=!                  " keep some vim history after closing
 set viminfo+=n~/.vim/viminfo
+
 
 " Persistent Undo
 " Keep undo history across sessions, by storing in file.
 " -----------------------------------------------------------------------------
 if has('persistent_undo')
-    set undodir=~/.vim/backups/undo,/tmp/
+    set undodir=$HOME/.local/share/nvim/undo//,$HOME/.backups/undo//,/tmp/undo//
     set undofile
 endif
 " }}}
