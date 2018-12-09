@@ -122,10 +122,8 @@ Plug 'ap/vim-css-color'
 Plug 'rhysd/vim-grammarous'
 
 " I only enable thoses when i need them
-" Plug 'sirver/ultisnips'
-" Plug 'honza/vim-snippets'
-" Plug 'arnauddri/vim-lodash-snippets'
-" Plug 'aperezdc/vim-template'
+ Plug 'aperezdc/vim-template'
+Plug 'honza/vim-snippets'
 
 " Initialize plugin system
 call plug#end()
@@ -474,7 +472,6 @@ noremap <Space> <PageDown>
 " Plugins configuration {{{
 " -----------------------------------------------------------------------------
 let loaded_matchparen = 1
-
 
 " Plugin Emmet {{{
 " -----------------------------------------------------------------------------
