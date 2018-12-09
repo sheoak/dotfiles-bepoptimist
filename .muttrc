@@ -21,7 +21,8 @@ source ~/.mutt/gpg.rc
 
 # Set up mutt to use our local maildir:
 set mbox_type=Maildir
-set sendmail    = /usr/bin/msmtp
+#set sendmail    = /usr/bin/msmtp
+set sendmail    = msmtp-enqueue.sh
 
 set quit=ask-yes
 
