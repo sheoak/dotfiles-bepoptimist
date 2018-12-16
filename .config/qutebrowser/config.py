@@ -204,6 +204,10 @@ config.bind('O','set-cmd-text -s :open -w ')
 
 # ad blocking
 #c.content.host_blocking.lists = ['https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts']
+
+c.content.host_blocking.enabled = True
+c.content.host_blocking.lists = ['https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/social/hosts']
+
 config.bind(',h', 'config-cycle -t -p content.host_blocking.enabled')
 
 # developer mode (for inspector)
