@@ -129,6 +129,12 @@ config.bind('>', 'navigate next')
 # ---------------------------------------------------------------------------
 # Misc. bindings
 # ---------------------------------------------------------------------------
+
+# fill password with user script and pass
+# the username must be set as the second line with user: prefix
+# it will use rofi, see ~/.config/qutebrowser/password_fill_rc file
+config.bind('<F2>', 'spawn --userscript password_fill')
+
 config.bind('F', 'hint all window')
 # d is a dangerous shortcut if you forget to go in insert mode…
 # i3 shortcut works or dd
@@ -153,8 +159,8 @@ config.bind('!', 'set-cmd-text -s :spawn')
 
 # pwdhash. F2 is for firefox plugin like shortcut
 # https://www.reddit.com/r/qutebrowser/comments/6gwfhf/solution_for_password_manager/
-config.bind('<F2>', 'jseval --file ~/.config/qutebrowser/qute-pwdhash.js', 'insert')
-config.bind('<Ctrl-h>', 'jseval --file ~/.config/qutebrowser/qute-pwdhash.js', 'insert')
+# config.bind('<F2>', 'jseval --file ~/.config/qutebrowser/qute-pwdhash.js', 'insert')
+# config.bind('<Ctrl-h>', 'jseval --file ~/.config/qutebrowser/qute-pwdhash.js', 'insert')
 
 # ---------------------------------------------------------------------------
 # Tab and window setting
