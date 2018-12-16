@@ -37,8 +37,11 @@ export LESSOPEN="|lesspipe.sh %s"
 export LESSHISTFILE=/dev/null
 
 # custom node path
-export PATH="$PATH:$HOME/.local/share/npm/bin"
+export PATH="$PATH:$HOME/.local/share/npm/bin:/usr/bin/node"
 export NODE_PATH="$NODE_PATH:$HOME/.local/share/npm/lib/node_modules"
+
+export JAVA_HOME="/usr/lib/jvm/java-11-openjdk"
+export PATH=$JAVA_HOME/bin:$PATH
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
