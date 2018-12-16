@@ -6,4 +6,4 @@ export TERMINAL=kitty
 export WLC_REPEAT_DELAY=270
 export WLC_REPEAT_RATE=52
 
-sway
+sway -dV
