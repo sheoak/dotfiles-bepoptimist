@@ -385,6 +385,12 @@ if has("autocmd")
     augroup END
     " }}}
 
+    " Special settings for passwords files {{{
+    augroup fileDetectPassword
+        au BufEnter /dev/shm/*    setlocal nobackup noswapfile
+    augroup END
+    " }}}
+
 else
 
     set autoindent
