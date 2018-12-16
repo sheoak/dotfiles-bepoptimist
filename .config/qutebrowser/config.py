@@ -118,8 +118,8 @@ config.bind('R', 'scroll right', 'caret')
 c.hints.chars = 'aiuectsrn'
 
 # switch : and .
-config.bind(':', 'repeat-command')
-config.bind('.', 'set-cmd-text :')
+#config.bind(':', 'repeat-command')
+#config.bind('.', 'set-cmd-text :')
 
 # ---------------------------------------------------------------------------
 # FRENCH Settings
