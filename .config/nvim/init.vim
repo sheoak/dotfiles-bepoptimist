@@ -72,18 +72,21 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'vim-airline/vim-airline'   " Cool status bar
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'tpope/vim-surround'       " motions around words
-Plug 'tpope/vim-repeat'         " missing repeat with dot
-Plug 'tpope/vim-speeddating'    " inc/dec dates and numbers
-Plug 'tpope/vim-commentary'     " quick comment
-"Plug 'justinmk/vim-sneak'       " Multiline f/F/t/T
-Plug 'wellle/targets.vim'       " Additionnal text objects like cin) or da,
-Plug 'junegunn/goyo.vim'        " Minimalist interface on demand with :Goyo
-Plug 'scrooloose/syntastic'     " Syntax checker for JS, PHP, Python…
-Plug 'sjl/gundo.vim'            " More undo
-Plug 'junegunn/vim-easy-align'  " Align tabs
-Plug 'tpope/vim-obsession'      " session managment
+Plug 'tpope/vim-surround'      " motions around words
+Plug 'tpope/vim-repeat'        " missing repeat with dot
+Plug 'tpope/vim-speeddating'   " inc/dec dates and numbers
+Plug 'tpope/vim-commentary'    " quick comment
+" Plug 'justinmk/vim-sneak'       " Multiline f/F/t/T
+Plug 'wellle/targets.vim'      " Additionnal text objects like cin) or da,
+Plug 'junegunn/goyo.vim'       " Minimalist interface on demand with :Goyo
+" Plug 'scrooloose/syntastic'    " Syntax checker for JS, PHP, Python…
+Plug 'dmerejkowsky/vim-ale' " Async Linter
+Plug 'sjl/gundo.vim'           " More undo
+Plug 'junegunn/vim-easy-align' " Align tabs
+Plug 'tpope/vim-obsession'     " session managment
 Plug 'editorconfig/editorconfig-vim'
+Plug 'airblade/vim-rooter'     " auto cd to project dir
+Plug 'fboender/bexec'          " execute current script
 
 " Git integration
 Plug 'tpope/vim-fugitive'
@@ -98,6 +101,10 @@ Plug 'digitaltoad/vim-pug',          { 'for': 'pug' }
 Plug 'jlong/sass-convert.vim',       { 'for': [ 'css', 'scss', 'sass' ] }
 Plug 'mattn/emmet-vim',              { 'for': ['html','css', 'scss', 'sass'] }
 Plug 'tmhedberg/matchit',            { 'for': ['html', 'xml'] }
+Plug 'posva/vim-vue',                { 'for': ['js'] }
+Plug 'artur-shaik/vim-javacomplete2',{ 'for': ['java'] }
+
+
 " live update css/html/js
 Plug 'jaxbot/browserlink.vim',       { 'for': ['html', 'css', 'js', 'sass', 'scss'] }
 " phpDocumentor
@@ -382,6 +389,8 @@ if has("autocmd")
         " Mail: remove annoying trail space detection and set gutter
         au FileType mail setlocal tw=72 listchars=tab:\ \
 
+        au FileType java setlocal omnifunc=javacomplete#Complete
+
     augroup END
     " }}}
 
@@ -489,26 +498,35 @@ let g:user_emmet_leader_key='<C-y>'
 
 " Plugin Syntastic {{{
 " -----------------------------------------------------------------------------
-let g:syntastic_stl_format          = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
-let g:syntastic_enable_perl_checker = 1
-let g:syntastic_enable_signs        = 1
-let g:syntastic_check_on_open       = 1
+" let g:syntastic_stl_format          = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
+" let g:syntastic_enable_perl_checker = 1
+" let g:syntastic_enable_signs        = 1
+" let g:syntastic_check_on_open       = 1
 
-" let g:syntastic_html_tidy_exec      = 'tidy'
-" let g:syntastic_html_tidy_ignore_errors = [
-"     \ '<sv-',
-"     \ 'discarding unexpected </sv-',
-"     \ 'proprietary attribute "sv-"'
-"     \ ]
+" " let g:syntastic_html_tidy_exec      = 'tidy'
+" " let g:syntastic_html_tidy_ignore_errors = [
+" "     \ '<sv-',
+" "     \ 'discarding unexpected </sv-',
+" "     \ 'proprietary attribute "sv-"'
+" "     \ ]
 
-" configure syntastic checkers
-let g:syntastic_html_checkers  = ['validator']
-let g:syntastic_js_checkers    = ['jshint']
-let g:syntastic_css_checkers   = ['csslint']
-let g:syntastic_php_checkers   = ['php']
-
+" " configure syntastic checkers
+" let g:syntastic_html_checkers  = ['validator']
+" let g:syntastic_js_checkers    = ['jshint']
+" let g:syntastic_css_checkers   = ['csslint']
+" let g:syntastic_php_checkers   = ['php']
 " }}}
 
+" Plugin ALE {{{
+" Fix files with prettier, and then ESLint.
+let b:ale_fixers = ['prettier', 'eslint']
+" }}}
+
+" Plugin vim-rooter {{{
+" how to identify a project root
+let g:rooter_patterns = ['Rakefile', '.git/', '.ctags', 'package.json']
+" }}}
+"
 " Plugin vim-airline {{{
 " -----------------------------------------------------------------------------
 set laststatus=2 " Always display the statusline in all windows
@@ -570,6 +588,12 @@ let g:surround_no_mappings = 1
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
 let g:neosnippet#enable_completed_snippet = 1 
+
+let g:deoplete#omni_patterns = {}
+let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
+let g:deoplete#sources = {}
+let g:deoplete#sources._ = []
+let g:deoplete#file#enable_buffer_path = 1
 " }}}
 
 " {{{ Denite
