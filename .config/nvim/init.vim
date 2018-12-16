@@ -444,7 +444,7 @@ end
 " it's better to set the leader here than in plugins to avoid issues
 let mapleader = ","
 " Quick save with new leader
-noremap <leader>, :w<CR>
+" noremap <leader>, :w<CR>
 
 " Don't use Ex mode, use Q for formatting
 noremap Q gq
