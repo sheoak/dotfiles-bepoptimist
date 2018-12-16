@@ -39,8 +39,10 @@ c.qt.args.append('autoplay-policy=user-gesture-required')
 # Custom search engines
 # ---------------------------------------------------------------------------
 c.url.start_pages              = 'about:blank'
-c.url.searchengines["DEFAULT"] = "https://www.google.fr/search?q={}"
-c.url.searchengines["g"]       = "https://www.google.fr/search?q={}"
+#c.url.searchengines["DEFAULT"] = "https://www.google.fr/search?q={}"
+#c.url.searchengines["DEFAULT"]       = "https://www.searx.me/?q={}&category_general=on&time_range=&language=en-us"
+c.url.searchengines["DEFAULT"]       = "https://www.qwant.com/?q={}&t=web"
+c.url.searchengines["g"]       = "https://www.google.com/search?hl=en&q={}"
 c.url.searchengines["y"]       = "https://www.youtube.com/results?search_query={}"
 c.url.searchengines["q"]       = "https://lite.qwant.com/?t=web&q={}"
 c.url.searchengines["a"]       = "https://wiki.archlinux.org/?search={}"
@@ -49,6 +51,9 @@ c.url.searchengines["wa"]      = "https://wiki.archlinux.org/index.php?search={}
 c.url.searchengines["s"]       = "https://www.searx.me/?q={}&category_general=on&time_range=&language=en-us"
 c.url.searchengines["m"]       = "http://www.openstreetmap.org/search?query={}"
 c.url.searchengines["gm"]      = "https://www.google.fr/maps/place/{}"
+c.url.searchengines["p"]       = "http://php.net/manual-lookup.php?pattern={}&scope=quickref"
+c.url.searchengines["d"]       = "https://developer.mozilla.org/fr/search?q={}"
+
 
 # ---------------------------------------------------------------------------
 # Custom folders
