@@ -1,0 +1,36 @@
+IMAPAccount accountname
+Host imap.domain.ltd
+User user@domain.ltd
+#Pass ***************
+# To store the password in an encrypted file use PassCmd instead of Pass
+PassCmd "pass path/to/password"
+#
+# Use SSL
+SSLType IMAPS
+# The following line should work. If get certificate errors, uncomment the two following lines and read the "Troubleshooting" section.
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+#CertificateFile ~/.cert/imap.gmail.com.pem
+#CertificateFile ~/.cert/Equifax_Secure_CA.pem
+
+IMAPStore accountname-remote
+Account accountname
+
+MaildirStore accountname-local
+Subfolders Verbatim
+# The trailing "/" is important
+Path ~/.mail/accountname/
+Inbox ~/.mail/accountname/Inbox
+Flatten .
+
+Channel accountname
+Master :accountname-remote:
+Slave :accountname-local:
+# Exclude everything under the internal [Gmail] folder, except the interesting folders
+# Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail"
+# Or include everything
+Patterns *
+# Automatically create missing mailboxes, both locally and on the server
+Create Both
+# Save the synchronization state files in the relevant directory
+SyncState *
+
