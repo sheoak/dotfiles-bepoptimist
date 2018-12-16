@@ -4,9 +4,12 @@
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  git-extras
+  colorize
   vi-mode
   common-aliases
   bepoptimist
+  private-aliases
 )
 
 # bug with completion security check
