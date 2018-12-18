@@ -278,6 +278,8 @@ set $mode_screen     ·       [E]nable      [D]isable       [A]ctivate 
 
 # Screensaver mode [E]nergy
 bindsym $mod+Control+e mode "$mode_screen"
+# Bepoptimist-style shortcut (è for screen)
+bindsym $mod+egrave mode "$mode_screen"
 
 mode "$mode_screen" {
 
@@ -364,10 +366,11 @@ bindsym $mod+Control+s restart
 
 # dmenu replacement with rofi, see ~/.Xresources for configuration
 bindsym $mod+d exec "rofi -show run"
+bindsym $mod+eacute exec "~/bin/rofi-pass/rofi-pass"
 # with ssh, commands
 bindsym $mod+Shift+d exec "rofi -combi-modi ssh,run -show combi -modi combi"
 # search web from rofi
-bindsym $mod+ctrl+d exec echo "" | rofi -dmenu -p "Search" -lines 0 | xargs -I{} qutebrowser \{\}
+bindsym $mod+Control+d exec echo "" | rofi -dmenu -p "Search" -lines 0 | xargs -I{} qutebrowser \{\}
 # window search with rofi, larger for window titles
 bindsym $mod+Tab exec "rofi -width 80 -combi-modi ,window -show combi -modi combi"
 
@@ -375,7 +378,7 @@ bindsym $mod+Tab exec "rofi -width 80 -combi-modi ,window -show combi -modi comb
 bindsym $mod+ccedilla bar mode toggle
 
 # wifi with rofi, executable must be in path
-# bindsym $mod+Control+d  exec rofi-wifi-menu
+#bindsym $mod+ctrl+d  exec rofi-wifi-menu
 
 # ----------------------------------------------------------------------------
 # Shortcuts: Multimedia keys
