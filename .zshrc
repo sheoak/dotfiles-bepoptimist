@@ -99,6 +99,9 @@ if [ "$TERM" = "linux" ]; then
     clear # against bg artifacts
 fi
 
+# fix ssh issues with kitty
+export TERM=xterm-256color
+
 # gruvbox colors from vim plugin
 source ~/.local/share/nvim/plugged/gruvbox/gruvbox_256palette.sh
 
