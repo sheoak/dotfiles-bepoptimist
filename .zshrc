@@ -22,7 +22,7 @@ export GPG_TTY=`tty`
 echo "UPDATESTARTUPTTY" | gpg-connect-agent > /dev/null 2>&1
 
 # privoxy
-export http_proxy="http://localhost:8118"
+#export http_proxy="http://localhost:8118"
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
