@@ -74,7 +74,7 @@ config.set('hints.min_chars', 1)
 # ---------------------------------------------------------------------------
 
 # remap homerow for bépo
-config.unbind('l')
+config.unbind('h')
 config.unbind('j')
 config.unbind('k')
 config.unbind('l')
