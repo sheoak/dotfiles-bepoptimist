@@ -2,3 +2,14 @@
 *.bak
 *.swp
 .cfg
+dev
+cloud/
+desktop/
+downloads/
+games/
+images/
+mail/
+music/
+videos/
+www/
+
