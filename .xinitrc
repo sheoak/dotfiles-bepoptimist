@@ -22,7 +22,13 @@ export TERMINAL=kitty
 xset r rate 280 56
 
 # swap esc and cap locks (macbook air)
-setxkbmap -option caps:swapescape fr bepo
+#setxkbmap -option caps:swapescape -option crtl:nocaps fr bepo
+
+# make CapsLock behave like Ctrl:
+setxkbmap -option ctrl:nocaps fr bepo
+
+# make short-pressed Ctrl behave like Escape:
+xcape -e 'Control_L=Escape'
 
 # desktop wallpaper and color
 /usr/bin/feh --bg-fill --no-fehbg --randomize ~/images/wallpapers/*
