@@ -30,17 +30,14 @@ setxkbmap -option ctrl:nocaps fr bepo
 # make short-pressed Ctrl behave like Escape:
 xcape -e 'Control_L=Escape'
 
-# desktop wallpaper and color
-/usr/bin/feh --bg-fill --no-fehbg --randomize ~/images/wallpapers/*
+# desktop wallpaper and color, put it in .xinitrc.local
+#/usr/bin/feh --bg-fill --no-fehbg --randomize ~/images/wallpapers/*
 
 # notifications
-# /usr/bin/dunst &
 systemctl --user start dunst
+systemctl --user import-environment DISPLAY
 
-#/usr/bin/compton -b
-
-#/usr/bin/udiskie -T -q --no-notify --use-udisks2 &
-
+/usr/bin/udiskie -T -q --no-notify --use-udisks2 &
 
 #exec i3 -d all > ~/i3.log
 exec i3
