@@ -269,7 +269,7 @@ mode "$mode_system" {
 bindsym $mod+Control+l exec $Locker
 
 # autolock
-exec xautolock -time $autolock -locker $Locker -notify 20 -notifier $lockalert 'xset dpms force off' &
+exec xautolock -time $autolock -locker $Locker -notify 20 -notifier $lockalert &
 
 # ----------------------------------------------------------------------------
 # Screensaver mode
