@@ -1,14 +1,5 @@
-# private settings
-# set folder      = "$HOME/mail"
-# set spoolfile   = "+myaccount/inbox"
-# set record      = "+myccount/gmail.sent"
-# set postponed   = "+myccount/gmail.drafts"
-# set realname    = "Your name"
-# set from        = "myemail@domain.ltd"
-source ~/.mutt/private.muttrc
-
-# IMAP: offlineimap generated mailboxes
-source ~/.mutt/mailboxes
+# IMAP: offlineimap/mbsync generated mailboxes
+#source ~/.mutt/mailboxes
 
 # bépo mapping
 source ~/.mutt/bepo.muttrc
@@ -127,3 +118,13 @@ mono indicator reverse
 
 macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
 macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+
+# private settings
+# set folder      = "$HOME/mail"
+# set spoolfile   = "+myaccount/inbox"
+# set record      = "+myccount/gmail.sent"
+# set postponed   = "+myccount/gmail.drafts"
+# set realname    = "Your name"
+# set from        = "myemail@domain.ltd"
+source ~/.mutt/private.muttrc
+
