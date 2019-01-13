@@ -26,4 +26,5 @@ npm install -g jshint csslint pleeease-cli sass less pug pug-cli html2pug svgo
 gem install sass
 
 # for vim-deoplete
-sudo pip3 install neovim
+pip3 install --user neovim
+pip2 install --user neovim
