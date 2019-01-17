@@ -477,8 +477,9 @@ set $bluet #458588BB
 set $darkgrayt #1d2021DD
 set $yellowt #d79921BB
 set $red #cc241dBB
+set $white #FFFFFF
 
-set $transparent #28282877
+set $transparent #282828FF
 
 # blue gruvbox
 # class                 border|backgr|text|indicator|child_border
