@@ -37,7 +37,8 @@ xcape -e 'Control_L=Escape'
 systemctl --user start dunst
 systemctl --user import-environment DISPLAY
 
-/usr/bin/udiskie -T -q --no-notify --use-udisks2 &
+# udiskie : -T: no tray -q: quiet
+/usr/bin/udiskie -T -q --use-udisks2 &
 
 #exec i3 -d all > ~/i3.log
 exec i3
