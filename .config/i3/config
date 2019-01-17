@@ -366,7 +366,8 @@ bindsym $mod+Control+s restart
 
 # dmenu replacement with rofi, see ~/.Xresources for configuration
 bindsym $mod+d exec "rofi -show run"
-bindsym $mod+eacute exec "~/bin/rofi-pass/rofi-pass"
+bindsym $mod+g exec "udiskie-rofi"
+bindsym $mod+eacute exec "rofi-pass"
 # with ssh, commands
 bindsym $mod+Shift+d exec "rofi -combi-modi ssh,run -show combi -modi combi"
 # search web from rofi
