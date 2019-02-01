@@ -400,8 +400,8 @@ bindsym XF86AudioLowerVolume exec amixer -c0 -D pulse sset Master 5%- && paplay 
 bindsym XF86AudioMute        exec amixer -c0 -D pulse -q set Master toggle && paplay /usr/share/sounds/freedesktop/stereo/message.oga
 
 # Sreen brightness controls
-#bindsym XF86MonBrightnessDown   exec xbacklight -dec 10
-#bindsym XF86MonBrightnessUp     exec xbacklight -inc 10
+bindsym XF86MonBrightnessDown   exec xbacklight -dec 10
+bindsym XF86MonBrightnessUp     exec xbacklight -inc 10
 bindsym $win+F7 exec xbacklight -dec 10
 bindsym $win+F8 exec xbacklight -inc 10
 bindsym $win+F9 exec xset dpms force off
