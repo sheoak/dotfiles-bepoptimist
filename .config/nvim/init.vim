@@ -52,6 +52,7 @@ Plug 'sheoak/vim-bepoptimist'   " Bepo keymap
 " Themes
 Plug 'iCyMind/NeoSolarized'
 Plug 'morhetz/gruvbox'
+Plug 'flazz/vim-colorschemes'
 
 " Shougo plugin suite
 Plug 'Shougo/denite.nvim'       " Unite interfaces
@@ -76,6 +77,8 @@ Plug 'tpope/vim-surround'      " motions around words
 Plug 'tpope/vim-repeat'        " missing repeat with dot
 Plug 'tpope/vim-speeddating'   " inc/dec dates and numbers
 Plug 'tpope/vim-commentary'    " quick comment
+" Plug 'tpope/vim-vinegar'     " enhance :Ex
+Plug 'tpope/vim-unimpaired'
 " Plug 'justinmk/vim-sneak'       " Multiline f/F/t/T
 Plug 'wellle/targets.vim'      " Additionnal text objects like cin) or da,
 Plug 'junegunn/goyo.vim'       " Minimalist interface on demand with :Goyo
@@ -83,7 +86,7 @@ Plug 'junegunn/goyo.vim'       " Minimalist interface on demand with :Goyo
 Plug 'dmerejkowsky/vim-ale' " Async Linter
 Plug 'sjl/gundo.vim'           " More undo
 Plug 'junegunn/vim-easy-align' " Align tabs
-Plug 'tpope/vim-obsession'     " session managment
+" Plug 'tpope/vim-obsession'     " session managment
 Plug 'editorconfig/editorconfig-vim'
 Plug 'airblade/vim-rooter'     " auto cd to project dir
 Plug 'fboender/bexec'          " execute current script
@@ -95,15 +98,16 @@ Plug 'airblade/vim-gitgutter'  " Git gutter on the left
 " Filetype specific plugins
 Plug 'davidhalter/jedi',             { 'for': 'python' }
 Plug 'zchee/deoplete-jedi',          { 'for': 'python' }
+Plug 'vim-scripts/indentpython.vim', { 'for': 'python' }
 Plug 'PotatoesMaster/i3-vim-syntax', { 'for': 'i3' }
 Plug 'hail2u/vim-css3-syntax',       { 'for': 'css' }
-Plug 'digitaltoad/vim-pug',          { 'for': 'pug' }
-Plug 'jlong/sass-convert.vim',       { 'for': [ 'css', 'scss', 'sass' ] }
+" Plug 'digitaltoad/vim-pug',          { 'for': 'pug' }
+" Plug 'jlong/sass-convert.vim',       { 'for': [ 'css', 'scss', 'sass' ] }
 Plug 'mattn/emmet-vim',              { 'for': ['html','css', 'scss', 'sass'] }
+" enhance % power
 Plug 'tmhedberg/matchit',            { 'for': ['html', 'xml'] }
-Plug 'posva/vim-vue',                { 'for': ['js'] }
-Plug 'artur-shaik/vim-javacomplete2',{ 'for': ['java'] }
-
+" Plug 'posva/vim-vue',                { 'for': ['js'] }
+" Plug 'artur-shaik/vim-javacomplete2',{ 'for': ['java'] }
 
 " live update css/html/js
 Plug 'jaxbot/browserlink.vim',       { 'for': ['html', 'css', 'js', 'sass', 'scss'] }
@@ -116,7 +120,7 @@ Plug 'kristijanhusak/deoplete-phpactor', { 'for': 'php' }
 Plug 'jelera/vim-javascript-syntax', { 'for': 'js' }
 Plug 'wokalski/autocomplete-flow',   { 'for': 'js' }
 Plug 'elzr/vim-json',                { 'for': 'json' }
-Plug 'plasticboy/vim-markdown',      { 'for': 'markdown' }
+"Plug 'plasticboy/vim-markdown',      { 'for': 'markdown' }
 Plug 'vim-pandoc/vim-pandoc',        { 'for': 'markdown' }
 Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': 'markdown' }
 
@@ -127,9 +131,9 @@ Plug 'ap/vim-css-color'
 
 " Grammar
 Plug 'rhysd/vim-grammarous'
+Plug 'dhruvasagar/vim-table-mode'
 
-" I only enable thoses when i need them
- Plug 'aperezdc/vim-template'
+Plug 'aperezdc/vim-template'
 Plug 'honza/vim-snippets'
 
 " Initialize plugin system
