@@ -506,30 +506,19 @@ let g:user_emmet_leader_key='<C-y>'
 "imap <C-g>g <C-g>,
 " }}}
 
-" Plugin Syntastic {{{
-" -----------------------------------------------------------------------------
-" let g:syntastic_stl_format          = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
-" let g:syntastic_enable_perl_checker = 1
-" let g:syntastic_enable_signs        = 1
-" let g:syntastic_check_on_open       = 1
-
-" " let g:syntastic_html_tidy_exec      = 'tidy'
-" " let g:syntastic_html_tidy_ignore_errors = [
-" "     \ '<sv-',
-" "     \ 'discarding unexpected </sv-',
-" "     \ 'proprietary attribute "sv-"'
-" "     \ ]
-
-" " configure syntastic checkers
-" let g:syntastic_html_checkers  = ['validator']
-" let g:syntastic_js_checkers    = ['jshint']
-" let g:syntastic_css_checkers   = ['csslint']
-" let g:syntastic_php_checkers   = ['php']
-" }}}
-
 " Plugin ALE {{{
 " Fix files with prettier, and then ESLint.
-let b:ale_fixers = ['prettier', 'eslint']
+let g:ale_fixers = ['prettier', 'stylelint', 'eslint', 'autopep8', 'yapf',
+            \   'remove_trailing_lines', 'trim_whitespace' ]
+" Check Python files with flake8 and pylint.
+" let b:ale_linters = ['flake8', 'pylint']
+" Disable warnings about trailing whitespace for Python files.
+let b:ale_warn_about_trailing_whitespace = 0
+nmap <silent> ylt :ALEToggle<cr>
+nmap <silent> ylf :ALEFix<cr>
+nmap <silent> yld :ALEDetail<cr>
+nmap <silent> «l :ALEPrevious<cr>
+nmap <silent> »l :ALENext<cr>
 " }}}
 
 " Plugin vim-rooter {{{
