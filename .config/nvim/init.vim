@@ -601,12 +601,15 @@ call denite#custom#option('default', { 'prompt': '❯' })
 call denite#custom#source(
 	\ 'file/rec', 'matchers', ['matcher/fuzzy', 'matcher/project_files', 'matcher/hide_hidden_files'])
 
+call denite#custom#source( 'grep', 'matchers', ['matcher_regexp'])
+
 call denite#custom#map(
       \ 'insert',
       \ '<C-n>',
       \ '<denite:move_to_next_line>',
       \ 'noremap'
       \)
+
 call denite#custom#map(
       \ 'insert',
       \ '<C-p>',
@@ -617,6 +620,43 @@ call denite#custom#map(
 call denite#custom#map(
       \ 'insert',
       \ '<C-t>',
+      \ '<denite:do_action:tabopen>',
+      \ 'noremap'
+      \)
+
+call denite#custom#map(
+      \ 'insert',
+      \ '<C-space>',
+      \ '<denite:toggle_select>',
+      \ 'noremap'
+      \)
+
+call denite#custom#map(
+      \ 'insert',
+      \ '<C-g>',
+      \ '<denite:enter_mode:normal>',
+      \ 'noremap'
+      \)
+
+" bepo mappings:
+call denite#custom#map(
+      \ 'normal',
+      \ 's',
+      \ '<denite:move_to_previous_line>',
+      \ 'noremap'
+      \)
+
+call denite#custom#map(
+      \ 'normal',
+      \ 't',
+      \ '<denite:move_to_next_line>',
+      \ 'noremap'
+      \)
+
+" move t to j
+call denite#custom#map(
+      \ 'normal',
+      \ 'j',
       \ '<denite:do_action:tabopen>',
       \ 'noremap'
       \)
@@ -639,6 +679,8 @@ if (executable('ag'))
     call denite#custom#var('grep', 'final_opts', [])
 endif
 
+map <leader>a :DeniteProjectDir -buffer-name=grep -default-action=quickfix grep:::!<CR>
+
 " TODO: remap CTRL-i to something nice
 nnoremap <Tab> :<C-u>Denite buffer<CR>
 nnoremap <leader><Space> :<C-u>DeniteProjectDir file/rec<CR>
@@ -646,7 +688,7 @@ nnoremap <leader>c :<C-u>Denite command_history<CR>
 nnoremap <leader>d :<C-u>Denite directory_mru<CR>
 nnoremap <leader>f :<C-u>Denite file/rec<CR>
 " find in git files if exists
-nnoremap <leader>g :<C-u>DeniteBufferDir
+nnoremap <leader>g :<C-u>DeniteProjectDir
     \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`<CR>
 " history
 nnoremap <leader>h :<C-u>Denite file_mru<CR>
