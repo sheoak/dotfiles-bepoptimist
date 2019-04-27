@@ -457,10 +457,10 @@ noremap Q gq
 nnoremap \\ :%s/\<<C-r><C-w>\>/
 
 " [O]rder all css properties
-nnoremap \o :<C-u>g/{/ .+1,/}/-1 sort<CR>
+nnoremap <leader>o :<C-u>g/{/ .+1,/}/-1 sort<CR>
 
 " pretty print json
-nnoremap \j :%!python -m json.tool<CR>
+nnoremap <leader>j :%!python -m json.tool<CR>
 
 " ranger style
 nnoremap gn :tabe<CR>
