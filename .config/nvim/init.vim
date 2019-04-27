@@ -773,6 +773,13 @@ let g:neosnippet#snippets_directory='~/.local/share/nvim/plugged/vim-snippets/sn
 let g:neosnippet#scope_aliases = {}
 let g:neosnippet#scope_aliases['python'] = 'python,django'
 " }}}
-"
-" }}} plugins section
 
+" EasyAlign {{{
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+" }}}
+
+" }}} plugins section
