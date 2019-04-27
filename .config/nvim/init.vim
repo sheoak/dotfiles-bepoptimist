@@ -486,6 +486,12 @@ xnoremap p pgvy
 noremap <BS> <PageUp>
 noremap <Space> <PageDown>
 
+" testing
+nmap yt ::!pytest<CR>
+
+" terminal escape instead of C-\ C-n
+tnoremap <C-g> <C-\><C-n>
+
 " }}}
 
 " Plugins configuration {{{
@@ -700,10 +706,12 @@ let g:goyo_linenr=1
 
 " ranger {{{
 let g:ranger_map_keys = 0
-nnoremap ,e :Ranger<CR>
 " open ranger when vim open a directory
 let g:ranger_replace_netrw = 1
 
+nnoremap ,E :Ranger<CR>
+nnoremap ,e :RangerWorkingDirectory<CR>
+nnoremap <C-n> :RangerWorkingDirectory<CR>
 " }}}
 
 " Neosnippets {{{
