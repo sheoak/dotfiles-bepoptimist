@@ -378,6 +378,7 @@ if has("autocmd")
         au FileType php            setlocal omnifunc=phpcomplete#CompletePHP
         au FileType css,sass,less  setlocal omnifunc=csscomplete#CompleteCSS
         au FileType javascript     setlocal omnifunc=javascriptcomplete#CompleteJS
+        au FileType javascript     setlocal formatprg=prettier\ --stdin
         au FileType python         setlocal omnifunc=pythoncomplete#Complete
         au FileType html,markdown  setlocal omnifunc=htmlcomplete#CompleteTags
         au FileType xml            setlocal omnifunc=xmlcomplete#CompleteTags
