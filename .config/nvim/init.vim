@@ -690,7 +690,7 @@ map <leader>a :DeniteProjectDir -buffer-name=grep -default-action=quickfix grep:
 " TODO: remap CTRL-i to something nice
 nnoremap <Tab> :<C-u>Denite buffer<CR>
 nnoremap <leader><Space> :<C-u>DeniteProjectDir file/rec<CR>
-nnoremap <leader>c :<C-u>Denite command_history<CR>
+nnoremap <leader>: :<C-u>Denite command_history<CR>
 nnoremap <leader>d :<C-u>Denite directory_mru<CR>
 nnoremap <leader>f :<C-u>Denite file/rec<CR>
 " find in git files if exists
@@ -700,8 +700,9 @@ nnoremap <leader>g :<C-u>DeniteProjectDir
 nnoremap <leader>h :<C-u>Denite file_mru<CR>
 nnoremap <leader>m :<C-u>Denite menu:bookmarks<CR>
 nnoremap <leader>r :<C-u>Denite register<CR>
-nnoremap <leader>s :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
-nnoremap <leader>S :<C-u>DeniteProjectDir grep:. -mode=normal<CR>
+nnoremap <leader># :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
+nnoremap <leader>/ :<C-u>DeniteProjectDir grep:. -mode=normal<CR>
+nnoremap <leader>à :<C-u>Denite tag<CR>
 
 " Unamed register access is rarely useful, remap it
 nnoremap "" :<C-u>Denite register<CR>
