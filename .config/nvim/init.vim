@@ -54,6 +54,8 @@ Plug 'iCyMind/NeoSolarized'
 Plug 'morhetz/gruvbox'
 Plug 'flazz/vim-colorschemes'
 
+Plug 'ludovicchabant/vim-gutentags'
+
 " Shougo plugin suite
 Plug 'Shougo/denite.nvim'       " Unite interfaces
 
@@ -101,12 +103,13 @@ Plug 'zchee/deoplete-jedi',          { 'for': 'python' }
 Plug 'vim-scripts/indentpython.vim', { 'for': 'python' }
 Plug 'PotatoesMaster/i3-vim-syntax', { 'for': 'i3' }
 Plug 'hail2u/vim-css3-syntax',       { 'for': 'css' }
+Plug 'broesler/jupyter-vim'
 " Plug 'digitaltoad/vim-pug',          { 'for': 'pug' }
 " Plug 'jlong/sass-convert.vim',       { 'for': [ 'css', 'scss', 'sass' ] }
 Plug 'mattn/emmet-vim',              { 'for': ['html','css', 'scss', 'sass'] }
 " enhance % power
 Plug 'tmhedberg/matchit',            { 'for': ['html', 'xml'] }
-" Plug 'posva/vim-vue',                { 'for': ['js'] }
+Plug 'posva/vim-vue',                { 'for': ['js'] }
 " Plug 'artur-shaik/vim-javacomplete2',{ 'for': ['java'] }
 
 " live update css/html/js
@@ -135,6 +138,8 @@ Plug 'dhruvasagar/vim-table-mode'
 
 Plug 'aperezdc/vim-template'
 Plug 'honza/vim-snippets'
+
+Plug 'diepm/vim-rest-console'
 
 " Initialize plugin system
 call plug#end()
