@@ -789,4 +789,8 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 " }}}
 
+" Gutentag {{{
+let g:gutentags_ctags_tagfile=".ctags"
+" }}}
+
 " }}} plugins section
