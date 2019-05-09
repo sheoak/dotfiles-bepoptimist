@@ -138,7 +138,7 @@ config.bind('>', 'navigate next')
 # fill password with user script and pass
 # the username must be set as the second line with user: prefix
 # it will use rofi, see ~/.config/qutebrowser/password_fill_rc file
-config.bind('<F2>', 'spawn --userscript password_fill')
+config.bind('éé', 'spawn --userscript password_fill')
 
 config.bind('F', 'hint all window')
 # d is a dangerous shortcut if you forget to go in insert mode…
@@ -146,14 +146,18 @@ config.bind('F', 'hint all window')
 # Ctrl-q still closes all windows
 config.unbind('d')
 config.bind('<Ctrl-d>', 'tab-close')
-config.bind('dd', 'tab-close')
-config.bind('da', 'window-only')
+config.bind('éq', 'tab-close')
+config.bind('éo', 'window-only')
 
 # edit with nvim (use ctrl-e in insert mode)
 config.bind('e', 'open-editor')
 
 # Firefox like shortcuts for private window
 config.bind('<Ctrl-Shift-p>', 'set-cmd-text -s :open -p ')
+
+# nvim-bepoptimist shortcuts
+config.bind('éq', 'tab-close')
+config.bind('èq', 'quit')
 
 config.bind('<Backspace>', 'scroll-page 0 -1')
 config.bind('<Return>', 'scroll-page 0 1')
@@ -215,7 +219,7 @@ config.bind(',p', 'config-cycle -t -p content.private_browsing')
 # ---------------------------------------------------------------------------
 
 config.bind('aa', ':set-cmd-text -s :quickmark-add {url}')
-config.bind('ab', 'open qute://bookmarks#quickmarks')
+config.bind('A', 'open qute://bookmarks#quickmarks')
 config.bind('aB', 'open -w qute://bookmarks#quickmarks')
 config.bind('ad', ':quickmark-del')
 config.bind('aD', 'set-cmd-text -s :quickmark-del')
@@ -224,9 +228,10 @@ config.bind('aL', 'set-cmd-text -s :quickmark-load -w')
 
 config.unbind('b')
 config.bind('ba', 'bookmark-add')
-config.bind('bb', 'open qute://bookmarks#bookmarks')
+config.bind('B', 'open qute://bookmarks#bookmarks')
 config.bind('bB', 'open -w qute://bookmarks#bookmarks')
 config.bind('bd', 'bookmark-del')
+config.bind('bD', 'set-cmd-text -s :bookmark-del')
 config.bind('bl', 'set-cmd-text -s :bookmark-load')
 config.bind('bL', 'set-cmd-text -s :bookmark-load -w')
 
@@ -269,25 +274,25 @@ config.bind('yV', 'yank -s selection')
 # ----------------------------------------------------------------------------
 
 # Clear the download list quickly
-config.bind('ll', 'download-clear')
-config.bind('lu', 'download-cancel')
-config.bind('lo', 'download-open')
-config.bind('lr', 'download-retry')
-config.bind('lD', 'download-delete')
-config.bind('ld', 'download-remove')
-config.bind('ls', ':set-cmd-text :download ')
+config.bind('dc', 'download-clear')
+config.bind('du', 'download-cancel')
+config.bind('dd', 'download-open')
+config.bind('dh', 'download-retry')
+config.bind('dR', 'download-delete')
+config.bind('dr', 'download-remove')
+config.bind('ds', ':set-cmd-text :download ')
 # downloads guitar tabs as pdf (ask for file name)
-config.bind('lt', ':set-cmd-text :print --pdf ' + download_path_tabs + '/')
+config.bind('dt', ':set-cmd-text :print --pdf ' + download_path_tabs + '/')
 # download as pdf
-config.bind('lp', ':set-cmd-text :print --pdf ' + download_path_pdf + '/')
+config.bind('dp', ':set-cmd-text :print --pdf ' + download_path_pdf + '/')
 
 # yv : youtube to video
-config.bind('lv', 'spawn ' + yt_download_cmd
+config.bind('dy', 'spawn ' + yt_download_cmd
             + ' {url} ;; message-info "Downloading video to '
             + download_path_video + '…"')
 
 # ym : youtube to mp3
-config.bind('la', 'spawn ' + yt_download_mp3_cmd
+config.bind('dY', 'spawn ' + yt_download_mp3_cmd
             + ' {url} ;; message-info "Extracting audio to '
             + download_path_music + '…"')
 
