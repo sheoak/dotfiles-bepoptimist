@@ -207,9 +207,6 @@ c.content.host_blocking.lists = \
 
 config.bind(',h', 'config-cycle -t -p content.host_blocking.enabled')
 
-# developer mode (for inspector)
-config.bind(',d', 'config-cycle -t -p content.developer_extras')
-
 # toggle private mode for next openned window
 config.bind(',p', 'config-cycle -t -p content.private_browsing')
 
