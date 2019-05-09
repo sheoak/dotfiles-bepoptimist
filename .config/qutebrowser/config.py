@@ -27,7 +27,7 @@ yt_download_mp3_cmd = "youtube-dl --audio-format mp3 --audio-quality 7 \
         + download_path_music + "/%(title)s.%(ext)s'"
 
 # fonts are very small on hidpi
-c.zoom.default = 86
+c.zoom.default = 100
 
 # I have many graphical bugs with webengine…
 # c.backend = 'webkit'
