@@ -51,16 +51,16 @@ set $lockalert 'xset dpms force off'
 # ----------------------------------------------------------------------------
 # workspaces
 # ----------------------------------------------------------------------------
-set $W1  "1: Term"
-set $W2  "2: Work"
-set $W3  "3: Social"
-set $W4  "4: Web"
-set $W5  "5: Files"
-set $W6  "6: Medias"
-set $W7  "7: Secondary"
-set $W8  "8: Others"
-set $W9  "9"
-set $W10 "10"
+set $W1  "Term"
+set $W2  "Work"
+set $W3  "Social"
+set $W4  "Web"
+set $W5  "Files"
+set $W6  "Medias"
+set $W7  "Secondary"
+set $W8  "Others"
+set $W9  "Extra"
+set $W10 "Extra 2"
 
 # set with your screen ids (xrandr)
 set $SCREEN1 eDP0
@@ -183,9 +183,10 @@ bindsym $mod+q kill
 # Resi[z]e window mode
 # ----------------------------------------------------------------------------
 
-bindsym $mod+z mode "resize"
+set $mode_resize  Mode resize
+bindsym $mod+z mode "$mode_resize"
 
-mode "resize" {
+mode "$mode_resize" {
     # These bindings trigger as soon as you enter the resize mode
     bindsym t        resize shrink width  10 px or 10 ppt
     bindsym s        resize grow   height 10 px or 10 ppt
@@ -248,7 +249,7 @@ mode "$mode_virtualbox" {
 # ----------------------------------------------------------------------------
 
 set $Locker i3lock -c 000000
-set $mode_system   ·   [L]ock    Log[o]ut    [S]uspend    [R]eboot    [P]oweroff   ·
+set $mode_system  [L]ock     Log[o]ut     [S]uspend     [R]eboot     [P]oweroff
 
 bindsym $mod+Control+BackSpace mode "$mode_system"
 bindsym XF86PowerOff           mode "$mode_system"
@@ -274,7 +275,7 @@ exec xautolock -time $autolock -locker $Locker -notify 20 -notifier $lockalert &
 # ----------------------------------------------------------------------------
 # Screensaver mode
 # ----------------------------------------------------------------------------
-set $mode_screen     ·       [E]nable      [D]isable       [A]ctivate    ·
+set $mode_screen  [E]nable    [D]isable    [A]ctivate
 
 # Screensaver mode [E]nergy
 bindsym $mod+Control+e mode "$mode_screen"
@@ -495,33 +496,34 @@ client.unfocused        $bluet $darkgrayt $gray $darkgray $transparent
 client.urgent           $redt $redt $white $red $redt
 
 # i3bar configuration
-bar {
-    position bottom
-    strip_workspace_numbers yes
-    font pango:DejaVu Sans Mono, FontAwesome 7
-    separator_symbol "⋆"
+# bar {
+#     position bottom
+#     strip_workspace_numbers yes
+#     font pango:DejaVu Sans Mono, FontAwesome 7
+#     separator_symbol "⋆"
 
-    height 22
+#     height 18
 
-    status_command i3status --config ~/.config/i3/i3status.conf
-    i3bar_command i3bar -t
+#     # status_command i3status --config ~/.config/i3/i3status.conf
+#     # i3bar_command i3bar -t
+#     # i3bar_command $HOME/bin/polybar-launch.sh
 
-    # statusbar colors      border    background  text
-    colors {
+#     # statusbar colors      border    background  text
+#     colors {
 
-        # bar background color
-        background $transparent
+#         # bar background color
+#         background $transparent
 
-        # text color used for blocks that do not have a color specified.
-        statusline $gray
+#         # text color used for blocks that do not have a color specified.
+#         statusline $gray
 
-        # workspaces section
-        #                    border     backgr.     text
-        focused_workspace    $bluet     $bluet      $darkgray
-        inactive_workspace   $darkgrayt $darkgrayt  $gray
-        active_workspace     $darkgray  $darkgrayt  $yellow
-        urgent_workspace     $yellow    $yellow     $bg
-    }
-}
+#         # workspaces section
+#         #                    border     backgr.     text
+#         focused_workspace    $bluet     $bluet      $darkgray
+#         inactive_workspace   $darkgrayt $darkgrayt  $gray
+#         active_workspace     $darkgray  $darkgrayt  $yellow
+#         urgent_workspace     $yellow    $yellow     $bg
+#     }
+# }
 
-
+exec_always --no-startup-id /home/sheoak/bin/polybar-launch.sh

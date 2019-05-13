@@ -1,0 +1,590 @@
+; polybar configuration
+;
+; set your env (ex: ~/.xinitrc)
+;
+; export MONITOR=e-DP1
+;
+; !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+; Work in progress
+; !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+[colors]
+black = #1F1F1F
+white = #93a1a1
+red = #dc322f
+green = #2aa198
+blue = #268bd2
+yellow = #fba922
+gray = #555555
+purple = #9f78e1
+pink = #d33682
+clear = #93a1a1
+
+; primary = #a89984
+primary = #BBBBBB
+secondary = #fba922
+background = ${self.black}
+foreground = ${self.primary}
+active_background = #3F3F3F
+active_text = #f3f3f3
+accent = ${self.secondary}
+urgent = ${self.red}
+good = ${self.green}
+disabled = ${self.gray}
+
+; test =       #073642
+; test =       #002b36
+; test =       #dc322f
+; colotest =   #859900
+; test =       #586e75
+; colotest =   #b58900
+; color1test = #657b83
+; colortest =  #268bd2
+; coltest   =  #839496
+; colortest =  #d33682
+; colortest =  #6c71c4
+; colotest =   #2aa198
+; colotest =   #93a1a1
+
+
+
+[bar/bottom]
+enable-ipc = true
+monitor = ${env:MONITOR:HDMI-1}
+monitor-fallback = eDP-1
+width = 100%
+height = 21
+
+bottom = true
+
+; background = ${colors.black}
+background = #111111
+; background = #BB000000
+foreground = ${colors.primary}
+
+border-bottom-size = 0
+border-bottom-color = #333
+
+border-top-size = 1
+; border-top-color = #333
+border-top-color = #111
+
+overline-size = 10
+overline-color = ${self.background}
+underline-size = 1
+underline-color = ${self.background}
+
+padding-left = 0
+padding-right = 0
+module-margin-left = 1
+module-margin-right = 1
+
+; font-0 = NotoSans-Regular:size=7;0
+; font-0 = DejaVu Sans Mono:size=7;2
+font-0 = Fira Mono:size=8;2
+font-1 = MaterialIcons:size=10;2
+font-2 = Hack:size=9;0
+font-3 = Siji:pixelsize=8;2
+font-4 = Font Awesome 5 Free:style=Solid:size=7;2
+font-5 = Font Awesome 5 Free:style=Regular:size=7;2
+font-6 = Font Awesome 5 Brands:style=Regular:size=7;2
+font-7 = FontAwesome:style=Regular:size=7;2
+font-8 = Hack:size=14;0
+; font-0 = dina:pixelsize=9;1
+; font-1 = siji:pixelsize=10;1
+; font-2 = unifont:size=6;1
+
+modules-left = i3 mpd msmtp
+modules-center = xwindow
+modules-right = mail temperature sepleft wireless-network openvpn sepleft battery pulseaudio sepleft clock
+
+screenchange-reload = true
+
+; wm-restack = bspwm
+
+tray-position = right
+
+cursor-click = pointer
+
+spacing = 0
+
+;[bar/external]
+;enable-ipc = true
+;monitor = HDMI-1
+;bottom = true
+;;dock = true
+;width = ${bar/bottom.width}
+;height = ${bar/bottom.height}
+
+;background = ${bar/bottom.background}
+;foreground = ${bar/bottom.foreground}
+
+;underline-size = ${bar/bottom.underline-size}
+;underline-color = ${bar/bottom.underline-color}
+;overline-size = ${bar/bottom.overline-size}
+;overline-color = ${bar/bottom.overline-color}
+
+;border-bottom.= ${bar/bottom.border-bottom}
+;border-bottom.color = ${bar/bottom.border-bottom-color}
+
+;spacing = ${bar/bottom.spacing}
+;padding-left = ${bar/bottom.padding-left}
+;padding-right = ${bar/bottom.padding-right}
+;module-margin-left = 0
+;module-margin-right = ${bar/bottom.module-margin-right}
+
+;font-0 = ${bar/bottom.font-0}
+;font-1 = ${bar/bottom.font-1}
+;font-2 = ${bar/bottom.font-2}
+;font-3 = ${bar/bottom.font-3}
+;font-4 = ${bar/bottom.font-4}
+;font-5 = ${bar/bottom.font-5}
+
+;modules-left = i3
+;modules-center = xwindow
+;modules-right = fs-root clock
+
+;wm-restack = ${bar/bottom.wm-restack}
+
+
+; [module/fs-root]
+; type = internal/fs
+; mount-0 = /
+; label-mounted = %{F#e60053}%percentage_used%%%{F-} used of %mountpoint%
+
+
+[module/i3]
+type = internal/i3
+;format = <label-state> <label-mode> %{F#333}%{T9}%{T-}%{F}
+format = <label-state> <label-mode>
+
+; format = <label-state> <label-mode> 
+pin-workspaces = true
+strip-wsnumbers = true
+enable-click = true
+
+ws-icon-0 = Term;
+ws-icon-1 = Web;
+ws-icon-2 = Work;
+ws-icon-3 = Medias;
+ws-icon-4 = Social;
+ws-icon-5 = Files;
+ws-icon-6 = Others;
+
+ws-icon-default = 
+
+label-dimmed-underline = ${root.background}
+
+label-focused = %icon% %name%
+label-focused-foreground = ${colors.active_text}
+label-focused-background = ${colors.active_background}
+;label-focused-underline = #${colors.accent}
+label-focused-underline = ${colors.accent}
+label-focused-font = 1
+label-focused-padding = 2
+
+; label-unfocused = %icon%  %name%
+label-unfocused = %icon%
+; label-unfocused-underline = #555555
+label-unfocused-font = 1
+label-unfocused-padding = 2
+label-unfocused-foreground = ${colors.gray}
+
+label-urgent = %icon%  %name%
+label-urgent-foreground = ${colors.white}
+label-urgent-background = #
+label-urgent-underline = ${colors.urgent}
+label-urgent-font = 1
+label-urgent-padding = 2
+
+label-visible = %icon%  %name%
+label-visible-foreground = #55ffffff
+label-visible-font = 1
+label-visible-padding = 2
+
+; Available tokens:
+;   %mode%
+; Default: %mode%
+label-mode = %mode%
+label-mode-padding = 2
+label-mode-background = ${colors.secondary}
+label-mode-foreground = ${colors.background}
+
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+
+format = <label>
+; format = <label> <ramp-coreload>
+
+label =   %percentage%%
+; label-font = 3
+; label-foreground = #99
+
+ramp-coreload-0 = ▁
+ramp-coreload-0-font = 2
+ramp-coreload-0-foreground = #aaff77
+ramp-coreload-1 = ▂
+ramp-coreload-1-font = 2
+ramp-coreload-1-foreground = #aaff77
+ramp-coreload-2 = ▃
+ramp-coreload-2-font = 2
+ramp-coreload-2-foreground = #aaff77
+ramp-coreload-3 = ▄
+ramp-coreload-3-font = 2
+ramp-coreload-3-foreground = #aaff77
+ramp-coreload-4 = ▅
+ramp-coreload-4-font = 2
+ramp-coreload-4-foreground = #fba922
+ramp-coreload-5 = ▆
+ramp-coreload-5-font = 2
+ramp-coreload-5-foreground = #fba922
+ramp-coreload-6 = ▇
+ramp-coreload-6-font = 2
+ramp-coreload-6-foreground = #ff5555
+ramp-coreload-7 = █
+ramp-coreload-7-font = 2
+ramp-coreload-7-foreground = #ff5555
+
+[module/memory]
+type = internal/memory
+interval = 2
+format = <label> <bar-used>
+
+label = RAM
+label-font = 3
+label-foreground = #99
+
+bar-used-width = 30
+bar-used-gradient = true
+bar-used-foreground-0 = #449f3d
+bar-used-foreground-1 = #2f8419
+bar-used-foreground-2 = #f5a70a
+bar-used-foreground-3 = #ed5456
+bar-used-indicator = █
+bar-used-indicator-font = 5
+bar-used-indicator-foreground = #fff
+bar-used-fill = █
+bar-used-fill-font = 5
+bar-used-empty = █
+bar-used-empty-font = 5
+bar-used-empty-foreground = #44
+
+[module/wireless-network]
+type = internal/network
+interface = wlp2s0
+interval = 2.0
+ping-interval = 10
+
+format-connected =  <ramp-signal> <label-connected>
+; format-connected-prefix = ""
+format-connected-prefix-foreground = ${colors.gray}
+format-connected-prefix-offset = -6
+
+label-connected = %{A1:~/bin/vendor/nmcli-rofi/nmcli-rofi:}%essid%%{A}
+format-connected-foreground = ${colors.gray}
+label-connected-foreground = ${colors.primary}
+
+format-disconnected = <label-disconnected>
+format-disconnected-prefix = " "
+format-disconnected-prefix-foreground = ${colors.gray}
+label-disconnected = %{A1:~/bin/vendor/nmcli-rofi/nmcli-rofi:} disconnected%{A}
+label-disconnected-foreground = ${colors.gray}
+format-disconnected-foreground = ${colors.urgent}
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+ramp-signal-foreground = ${colors.gray}
+
+format-packetloss = <animation-packetloss> <label-connected>
+label-packetloss = %essid%
+label-packetloss-foreground = ${colors.red}
+
+animation-packetloss-0 = 
+animation-packetloss-0-foreground = ${colors.red}
+animation-packetloss-1 = 
+animation-packetloss-1-foreground = ${colors.secondary}
+animation-packetloss-framerate = 500
+
+; [module/wired-network]
+; type = internal/network
+; interface = eth1
+; interval = 2.0
+
+; label-connected =   %local_ip%
+; label-disconnected = Ethernet disconnected
+; label-disconnected-foreground = #66
+
+[module/mpd]
+type = internal/mpd
+; format-online = <bar-progress>  <icon-prev> <icon-stop> <toggle> <icon-next>  <label-song>
+; format-online =  <label-song> · <icon-repeat> <icon-random> <icon-single> <icon-consume>
+format-online = <label-song>
+label-song = %{A1:mpc toggle:}%artist% – %title%%{A}
+format-online-foreground = ${colors.gray}
+
+; format-online-overline = ${root.background}
+; format-online-underline = ${root.background}
+format-offline =  <label-offline>
+label-offline = off
+format-offline-foreground = ${colors.urgent}
+
+format-playing =  %{F#BBBBBB}<label-song>%{F-}
+format-paused =  <label-song>
+format-stopped =
+
+; label-song-foreground = ${colors.primary}
+format-paused-foreground = ${colors.disabled}
+format-playing-foreground = ${colors.primary}
+
+icon-play = 
+icon-pause = 
+icon-stop = 
+icon-prev = 
+icon-next = 
+icon-random = 
+icon-repeat = 
+icon-consume = 
+icon-single = (1)
+
+toggle-on-foreground =
+toggle-off-foreground = #55
+
+bar-progress-width = 45
+bar-progress-format = %{+o +u}%fill%%{-o -u}%indicator%%{+o +u}%empty%%{-u -o}
+; bar-progress-indicator = |
+bar-progress-indicator = █
+bar-progress-indicator-foreground = #ff
+bar-progress-indicator-font = 3
+; bar-progress-fill = ─
+bar-progress-fill = █
+bar-progress-fill-foreground = #bb
+bar-progress-fill-font = 3
+; bar-progress-empty = ─
+bar-progress-empty = ▒
+bar-progress-empty-font = 3
+bar-progress-empty-foreground = #44
+
+[module/clock]
+type = internal/date
+interval = 5
+format-padding = 4
+; format-background = #000
+; format-foreground = #fff
+; date = %%{F#bb}%Y-%m-%d%%{F-}  %%{F#ee}%H:%M%%{F-}
+date =  %A %d · %H:%M
+format =  <label>
+format-foreground = ${colors.gray}
+label-foreground = ${colors.primary}
+
+[module/pulseaudio]
+type = internal/pulseaudio
+; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
+; If not, uses default sink
+sink = alsa_output.pci-0000_00_1b.0.analog-stereo
+; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
+; Default: true
+use-ui-max = true
+
+; Interval for volume increase/decrease (in percent points)
+; Default: 5
+interval = 5
+
+; Available tags:
+;   <label-volume> (default)
+;   <ramp-volume>
+;   <bar-volume>
+format-volume = <label-volume> <bar-volume>
+
+; Available tags:
+;   <label-muted> (default)
+;   <ramp-volume>
+;   <bar-volume>
+format-muted = <label-muted>
+
+; Available tokens:
+;   %percentage% (default)
+label-volume = 
+
+; Available tokens:
+;   %percentage% (default)
+label-muted = 
+label-muted-foreground = ${colors.purple}
+
+; Only applies if <ramp-volume> is used
+ramp-volume-0 = 1
+ramp-volume-1 = 2
+ramp-volume-2 = 3
+
+bar-volume-width = 10
+bar-volume-foreground-0 = ${colors.purple}
+bar-volume-foreground-1 = ${colors.purple}
+bar-volume-foreground-2 = ${colors.green}
+bar-volume-foreground-3 = ${colors.green}
+bar-volume-foreground-4 = ${colors.green}
+bar-volume-foreground-5 = ${colors.secondary}
+bar-volume-foreground-6 = ${colors.red}
+bar-volume-gradient = false
+bar-volume-indicator = 
+bar-volume-indicator-font = 2
+bar-volume-fill = ·
+bar-volume-fill-font = 2
+bar-volume-empty = ·
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.primary}
+
+[module/battery]
+type = internal/battery
+full-at = 91
+
+battery = BAT0
+adapter = ADP1
+
+poll-interval = 5
+time-format = %H:%M
+
+format-charging =  <label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
+format-full = <label-full>
+
+label-discharging = %percentage%%
+label-charging = %percentage%%
+label-full =
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+format-discharging-foreground = ${colors.secondary}
+label-discharging-foreground = ${colors.primary}
+
+format-charging-foreground = ${colors.secondary}
+label-charging-foreground = ${colors.primary}
+
+format-full-foreground = ${colors.gray}
+label-full-foreground = ${colors.primary}
+
+format-foreground-1 = ${colors.blue}
+format-foreground-2 = ${colors.secondary}
+
+[module/xwindow]
+type = internal/xwindow
+label-maxlen = 75
+; label-foreground = #bbb
+
+[module/powermenu]
+type = custom/menu
+
+format-padding = 3
+format-background = #000
+format-foreground = #fff
+
+label-open = 
+label-close = 
+label-separator = " - "
+
+menu-0-0 = Terminate WM
+menu-0-0-foreground = ${colors.accent}
+menu-0-0-exec = bspc quit -1
+menu-0-1 = Reboot
+menu-0-1-foreground = ${colors.accent}
+menu-0-1-exec = menu-open-1
+menu-0-2 = Power off
+menu-0-2-foreground = ${colors.accent}
+menu-0-2-exec = menu-open-2
+
+menu-1-0 = Cancel
+menu-1-0-foreground = ${colors.accent}
+menu-1-0-exec = menu-open-0
+menu-1-1 = Reboot
+menu-1-1-foreground = ${colors.accent}
+menu-1-1-exec = sudo reboot
+
+menu-2-0 = Power off
+menu-2-0-foreground = ${colors.accent}
+menu-2-0-exec = sudo poweroff
+menu-2-1 = Cancel
+menu-2-1-foreground = ${colors.accent}
+menu-2-1-exec = menu-open-0
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 40
+
+format =
+format-warn =  <label-warn>
+format-warn-foreground = ${colors.red}
+format-warn-underline = ${colors.red}
+
+label = %temperature-c%
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.primary}
+
+[module/openvpn]
+; TODO: check if /sys/class/net/tun0/dev_id exists instead
+type = custom/script
+exec = ~/bin/check-vpn.sh
+interval = 2
+
+format = <label>
+label = %output%
+format-foreground = ${colors.gray}
+label-foreground = ${colors.purple}
+
+[module/sepleft]
+type = custom/text
+content = ·
+content-foreground = ${colors.gray}
+
+[module/sepright]
+type = custom/text
+content = ·
+content-foreground = ${colors.gray}
+
+[module/mail]
+type = custom/script
+exec = ~/bin/check-mail.sh
+
+interval = 2
+
+; Available tags:
+;   <output> - deprecated
+;   <label> (default)
+format = <label>
+; format-background = #999
+format-foreground = ${colors.accent}
+format-padding = 0
+
+; Available tokens:
+;   %output%
+; Default: %output%
+; label =  %output:0:15:No mail%
+label =  %output%
+
+
+[module/msmtp]
+type = custom/script
+exec = ~/bin/check-msmtp.sh
+
+interval = 5
+
+; Available tags:
+;   <output> - deprecated
+;   <label> (default)
+format = <label>
+; format-background = #999
+format-foreground = ${colors.purple}
+format-padding = 4
+
+; Available tokens:
+;   %output%
+; Default: %output%
+label =   %output:0:15:No queue%
+; vim:ft=dosini
