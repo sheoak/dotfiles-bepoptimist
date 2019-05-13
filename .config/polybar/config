@@ -19,14 +19,16 @@ yellow = #fba922
 gray = #555555
 purple = #9f78e1
 pink = #d33682
-clear = #93a1a1
+light = #777777
+superlight = #333333
 
 ; primary = #a89984
 primary = #BBBBBB
 secondary = #fba922
-background = ${self.black}
+background =  #DD000000
 foreground = ${self.primary}
-active_background = #3F3F3F
+; active_background = #3F3F3F
+active_background = #333
 active_text = #f3f3f3
 accent = ${self.secondary}
 urgent = ${self.red}
@@ -59,7 +61,8 @@ height = 21
 bottom = true
 
 ; background = ${colors.black}
-background = #111111
+; background = #111111
+background = ${colors.background}
 ; background = #BB000000
 foreground = ${colors.primary}
 
@@ -85,15 +88,15 @@ font-1 = Siji:pixelsize=8;2
 font-2 = Font Awesome 5 Free:style=Solid:size=7;2
 font-3 = Font Awesome 5 Free:style=Regular:size=7;2
 font-4 = FontAwesome:style=Regular:size=7;2
-font-5 = Hack Nerd Font Mono:style=Regular:size=14;0
+font-5 = Hack Nerd Font Mono:style=Regular:size=15;0
 ; font-4 = Font Awesome 5 Brands:style=Regular:size=7;2
 ; font-0 = NotoSans-Regular:size=7;0
 ; font-0 = DejaVu Sans Mono:size=7;2
 ; font-7 = MaterialIcons:size=10;2
 
-modules-left = i3 sepleft mpd msmtp
+modules-left = i3 sepstraight mpd msmtp
 ; modules-center = xwindow
-modules-right = mail temperature sepright bluetooth wireless-network openvpn sepleft battery pulseaudio sepright clock
+modules-right = mail temperature sepright wireless-network openvpn bluetooth sepleft battery pulseaudio sepright clock
 
 screenchange-reload = true
 
@@ -177,32 +180,41 @@ ws-icon-default = 
 
 label-dimmed-underline = ${root.background}
 
-label-focused = %icon% %name%
-label-focused-foreground = ${colors.active_text}
-label-focused-background = ${colors.active_background}
-;label-focused-underline = #${colors.accent}
-label-focused-underline = ${colors.accent}
+label-focused = %icon%
+; label-focused = %icon% %name%
+label-focused-foreground = ${colors.blue}
+; label-focused-background = ${colors.blue}
+; label-focused-background = ${colors.superlight}
+; label-focused-underline = ${colors.blue}
+; label-focused-underline = ${colors.accent}
 label-focused-font = 1
-label-focused-padding = 2
+label-focused-padding = 1
+label-focused-margin = 1
 
 ; label-unfocused = %icon%  %name%
 label-unfocused = %icon%
 ; label-unfocused-underline = #555555
 label-unfocused-font = 1
-label-unfocused-padding = 2
+label-unfocused-padding = 1
+label-unfocused-margin = 1
 label-unfocused-foreground = ${colors.gray}
 
-label-urgent = %icon%  %name%
-label-urgent-foreground = ${colors.white}
-label-urgent-background = #
+; label-urgent = %icon% %name%
+label-urgent = %icon%
+; label-urgent-foreground = ${colors.yellow}
+; label-urgent-foreground = ${colors.gray}
 label-urgent-underline = ${colors.urgent}
 label-urgent-font = 1
-label-urgent-padding = 2
+label-urgent-padding = 1
+label-urgent-margin = 1
 
-label-visible = %icon%  %name%
-label-visible-foreground = #55ffffff
+; label-visible = %icon% %name%
+label-visible = %icon%
+label-visible-foreground = ${colors.primary}
+; label-visible-background = ${colors.gray}
 label-visible-font = 1
-label-visible-padding = 2
+label-visible-padding = 1
+label-visible-margin = 1
 
 ; Available tokens:
 ;   %mode%
@@ -378,9 +390,9 @@ format-padding = 4
 ; format-foreground = #fff
 ; date = %%{F#bb}%Y-%m-%d%%{F-}  %%{F#ee}%H:%M%%{F-}
 date =  %A %d · %H:%M
-format =  <label>
+format = <label>
 format-foreground = ${colors.gray}
-label-foreground = ${colors.primary}
+label-foreground = ${colors.light}
 
 [module/pulseaudio]
 type = internal/pulseaudio
@@ -399,7 +411,8 @@ interval = 5
 ;   <label-volume> (default)
 ;   <ramp-volume>
 ;   <bar-volume>
-format-volume = <label-volume> <bar-volume>
+; format-volume = <label-volume> <bar-volume>
+format-volume = <bar-volume>
 
 ; Available tags:
 ;   <label-muted> (default)
@@ -593,15 +606,20 @@ label = %output%
 format-foreground = ${colors.gray}
 label-foreground = ${colors.purple}
 
+[module/sepstraight]
+type = custom/text
+content = %{T6}   %{T-}
+content-foreground = ${colors.superlight}
+
 [module/sepleft]
 type = custom/text
 content = %{T6}%{T-}
-content-foreground = ${colors.gray}
+content-foreground = ${colors.superlight}
 
 [module/sepright]
 type = custom/text
 content = %{T6}%{T-}
-content-foreground = ${colors.gray}
+content-foreground = ${colors.superlight}
 
 [module/mail]
 type = custom/script
