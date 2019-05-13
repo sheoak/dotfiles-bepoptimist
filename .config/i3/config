@@ -22,7 +22,7 @@ set $win Mod4
 floating_modifier $mod
 
 # leave this on top because it can be override by workspace settings
-gaps inner 15
+gaps inner 0
 gaps outer 0
 smart_gaps on
 smart_borders on
@@ -42,6 +42,8 @@ font pango:DejaVu Sans Mono 7
 # ----------------------------------------------------------------------------
 set $termDetached kitty
 set $term kitty --single-instance 
+# set $termDetached urxvtc
+# set $term urxvt
 
 # autolock timer in minutes
 set $autolock 15
@@ -64,7 +66,8 @@ set $W10 "Extra 2"
 
 # set with your screen ids (xrandr)
 set $SCREEN1 eDP0
-set $SCREEN2 HDMI1
+# set $SCREEN2 HDMI1
+set $SCREEN2 HDMI-1
 
 # ----------------------------------------------------------------------------
 # Workspaces
@@ -150,8 +153,8 @@ bindsym $mod+Shift+Up       move up
 bindsym $mod+Shift+Right    move right
 
 # split in horizontal/vertical orientation
-bindsym $mod+h split h
-bindsym $mod+v split v
+bindsym $mod+h split v
+bindsym $mod+v split h
 
 # change layout (stacked (v)ertical, tabbed (h)orizontal, toggle split (g)rid)
 bindsym $mod+Shift+v     layout stacking
@@ -160,7 +163,7 @@ bindsym $mod+Shift+g     layout toggle split
 
 # enter fullscreen mode for the focused container
 # TODO: mnemotechnic?
-bindsym $mod+period fullscreen
+bindsym $mod+f fullscreen
 
 # focus the parent/child container
 bindsym $mod+p focus parent
@@ -376,6 +379,10 @@ bindsym $mod+Shift+eacute exec "rofi-pass --bmarks"
 bindsym $mod+Control+eacute exec "rofi-pass --last-used"
 # wifi with rofi, executable must be in path
 bindsym $mod+Control+d  exec rofi-wifi-menu
+bindsym $mod+w  exec rofi-wifi-menu
+
+# xrandr script for rofi
+bindsym $mod+x  exec rofi-xrandr
 
 # with ssh, commands
 bindsym $mod+Shift+d exec "rofi -combi-modi ssh,run -show combi -modi combi"
@@ -422,39 +429,41 @@ bindsym $mod+shift+Return exec $termDetached -o font_size=8
 
 # [m]utt
 # TODO: open if not openned yet
-bindsym $mod+shift+m workspace $W3; exec $termDetached -o font_size=9 --title "mutt" mutt
-bindsym $mod+m       exec i3-msg '[title="mutt"] focus'
-bindsym XF86Mail     exec i3-msg '[title="mutt"] focus'
+bindsym $win+shift+m workspace $w3; exec $termDetached -o font_size=12 sh -c "i3-msg mark mutt && mutt"
+bindsym $win+m       exec i3-msg '[con_mark="mutt"] focus'
+bindsym XF86Mail     exec i3-msg '[con_mark="mutt"] focus'
 
-bindsym $mod+shift+b workspace $W3; exec messengerfordesktop
-bindsym $mod+b       exec i3-msg '[title="Messenger for Desktop"] focus'
+bindsym $win+shift+b workspace $W3; exec messengerfordesktop
+bindsym $win+b       exec i3-msg '[title="Messenger for Desktop"] focus'
 
 # Qutebrowser
 # Exceptionnaly we don't use shift because it's commonly use, we keep it
 # for developper mode
-bindsym $mod+o exec qutebrowser
+bindsym $win+q exec qutebrowser
 # for dev
-bindsym $mod+shift+o exec qutebrowser --enable-webengine-inspector --loglevel vdebug
+bindsym $win+shift+q exec qutebrowser --enable-webengine-inspector --loglevel vdebug
+
+# chromium
+bindsym $win+c exec chromium
+
+# new version with shortcuts on Win key
+bindsym $win+f exec firefox
+bindsym $win+z exec zathura
 
 # ncmpcpp ([l]ecteur)
 # you can move to a more logical key for you langage, like [J]ukebox
 # TODO: open if not openned yet
-bindsym $mod+shift+l workspace $w6; exec $termDetached -o font_size=8 sh -c "i3-msg mark ncmpcpp && ncmpcpp"
-bindsym $mod+l       exec i3-msg '[con_mark="ncmpcpp"] focus'
+bindsym $win+shift+n workspace $w6; exec $termDetached -o font_size=12 sh -c "i3-msg mark ncmpcpp && ncmpcpp"
+bindsym $win+n       exec i3-msg '[con_mark="ncmpcpp"] focus'
 
 # ranger ([F]iles
-bindsym $mod+shift+f    exec $term --title "ranger" ranger
-bindsym $mod+f          exec i3-msg '[title="ranger"] focus'
+bindsym $win+r    exec $term --title "ranger" ranger
 
 # Mouse
 # The middle button over a titlebar kills the window
 bindsym --release button2 kill
 # The middle button and a modifer over any part of the window kills the window
 bindsym --whole-window $mod+button2 kill
-
-# chromium
-bindsym $mod+shift+w exec chromium
-bindsym $mod+w   [class="Chromium"] focus
 
 # ----------------------------------------------------------------------------
 # Specific settings
