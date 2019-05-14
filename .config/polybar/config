@@ -10,20 +10,25 @@
 
 [colors]
 black = #1F1F1F
-white = #93a1a1
+; white = #93a1a1
+white = #98a6a6
 red = #dc322f
+lightred = #FF0000
 green = #2aa198
 blue = #268bd2
+lightblue = #00FFFF
 orange = #f48d18
 yellow = #fba922
-gray = #555555
+gray = #777
 purple = #9f78e1
+lightpurple = #FF78FF
 pink = #d33682
-light = #777777
-superlight = #333333
+light = #999
+superlight = #555
 
 ; primary = #a89984
-primary = #BBBBBB
+primary = #EEE
+primary-alt = #999999
 secondary = #fba922
 background =  #DD000000
 foreground = ${self.primary}
@@ -73,7 +78,7 @@ border-top-size = 1
 ; border-top-color = #333
 border-top-color = #111
 
-overline-size = 10
+overline-size = 1
 overline-color = ${self.background}
 underline-size = 1
 underline-color = ${self.background}
@@ -89,6 +94,7 @@ font-2 = Font Awesome 5 Free:style=Solid:size=7;2
 font-3 = Font Awesome 5 Free:style=Regular:size=7;2
 font-4 = FontAwesome:style=Regular:size=7;2
 font-5 = Hack Nerd Font Mono:style=Regular:size=15;0
+font-6 = Fira Mono:style=Regular:size=8;3
 ; font-4 = Font Awesome 5 Brands:style=Regular:size=7;2
 ; font-0 = NotoSans-Regular:size=7;0
 ; font-0 = DejaVu Sans Mono:size=7;2
@@ -96,7 +102,7 @@ font-5 = Hack Nerd Font Mono:style=Regular:size=15;0
 
 modules-left = i3 sepstraight mpd msmtp
 ; modules-center = xwindow
-modules-right = mail temperature sepright wireless-network openvpn bluetooth sepleft battery pulseaudio sepright clock
+modules-right = mail temperature sepright wireless-network openvpn bluetooth sepleft battery sepleft pulseaudio sepright clock
 
 screenchange-reload = true
 
@@ -105,8 +111,6 @@ screenchange-reload = true
 tray-position = right
 
 cursor-click = pointer
-
-spacing = 0
 
 ;[bar/external]
 ;enable-ipc = true
@@ -185,7 +189,10 @@ label-focused = %icon%
 label-focused-foreground = ${colors.blue}
 ; label-focused-background = ${colors.blue}
 ; label-focused-background = ${colors.superlight}
-; label-focused-underline = ${colors.blue}
+label-focused-underline = ${colors.blue}
+; label-focused-overline = ${colors.blue}
+label-focused-overline-size = 1
+
 ; label-focused-underline = ${colors.accent}
 label-focused-font = 1
 label-focused-padding = 1
@@ -296,16 +303,14 @@ format-connected = <ramp-signal> <label-connected>
 format-connected-prefix-foreground = ${colors.gray}
 format-connected-prefix-offset = -6
 
-label-connected = %{A1:~/bin/vendor/nmcli-rofi/nmcli-rofi:}%essid%%{A}
+label-connected = %{A1:rofi-wifi-menu:}%essid%%{A}
 format-connected-foreground = ${colors.gray}
 label-connected-foreground = ${colors.primary}
 
 format-disconnected = <label-disconnected>
-format-disconnected-prefix = ""
-format-disconnected-prefix-foreground = ${colors.gray}
-label-disconnected = %{A1:~/bin/vendor/nmcli-rofi/nmcli-rofi:} disconnected%{A}
-label-disconnected-foreground = ${colors.gray}
-format-disconnected-foreground = ${colors.urgent}
+label-disconnected = %{A1:rofi-wifi-menu:}%{A}
+label-disconnected-foreground = ${colors.red}
+; format-disconnected-foreground = ${colors.urgent}
 
 ramp-signal-0 = 
 ramp-signal-1 = 
@@ -341,18 +346,27 @@ type = internal/mpd
 ; format-online =  <label-song> · <icon-repeat> <icon-random> <icon-single> <icon-consume>
 format-online = <label-song>
 label-song = %{A1:mpc toggle:}%artist% – %title%%{A}
-format-online-foreground = ${colors.gray}
+; format-online-foreground = ${colors.gray}
 
-format-offline =  <label-offline> %{T6} %{T-}
-label-offline = off
+format-offline =  <label-offline>
+label-offline = mpd off
 format-offline-foreground = ${colors.urgent}
 
-format-playing =  %{F#BBBBBB}<label-song>  %{F-}%{T6}%{T-}
-format-paused =  <label-song>  %{T6}%{T-}
+format-playing = <label-song>
+format-paused = <label-song>
 format-stopped =
 
-format-paused-foreground = ${colors.disabled}
-format-playing-foreground = ${colors.primary}
+format-playing-prefix= " "
+format-playing-prefix-foreground = ${colors.gray}
+
+format-paused-foreground = ${colors.gray}
+format-paused-prefix= " "
+format-paused-prefix-foreground = ${colors.gray}
+
+format-online-suffix = " "
+format-online-suffix-foreground = ${colors.superlight}
+format-online-suffix-font = 6
+
 
 ; icon-play = 
 ; icon-pause = 
@@ -392,7 +406,7 @@ format-padding = 4
 date =  %A %d · %H:%M
 format = <label>
 format-foreground = ${colors.gray}
-label-foreground = ${colors.light}
+label-foreground = ${colors.primary-alt}
 
 [module/pulseaudio]
 type = internal/pulseaudio
@@ -435,21 +449,21 @@ ramp-volume-1 = 2
 ramp-volume-2 = 3
 
 bar-volume-width = 10
-bar-volume-foreground-0 = ${colors.purple}
-bar-volume-foreground-1 = ${colors.purple}
-bar-volume-foreground-2 = ${colors.green}
-bar-volume-foreground-3 = ${colors.green}
-bar-volume-foreground-4 = ${colors.green}
+bar-volume-foreground-0 = ${colors.lightpurple}
+bar-volume-foreground-1 = ${colors.lightpurple}
+bar-volume-foreground-2 = ${colors.lightblue}
+bar-volume-foreground-3 = ${colors.lightblue}
+bar-volume-foreground-4 = ${colors.lightblue}
 bar-volume-foreground-5 = ${colors.secondary}
-bar-volume-foreground-6 = ${colors.red}
+bar-volume-foreground-6 = ${colors.lightred}
 bar-volume-gradient = false
 bar-volume-indicator = 
-bar-volume-indicator-font = 2
+bar-volume-indicator-font = 7
 bar-volume-fill = ·
-bar-volume-fill-font = 2
+bar-volume-fill-font = 7
 bar-volume-empty = ·
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.gray}
+bar-volume-empty-font = 7
+bar-volume-empty-foreground = ${colors.light}
 
 [module/battery]
 type = internal/battery
@@ -461,13 +475,16 @@ adapter = ADP1
 poll-interval = 5
 time-format = %H:%M
 
-format-charging =  <label-charging>
+format-charging = <label-charging>
 format-discharging = <ramp-capacity> <label-discharging>
 format-full = <label-full>
 
+format-charging-prefix = " "
+format-charging-prefix-foreground = ${colors.accent}
+
 label-discharging = %percentage%%
 label-charging = %percentage%%
-label-full =
+label-full = 
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 
@@ -479,15 +496,14 @@ ramp-capacity-0-foreground = ${colors.urgent}
 ramp-capacity-1-foreground = ${colors.orange}
 ramp-capacity-2-foreground = ${colors.yellow}
 ramp-capacity-3-foreground = ${colors.green}
-ramp-capacity-4-foreground = ${colors.gray}
+ramp-capacity-4-foreground = ${colors.blue}
 
 label-discharging-foreground = ${colors.primary}
 
 format-charging-foreground = ${colors.gray}
 label-charging-foreground = ${colors.primary}
 
-format-full-foreground = ${colors.gray}
-label-full-foreground = ${colors.primary}
+; format-full-foreground = ${colors.gray}
 
 format-foreground-1 = ${colors.blue}
 format-foreground-2 = ${colors.secondary}
@@ -661,7 +677,7 @@ interval = 5
 ; Available tags:
 ;   <output> - deprecated
 ;   <label> (default)
-format = <label>
+format =  <label>
 ; format-background = #999
 format-foreground = ${colors.purple}
 format-padding = 4
