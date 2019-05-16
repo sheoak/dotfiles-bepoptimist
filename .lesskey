@@ -4,9 +4,9 @@
 # Version:    O.11
 
 # bepo keys
-c   next-tag
-C   prev-tag
-t   forw-line
-s   back-line
-T   forw-scroll
-S   back-scroll
+t   next-tag
+T   prev-tag
+s   forw-line
+r   back-line
+S   forw-scroll
+R   back-scroll
