@@ -1,11 +1,11 @@
 " Vim main configuration file {{{
 "
 " Maintainer: sheoak
-" Version:    O.11
+" Version:    O.2
 "
 " I use this config mainly for:
 "
-" - Programming under git versionning (PHP/JS/HTML/CSS)
+" - Programming under git versionning (PHP/JS/HTML/CSS/Python/Bash)
 " - Text/Mail editing
 "
 " I used http://dougblack.io/words/a-good-vimrc.html post to help me organize
@@ -36,7 +36,7 @@
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" }}}
 
-" vim-plug {{{
+" Plugins (vim-plug) {{{
 " -----------------------------------------------------------------------------
 if has('nvim')
     let s:plug_path=$HOME . '/.local/share/nvim/plugged'
@@ -46,17 +46,26 @@ endif
 
 call plug#begin(s:plug_path)
 
-" My custom plugins
+" My custom plugins {{{
+"
+" TODO: split it
+" TODO: add more options
+" TODO: update documentation
+" ----------------------------------------------------------------------------
 Plug 'sheoak/vim-bepoptimist'   " Bepo keymap
 
-" Themes
+" }}}
+
+" Themes {{{
+" ----------------------------------------------------------------------------
 Plug 'iCyMind/NeoSolarized'
 Plug 'morhetz/gruvbox'
 Plug 'flazz/vim-colorschemes'
 
-Plug 'ludovicchabant/vim-gutentags'
+" }}}
 
-" Shougo plugin suite
+" Shougo plugin suite {{{
+" ----------------------------------------------------------------------------
 Plug 'Shougo/denite.nvim'       " Unite interfaces
 
 if has('nvim')
@@ -72,83 +81,86 @@ Plug 'Shougo/neomru.vim'
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 
-Plug 'vim-airline/vim-airline'   " Cool status bar
-Plug 'vim-airline/vim-airline-themes'
+" }}}
 
-Plug 'tpope/vim-surround'      " motions around words
-Plug 'tpope/vim-repeat'        " missing repeat with dot
-Plug 'tpope/vim-speeddating'   " inc/dec dates and numbers
-Plug 'tpope/vim-commentary'    " quick comment
-" Plug 'tpope/vim-vinegar'     " enhance :Ex
-Plug 'tpope/vim-unimpaired'
-" Plug 'justinmk/vim-sneak'       " Multiline f/F/t/T
-Plug 'wellle/targets.vim'      " Additionnal text objects like cin) or da,
-Plug 'junegunn/goyo.vim'       " Minimalist interface on demand with :Goyo
-" Plug 'scrooloose/syntastic'    " Syntax checker for JS, PHP, Python…
-Plug 'dmerejkowsky/vim-ale' " Async Linter
-Plug 'sjl/gundo.vim'           " More undo
-Plug 'junegunn/vim-easy-align' " Align tabs
-" Plug 'tpope/vim-obsession'     " session managment
-Plug 'editorconfig/editorconfig-vim'
-Plug 'airblade/vim-rooter'     " auto cd to project dir
-Plug 'fboender/bexec'          " execute current script
+" All languages plugins {{{
+" ----------------------------------------------------------------------------
+Plug 'ludovicchabant/vim-gutentags'    " Ctags generation
+Plug 'vim-airline/vim-airline'         " Cool status bar
+Plug 'vim-airline/vim-airline-themes'  " Airline themes
+Plug 'tpope/vim-surround'              " Motions around words
+Plug 'tpope/vim-repeat'                " Missing repeat with dot
+Plug 'tpope/vim-speeddating'           " Inc/dec dates and numbers
+Plug 'tpope/vim-commentary'            " Quick comment
+Plug 'tpope/vim-unimpaired'            " Pairing mapping
+Plug 'justinmk/vim-sneak'              " Multiline f/F/t/T
+Plug 'wellle/targets.vim'              " Additionnal text objects: cin) or da,…
+Plug 'michaeljsmith/vim-indent-object' " Indentation text objects
+Plug 'junegunn/goyo.vim'               " Minimalist interface on demand
+Plug 'dmerejkowsky/vim-ale'            " Async Linter
+Plug 'sjl/gundo.vim'                   " More undo
+Plug 'junegunn/vim-easy-align'         " Align tabs
+Plug 'dhruvasagar/vim-table-mode'      " Make table easily
+Plug 'editorconfig/editorconfig-vim'   " Read editorconfig file
+Plug 'airblade/vim-rooter'             " Auto cd to project dir
+Plug 'fboender/bexec'                  " Execute current script
+Plug 'vim-vdebug/vdebug'               " Interactive debugger
+Plug 'tpope/vim-fugitive'              " Git integration
+Plug 'airblade/vim-gitgutter'          " Git gutter on the left
+Plug 'francoiscabrol/ranger.vim'       " Ranger integration
+Plug 'rhysd/vim-grammarous'            " Grammar check
+Plug 'aperezdc/vim-template'           " Auto-template when opening new file
+Plug 'honza/vim-snippets'              " Snippets for different languages
+Plug 'diepm/vim-rest-console'          " Call REST API from vim
+" }}}
 
-" Git integration
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'  " Git gutter on the left
+" Filetype specific plugins {{{
+" ----------------------------------------------------------------------------
 
-" Filetype specific plugins
+" Python
 Plug 'davidhalter/jedi',             { 'for': 'python' }
 Plug 'zchee/deoplete-jedi',          { 'for': 'python' }
 Plug 'vim-scripts/indentpython.vim', { 'for': 'python' }
 Plug 'PotatoesMaster/i3-vim-syntax', { 'for': 'i3' }
 Plug 'hail2u/vim-css3-syntax',       { 'for': 'css' }
-Plug 'broesler/jupyter-vim'
-" Plug 'digitaltoad/vim-pug',          { 'for': 'pug' }
-" Plug 'jlong/sass-convert.vim',       { 'for': [ 'css', 'scss', 'sass' ] }
+Plug 'plytophogy/vim-virtualenv'
+Plug 'broesler/jupyter-vim'  " TODO: test me
+Plug 'szymonmaszke/vimpyter' " TODO: test me
+
+" Web
 Plug 'mattn/emmet-vim',              { 'for': ['html','css', 'scss', 'sass'] }
-" enhance % power
+Plug 'alvan/vim-closetag',           { 'for': ['html','css', 'scss', 'sass'] }
+Plug 'jaxbot/browserlink.vim',       { 'for': ['html', 'css', 'js', 'sass', 'scss'] }
 Plug 'tmhedberg/matchit',            { 'for': ['html', 'xml'] }
 Plug 'posva/vim-vue',                { 'for': ['js'] }
-" Plug 'artur-shaik/vim-javacomplete2',{ 'for': ['java'] }
+Plug 'ap/vim-css-color'
 
-" live update css/html/js
-Plug 'jaxbot/browserlink.vim',       { 'for': ['html', 'css', 'js', 'sass', 'scss'] }
-" phpDocumentor
+" PHP
 Plug 'tobyS/pdv' ,                       { 'for': 'php' }
-Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
+Plug 'phpactor/phpactor' ,               { 'do': 'composer install', 'for': 'php'}
 Plug 'kristijanhusak/deoplete-phpactor', { 'for': 'php' }
 
-" Missing syntax
+" Javascript
 Plug 'jelera/vim-javascript-syntax', { 'for': 'js' }
 Plug 'wokalski/autocomplete-flow',   { 'for': 'js' }
 Plug 'elzr/vim-json',                { 'for': 'json' }
-"Plug 'plasticboy/vim-markdown',      { 'for': 'markdown' }
-Plug 'vim-pandoc/vim-pandoc',        { 'for': 'markdown' }
-Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': 'markdown' }
 
-" ranger integration
-Plug 'francoiscabrol/ranger.vim'
-Plug 'rbgrouleff/bclose.vim'
-Plug 'ap/vim-css-color'
+" Text files
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
-" Grammar
-Plug 'rhysd/vim-grammarous'
-Plug 'dhruvasagar/vim-table-mode'
+" ----------------------------------------------------------------------------
 
-Plug 'aperezdc/vim-template'
-Plug 'honza/vim-snippets'
-
-Plug 'diepm/vim-rest-console'
+" TODO: Test markdown plugins
+" Plug 'gabrielelana/vim-markdown'
+" Plug 'plasticboy/vim-markdown',      { 'for': 'markdown' }
+" Plug 'vim-pandoc/vim-pandoc',        { 'for': 'markdown' }
+" Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': 'markdown' }
 
 " Initialize plugin system
 call plug#end()
 
 " }}}
 
-" neovim configuration {{{
-let g:python_host_prog='/usr/bin/python2'
-let g:python3_host_prog='/usr/bin/python3'
 " }}}
 
 " Basic vim settings {{{
@@ -359,7 +371,6 @@ if has("autocmd")
 
         " Mail type
         au BufRead,BufNewFile *mutt-*      setlocal filetype=mail
-
         au BufEnter Makefile setlocal noexpandtab
 
     augroup END
@@ -370,7 +381,7 @@ if has("autocmd")
         au!
 
         " Tab settings
-        au FileType sass,pug,html setlocal
+        au FileType sass,pug,html,yaml setlocal
             \ softtabstop=2
             \ shiftwidth=2
             \ tabstop=2
@@ -397,8 +408,8 @@ if has("autocmd")
                     \ formatoptions+=taw
 
         " Mail: remove annoying trail space detection and set gutter
-        au FileType mail setlocal tw=72 listchars=tab:\ \
-
+        " fo+=aw is for mutt text_flowed option
+        au FileType mail setlocal tw=72 fo+=aw listchars=tab:\ \ 
         au FileType java setlocal omnifunc=javacomplete#Complete
 
     augroup END
@@ -447,33 +458,33 @@ end
 " Custom maps {{{
 
 " note that \ is not leader in this configuration (, is)
-" and , has been moved to ’, taking advantage of bepo (see bepoptimist plugin)
+" and , has been moved to ç, taking advantage of bepo (see bepoptimist plugin)
 
 " default leader is bad in azerty and bépo keyboards
-" bepoptimist plugin will take care of moving , and ; to < and >
+" bepoptimist plugin will take care of moving , and ; to ç and Ç
 " it's better to set the leader here than in plugins to avoid issues
 let mapleader = ","
+
+" TODO: affect some map to ",,"
 " Quick save with new leader
 " noremap <leader>, :w<CR>
 
 " Don't use Ex mode, use Q for formatting
 noremap Q gq
 
-" search word under cursor
-nnoremap \\ :%s/\<<C-r><C-w>\>/
-
+" TODO: move to a better place
 " [O]rder all css properties
 nnoremap <leader>o :<C-u>g/{/ .+1,/}/-1 sort<CR>
 
+" TODO: move to a better place
 " pretty print json
 nnoremap <leader>j :%!python -m json.tool<CR>
 
 " ranger style
+" TODO: move me, it erases built-in
 nnoremap gn :tabe<CR>
 
-" new operator pending maps
-
-" [I]nside [N]ext (
+" Operator [I]nside [N]ext (
 onoremap in( :<c-u>normal! f(vi(<cr>
 onoremap il( :<c-u>normal! F)vi(<cr>
 
@@ -492,17 +503,22 @@ xnoremap p pgvy
 noremap <BS> <PageUp>
 noremap <Space> <PageDown>
 
-" testing
-nmap yt ::!pytest<CR>
-
 " terminal escape instead of C-\ C-n
 tnoremap <C-g> <C-\><C-n>
+
+" delete in black hole (do not store in register
+nnoremap dD "_d
 
 " }}}
 
 " Plugins configuration {{{
 " -----------------------------------------------------------------------------
 let loaded_matchparen = 1
+
+" Neovim {{{
+let g:python_host_prog='/usr/bin/python2'
+let g:python3_host_prog='/usr/bin/python3'
+" }}}
 
 " Plugin Emmet {{{
 " -----------------------------------------------------------------------------
@@ -520,11 +536,13 @@ let g:ale_fixers = ['prettier', 'stylelint', 'eslint', 'autopep8', 'yapf',
 " let b:ale_linters = ['flake8', 'pylint']
 " Disable warnings about trailing whitespace for Python files.
 let b:ale_warn_about_trailing_whitespace = 0
-nmap <silent> ylt :ALEToggle<cr>
+nmap <silent> ]oa :ALEDisable<cr>
+nmap <silent> [oa :ALEEnable<cr>
+nmap <silent> yoa :ALEToggle<cr>
 nmap <silent> ylf :ALEFix<cr>
 nmap <silent> yld :ALEDetail<cr>
-nmap <silent> «l :ALEPrevious<cr>
-nmap <silent> »l :ALENext<cr>
+nmap <silent> [h :ALEPrevious<cr>
+nmap <silent> ]h :ALENext<cr>
 " }}}
 
 " Plugin vim-rooter {{{
@@ -570,6 +588,7 @@ let g:pandoc#biblio#sources = 'b'
 " }}}
 
 " Sneak {{{
+let g:sneak#label = 0
 let g:sneak#use_ic_scs = 1
 " }}}
 
@@ -591,6 +610,8 @@ let g:surround_no_mappings = 1
 
 " {{{ Deoplete
 " Use deoplete.
+let g:python_host_prog=expand('~/.virtualenvs/neovim2/bin/python')
+let g:python3_host_prog=expand('~/.virtualenvs/neovim3/bin/python')
 let g:deoplete#enable_at_startup = 1
 let g:neosnippet#enable_completed_snippet = 1 
 
@@ -618,14 +639,14 @@ call denite#custom#map(
 
 call denite#custom#map(
       \ 'insert',
-      \ '<C-p>',
+      \ '<C-t>',
       \ '<denite:move_to_previous_line>',
       \ 'noremap'
       \)
 
 call denite#custom#map(
       \ 'insert',
-      \ '<C-t>',
+      \ '<C-j>',
       \ '<denite:do_action:tabopen>',
       \ 'noremap'
       \)
@@ -641,29 +662,6 @@ call denite#custom#map(
       \ 'insert',
       \ '<C-g>',
       \ '<denite:enter_mode:normal>',
-      \ 'noremap'
-      \)
-
-" bepo mappings:
-call denite#custom#map(
-      \ 'normal',
-      \ 's',
-      \ '<denite:move_to_previous_line>',
-      \ 'noremap'
-      \)
-
-call denite#custom#map(
-      \ 'normal',
-      \ 't',
-      \ '<denite:move_to_next_line>',
-      \ 'noremap'
-      \)
-
-" move t to j
-call denite#custom#map(
-      \ 'normal',
-      \ 'j',
-      \ '<denite:do_action:tabopen>',
       \ 'noremap'
       \)
 
@@ -687,7 +685,6 @@ endif
 
 map <leader>a :DeniteProjectDir -buffer-name=grep -default-action=quickfix grep:::!<CR>
 
-" TODO: remap CTRL-i to something nice
 nnoremap <Tab> :<C-u>Denite buffer<CR>
 nnoremap <leader><Space> :<C-u>DeniteProjectDir file/rec<CR>
 nnoremap <leader>: :<C-u>Denite command_history<CR>
@@ -696,15 +693,16 @@ nnoremap <leader>f :<C-u>Denite file/rec<CR>
 " find in git files if exists
 nnoremap <leader>g :<C-u>DeniteProjectDir
     \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`<CR>
-" history
-nnoremap <leader>h :<C-u>Denite file_mru<CR>
+nnoremap <leader>u :<C-u>Denite file_mru<CR>
 nnoremap <leader>m :<C-u>Denite menu:bookmarks<CR>
 nnoremap <leader>r :<C-u>Denite register<CR>
 nnoremap <leader># :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
 nnoremap <leader>/ :<C-u>DeniteProjectDir grep:. -mode=normal<CR>
 nnoremap <leader>à :<C-u>Denite tag<CR>
+nnoremap <leader>h :<C-u>Denite file_mru<CR>
+nnoremap <leader>s :<C-u>Denite spell<CR>
 
-" Unamed register access is rarely useful, remap it
+" Unnamed register access is rarely useful, remap it
 nnoremap "" :<C-u>Denite register<CR>
 
 
@@ -729,7 +727,9 @@ let s:menus.bookmarks.file_candidates = [
     \ ['i3 status', '~/.config/i3/i3status.conf'],
     \ ['qutebrowser', '~/.config/qutebrowser/config.py'],
     \ ['kitty', '~/.config/kitty/kitty.conf'],
-    \ ['mutt', '~/.muttrc']
+    \ ['mutt', '~/.muttrc'],
+    \ ['polybar', '~/.config/polybar/config'],
+    \ ['mpd', '~/.config/mpd/mpd.conf']
 \ ]
 
 call denite#custom#var('menu', 'menus', s:menus)
@@ -791,6 +791,31 @@ nmap ga <Plug>(EasyAlign)
 
 " Gutentag {{{
 let g:gutentags_ctags_tagfile=".ctags"
+" }}}
+
+" Vimpyter {{{
+autocmd Filetype ipynb nmap <silent>yvi :VimpyterInsertPythonBlock<CR>
+autocmd Filetype ipynb nmap <silent>yvs :VimpyterStartJupyter<CR>
+autocmd Filetype ipynb nmap <silent>yvn :VimpyterStartNteract<CR>
+" }}}
+
+" vim-markdown {{{
+let g:mkdp_browser = 'qutebrowser'
+nmap ;mp <Plug>MarkdownPreviewToggle
+" }}}
+
+" Git-gutter
+set updatetime=100
+" nunmap <leader>hp
+" nunmap <leader>hs
+" nunmap <leader>hu
+
+nmap ]gh :GitGutterLineHighlightsDisable<CR>
+nmap [gh :GitGutterLineHighlightsEnable<CR>
+nmap [gh :GitGutterLineHighlightsEnable<CR>
+nmap gya <Plug>GitGutterStageHunk
+nmap gyu <Plug>GitGutterUndoHunk
+nmap gyz <Plug>GitGutterPreviewHunk
 " }}}
 
 " }}} plugins section
