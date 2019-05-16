@@ -2,6 +2,7 @@
 *.bak
 *.swp
 .cfg
+.cfg-private
 dev
 cloud/
 desktop/
