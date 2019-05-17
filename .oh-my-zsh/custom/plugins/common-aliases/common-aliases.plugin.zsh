@@ -137,7 +137,7 @@ alias youtube-quickdl="youtube-dl --audio-quality 7 --prefer-free-formats --rest
 
 # project manager
 # https://github.com/eivind88/prm
-alias pm='. ~/bin/prm/prm.sh'
+alias pm='. ~/bin/vendor/prm/prm.sh'
 alias pms='pm start '
 alias pmq='pm stop '
 alias z='zathura'
