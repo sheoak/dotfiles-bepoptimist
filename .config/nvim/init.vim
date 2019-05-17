@@ -398,7 +398,7 @@ if has("autocmd")
 
     " Special settings for passwords files {{{
     augroup fileDetectPassword
-        au BufEnter /dev/shm/*    setlocal nobackup noswapfile
+        au BufEnter /dev/shm/*    setlocal nobackup noswapfile noundofile
     augroup END
     " }}}
 
