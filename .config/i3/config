@@ -22,20 +22,21 @@ set $win Mod4
 floating_modifier $mod
 
 # leave this on top because it can be override by workspace settings
-gaps inner 0
-gaps outer 0
+gaps inner 7
+gaps outer 3
 smart_gaps on
 smart_borders on
-new_window          pixel 2
+new_window          pixel 3
 new_float           pixel 7
 hide_edge_borders   smart
 
 # for i3-gaps
-for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border pixel 3
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
-font pango:DejaVu Sans Mono 7
+# font pango:DejaVu Sans Mono 7
+font pango:Deja Vu Sans 8
 
 # ----------------------------------------------------------------------------
 # commands
@@ -53,16 +54,16 @@ set $lockalert 'xset dpms force off'
 # ----------------------------------------------------------------------------
 # workspaces
 # ----------------------------------------------------------------------------
-set $W1  "Term"
-set $W2  "Work"
-set $W3  "Social"
-set $W4  "Web"
-set $W5  "Files"
-set $W6  "Medias"
-set $W7  "Secondary"
-set $W8  "Others"
-set $W9  "Extra"
-set $W10 "Extra 2"
+set $W1  "1:Term"
+set $W2  "2:Work"
+set $W3  "3:Social"
+set $W4  "4:Web"
+set $W5  "5:Files"
+set $W6  "6:Medias"
+set $W7  "7:Secondary"
+set $W8  "8:Others"
+set $W9  "9:Extra"
+set $W10 "10:Extra 2"
 
 # set with your screen ids (xrandr)
 set $SCREEN1 eDP0
@@ -372,7 +373,7 @@ bindsym $mod+Control+s restart
 bindsym $mod+d exec "rofi -show run"
 bindsym $mod+g exec "udiskie-rofi"
 #bindsym $mod+apostrophe exec "rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}'"
-bindsym $mod+apostrophe exec "rofi -font 'Hack 10'  -width 1000 -lines 26 -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}' ; sleep 0.5; xdotool type $(xclip -o -selection clipboard)"
+# bindsym $mod+apostrophe exec "rofi -font 'Hack 10'  -width 1000 -lines 26 -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}' ; sleep 0.5; xdotool type $(xclip -o -selection clipboard)"
 bindsym $mod+Shift+apostrophe exec "greenclip clear"
 bindsym $mod+eacute exec "rofi-pass"
 bindsym $mod+Shift+eacute exec "rofi-pass --bmarks"
@@ -400,8 +401,8 @@ bindsym $mod+ccedilla bar mode toggle
 # ----------------------------------------------------------------------------
 
 # Screenshot
-bindsym XF86Display exec "scrot ~/Desktop/Screenshot%Y-%m-%d%H:%M:%S.png"
-bindsym $win+F1     exec "scrot ~/Desktop/Screenshot%Y-%m-%d%H:%M:%S.png"
+bindsym XF86Display exec "scrot ~/desktop/Screenshot%Y-%m-%d%H:%M:%S.png"
+bindsym $win+F1     exec "scrot ~/desktop/Screenshot%Y-%m-%d%H:%M:%S.png"
 
 bindsym XF86AudioRaiseVolume exec amixer -c0 -D pulse sset Master 5%+ && paplay /usr/share/sounds/freedesktop/stereo/message.oga
 bindsym XF86AudioLowerVolume exec amixer -c0 -D pulse sset Master 5%- && paplay /usr/share/sounds/freedesktop/stereo/message.oga
@@ -478,31 +479,55 @@ for_window [class="^Pidgin$" window_role="^conversation$"] resize grow width 0 p
 # ----------------------------------------------------------------------------
 # Theme
 # ----------------------------------------------------------------------------
-set $bg #282828AA
-set $red #cc241d
+# set $bg #282828AA
+set $bg #1F1F1F
+set $black #000000
+set $red #dc322f
 set $green #98971a
-set $yellow #d79921
+set $yellow #fba922
 set $blue #458588
-set $purple #b16286
+set $lightblue #268bd2
+set $purple #9f78e1
 set $aqua #689d68
-set $gray #a89984
-set $darkgray #1d2021
-
+set $gray #777777
+set $midgray #555555
+set $darkgray #333333
 set $aquat #689d68BB
 set $bluet #458588BB
 set $darkgrayt #1d2021DD
 set $yellowt #d79921BB
 set $red #cc241dBB
-set $white #FFFFFF
-
-set $transparent #282828FF
+set $white #DDDDDD
+set $whitet #DDDDDD88
+set $transparent #00000055
 
 # blue gruvbox
 # class                 border|backgr|text|indicator|child_border
-client.focused          $aquat $bluet $darkgray $bluet $yellowt
-client.focused_inactive $bluet $bluet $darkgray $darkgray $transparent
-client.unfocused        $bluet $darkgrayt $gray $darkgray $transparent
-client.urgent           $redt $redt $white $red $redt
+client.focused          $black $black $lightblue $green $yellow
+client.focused_inactive $black $black $white $darkgray $aqua
+client.unfocused        $black $darkgray $gray $darkgray $transparent
+client.urgent           $black $red $white $red $red
+# client.focused          $aquat $bluet $darkgray $bluet $yellowt
+# client.focused_inactive $bluet $bluet $darkgray $darkgray $transparent
+# client.unfocused        $bluet $darkgrayt $gray $darkgray $transparent
+# client.urgent           $redt $redt $white $red $redt
+
+# set $bg #282828AA
+# set $red #cc241d
+# set $green #98971a
+# set $yellow #d79921
+# set $blue #458588
+# set $purple #b16286
+# set $aqua #689d68
+# set $gray #a89984
+# set $darkgray #1d2021
+# set $aquat #689d68BB
+# set $bluet #458588BB
+# set $darkgrayt #1d2021DD
+# set $yellowt #d79921BB
+# set $red #cc241dBB
+# set $white #FFFFFF
+# set $transparent #282828FF
 
 # i3bar configuration
 # bar {
