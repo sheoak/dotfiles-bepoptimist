@@ -98,9 +98,9 @@ bind editor ^T complete
 # Index Key Bindings ---------------------------------
 bind index g noop
 bind pager g noop
-bind index gg first-entry
+bind index,browser gg first-entry
 bind pager gg top
-bind index G last-entry
+bind index,browser G last-entry
 bind pager G bottom
 
 # vim-bepo-typematrix-like
@@ -109,7 +109,7 @@ bind index,pager <Space> next-page
 bind index,pager <BackSpace> previous-page
 bind index,pager ^ change-folder
 #bind pager <shift><Space> tag-message
-macro index c <sync-mailbox><change-folder>?<tab> "Go to the folder menu"
+macro index t <sync-mailbox><change-folder>?<tab> "Go to the folder menu"
 
 # ----------- Appearance
 
