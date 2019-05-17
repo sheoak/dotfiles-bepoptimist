@@ -38,7 +38,7 @@ systemctl --user start dunst
 systemctl --user import-environment DISPLAY
 
 # udiskie : -T: no tray -q: quiet
-/usr/bin/udiskie -T -q --use-udisks2 &
+/usr/bin/udiskie -T -q --use-udisks2 -a &
 
 #exec i3 -d all > ~/i3.log
 exec i3
