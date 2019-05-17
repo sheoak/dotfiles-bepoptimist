@@ -74,25 +74,27 @@ config.set('hints.min_chars', 1)
 # ---------------------------------------------------------------------------
 
 # remap homerow for bépo
-config.unbind('h')
 config.unbind('j')
 config.unbind('k')
 config.unbind('l')
+config.unbind('n')
 
-config.bind('s', 'scroll up')
-config.bind('t', 'scroll down')
-config.bind('c', 'back')
-config.bind('r', 'forward')
+config.bind('r', 'scroll up')
+config.bind('s', 'scroll down')
+config.bind('t', 'scroll left')
+config.bind('n', 'scroll right')
+
+config.bind('l', 'scroll right')
+config.bind('L', 'scroll right')
 
 # left hand control, nice when using mouse
 config.bind('«', 'back')
 config.bind('»', 'forward')
+config.bind('æ', 'back')
+config.bind('€', 'forward')
 
-# remap uppercase homerow for bépo
-config.bind('C', 'scroll left')
-config.bind('R', 'scroll right')
-config.bind('S', 'scroll-page 0 -1')
-config.bind('T', 'scroll-page 0 1')
+config.bind('l', 'search-next')
+config.bind('L', 'search-prev')
 
 # we need to move the reload key
 config.bind('<Ctrl-R>', 'reload -f')
@@ -100,18 +102,16 @@ config.bind('<Ctrl-R>', 'reload -f')
 config.bind('hh', 'reload')
 
 # CARET Mode -----------------------------------------------------------------
-config.bind('s', 'move-to-prev-line', 'caret')
-config.bind('t', 'move-to-next-line', 'caret')
-config.bind('c', 'move-to-prev-char', 'caret')
-config.bind('r', 'move-to-next-char', 'caret')
+config.bind('r', 'move-to-prev-line', 'caret')
+config.bind('s', 'move-to-next-line', 'caret')
+config.bind('t', 'move-to-prev-char', 'caret')
+config.bind('n', 'move-to-next-char', 'caret')
 
-config.bind('S', 'scroll up', 'caret')
-config.bind('T', 'scroll down', 'caret')
-config.bind('C', 'scroll left', 'caret')
-config.bind('R', 'scroll right', 'caret')
+config.bind('R', 'scroll up', 'caret')
+config.bind('S', 'scroll down', 'caret')
+config.bind('T', 'scroll left', 'caret')
+config.bind('N', 'scroll right', 'caret')
 
-# move c to ç (i don’t need it)
-# config.bind('ç', 'enter-mode normal', 'caret')
 # ----------------------------------------------------------------------------
 
 # hints for bepo
