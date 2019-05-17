@@ -103,7 +103,7 @@ font-7 = Font Awesome 5 Free:style=Solid:size=7;1
 
 modules-left = i3 sepstraight mpd msmtp
 ; modules-center = xwindow
-modules-right = mail temperature sepright wireless-network openvpn bluetooth sepleft battery sepleft pulseaudio sepright clock
+modules-right = mailipc temperature sepright wireless-network openvpn bluetooth sepleft battery sepleft pulseaudio sepright clock
 
 screenchange-reload = true
 
@@ -661,6 +661,13 @@ format-padding = 0
 ; label =  %output:0:15:No mail%
 label =  %output%
 
+
+[module/mailipc]
+type=custom/ipc
+hook-0 = ~/bin/check-mail.sh
+format = <output>
+format-foreground = ${colors.accent}
+initial = 1
 
 
 [module/bluetooth]
