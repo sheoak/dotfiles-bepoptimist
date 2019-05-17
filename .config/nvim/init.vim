@@ -808,48 +808,48 @@ let g:grammarous#default_comments_only_filetypes = {
 let g:grammarous#use_vim_spelllang = 1
 
 " Memo: ß is AltGr+S ([S]pell)
-nnoremap ßß <Plug>(grammarous-fixit)
-nnoremap ßI <Plug>(grammarous-move-to-info-window)
-nnoremap ßi <Plug>(grammarous-open-info-window)
-nnoremap ßh <Plug>(grammarous-reset)
-nnoremap ßa <Plug>(grammarous-fixall)
-nnoremap ßq <Plug>(grammarous-close-info-window)
-nnoremap ßr <Plug>(grammarous-remove-error)
-nnoremap ßd <Plug>(grammarous-disable-rule)
-nnoremap ßn <Plug>(grammarous-move-to-next-error)
-nnoremap ßp <Plug>(grammarous-move-to-previous-error)
+nmap ßß <Plug>(grammarous-fixit)
+nmap ßI <Plug>(grammarous-move-to-info-window)
+nmap ßi <Plug>(grammarous-open-info-window)
+nmap ßh <Plug>(grammarous-reset)
+nmap ßa <Plug>(grammarous-fixall)
+nmap ßq <Plug>(grammarous-close-info-window)
+nmap ßr <Plug>(grammarous-remove-error)
+nmap ßd <Plug>(grammarous-disable-rule)
+nmap ßn <Plug>(grammarous-move-to-next-error)
+nmap ßp <Plug>(grammarous-move-to-previous-error)
 
-nnoremap ßc :GrammarousCheck<CR>
-vnoremap ß :GrammarousCheck<CR>
+nmap ßc :GrammarousCheck<CR>
+vmap ß :GrammarousCheck<CR>
 
-nnoremap ßf :set spelllang=fr<CR>
-nnoremap ße :set spelllang=en<CR>
+nmap ßf :set spelllang=fr<CR>
+nmap ße :set spelllang=en<CR>
 
-nnoremap ßs z=
+nmap ßs z=
 
 " insert modline at EOF
-nnoremap ßmf Govim: set spelllang=fr<Esc>:Commentary<Esc><C-o>
-nnoremap ßme Govim: set spelllang=en<Esc>:Commentary<Esc><C-o>
+nmap ßmf Govim: set spelllang=fr<Esc>:Commentary<Esc><C-o>
+nmap ßme Govim: set spelllang=en<Esc>:Commentary<Esc><C-o>
 
 omap ß <Plug>(operator-grammarous)
 " }}}
 
 " CamelCase motions {{{
 " motions
-noremap <silent> ç <Plug>CamelCaseMotion_w
-noremap <silent> Ç <Plug>CamelCaseMotion_b
-noremap <silent> gç <Plug>CamelCaseMotion_e
-noremap <silent> gÇ <Plug>CamelCaseMotion_ge
-vnoremap <silent> ç <Plug>CamelCaseMotion_w
-vnoremap <silent> Ç <Plug>CamelCaseMotion_b
-vnoremap <silent> gç <Plug>CamelCaseMotion_e
-vnoremap <silent> gÇ <Plug>CamelCaseMotion_ge
+nmap <silent> ç <Plug>CamelCaseMotion_w
+nmap <silent> Ç <Plug>CamelCaseMotion_b
+nmap <silent> gç <Plug>CamelCaseMotion_e
+nmap <silent> gÇ <Plug>CamelCaseMotion_ge
+vmap <silent> ç <Plug>CamelCaseMotion_w
+vmap <silent> Ç <Plug>CamelCaseMotion_b
+vmap <silent> gç <Plug>CamelCaseMotion_e
+vmap <silent> gÇ <Plug>CamelCaseMotion_ge
 
 " text-objects {{{
-onoremap <silent> aç <Plug>CamelCaseMotion_iw
-xnoremap <silent> aç <Plug>CamelCaseMotion_iw
-onoremap <silent> iç <Plug>CamelCaseMotion_ib
-xnoremap <silent> iç <Plug>CamelCaseMotion_ib
+omap <silent> aç <Plug>CamelCaseMotion_iw
+xmap <silent> aç <Plug>CamelCaseMotion_iw
+omap <silent> iç <Plug>CamelCaseMotion_ib
+xmap <silent> iç <Plug>CamelCaseMotion_ib
 " }}}
 
 " vim-indentwise {{{
