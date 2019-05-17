@@ -311,15 +311,15 @@ config.bind('dY', 'spawn ' + yt_download_mp3_cmd
 c.content.user_stylesheets.append('user.css')
 
 # fonts configuration
-c.fonts.monospace = '12px Deja Vu Sans Mono'
+c.fonts.monospace = '10px Hack'
 c.fonts.prompts = '10px'
 c.fonts.messages.error = '10px Hack'
 c.fonts.messages.info = '10px'
 c.fonts.messages.warning = '10px'
 c.fonts.hints = '10px Hack'
-c.fonts.statusbar = '11px Hack'
-c.fonts.completion.entry = '10px Hack'
-c.fonts.completion.category = '10px'
+c.fonts.statusbar = '14px Hack'
+c.fonts.completion.entry = '14px Hack'
+c.fonts.completion.category = '14px'
 c.fonts.downloads = '10px'
 c.hints.border = '1px solid'
 
