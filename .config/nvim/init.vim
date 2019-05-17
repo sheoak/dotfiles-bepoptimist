@@ -53,7 +53,6 @@ call plug#begin(s:plug_path)
 " TODO: update documentation
 " ----------------------------------------------------------------------------
 Plug 'sheoak/vim-bepoptimist'   " Bepo keymap
-
 " }}}
 
 " Themes {{{
@@ -61,7 +60,6 @@ Plug 'sheoak/vim-bepoptimist'   " Bepo keymap
 Plug 'iCyMind/NeoSolarized'
 Plug 'morhetz/gruvbox'
 Plug 'flazz/vim-colorschemes'
-
 " }}}
 
 " Shougo plugin suite {{{
@@ -80,7 +78,6 @@ endif
 Plug 'Shougo/neomru.vim'
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
-
 " }}}
 
 " All languages plugins {{{
@@ -95,7 +92,10 @@ Plug 'tpope/vim-commentary'            " Quick comment
 Plug 'tpope/vim-unimpaired'            " Pairing mapping
 Plug 'justinmk/vim-sneak'              " Multiline f/F/t/T
 Plug 'wellle/targets.vim'              " Additionnal text objects: cin) or da,…
+Plug 'bkad/CamelCaseMotion'            " Additionnal CamelCase motions
 Plug 'michaeljsmith/vim-indent-object' " Indentation text objects
+Plug 'jeetsukumaran/vim-indentwise'    " Motion for indentations
+Plug 'jeetsukumaran/vim-pythonsense'   " Additionnal python text-objects
 Plug 'junegunn/goyo.vim'               " Minimalist interface on demand
 Plug 'dmerejkowsky/vim-ale'            " Async Linter
 Plug 'sjl/gundo.vim'                   " More undo
@@ -107,7 +107,9 @@ Plug 'fboender/bexec'                  " Execute current script
 Plug 'vim-vdebug/vdebug'               " Interactive debugger
 Plug 'tpope/vim-fugitive'              " Git integration
 Plug 'airblade/vim-gitgutter'          " Git gutter on the left
+Plug 'rbgrouleff/bclose.vim'           " Ranger plugin dependency
 Plug 'francoiscabrol/ranger.vim'       " Ranger integration
+Plug 'kana/vim-operator-user'          " Grammarous dep
 Plug 'rhysd/vim-grammarous'            " Grammar check
 Plug 'aperezdc/vim-template'           " Auto-template when opening new file
 Plug 'honza/vim-snippets'              " Snippets for different languages
@@ -128,11 +130,11 @@ Plug 'broesler/jupyter-vim'  " TODO: test me
 Plug 'szymonmaszke/vimpyter' " TODO: test me
 
 " Web
-Plug 'mattn/emmet-vim',              { 'for': ['html','css', 'scss', 'sass'] }
-Plug 'alvan/vim-closetag',           { 'for': ['html','css', 'scss', 'sass'] }
-Plug 'jaxbot/browserlink.vim',       { 'for': ['html', 'css', 'js', 'sass', 'scss'] }
-Plug 'tmhedberg/matchit',            { 'for': ['html', 'xml'] }
-Plug 'posva/vim-vue',                { 'for': ['js'] }
+Plug 'mattn/emmet-vim',        { 'for': ['html','css', 'scss', 'sass'] }
+Plug 'alvan/vim-closetag',     { 'for': ['html','css', 'scss', 'sass'] }
+Plug 'jaxbot/browserlink.vim', { 'for': ['html', 'css', 'js', 'sass', 'scss'] }
+Plug 'tmhedberg/matchit',      { 'for': ['html', 'xml'] }
+Plug 'posva/vim-vue',          { 'for': ['js'] }
 Plug 'ap/vim-css-color'
 
 " PHP
@@ -147,25 +149,15 @@ Plug 'elzr/vim-json',                { 'for': 'json' }
 
 " Text files
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
-
-" ----------------------------------------------------------------------------
-
-" TODO: Test markdown plugins
-" Plug 'gabrielelana/vim-markdown'
-" Plug 'plasticboy/vim-markdown',      { 'for': 'markdown' }
-" Plug 'vim-pandoc/vim-pandoc',        { 'for': 'markdown' }
-" Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': 'markdown' }
+" }}}
 
 " Initialize plugin system
 call plug#end()
 
 " }}}
 
-" }}}
-
 " Basic vim settings {{{
 " -----------------------------------------------------------------------------
-
 set hidden                     " no alert if current buffer has not been saved
 set modeline                   " enable modelines comments
 set modelines=1
@@ -175,9 +167,7 @@ set visualbell                 " no sounds
 set noerrorbells
 set shell=zsh                  " shell zsh by default
 
-" }}}
-
-" Backup / history / undo {{{
+" History / undo {{{
 " -----------------------------------------------------------------------------
 set history=500                " keep 500 lines of command line history
 set backup
@@ -193,10 +183,8 @@ set sessionoptions-=options     " do not save options
 set viminfo^=!                  " keep some vim history after closing
 set viminfo+=n~/.vim/viminfo
 
-
 " Persistent Undo
 " Keep undo history across sessions, by storing in file.
-" -----------------------------------------------------------------------------
 if has('persistent_undo')
     set undodir=$HOME/.local/share/nvim/undo//,$HOME/.backups/undo//,/tmp/undo//
     set undofile
@@ -205,28 +193,21 @@ endif
 
 " Editing {{{
 " -----------------------------------------------------------------------------
-set complete-=i                       " scan current and included files
+set complete-=i                      " scan current and included files
 set ttimeout
-set ttimeoutlen=100                   " time waited before end of sequence
-set autoread                          " detect file changed outside of vim
-set tabstop=4                         " number of visual spaces per TAB
-set softtabstop=4                     " number of spaces in tab when editing
+set ttimeoutlen=100                  " time waited before end of sequence
+set autoread                         " detect file changed outside of vim
+set tabstop=4                        " number of visual spaces per TAB
+set softtabstop=4                    " number of spaces in tab when editing
 set shiftwidth=4
-set expandtab                         " tabs are spaces
-set listchars=nbsp:·,trail:¤,tab:\ \  " show invisible nbsp/tabs spaces
+set expandtab                        " tabs are spaces
+set listchars=nbsp:·,trail:¤,tab:\ \ " show invisible nbsp/tabs spaces
 set list
-set backspace=indent,eol,start        " allow all backspacing in insert mode
-
-set showmatch                   " when inserting a bracket, briefly jump to
-                                " its match
-
-set nojoinspaces                " Use only one space after '.' when joining
-                                " lines, instead of two
-
-set nrformats-=octal            " don't treat numbers with leading zeros as
-                                " octal when incrementing/decrementing
-
-set diffopt+=vertical           " start diff mode with vert. splits by default
+set backspace=indent,eol,start       " allow all backspacing in insert mode
+set showmatch                        " briefly jump to matching bracket
+set nojoinspaces                     " only one space when joining lines
+set nrformats-=octal                 " numbers with leading zeros are not octal
+set diffopt+=vertical                " start diff mode with vert. splits
 
  " yank to the system clipboard by default
 if has('unnamedplus')
@@ -476,17 +457,9 @@ noremap Q gq
 " [O]rder all css properties
 nnoremap <leader>o :<C-u>g/{/ .+1,/}/-1 sort<CR>
 
-" TODO: move to a better place
-" pretty print json
-nnoremap <leader>j :%!python -m json.tool<CR>
-
 " ranger style
 " TODO: move me, it erases built-in
 nnoremap gn :tabe<CR>
-
-" Operator [I]nside [N]ext (
-onoremap in( :<c-u>normal! f(vi(<cr>
-onoremap il( :<c-u>normal! F)vi(<cr>
 
 " Rewrite some vim maps in insert mode, not that usefull anyway:
 inoremap <C-j> <C-x><C-]>
@@ -507,7 +480,8 @@ noremap <Space> <PageDown>
 tnoremap <C-g> <C-\><C-n>
 
 " delete in black hole (do not store in register
-nnoremap dD "_d
+" (ð is altGr+d)
+nnoremap ð "_d
 
 " }}}
 
@@ -536,13 +510,13 @@ let g:ale_fixers = ['prettier', 'stylelint', 'eslint', 'autopep8', 'yapf',
 " let b:ale_linters = ['flake8', 'pylint']
 " Disable warnings about trailing whitespace for Python files.
 let b:ale_warn_about_trailing_whitespace = 0
-nmap <silent> ]oa :ALEDisable<cr>
-nmap <silent> [oa :ALEEnable<cr>
-nmap <silent> yoa :ALEToggle<cr>
-nmap <silent> ylf :ALEFix<cr>
-nmap <silent> yld :ALEDetail<cr>
-nmap <silent> [h :ALEPrevious<cr>
-nmap <silent> ]h :ALENext<cr>
+nnoremap <silent> ]oa :ALEDisable<cr>
+nnoremap <silent> [oa :ALEEnable<cr>
+nnoremap <silent> yoa :ALEToggle<cr>
+nnoremap <silent> ylf :ALEFix<cr>
+nnoremap <silent> yld :ALEDetail<cr>
+nnoremap <silent> [h :ALEPrevious<cr>
+nnoremap <silent> ]h :ALENext<cr>
 " }}}
 
 " Plugin vim-rooter {{{
@@ -598,11 +572,10 @@ let g:gundo_prefer_python3 = 1
 
 " Bepoptimist {{{
 let g:bim_map_fugitive     = 1
-
-" switch : and . — it might feels strange at first but it was huge improvement
-" for me. Sadly it’s not compatible with vim-repeat for now so I disabled it
+" switch : and .
+" doesn't work: vim-repeat ends up remapping it sometimes
 " let g:bim_switch_command   = 1
-"
+" nmap : <Plug>(RepeatDot)
 " we need to tell surround that Bepoptimist is going to map it
 " and this need to happens in init.vim before surround is loaded
 let g:surround_no_mappings = 1
@@ -684,14 +657,18 @@ if (executable('ag'))
 endif
 
 map <leader>a :DeniteProjectDir -buffer-name=grep -default-action=quickfix grep:::!<CR>
+map <leader>A :DeniteProjectDir -buffer-name=grep -default-action=quickfix grep:::!<CR>
 
 nnoremap <Tab> :<C-u>Denite buffer<CR>
 nnoremap <leader><Space> :<C-u>DeniteProjectDir file/rec<CR>
 nnoremap <leader>: :<C-u>Denite command_history<CR>
 nnoremap <leader>d :<C-u>Denite directory_mru<CR>
-nnoremap <leader>f :<C-u>Denite file/rec<CR>
+nnoremap <leader>f :<C-u>DeniteProjectDir file/rec<CR>
+nnoremap <leader>F :<C-u>DeniteBufferDir file/rec<CR>
 " find in git files if exists
 nnoremap <leader>g :<C-u>DeniteProjectDir
+    \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`<CR>
+nnoremap <leader>G :<C-u>DeniteBufferDir
     \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`<CR>
 nnoremap <leader>u :<C-u>Denite file_mru<CR>
 nnoremap <leader>m :<C-u>Denite menu:bookmarks<CR>
@@ -701,10 +678,7 @@ nnoremap <leader>/ :<C-u>DeniteProjectDir grep:. -mode=normal<CR>
 nnoremap <leader>à :<C-u>Denite tag<CR>
 nnoremap <leader>h :<C-u>Denite file_mru<CR>
 nnoremap <leader>s :<C-u>Denite spell<CR>
-
-" Unnamed register access is rarely useful, remap it
-nnoremap "" :<C-u>Denite register<CR>
-
+nnoremap <leader>S :<C-u>Denite grammarous<CR>
 
 " Add custom menus
 " TODO: a bookmark plugin for denite would be better
@@ -736,31 +710,30 @@ call denite#custom#var('menu', 'menus', s:menus)
 
 " }}}
 
-" goyo {{{
+" Goyo {{{
+" TODO: create unimpaired mappings
 let g:goyo_height='90%'
 let g:goyo_width=80
 let g:goyo_linenr=1
 " }}}
 
-" ranger {{{
+" Ranger {{{
 let g:ranger_map_keys = 0
-" open ranger when vim open a directory
-let g:ranger_replace_netrw = 1
+let g:ranger_replace_netrw = 1 " open ranger when vim open a directory
 
-nnoremap ,E :Ranger<CR>
 nnoremap ,e :RangerWorkingDirectory<CR>
-nnoremap <C-n> :RangerWorkingDirectory<CR>
+nnoremap ,E :RangerCurrentFile<CR>
 " }}}
 
 " Neosnippets {{{
 " Plugin key-mappings.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+" Note: It must be "imap" and "smap"
 imap <C-space>     <Plug>(neosnippet_expand_or_jump)
 smap <C-space>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-space>     <Plug>(neosnippet_expand_target)
 
 " SuperTab like snippets behavior.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+" Note: It must be "imap" and "smap"
 imap <expr><TAB>
  \ pumvisible() ? "\<C-n>" :
  \ neosnippet#expandable_or_jumpable() ?
@@ -782,11 +755,7 @@ let g:neosnippet#scope_aliases['python'] = 'python,django'
 " }}}
 
 " EasyAlign {{{
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
+" Defined in bepoptimist
 " }}}
 
 " Gutentag {{{
@@ -794,28 +763,107 @@ let g:gutentags_ctags_tagfile=".ctags"
 " }}}
 
 " Vimpyter {{{
-autocmd Filetype ipynb nmap <silent>yvi :VimpyterInsertPythonBlock<CR>
-autocmd Filetype ipynb nmap <silent>yvs :VimpyterStartJupyter<CR>
-autocmd Filetype ipynb nmap <silent>yvn :VimpyterStartNteract<CR>
+" TODO: move to unimpaired ]o [o
+autocmd Filetype ipynb nnoremap <silent>yvi :VimpyterInsertPythonBlock<CR>
+autocmd Filetype ipynb nnoremap <silent>yvs :VimpyterStartJupyter<CR>
+autocmd Filetype ipynb nnoremap <silent>yvn :VimpyterStartNteract<CR>
 " }}}
 
 " vim-markdown {{{
 let g:mkdp_browser = 'qutebrowser'
-nmap ;mp <Plug>MarkdownPreviewToggle
+
+nmap [om <Plug>MarkdownPreview
+nmap ]om <Plug>MarkdownPreviewStop
+nmap yom <Plug>MarkdownPreviewToggle
 " }}}
 
-" Git-gutter
+" Git-gutter {{{
 set updatetime=100
-" nunmap <leader>hp
-" nunmap <leader>hs
-" nunmap <leader>hu
 
-nmap ]gh :GitGutterLineHighlightsDisable<CR>
-nmap [gh :GitGutterLineHighlightsEnable<CR>
-nmap [gh :GitGutterLineHighlightsEnable<CR>
+nmap ]og :GitGutterLineHighlightsDisable<CR>
+nmap [og :GitGutterLineHighlightsEnable<CR>
+nmap yog :GitGutterLineHighlightsToggle<CR>
 nmap gya <Plug>GitGutterStageHunk
 nmap gyu <Plug>GitGutterUndoHunk
 nmap gyz <Plug>GitGutterPreviewHunk
 " }}}
 
+" Table-mode {{{
+nnoremap ]ot :TableModeEnable<CR>
+nnoremap [ot :TableModeDisable<CR>
+nnoremap yot :TableModeToggle<CR>
+
+" Memo: þ is AltGr+T ([T]able)
+nnoremap þþ :TableModeToggle<CR>
+nnoremap þs :TableModeSort<CR>
+vnoremap þt :Tableize<CR>
+nnoremap þf :TableModeAddFormula<CR>
+nnoremap þe :TableModeEvalFormulaLine<CR>
+" }}}
+
+" Grammarous {{{
+let g:grammarous#default_comments_only_filetypes = {
+            \ '*' : 1, 'help' : 0, 'markdown' : 0, 'text' : 0
+            \ }
+let g:grammarous#use_vim_spelllang = 1
+
+" Memo: ß is AltGr+S ([S]pell)
+nnoremap ßß <Plug>(grammarous-fixit)
+nnoremap ßI <Plug>(grammarous-move-to-info-window)
+nnoremap ßi <Plug>(grammarous-open-info-window)
+nnoremap ßh <Plug>(grammarous-reset)
+nnoremap ßa <Plug>(grammarous-fixall)
+nnoremap ßq <Plug>(grammarous-close-info-window)
+nnoremap ßr <Plug>(grammarous-remove-error)
+nnoremap ßd <Plug>(grammarous-disable-rule)
+nnoremap ßn <Plug>(grammarous-move-to-next-error)
+nnoremap ßp <Plug>(grammarous-move-to-previous-error)
+
+nnoremap ßc :GrammarousCheck<CR>
+vnoremap ß :GrammarousCheck<CR>
+
+nnoremap ßf :set spelllang=fr<CR>
+nnoremap ße :set spelllang=en<CR>
+
+nnoremap ßs z=
+
+" insert modline at EOF
+nnoremap ßmf Govim: set spelllang=fr<Esc>:Commentary<Esc><C-o>
+nnoremap ßme Govim: set spelllang=en<Esc>:Commentary<Esc><C-o>
+
+omap ß <Plug>(operator-grammarous)
+" }}}
+
+" CamelCase motions {{{
+" motions
+noremap <silent> ç <Plug>CamelCaseMotion_w
+noremap <silent> Ç <Plug>CamelCaseMotion_b
+noremap <silent> gç <Plug>CamelCaseMotion_e
+noremap <silent> gÇ <Plug>CamelCaseMotion_ge
+vnoremap <silent> ç <Plug>CamelCaseMotion_w
+vnoremap <silent> Ç <Plug>CamelCaseMotion_b
+vnoremap <silent> gç <Plug>CamelCaseMotion_e
+vnoremap <silent> gÇ <Plug>CamelCaseMotion_ge
+
+" text-objects {{{
+onoremap <silent> aç <Plug>CamelCaseMotion_iw
+xnoremap <silent> aç <Plug>CamelCaseMotion_iw
+onoremap <silent> iç <Plug>CamelCaseMotion_ib
+xnoremap <silent> iç <Plug>CamelCaseMotion_ib
+" }}}
+
+" vim-indentwise {{{
+" map [- <Plug>(IndentWisePreviousLesserIndent)
+" map [= <Plug>(IndentWisePreviousEqualIndent)
+" map [> <Plug>(IndentWisePreviousGreaterIndent)
+" map ]- <Plug>(IndentWiseNextLesserIndent)
+" map ]= <Plug>(IndentWiseNextEqualIndent)
+" map ]+ <Plug>(IndentWiseNextGreaterIndent)
+" map [_ <Plug>(IndentWisePreviousAbsoluteIndent)
+" map ]_ <Plug>(IndentWiseNextAbsoluteIndent)
+" map [% <Plug>(IndentWiseBlockScopeBoundaryBegin)
+" map ]% <Plug>(IndentWiseBlockScopeBoundaryEnd)
+" }}}
+
 " }}} plugins section
+
