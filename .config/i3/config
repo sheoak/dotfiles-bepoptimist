@@ -454,7 +454,8 @@ bindsym $win+z exec zathura
 # ncmpcpp ([l]ecteur)
 # you can move to a more logical key for you langage, like [J]ukebox
 # TODO: open if not openned yet
-bindsym $win+shift+n workspace $w6; exec $termDetached -o font_size=12 sh -c "i3-msg mark ncmpcpp && ncmpcpp"
+set $ncmpcpp ncmpcpp -c ~/.config/ncmpcpp/config-private
+bindsym $win+shift+n workspace $w6; exec $termDetached -o font_size=12 sh -c "i3-msg mark ncmpcpp && $ncmpcpp"
 bindsym $win+n       exec i3-msg '[con_mark="ncmpcpp"] focus'
 
 # ranger ([F]iles
