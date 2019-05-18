@@ -1,0 +1,5 @@
+*MONITOR: eDP-1
+*EXT_MONITOR: HDMI-1
+
+i3wm*MOD Mod1
+i3wm*WIN Mod4

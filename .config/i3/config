@@ -1,26 +1,28 @@
 # i3 config file for french bépo keyboard
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 #
+# The homerow is tsrn (not ctsr)
+# Which is how all the apps from my repo are configured, including vim
+# This makes more sense when having to remap it all anyway.
+#
 # Include
 # - virtualbox mode for Internet Explorer testing, to configure
 # - dual screen configuration
 #
 # Maintainer: Sheoak <dev@sheoak.fr>
-# v0.1.1
-#
-# Free keys:
-# win+ all keys but F7-9
+# v0.2
 
 # ----------------------------------------------------------------------------
 # I3 settings
 # ----------------------------------------------------------------------------
 
-# i3 modifiers
-set $mod Mod1
-set $win Mod4
+# read settings from .Xresources for local settings
+set_from_resource $MONITOR MONITOR eDP-1
+set_from_resource $mod i3wm.MOD Mod1
+set_from_resource $win i3wm.WIN Mod4
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
-
 # leave this on top because it can be override by workspace settings
 gaps inner 7
 gaps outer 3
@@ -32,6 +34,8 @@ hide_edge_borders   smart
 
 # for i3-gaps
 for_window [class="^.*"] border pixel 3
+
+for_window [class=".*"] title_format "  %title  "
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
@@ -263,7 +267,6 @@ mode "$mode_system" {
     bindsym o exec --no-startup-id i3-msg exit, mode "default"
     bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    #bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
     bindsym p exec --no-startup-id  systemctl poweroff -i, mode "default"
 
     # back to normal: Enter or Escape
@@ -282,7 +285,6 @@ exec xautolock -time $autolock -locker $Locker -notify 20 -notifier $lockalert &
 set $mode_screen  [E]nable    [D]isable    [A]ctivate
 
 # Screensaver mode [E]nergy
-bindsym $mod+Control+e mode "$mode_screen"
 # Bepoptimist-style shortcut (è for screen)
 bindsym $mod+egrave mode "$mode_screen"
 
@@ -381,20 +383,16 @@ bindsym $mod+Control+eacute exec "rofi-pass --last-used"
 # wifi with rofi, executable must be in path
 bindsym $mod+Control+d  exec rofi-wifi-menu
 bindsym $mod+w  exec rofi-wifi-menu
-
 # xrandr script for rofi
 bindsym $mod+x  exec rofi-xrandr
-
 # with ssh, commands
 bindsym $mod+Shift+d exec "rofi -combi-modi ssh,run -show combi -modi combi"
 # search web from rofi
 # bindsym $mod+Control+d exec echo "" | rofi -dmenu -p "Search" -lines 0 | xargs -I{} qutebrowser \{\}
 # window search with rofi, larger for window titles
 bindsym $mod+Tab exec "rofi -width 80 -combi-modi ,window -show combi -modi combi"
-
 # toggle i3bar
 bindsym $mod+ccedilla bar mode toggle
-
 
 # ----------------------------------------------------------------------------
 # Shortcuts: Multimedia keys
@@ -502,56 +500,31 @@ set $white #DDDDDD
 set $whitet #DDDDDD88
 set $transparent #00000055
 
-# blue gruvbox
 # class                 border|backgr|text|indicator|child_border
 client.focused          $black $black $lightblue $green $yellow
 client.focused_inactive $black $black $white $darkgray $aqua
 client.unfocused        $black $darkgray $gray $darkgray $transparent
 client.urgent           $black $red $white $red $red
-# client.focused          $aquat $bluet $darkgray $bluet $yellowt
-# client.focused_inactive $bluet $bluet $darkgray $darkgray $transparent
-# client.unfocused        $bluet $darkgrayt $gray $darkgray $transparent
-# client.urgent           $redt $redt $white $red $redt
 
-# set $bg #282828AA
-# set $red #cc241d
-# set $green #98971a
-# set $yellow #d79921
-# set $blue #458588
-# set $purple #b16286
-# set $aqua #689d68
-# set $gray #a89984
-# set $darkgray #1d2021
-# set $aquat #689d68BB
-# set $bluet #458588BB
-# set $darkgrayt #1d2021DD
-# set $yellowt #d79921BB
-# set $red #cc241dBB
-# set $white #FFFFFF
-# set $transparent #282828FF
+exec_always --no-startup-id polybar-launch.sh
 
+# Disabled: using polybar
 # i3bar configuration
 # bar {
 #     position bottom
 #     strip_workspace_numbers yes
 #     font pango:DejaVu Sans Mono, FontAwesome 7
 #     separator_symbol "⋆"
-
 #     height 18
-
 #     # status_command i3status --config ~/.config/i3/i3status.conf
 #     # i3bar_command i3bar -t
 #     # i3bar_command $HOME/bin/polybar-launch.sh
-
 #     # statusbar colors      border    background  text
 #     colors {
-
 #         # bar background color
 #         background $transparent
-
 #         # text color used for blocks that do not have a color specified.
 #         statusline $gray
-
 #         # workspaces section
 #         #                    border     backgr.     text
 #         focused_workspace    $bluet     $bluet      $darkgray
@@ -560,5 +533,3 @@ client.urgent           $black $red $white $red $red
 #         urgent_workspace     $yellow    $yellow     $bg
 #     }
 # }
-
-exec_always --no-startup-id /home/sheoak/bin/polybar-launch.sh
