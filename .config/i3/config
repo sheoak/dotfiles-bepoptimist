@@ -17,43 +17,58 @@
 # ----------------------------------------------------------------------------
 
 # read settings from .Xresources for local settings
-set_from_resource $MONITOR MONITOR eDP-1
-set_from_resource $mod i3wm.MOD Mod1
-set_from_resource $win i3wm.WIN Mod4
+# this makes the i3 configuration file generic
+set_from_resource $mod i3wm.mod Mod1
+set_from_resource $win i3wm.win Mod4
+set_from_resource $font i3wm.font pango:Deja Vu Sans 7
+set_from_resource $innergap i3wn.innergap 7
+set_from_resource $outergap i3wn.outergap 3
+set_from_resource $border i3wn.outergap 3
+set_from_resource $borderfloat i3wn.outergap 7
+set_from_resource $monitor monitor eDP-1
+set_from_resource $monitorext monitorext HDMI-1
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 # leave this on top because it can be override by workspace settings
-gaps inner 7
-gaps outer 3
+gaps inner $innergap
+gaps outer $outergap
 smart_gaps on
 smart_borders on
-new_window          pixel 3
-new_float           pixel 7
+new_window          pixel $border
+new_float           pixel $borderfloat
 hide_edge_borders   smart
 
 # for i3-gaps
-for_window [class="^.*"] border pixel 3
-
+for_window [class="^.*"] border pixel $border
 for_window [class=".*"] title_format "  %title  "
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
-# font pango:DejaVu Sans Mono 7
-font pango:Deja Vu Sans 8
+font $font
+
+# autolock timer in minutes
+set $autolock 15
 
 # ----------------------------------------------------------------------------
 # commands
 # ----------------------------------------------------------------------------
 set $termDetached kitty
 set $term kitty --single-instance 
-# set $termDetached urxvtc
-# set $term urxvt
-
-# autolock timer in minutes
-set $autolock 15
-#set $lockalert "notify-send -u critical -t 10000 -- 'Locking screen in 10 seconds'"
+set $ncmpcpp ncmpcpp -c ~/.config/ncmpcpp/config-private
 set $lockalert 'xset dpms force off'
+set $Locker i3lock -c 000000
+
+# ----------------------------------------------------------------------------
+# modes
+# ----------------------------------------------------------------------------
+set $mode_system  [L]ock     Log[o]ut     [S]uspend     [R]eboot     [P]oweroff
+set $mode_resize  Mode resize
+set $mode_virtualbox   [w]indows     [u]buntu
+set $mode_screen  [E]nable    [D]isable    [A]ctivate
+set $mode_gaps Inner Gaps: +|-|r Outer Gaps: «|»|R (local)
+set $mode_gaps_all Inner Gaps: +|-|r Outer Gaps: «|»|R (global)
+set $mode_mpc MPC: [p] play/pause, [u] update, [f/r] forward, [b/B] backward, [n/N] next/previous
 
 # ----------------------------------------------------------------------------
 # workspaces
@@ -69,41 +84,32 @@ set $W8  "8:Others"
 set $W9  "9:Extra"
 set $W10 "10:Extra 2"
 
-# set with your screen ids (xrandr)
-set $SCREEN1 eDP0
-# set $SCREEN2 HDMI1
-set $SCREEN2 HDMI-1
-
 # ----------------------------------------------------------------------------
 # Workspaces
 # ----------------------------------------------------------------------------
 
 # first monitor workspaces
-workspace $W1 output $SCREEN1
-workspace $W2 output $SCREEN1
-workspace $W3 output $SCREEN1
-workspace $W4 output $SCREEN1
-workspace $W5 output $SCREEN1
-workspace $W6 output $SCREEN1
+workspace $W1 output $monitor
+workspace $W2 output $monitor
+workspace $W3 output $monitor
+workspace $W4 output $monitor
+workspace $W5 output $monitor
+workspace $W6 output $monitor
 
 # second monitor
-workspace $W7  output $SCREEN2
-workspace $W8  output $SCREEN2
-workspace $W9  output $SCREEN2
-workspace $W10 output $SCREEN2
-
-# small gap for social
-workspace $W3 gaps inner 10
-workspace $W3 gaps outer 0
+workspace $W7  output $monitorext
+workspace $W8  output $monitorext
+workspace $W9  output $monitorext
+workspace $W10 output $monitorext
 
 # no gap for browser and workspace
-workspace $W2 gaps inner 0
-workspace $W2 gaps outer 0
-workspace $W4 gaps inner 0
-workspace $W4 gaps outer 0
+# workspace $W2 gaps inner 0
+# workspace $W2 gaps outer 0
+# workspace $W4 gaps inner 0
+# workspace $W4 gaps outer 0
 
 # default workspace, to avoid "1" by default
-exec --no-startup-id i3-msg "workspace $W1"
+# exec --no-startup-id i3-msg "workspace $W1"
 
 # switch to workspace
 bindsym $mod+a        workspace $W1
@@ -166,34 +172,19 @@ bindsym $mod+Shift+v     layout stacking
 bindsym $mod+Shift+h     layout tabbed
 bindsym $mod+Shift+g     layout toggle split
 
-# enter fullscreen mode for the focused container
-# TODO: mnemotechnic?
 bindsym $mod+f fullscreen
-
-# focus the parent/child container
 bindsym $mod+p focus parent
 bindsym $mod+c focus child
-
-# Make the currently focused window a scratchpad
 bindsym $mod+Control+space move scratchpad
-
-# toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
-
-# Show the first scratchpad window
 bindsym $mod+space scratchpad show
-
-# kill focused window
 bindsym $mod+BackSpace kill
 bindsym $mod+q kill
 
 # ----------------------------------------------------------------------------
 # Resi[z]e window mode
 # ----------------------------------------------------------------------------
-
-set $mode_resize  Mode resize
 bindsym $mod+z mode "$mode_resize"
-
 mode "$mode_resize" {
     # These bindings trigger as soon as you enter the resize mode
     bindsym t        resize shrink width  10 px or 10 ppt
@@ -239,9 +230,7 @@ bindsym --whole-window button11 workspace next
 # ----------------------------------------------------------------------------
 # Virtualbox mode : run vms with different IE versions
 # ----------------------------------------------------------------------------
-set $mode_virtualbox   ·     [w]indows       [u]buntu     ·
 bindsym $mod+Control+v mode "$mode_virtualbox"
-
 mode "$mode_virtualbox" {
     bindsym w exec VBoxSDL -startvm "Windows";mode "default"
     bindsym u exec VBoxSDL -startvm "Ubuntu";mode "default"
@@ -256,19 +245,14 @@ mode "$mode_virtualbox" {
 # $mod+Control shortcuts are use for system/i3 calls
 # ----------------------------------------------------------------------------
 
-set $Locker i3lock -c 000000
-set $mode_system  [L]ock     Log[o]ut     [S]uspend     [R]eboot     [P]oweroff
-
 bindsym $mod+Control+BackSpace mode "$mode_system"
 bindsym XF86PowerOff           mode "$mode_system"
-
 mode "$mode_system" {
     bindsym l exec --no-startup-id $Locker, mode "default"
     bindsym o exec --no-startup-id i3-msg exit, mode "default"
     bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym p exec --no-startup-id  systemctl poweroff -i, mode "default"
-
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -281,19 +265,13 @@ exec xautolock -time $autolock -locker $Locker -notify 20 -notifier $lockalert &
 
 # ----------------------------------------------------------------------------
 # Screensaver mode
-# ----------------------------------------------------------------------------
-set $mode_screen  [E]nable    [D]isable    [A]ctivate
-
-# Screensaver mode [E]nergy
 # Bepoptimist-style shortcut (è for screen)
+# ----------------------------------------------------------------------------
 bindsym $mod+egrave mode "$mode_screen"
-
 mode "$mode_screen" {
-
     bindsym e exec --no-startup-id xset s on +dpms, mode "default"
     bindsym d exec --no-startup-id xset s off -dpms, mode "default"
     bindsym a exec --no-startup-id sleep 1 && xset dpms force off, mode "default"
-
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -302,36 +280,26 @@ mode "$mode_screen" {
 # ----------------------------------------------------------------------------
 # Gaps mode
 # ----------------------------------------------------------------------------
-set $mode_gaps Inner Gaps: +|-|r Outer Gaps: «|»|R (local)
 bindsym $mod+j mode "$mode_gaps"
-
 mode "$mode_gaps" {
-
         bindsym guillemotleft  gaps inner current minus 5
         bindsym guillemotright gaps inner current plus 5
         bindsym r              gaps inner current set 0
-
         bindsym plus    gaps outer current plus 5
         bindsym minus   gaps outer current minus 5
         bindsym Shift+r gaps outer current set 0
-
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
 
-set $mode_gaps_all Inner Gaps: +|-|r Outer Gaps: «|»|R (global)
 bindsym $mod+shift+j mode "$mode_gaps_all"
-
 mode "$mode_gaps_all" {
-
         bindsym Shift+guillemotright gaps inner all plus 5
         bindsym Shift+guillemotleft  gaps inner all minus 5
         bindsym r                    gaps inner all set 0
-
         bindsym Shift+plus  gaps outer all plus 5
         bindsym Shift+minus gaps outer all minus 5
         bindsym Shift+r     gaps outer all set 0
-
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
@@ -339,25 +307,18 @@ mode "$mode_gaps_all" {
 # ----------------------------------------------------------------------------
 # MPC mode
 # ----------------------------------------------------------------------------
-set $mode_mpc MPC: [p] play/pause, [u] update, [f/r] forward, [b/B] backward, [n/N] next/previous
 bindsym $mod+Control+m mode "$mode_mpc"
-
 mode "$mode_mpc" {
-
         bindsym p exec mpc toggle
-
         # next/previous
         bindsym n exec mpc next
         bindsym Shift+n exec mpc prev
-
         # seek
         bindsym f exec mpc seek +00:00:01
         bindsym b exec mpc seek -00:00:01
         bindsym Shift+f exec mpc seek +00:00:10
         bindsym Shift+b exec mpc seek -00:00:10
-
         bindsym u exec mpc update
-
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
@@ -366,9 +327,8 @@ mode "$mode_mpc" {
 # Shortcuts: I3 access
 # ----------------------------------------------------------------------------
 
-# reload the configuration file
+# reload/restart i3
 bindsym $mod+Control+r reload
-# restart i3 in place
 bindsym $mod+Control+s restart
 
 # dmenu replacement with rofi, see ~/.Xresources for configuration
@@ -402,6 +362,7 @@ bindsym $mod+ccedilla bar mode toggle
 bindsym XF86Display exec "scrot ~/desktop/Screenshot%Y-%m-%d%H:%M:%S.png"
 bindsym $win+F1     exec "scrot ~/desktop/Screenshot%Y-%m-%d%H:%M:%S.png"
 
+# TODO: read from .Xresources
 bindsym XF86AudioRaiseVolume exec amixer -c0 -D pulse sset Master 5%+ && paplay /usr/share/sounds/freedesktop/stereo/message.oga
 bindsym XF86AudioLowerVolume exec amixer -c0 -D pulse sset Master 5%- && paplay /usr/share/sounds/freedesktop/stereo/message.oga
 bindsym XF86AudioMute        exec amixer -c0 -D pulse -q set Master toggle && paplay /usr/share/sounds/freedesktop/stereo/message.oga
@@ -420,44 +381,23 @@ bindsym XF86AudioPrev  exec mpc prev
 
 # ----------------------------------------------------------------------------
 # Shortcuts: Apps
+# TODO: open if not openned yet (mutt, ncmpcpp…)
 # ----------------------------------------------------------------------------
 
-# start a terminal
 bindsym $mod+Return exec $term
 bindsym $mod+shift+Return exec $termDetached -o font_size=8
-
-# [m]utt
-# TODO: open if not openned yet
+bindsym $win+m exec i3-msg '[con_mark="mutt"] focus'
+bindsym XF86Mail exec i3-msg '[con_mark="mutt"] focus'
 bindsym $win+shift+m workspace $w3; exec $termDetached -o font_size=12 sh -c "i3-msg mark mutt && mutt"
-bindsym $win+m       exec i3-msg '[con_mark="mutt"] focus'
-bindsym XF86Mail     exec i3-msg '[con_mark="mutt"] focus'
-
+bindsym $win+b exec i3-msg '[title="Messenger for Desktop"] focus'
 bindsym $win+shift+b workspace $W3; exec messengerfordesktop
-bindsym $win+b       exec i3-msg '[title="Messenger for Desktop"] focus'
-
-# Qutebrowser
-# Exceptionnaly we don't use shift because it's commonly use, we keep it
-# for developper mode
 bindsym $win+q exec qutebrowser
-# for dev
-bindsym $win+shift+q exec qutebrowser --enable-webengine-inspector --loglevel vdebug
-
-# chromium
 bindsym $win+c exec chromium
-
-# new version with shortcuts on Win key
 bindsym $win+f exec firefox
 bindsym $win+z exec zathura
-
-# ncmpcpp ([l]ecteur)
-# you can move to a more logical key for you langage, like [J]ukebox
-# TODO: open if not openned yet
-set $ncmpcpp ncmpcpp -c ~/.config/ncmpcpp/config-private
+bindsym $win+n exec i3-msg '[con_mark="ncmpcpp"] focus'
 bindsym $win+shift+n workspace $w6; exec $termDetached -o font_size=12 sh -c "i3-msg mark ncmpcpp && $ncmpcpp"
-bindsym $win+n       exec i3-msg '[con_mark="ncmpcpp"] focus'
-
-# ranger ([F]iles
-bindsym $win+r    exec $term --title "ranger" ranger
+bindsym $win+r exec $term --title "ranger" ranger
 
 # Mouse
 # The middle button over a titlebar kills the window
@@ -479,6 +419,7 @@ for_window [class="^Pidgin$" window_role="^conversation$"] resize grow width 0 p
 # Theme
 # ----------------------------------------------------------------------------
 # set $bg #282828AA
+# TODO: move to xresources
 set $bg #1F1F1F
 set $black #000000
 set $red #dc322f
