@@ -65,7 +65,6 @@ Plug 'flazz/vim-colorschemes'
 " Shougo plugin suite {{{
 " ----------------------------------------------------------------------------
 Plug 'Shougo/denite.nvim'       " Unite interfaces
-
 if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -96,6 +95,7 @@ Plug 'bkad/CamelCaseMotion'            " Additionnal CamelCase motions
 Plug 'michaeljsmith/vim-indent-object' " Indentation text objects
 Plug 'jeetsukumaran/vim-indentwise'    " Motion for indentations
 Plug 'jeetsukumaran/vim-pythonsense'   " Additionnal python text-objects
+Plug 'PeterRincker/vim-argumentative'  " Switch arguments
 Plug 'junegunn/goyo.vim'               " Minimalist interface on demand
 Plug 'dmerejkowsky/vim-ale'            " Async Linter
 Plug 'sjl/gundo.vim'                   " More undo
@@ -151,6 +151,10 @@ Plug 'elzr/vim-json',                { 'for': 'json' }
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 " }}}
 
+" Special plugins {{{
+Plug 'ryanoasis/vim-devicons'  " icons, must be loaded after the rest
+" }}}
+
 " Initialize plugin system
 call plug#end()
 
@@ -166,6 +170,7 @@ set fileformat=unix            " unix format by default, of course
 set visualbell                 " no sounds
 set noerrorbells
 set shell=zsh                  " shell zsh by default
+" }}}
 
 " History / undo {{{
 " -----------------------------------------------------------------------------
@@ -246,6 +251,7 @@ set foldmethod=marker   " fold based on indent level
 
 " UI {{{
 " -----------------------------------------------------------------------------
+set guifont=Hack\ Nerd\ Font\ Mono\ 12
 set nonumber            " show line number ?
 set norelativenumber    " show relative number also ?
 
@@ -596,6 +602,25 @@ let g:deoplete#file#enable_buffer_path = 1
 " }}}
 
 " {{{ Denite
+
+" TODO: check that denite is loaded (lazy loading)
+
+" Denite-like mappings
+nmap <leader>w :w<CR>
+nmap <leader>W :w!<CR>
+nmap <leader>?w :s 
+nmap <leader>?W :s! 
+nmap <leader>q :q<CR>
+nmap <leader>Q :q!<CR>
+nmap <leader>x :x<CR>
+nmap <leader>X :x!<CR>
+nmap <leader>c :bdelete<CR>
+nmap <leader>C :bdelete!<CR>
+
+" temporory fix for devicons (deprecated sources):
+call denite#custom#source('file,file/rec,file/mru,file/old,file/point',
+    \ 'converters', ['devicons_denite_converter'])
+
 call denite#custom#option('default', { 'prompt': '❯' })
 
 call denite#custom#source('file/rec', 'matchers', [
@@ -681,9 +706,11 @@ map <leader>a :DeniteProjectDir -buffer-name=grep -default-action=quickfix grep:
 map <leader>A :DeniteProjectDir -buffer-name=grep -default-action=quickfix grep:::!<CR>
 
 nnoremap <Tab> :<C-u>Denite buffer<CR>
-nnoremap <leader><Space> :<C-u>DeniteProjectDir file/rec<CR>
+nnoremap <leader><Space> :<C-u>Denite -resume<CR>
 nnoremap <leader>: :<C-u>Denite command_history<CR>
-nnoremap <leader>d :<C-u>Denite directory_mru<CR>
+" TODO: hidden files (.d, .D)
+nnoremap <leader>d :<C-u>DeniteProjectDir directory_rec<CR>
+nnoremap <leader>D :<C-u>DeniteBufferDir directory_rec<CR>
 nnoremap <leader>f :<C-u>DeniteProjectDir file/rec<CR>
 nnoremap <leader>F :<C-u>DeniteBufferDir file/rec<CR>
 nnoremap <leader>.f :<C-u>DeniteProjectDir file/rec/hidden<CR>
@@ -693,31 +720,30 @@ nnoremap <leader>g :<C-u>DeniteProjectDir
     \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`<CR>
 nnoremap <leader>G :<C-u>DeniteBufferDir
     \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`<CR>
-nnoremap <leader>u :<C-u>Denite file_mru<CR>
 nnoremap <leader>m :<C-u>Denite menu:bookmarks<CR>
 nnoremap <leader>r :<C-u>Denite register<CR>
 nnoremap <leader># :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
 nnoremap <leader>/ :<C-u>DeniteProjectDir grep:. -mode=normal<CR>
 nnoremap <leader>à :<C-u>Denite tag<CR>
-nnoremap <leader>h :<C-u>Denite file_mru<CR>
+nnoremap <leader>h :<C-u>Denite file_mru directory_mru menu:bookmarks<CR>
+nnoremap <leader>H :<C-u>Denite directory_mru<CR>
 nnoremap <leader>s :<C-u>Denite spell<CR>
 nnoremap <leader>S :<C-u>Denite grammarous<CR>
 
 " Add custom menus
 " TODO: a bookmark plugin for denite would be better
 let s:menus = {}
-
 let s:menus.bookmarks = {
     \ 'description': 'Bookmarks'
 \ }
 let s:menus.bookmarks.file_candidates = [
-    \ ['init.vim'          , '~/.config/nvim/init.vim']                                                  ,
-    \ ['bepoptimist'       , '~/.local/share/nvim/plugged/vim-bepoptimist/plugin/bepoptimist.vim']       ,
-    \ ['bepoptimist after' , '~/.local/share/nvim/plugged/vim-bepoptimist/after/plugin/bepoptimist.vim'],
-    \ ['mkinitpcio',    '/etc/mkinitcpio.conf'],
-    \ ['grub',          '/etc/default/grub'],
-    \ ['fstab',         '/etc/fstabc'],
-    \ ['zshrc',  '~/.zshrc'],
+    \ ['init.vim' , '~/.config/nvim/init.vim']                                                  ,
+    \ ['bepoptimist', '~/.local/share/nvim/plugged/vim-bepoptimist/plugin/bepoptimist.vim']       ,
+    \ ['bepoptimist after', '~/.local/share/nvim/plugged/vim-bepoptimist/after/plugin/bepoptimist.vim'],
+    \ ['mkinitpcio', '/etc/mkinitcpio.conf'],
+    \ ['grub', '/etc/default/grub'],
+    \ ['fstab', '/etc/fstabc'],
+    \ ['zshrc', '~/.zshrc'],
     \ ['zshenv', '~/.zshenv'],
     \ ['custom zsh', '~/.oh-my-zsh/custom/plugins/common-aliases/common-aliases.plugin.zsh'],
     \ ['i3', '~/.config/i3/config'],
@@ -726,7 +752,8 @@ let s:menus.bookmarks.file_candidates = [
     \ ['kitty', '~/.config/kitty/kitty.conf'],
     \ ['mutt', '~/.muttrc'],
     \ ['polybar', '~/.config/polybar/config'],
-    \ ['mpd', '~/.config/mpd/mpd.conf']
+    \ ['mpd', '~/.config/mpd/mpd.conf'],
+    \ ['memo vim', '~/.config/nvim/memo.md']
 \ ]
 
 call denite#custom#var('menu', 'menus', s:menus)
@@ -875,6 +902,11 @@ omap <silent> iç <Plug>CamelCaseMotion_ib
 xmap <silent> iç <Plug>CamelCaseMotion_ib
 " }}}
 
+" vim-arguments {{{
+nmap g« <Plug>Argumentative_MoveLeft
+nmap g» <Plug>Argumentative_MoveRight
+" }}}
+
 " vim-indentwise {{{
 " map [- <Plug>(IndentWisePreviousLesserIndent)
 " map [= <Plug>(IndentWisePreviousEqualIndent)
@@ -889,4 +921,10 @@ xmap <silent> iç <Plug>CamelCaseMotion_ib
 " }}}
 
 " }}} plugins section
+
+" Devicons {{{
+let g:webdevicons_enable_denite = 1
+let g:webdevicons_enable_airline_tabline = 1
+let g:webdevicons_enable_airline_statusline = 1
+" }}}
 
