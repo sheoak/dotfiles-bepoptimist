@@ -598,10 +598,29 @@ let g:deoplete#file#enable_buffer_path = 1
 " {{{ Denite
 call denite#custom#option('default', { 'prompt': '❯' })
 
-call denite#custom#source(
-	\ 'file/rec', 'matchers', ['matcher/fuzzy', 'matcher/project_files', 'matcher/hide_hidden_files'])
+call denite#custom#source('file/rec', 'matchers', [
+        \ 'matcher/hide_hidden_files',
+        \ 'matcher/fuzzy',
+        \ 'matcher/project_files',
+        \ 'sorter/rank'
+    \])
 
-call denite#custom#source( 'grep', 'matchers', ['matcher_regexp'])
+call denite#custom#source('file/rec', 'sorters', [
+        \ 'sorter/rank'
+    \])
+
+call denite#custom#source('file_mru', 'sorters', [
+        \ 'sorter/sublime'
+    \])
+
+call denite#custom#source( 'grep', 'matchers', [
+        \ 'matcher_regexp'
+     \])
+
+" Denite for git
+call denite#custom#alias('source', 'file/rec/git', 'file/rec')
+call denite#custom#var('file/rec/git', 'command',
+    \ ['git', 'ls-files', '-co', '--exclude-standard'])
 
 call denite#custom#map(
       \ 'insert',
@@ -638,15 +657,11 @@ call denite#custom#map(
       \ 'noremap'
       \)
 
-" Denite for git
-call denite#custom#alias('source', 'file/rec/git', 'file/rec')
-call denite#custom#var('file/rec/git', 'command',
-    \ ['git', 'ls-files', '-co', '--exclude-standard'])
-
 " Ag command on grep source
+" \ ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])
 if (executable('ag'))
     call denite#custom#var('file/rec', 'command',
-        \ ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])
+        \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
 
     call denite#custom#var('grep', 'command', ['ag'])
     call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
@@ -654,6 +669,12 @@ if (executable('ag'))
     call denite#custom#var('grep', 'pattern_opt', [])
     call denite#custom#var('grep', 'separator', ['--'])
     call denite#custom#var('grep', 'final_opts', [])
+
+    " Denite with hidden files
+    call denite#custom#alias('source', 'file/rec/hidden', 'file/rec')
+    call denite#custom#var('file/rec/hidden', 'command',
+        \ ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])
+
 endif
 
 map <leader>a :DeniteProjectDir -buffer-name=grep -default-action=quickfix grep:::!<CR>
@@ -665,6 +686,8 @@ nnoremap <leader>: :<C-u>Denite command_history<CR>
 nnoremap <leader>d :<C-u>Denite directory_mru<CR>
 nnoremap <leader>f :<C-u>DeniteProjectDir file/rec<CR>
 nnoremap <leader>F :<C-u>DeniteBufferDir file/rec<CR>
+nnoremap <leader>.f :<C-u>DeniteProjectDir file/rec/hidden<CR>
+nnoremap <leader>.F :<C-u>DeniteBufferDir file/rec/hidden<CR>
 " find in git files if exists
 nnoremap <leader>g :<C-u>DeniteProjectDir
     \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`<CR>
