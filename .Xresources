@@ -1,5 +1,11 @@
-! Urxvt Settings
 ! Maintainer: sheoak <dev@sheoak.fr>
+
+*monitor: eDP-1
+*monitorext: HDMI-1
+
+i3wm*font: pango:Deja Vu Sans 12
+i3wm*mod: Mod1
+i3wm*win: Mod4
 
 ! Cursor theme
 Xcursor*theme:          aero
@@ -134,4 +140,7 @@ URxvt*color14: #93a1a1
 !! white dark/light
 URxvt*color7: #eee8d5
 URxvt*color15: #fdf6e3
+
+!! local settings, overriding generic ones
+#include ".Xresources.local"
 

@@ -1,6 +1,7 @@
 *.log
 *.bak
 *.swp
+*.local
 .cfg
 .cfg-private
 dev
