@@ -77,10 +77,21 @@ endif
 Plug 'Shougo/neomru.vim'
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
+
+" Extra sources
+Plug 'kmnk/denite-dirmark'
+Plug 'junegunn/vim-emoji'
+Plug 'pocari/vim-denite-emoji'
+
+" For vim-vebugger
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 " }}}
 
 " All languages plugins {{{
 " ----------------------------------------------------------------------------
+Plug 'scrooloose/nerdtree'
+Plug 'MattesGroeger/vim-bookmarks'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ludovicchabant/vim-gutentags'    " Ctags generation
 Plug 'vim-airline/vim-airline'         " Cool status bar
 Plug 'vim-airline/vim-airline-themes'  " Airline themes
@@ -114,6 +125,7 @@ Plug 'rhysd/vim-grammarous'            " Grammar check
 Plug 'aperezdc/vim-template'           " Auto-template when opening new file
 Plug 'honza/vim-snippets'              " Snippets for different languages
 Plug 'diepm/vim-rest-console'          " Call REST API from vim
+Plug 'idanarye/vim-vebugger'
 " }}}
 
 " Filetype specific plugins {{{
@@ -153,6 +165,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
 " Special plugins {{{
 Plug 'ryanoasis/vim-devicons'  " icons, must be loaded after the rest
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " }}}
 
 " Initialize plugin system
@@ -304,12 +317,10 @@ else
 endif
 
 if $TERM == 'linux'
-    "colorscheme NeoSolarized
-    colorscheme gruvbox
+    colorscheme NeoSolarized
 else
     try
-        "colorscheme NeoSolarized
-        colorscheme gruvbox
+        colorscheme NeoSolarized
     catch
         colorscheme desert
     endtry
@@ -463,10 +474,6 @@ noremap Q gq
 " [O]rder all css properties
 nnoremap <leader>o :<C-u>g/{/ .+1,/}/-1 sort<CR>
 
-" ranger style
-" TODO: move me, it erases built-in
-nnoremap gn :tabe<CR>
-
 " Rewrite some vim maps in insert mode, not that usefull anyway:
 inoremap <C-j> <C-x><C-]>
 inoremap <C-f> <C-x><C-f>
@@ -603,19 +610,7 @@ let g:deoplete#file#enable_buffer_path = 1
 
 " {{{ Denite
 
-" TODO: check that denite is loaded (lazy loading)
-
-" Denite-like mappings
-nmap <leader>w :w<CR>
-nmap <leader>W :w!<CR>
-nmap <leader>?w :s 
-nmap <leader>?W :s! 
-nmap <leader>q :q<CR>
-nmap <leader>Q :q!<CR>
-nmap <leader>x :x<CR>
-nmap <leader>X :x!<CR>
-nmap <leader>c :bdelete<CR>
-nmap <leader>C :bdelete!<CR>
+" TODO: check that denite is loaded (lazy loading). How?
 
 " temporory fix for devicons (deprecated sources):
 call denite#custom#source('file,file/rec,file/mru,file/old,file/point',
@@ -623,20 +618,25 @@ call denite#custom#source('file,file/rec,file/mru,file/old,file/point',
 
 call denite#custom#option('default', { 'prompt': '❯' })
 
-call denite#custom#source('file/rec', 'matchers', [
+call denite#custom#source('file', 'matchers', [
         \ 'matcher/hide_hidden_files',
         \ 'matcher/fuzzy',
         \ 'matcher/project_files',
-        \ 'sorter/rank'
+    \])
+call denite#custom#source('file/rec', 'matchers', [
+        \ 'matcher/hide_hidden_files',
+        \ 'matcher/fuzzy',
+        \ 'matcher/project_files'
+    \])
+call denite#custom#source('directory_rec', 'matchers', [
+        \ 'matcher/hide_hidden_files',
+        \ 'matcher/fuzzy',
+        \ 'matcher/project_files'
     \])
 
-call denite#custom#source('file/rec', 'sorters', [
-        \ 'sorter/rank'
-    \])
-
-call denite#custom#source('file_mru', 'sorters', [
-        \ 'sorter/sublime'
-    \])
+call denite#custom#source('file/rec', 'sorters', [ 'sorter/rank' ])
+call denite#custom#source('directory_rec', 'sorters', [ 'sorter/rank' ])
+call denite#custom#source('file_mru', 'sorters', [ 'sorter/sublime' ])
 
 call denite#custom#source( 'grep', 'matchers', [
         \ 'matcher_regexp'
@@ -646,6 +646,14 @@ call denite#custom#source( 'grep', 'matchers', [
 call denite#custom#alias('source', 'file/rec/git', 'file/rec')
 call denite#custom#var('file/rec/git', 'command',
     \ ['git', 'ls-files', '-co', '--exclude-standard'])
+
+" call denite#custom#alias('source', 'directory/rec/git', 'directory_rec')
+" call denite#custom#var('directory/rec/git', 'command',
+"     \ ['git', 'ls-remote', '-co', '--exclude-standard'])
+
+call denite#custom#alias('source', 'file/rec/gitremote', 'file/rec')
+call denite#custom#var('file/rec/gitremote', 'command',
+    \ ['git', 'ls-remote', '-co', '--exclude-standard'])
 
 call denite#custom#map(
       \ 'insert',
@@ -682,8 +690,28 @@ call denite#custom#map(
       \ 'noremap'
       \)
 
+call denite#custom#map(
+      \ 'insert',
+      \ '<C-r>',
+      \ '<denite:jump_to_previous_source>',
+      \ 'noremap'
+      \)
+
+call denite#custom#map(
+      \ 'insert',
+      \ '<C-s>',
+      \ '<denite:jump_to_next_source>',
+      \ 'noremap'
+      \)
+
+call denite#custom#map(
+      \ 'insert',
+      \ '<C-h>',
+      \ '<denite:restore_sources>',
+      \ 'noremap'
+      \)
+
 " Ag command on grep source
-" \ ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])
 if (executable('ag'))
     call denite#custom#var('file/rec', 'command',
         \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
@@ -702,62 +730,99 @@ if (executable('ag'))
 
 endif
 
-map <leader>a :DeniteProjectDir -buffer-name=grep -default-action=quickfix grep:::!<CR>
-map <leader>A :DeniteProjectDir -buffer-name=grep -default-action=quickfix grep:::!<CR>
+" Denite-like mappings
+nmap <leader>s :w<CR>
+nmap <leader>S :w!<CR>
+nmap <leader>w :s 
+nmap <leader>W :s! 
+nmap <leader>q :q<CR>
+nmap <leader>Q :q!<CR>
+nmap <leader>x :x<CR>
+nmap <leader>X :x!<CR>
+nmap <leader>d :bdelete<CR>
+nmap <leader>D :bdelete!<CR>
 
+" -----------------------------------------------------------------------------
+" Memo:
+" -----------------------------------------------------------------------------
+" .         hidden hiles are included
+" c         current file directory
+" h         home directory
+" lower     files
+" upper     directories
+" -----------------------------------------------------------------------------
+
+" Recent and favorites
 nnoremap <Tab> :<C-u>Denite buffer<CR>
-nnoremap <leader><Space> :<C-u>Denite -resume<CR>
-nnoremap <leader>: :<C-u>Denite command_history<CR>
-" TODO: hidden files (.d, .D)
-nnoremap <leader>d :<C-u>DeniteProjectDir directory_rec<CR>
-nnoremap <leader>D :<C-u>DeniteBufferDir directory_rec<CR>
+nnoremap <leader>, :<C-u>Denite -resume<CR>
+nnoremap <leader>m :<C-u>Denite dirmark<CR>
+nnoremap <leader>M :<C-u>Denite dirmark/add<CR>
+nnoremap <leader><space> :<C-u>Denite -source-names=hide file_mru directory_mru dirmark<CR>
+
+" [R]ecent
+nnoremap <leader>r :<C-u>Denite file_mru<CR>
+nnoremap <leader>R :<C-u>Denite directory_mru<CR>
+
+" [f]ile
 nnoremap <leader>f :<C-u>DeniteProjectDir file/rec<CR>
-nnoremap <leader>F :<C-u>DeniteBufferDir file/rec<CR>
 nnoremap <leader>.f :<C-u>DeniteProjectDir file/rec/hidden<CR>
-nnoremap <leader>.F :<C-u>DeniteBufferDir file/rec/hidden<CR>
-" find in git files if exists
+nnoremap <leader>cf :<C-u>DeniteBufferDir file/rec<CR>
+nnoremap <leader>.cf :<C-u>DeniteBufferDir file/rec/hidden<CR>
+nnoremap <leader>hf :<C-u>Denite -path=~ file/rec<CR>
+nnoremap <leader>.hf :<C-u>Denite -path=~ file/rec/hidden<CR>
+
+" [F]older
+nnoremap <leader>F :<C-u>DeniteProjectDir directory_rec<CR>
+nnoremap <leader>.F :<C-u>DeniteProjectDir directory/rec/hidden<CR>
+nnoremap <leader>cF :<C-u>DeniteBufferDir directory_rec<CR>
+nnoremap <leader>.cF :<C-u>DeniteBufferDir directory/rec/hidden<CR>
+nnoremap <leader>hF :<C-u>Denite -path=~ directory_rec<CR>
+nnoremap <leader>.hF :<C-u>Denite -path=~ directory/rec/hidden<CR>
+
+" [b]rowse (file/directory non recursive)
+nnoremap <leader>b :<C-u>DeniteProjectDir file<CR>
+nnoremap <leader>cb :<C-u>DeniteBufferDir file<CR>
+nnoremap <leader>hb :<C-u>Denite -path=~ file<CR>
+
+" [G]it
+" TODO: bare repo config?
 nnoremap <leader>g :<C-u>DeniteProjectDir
     \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`<CR>
-nnoremap <leader>G :<C-u>DeniteBufferDir
+" nnoremap <leader>G :<C-u>DeniteProjectDir
+"     \ `finddir('.git', ';') != '' ? 'directory/rec/git' : 'directory/rec'`<CR>
+nnoremap <leader>cg :<C-u>DeniteBufferDir
     \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`<CR>
-nnoremap <leader>m :<C-u>Denite menu:bookmarks<CR>
-nnoremap <leader>r :<C-u>Denite register<CR>
+" nnoremap <leader>cG :<C-u>DeniteBufferDir
+"     \ `finddir('.git', ';') != '' ? 'directory/rec/git' : 'directory/rec'`<CR>
+
+" Searching
 nnoremap <leader># :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
 nnoremap <leader>/ :<C-u>DeniteProjectDir grep:. -mode=normal<CR>
-nnoremap <leader>à :<C-u>Denite tag<CR>
-nnoremap <leader>h :<C-u>Denite file_mru directory_mru menu:bookmarks<CR>
-nnoremap <leader>H :<C-u>Denite directory_mru<CR>
-nnoremap <leader>s :<C-u>Denite spell<CR>
-nnoremap <leader>S :<C-u>Denite grammarous<CR>
+map <leader>a :DeniteProjectDir -buffer-name=grep -default-action=quickfix grep:::!<CR>
+map <leader>ca :DeniteBufferDir -buffer-name=grep -default-action=quickfix grep:::!<CR>
+map <leader>ha :Denite -path=~ -buffer-name=grep -default-action=quickfix grep:::!<CR>
 
-" Add custom menus
-" TODO: a bookmark plugin for denite would be better
-let s:menus = {}
-let s:menus.bookmarks = {
-    \ 'description': 'Bookmarks'
-\ }
-let s:menus.bookmarks.file_candidates = [
-    \ ['init.vim' , '~/.config/nvim/init.vim']                                                  ,
-    \ ['bepoptimist', '~/.local/share/nvim/plugged/vim-bepoptimist/plugin/bepoptimist.vim']       ,
-    \ ['bepoptimist after', '~/.local/share/nvim/plugged/vim-bepoptimist/after/plugin/bepoptimist.vim'],
-    \ ['mkinitpcio', '/etc/mkinitcpio.conf'],
-    \ ['grub', '/etc/default/grub'],
-    \ ['fstab', '/etc/fstabc'],
-    \ ['zshrc', '~/.zshrc'],
-    \ ['zshenv', '~/.zshenv'],
-    \ ['custom zsh', '~/.oh-my-zsh/custom/plugins/common-aliases/common-aliases.plugin.zsh'],
-    \ ['i3', '~/.config/i3/config'],
-    \ ['i3 status', '~/.config/i3/i3status.conf'],
-    \ ['qutebrowser', '~/.config/qutebrowser/config.py'],
-    \ ['kitty', '~/.config/kitty/kitty.conf'],
-    \ ['mutt', '~/.muttrc'],
-    \ ['polybar', '~/.config/polybar/config'],
-    \ ['mpd', '~/.config/mpd/mpd.conf'],
-    \ ['memo vim', '~/.config/nvim/memo.md']
-\ ]
+" Ranger
+nnoremap ,e :RangerWorkingDirectory<CR>
+nnoremap ,ce :RangerCurrentFile<CR>
+nnoremap ,he :Ranger ~<CR>
 
-call denite#custom#var('menu', 'menus', s:menus)
-
+" Others
+nnoremap <leader>à :<C-u>Denite jump<CR>
+nnoremap <leader>C :<C-u>Denite colorscheme<CR>
+nnoremap <leader>E :<C-u>Denite emoji<CR>
+nnoremap <leader>k :<C-u>Denite help<CR>
+nnoremap <leader>l :<C-u>Denite line<CR>
+nnoremap <leader>n :<C-u>NERDTreeToggle<CR>
+nnoremap <leader>t :<C-u>Denite tag<CR>
+nnoremap <leader>u :<C-u>:Gundo<CR>
+nnoremap <leader>y :<C-u>Denite register<CR>
+nnoremap <leader>Z :<C-u>Denite grammarous<CR>
+nnoremap <leader>z :<C-u>Denite spell<CR>
+nnoremap <leader>: :<C-u>Denite command<CR>
+nnoremap <leader>… :<C-u>Denite command_history<CR>
+nnoremap <leader>! :Denite output:!
+nnoremap <leader>? :map <leader><CR>
 " }}}
 
 " Goyo {{{
@@ -770,9 +835,6 @@ let g:goyo_linenr=1
 " Ranger {{{
 let g:ranger_map_keys = 0
 let g:ranger_replace_netrw = 1 " open ranger when vim open a directory
-
-nnoremap ,e :RangerWorkingDirectory<CR>
-nnoremap ,E :RangerCurrentFile<CR>
 " }}}
 
 " Neosnippets {{{
@@ -839,6 +901,7 @@ nmap gyz <Plug>GitGutterPreviewHunk
 " }}}
 
 " Table-mode {{{
+" TODO: remove tm mapping
 nnoremap ]ot :TableModeEnable<CR>
 nnoremap [ot :TableModeDisable<CR>
 nnoremap yot :TableModeToggle<CR>
@@ -846,9 +909,12 @@ nnoremap yot :TableModeToggle<CR>
 " Memo: þ is AltGr+T ([T]able)
 nnoremap þþ :TableModeToggle<CR>
 nnoremap þs :TableModeSort<CR>
-vnoremap þt :Tableize<CR>
 nnoremap þf :TableModeAddFormula<CR>
 nnoremap þe :TableModeEvalFormulaLine<CR>
+
+nnoremap þt <Plug>(table-mode-tableize)
+xnoremap þt <Plug>(table-mode-tableize)
+xnoremap þd <Plug>(table-mode-tableize-delimiter)
 " }}}
 
 " Grammarous {{{
@@ -928,3 +994,12 @@ let g:webdevicons_enable_airline_tabline = 1
 let g:webdevicons_enable_airline_statusline = 1
 " }}}
 
+" Sneak {{{
+let g:sneak#s_next = 1
+let g:sneak#use_ic_scs = 1
+" let g:sneak#label = 1
+let g:sneak#target_labels = "auiectsrnpld"
+let g:sneak#prompt = '❯'
+autocmd ColorScheme * hi! link Sneak Normal
+autocmd ColorScheme * hi SneakLabel guifg=white guibg=magenta ctermfg=white ctermbg=magenta
+" }}}
