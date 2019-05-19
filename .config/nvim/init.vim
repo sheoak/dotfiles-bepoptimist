@@ -895,9 +895,6 @@ set updatetime=100
 nmap ]og :GitGutterLineHighlightsDisable<CR>
 nmap [og :GitGutterLineHighlightsEnable<CR>
 nmap yog :GitGutterLineHighlightsToggle<CR>
-nmap gya <Plug>GitGutterStageHunk
-nmap gyu <Plug>GitGutterUndoHunk
-nmap gyz <Plug>GitGutterPreviewHunk
 " }}}
 
 " Table-mode {{{
