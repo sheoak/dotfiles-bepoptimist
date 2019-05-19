@@ -16,14 +16,14 @@
 # ----------------------------------------------------------------------------
 
 # i3-gaps specific settings
-gaps inner 15
-gaps outer -5
-smart_gaps on
+#gaps inner 15
+#gaps outer -5
+#smart_gaps on
 #smart_borders no_gaps
 
 # sway specific settings
-output eDP-1 scale 1.4
-output "*" background ~/images/wallpapers/3fCMDkc.jpg fill
+# output eDP-1 scale 1.4
+output "*" background ~/images/wallpapers/cheetah.jpg fill
 
 # touchpad
 input "1267:12440:ELAN1201:00_04F3:3098_To" {
@@ -53,8 +53,10 @@ input "1133:50479:Logitech_USB_Re" {
 set $mod Mod1
 set $win Mod4
 
-set $termDetached kitty
-set $term kitty --single-instance 
+set $termDetached urxvtc
+#set $termDetached kitty
+set $term urxvt
+#set $term kitty --single-instance 
 
 # autolock timer in minutes
 set $autolock 10
@@ -110,6 +112,9 @@ workspace $W10 output $SCREEN2
 
 # default workspace, to avoid "1" by default
 exec --no-startup-id i3-msg "workspace $W1"
+# dual key ESC+Control
+exec --no-startup-id xcape -e 'Shift_L=Escape'
+exec --no-startup-id urxvtd -q -f -o
 
 # switch to workspace
 bindsym $mod+a        workspace $W1
@@ -225,9 +230,9 @@ bindsym --whole-window button9 floating toggle
 # up
 bindsym --whole-window button8 fullscreen
 # left
-bindsym --whole-window button10 workspace prev
+# bindsym --whole-window button10 workspace prev
 # right
-bindsym --whole-window button11 workspace next
+# bindsym --whole-window button11 workspace next
 
 # ----------------------------------------------------------------------------
 # Virtualbox mode : run vms with different IE versions
@@ -364,9 +369,9 @@ bindsym $mod+f          exec i3-msg '[title="ranger"] focus'
 
 # Mouse
 # The middle button over a titlebar kills the window
-bindsym --release button2 kill
+# bindsym --release button2 kill
 # The middle button and a modifer over any part of the window kills the window
-bindsym --whole-window $mod+button2 kill
+# bindsym --whole-window $mod+button2 kill
 
 # chromium
 # bindsym $mod+shift+w exec chromium-browser
@@ -416,6 +421,7 @@ for_window [class="^Pidgin$" window_role="^conversation$"] resize grow width 0 p
 #client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
 #client.urgent           $red $red $white $red $red
 
+set $white #FFFFFF
 set $bg #282828AA
 set $red #cc241d
 set $green #98971a
@@ -447,7 +453,7 @@ bar {
     height 18
 
     status_command i3status --config ~/.config/i3/i3status.conf
-    i3bar_command i3bar -t
+   # i3bar_command i3bar -t
 
     # statusbar colors      border    background  text
     colors {
