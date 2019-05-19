@@ -341,7 +341,6 @@ if has("autocmd")
     " Put these in an autocmd group, so that we can delete them easily.
     augroup vimrcEx
         au!
-
         " When editing a file, always jump to the last known cursor position.
         " Don't do it for commit messages, when the position is invalid, or when
         " inside an event handler (happens when dropping a file on gvim).
@@ -350,39 +349,26 @@ if has("autocmd")
         \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
             \ exe "silent! normal g`\"za" |
         \ endif
-
     augroup END
     " }}}
 
     " File type detection {{{
     augroup fileDetect
         au!
-
-        au BufEnter *.zsh-theme            setlocal filetype=zsh
-
-        " html mix with php
-        au BufRead,BufNewFile *.phtml      setlocal filetype=php
-
-        " JSON type
-        au BufRead,BufNewFile *.json       setlocal filetype=json
-        au BufRead,BufNewFile .jshintrc    setlocal filetype=json
-
-        " Mail type
-        au BufRead,BufNewFile *mutt-*      setlocal filetype=mail
+        au BufEnter *.zsh-theme setlocal filetype=zsh
+        au BufRead,BufNewFile *.phtml setlocal filetype=php
+        au BufRead,BufNewFile *.json setlocal filetype=json
+        au BufRead,BufNewFile .jshintrc setlocal filetype=json
+        au BufRead,BufNewFile *mutt-* setlocal filetype=mail
         au BufEnter Makefile setlocal noexpandtab
-
     augroup END
     " }}}
 
     " File type settings (autocmd) {{{
     augroup fileTypes
         au!
-
         " Tab settings
-        au FileType sass,pug,html,yaml setlocal
-            \ softtabstop=2
-            \ shiftwidth=2
-            \ tabstop=2
+        au FileType sass,pug,html,yaml setlocal sts=2 sw=2 ts=2
 
         " HTML/CSS mapping
         au FileType html,css,sass,less
@@ -398,12 +384,10 @@ if has("autocmd")
         au FileType xml            setlocal omnifunc=xmlcomplete#CompleteTags
 
         " formating by types
-        au FileType vim            setlocal foldmethod=marker foldlevel=0
-        au FileType text           setlocal tw=78 formatoptions+=tw
-
-        au FileType markdown       setlocal tw=80 formatoptions+=tw
-        au FileType gitcommit      setlocal tw=72 colorcolumn=72
-                    \ formatoptions+=taw
+        au FileType vim       setlocal fdm=marker fdl=0
+        au FileType text      setlocal tw=78 fo+=tw
+        au FileType markdown  setlocal tw=80 fo+=tw
+        au FileType gitcommit setlocal tw=72 cc=72 fo+=taw
 
         " Mail: remove annoying trail space detection and set gutter
         " fo+=aw is for mutt text_flowed option
@@ -415,14 +399,12 @@ if has("autocmd")
 
     " Special settings for passwords files {{{
     augroup fileDetectPassword
-        au BufEnter /dev/shm/*    setlocal nobackup noswapfile noundofile
+        au BufEnter /dev/shm/* setlocal nobackup noswapfile noundofile
     augroup END
     " }}}
 
 else
-
     set autoindent
-
 endif " has("autocmd")
 " }}}
 
