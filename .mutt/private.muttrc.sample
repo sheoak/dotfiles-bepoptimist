@@ -1,4 +1,6 @@
 
+set pgp_sign_as = YOUR_PUBLIC_GPG_KEY_CHAIN
+
 # private settings, do not commit
 set folder      = "$HOME/mail"
 set spoolfile   = "+myaccount/inbox"

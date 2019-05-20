@@ -1,6 +1,4 @@
 
-set pgp_sign_as = A83B54AED1B135ED771151EBC3EEEC27094BFC58
-
 set pgp_timeout = 10000
 set crypt_replyencrypt  = yes
 set crypt_autosign      = yes
