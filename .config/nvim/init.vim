@@ -995,7 +995,14 @@ autocmd ColorScheme * hi SneakLabel guifg=white guibg=magenta ctermfg=white cter
 " }}}
 
 " Startify {{{
-let g:startify_custom_header = ['Welcome back!']
+let g:startify_custom_header = []
+" let g:startify_custom_header = ['        Welcome back!']
+let g:startify_files_number = 6
+let g:startify_change_to_dir = 0
+" let g:startify_skiplist = [ ]
+let g:startify_custom_indices = map(range(1,100), 'string(v:val)')
+let g:startify_custom_indices = ['a', 'u', 'r', 'h', 'n', 'p', 'd', 'l',
+    \ 'o', 'j', 'y', 'g', 'g', 'h', 'f' ]
 " }}}
 
 " vim-bookmarks {{{
