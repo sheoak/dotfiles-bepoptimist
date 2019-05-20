@@ -3,7 +3,14 @@
 *.log
 *.bak
 .cfg
+.msmtprc
+.mbsyncrc
+.offlineimaprc
+.Xresources.local
+.config/nvim/init.local.vim
 .cfg-private
+.zshrc.local
+.xinitrc.local
 backups/
 cloud/
 desktop/
