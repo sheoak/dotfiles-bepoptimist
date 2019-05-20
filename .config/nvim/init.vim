@@ -451,16 +451,12 @@ end
 " it's better to set the leader here than in plugins to avoid issues
 let mapleader = ","
 
-" TODO: affect some map to ",,"
-" Quick save with new leader
-" noremap <leader>, :w<CR>
-
 " Don't use Ex mode, use Q for formatting
 noremap Q gq
 
 " TODO: move to a better place
 " [O]rder all css properties
-nnoremap <leader>o :<C-u>g/{/ .+1,/}/-1 sort<CR>
+" nnoremap <leader>o :<C-u>g/{/ .+1,/}/-1 sort<CR>
 
 " Rewrite some vim maps in insert mode, not that usefull anyway:
 inoremap <C-j> <C-x><C-]>
