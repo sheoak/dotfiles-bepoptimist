@@ -569,13 +569,7 @@ let g:gundo_prefer_python3 = 1
 " }}}
 
 " Bepoptimist {{{
-let g:bim_map_fugitive     = 1
-" switch : and .
-" doesn't work: vim-repeat ends up remapping it sometimes
-" let g:bim_switch_command   = 1
-" nmap : <Plug>(RepeatDot)
-" we need to tell surround that Bepoptimist is going to map it
-" and this need to happens in init.vim before surround is loaded
+let g:bim_map_fugitive = 1
 let g:surround_no_mappings = 1
 " }}}
 
