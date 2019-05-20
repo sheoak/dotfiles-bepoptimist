@@ -442,9 +442,8 @@ command! W w !sudo tee % > /dev/null
 if has("spell")
     augroup spell
         au!
-        au FileType text,mail            setlocal spell spelllang=fr
-        au FileType markdown,gitcommit   setlocal spell spelllang=en
-        au FileType help                 setlocal nospell
+        au FileType text,mail,markdown,gitcommit setlocal spell spelllang=en,fr
+        au FileType help setlocal nospell
     augroup END
 end
 " }}}
@@ -973,19 +972,17 @@ nmap ßr <Plug>(grammarous-remove-error)
 nmap ßd <Plug>(grammarous-disable-rule)
 nmap ßn <Plug>(grammarous-move-to-next-error)
 nmap ßp <Plug>(grammarous-move-to-previous-error)
-
 nmap ßc :GrammarousCheck<CR>
 vmap ß :GrammarousCheck<CR>
-
+" Vim spell
 nmap ßf :set spelllang=fr<CR>
 nmap ße :set spelllang=en<CR>
-
+nmap ßm :set spelllang=en,fr<CR>
 nmap ßs z=
-
-" insert modline at EOF
+" FIXME: insert modline at EOF
 nmap ßmf Govim: set spelllang=fr<Esc>:Commentary<Esc><C-o>
 nmap ßme Govim: set spelllang=en<Esc>:Commentary<Esc><C-o>
-
+" Operator
 omap ß <Plug>(operator-grammarous)
 " }}}
 
