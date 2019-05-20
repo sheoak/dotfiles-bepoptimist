@@ -44,6 +44,10 @@ else
     let s:plug_path=$HOME . '/.vim/plugged'
 endif
 
+" Source a local configuration, out of git repository
+" You can put your username, private bookmarks, tests, local settings…
+let g:local_config="~/.config/nvim/init.local.vim"
+
 call plug#begin(s:plug_path)
 
 " My custom plugins {{{
@@ -996,4 +1000,10 @@ let g:startify_custom_header = ['Welcome back!']
 
 " vim-bookmarks {{{
 nnoremap ms <Plug>BookmarkShowAll
+" }}}
+
+" local configuration {{{
+if filereadable(expand(g:local_config))
+    exe 'source' g:local_config
+endif
 " }}}
