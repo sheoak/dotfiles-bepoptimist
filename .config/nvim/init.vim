@@ -90,9 +90,7 @@ Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 " All languages plugins {{{
 " ----------------------------------------------------------------------------
 Plug 'mhinz/vim-startify'
-Plug 'scrooloose/nerdtree'
 Plug 'MattesGroeger/vim-bookmarks'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ludovicchabant/vim-gutentags'    " Ctags generation
 Plug 'vim-airline/vim-airline'         " Cool status bar
 Plug 'vim-airline/vim-airline-themes'  " Airline themes
@@ -168,7 +166,12 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug '/usr/bin/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'ryanoasis/vim-devicons'  " icons, must be loaded after the rest
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+" }}}
+
+" Disabled plugins {{{
+" Plug 'scrooloose/nerdtree'
+" Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " }}}
 
 " Initialize plugin system
