@@ -63,7 +63,8 @@ Plug 'sheoak/vim-bepoptimist'   " Bepo keymap
 " ----------------------------------------------------------------------------
 Plug 'iCyMind/NeoSolarized'
 Plug 'morhetz/gruvbox'
-Plug 'flazz/vim-colorschemes'
+" Plug 'flazz/vim-colorschemes'
+Plug 'noah/vim256-color'
 " }}}
 
 " Shougo plugin suite {{{
@@ -327,10 +328,10 @@ else
 endif
 
 if $TERM == 'linux'
-    colorscheme NeoSolarized
+    colorscheme Tomorrow-Night-Eighties
 else
     try
-        colorscheme NeoSolarized
+        colorscheme Tomorrow-Night-Eighties
     catch
         colorscheme desert
     endtry
