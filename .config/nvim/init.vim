@@ -810,12 +810,60 @@ nnoremap <leader>Z :<C-u>Denite grammarous<CR>
 nnoremap <leader>z :<C-u>Denite spell<CR>
 nnoremap <leader>: :<C-u>Denite command<CR>
 nnoremap <leader>… :<C-u>Denite command_history<CR>
-nnoremap <leader>! :Denite output:!
-nnoremap <leader>?a :Denite output:map
-nnoremap <leader>?n :Denite output:nmap
-nnoremap <leader>?i :Denite output:imap
-nnoremap <leader>?x :Denite output:xmap
-nnoremap <leader>?o :Denite output:omap
+nnoremap <leader>! :<C-u>Denite output:!
+nnoremap <leader>?a :<C-u>Denite output:map
+nnoremap <leader>?n :<C-u>Denite output:nmap
+nnoremap <leader>?i :<C-u>Denite output:imap
+nnoremap <leader>?x :<C-u>Denite output:xmap
+nnoremap <leader>?o :<C-u>Denite output:omap
+" }}}
+
+" FZF {{{
+
+" Faster than Denite, we use fzf when only need to open files
+nnoremap <Tab> :Buffers<CR>
+nnoremap <leader>, :FZF<CR>
+nnoremap <leader><space> :GFiles<CR>
+nnoremap <leader>m :Marks<CR>
+
+" Insert mode completion
+
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
+" Global line completion (not just open buffers. ripgrep required.)
+inoremap <expr> <c-x><c-l> fzf#vim#complete(fzf#wrap({
+            \ 'prefix': '^.*$',
+            \ 'source': 'rg -n ^ --color always',
+            \ 'options': '--ansi --delimiter : --nth 3..',
+            \ 'reducer': { lines -> join(split(lines[0], ':\zs')[2:], '') }}))
+
+imap <c-k> <plug>(fzf-complete-word)
+imap <c-f> <plug>(fzf-complete-file-ag)
+imap <c-l> <plug>(fzf-complete-line)
+
+" TODO: changeme…
+nnoremap ù :Cd ~
+
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+            \ { 'fg':      ['fg', 'Normal'],
+            \ 'bg':      ['bg', 'Normal'],
+            \ 'hl':      ['fg', 'Comment'],
+            \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+            \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+            \ 'hl+':     ['fg', 'Statement'],
+            \ 'info':    ['fg', 'PreProc'],
+            \ 'border':  ['fg', 'Ignore'],
+            \ 'prompt':  ['fg', 'Conditional'],
+            \ 'pointer': ['fg', 'Exception'],
+            \ 'marker':  ['fg', 'Keyword'],
+            \ 'spinner': ['fg', 'Label'],
+            \ 'header':  ['fg', 'Comment'] }
+
+command! -nargs=* -complete=dir Cd call fzf#run(fzf#wrap(
+            \ {'source': 'find '.(empty(<f-args>) ? '.' : <f-args>).' -type d',
+            \  'sink': 'cd'}))
+
 " }}}
 
 " Goyo {{{
