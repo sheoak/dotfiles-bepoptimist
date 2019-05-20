@@ -2,9 +2,8 @@ The bépo keyboard addict dotfiles repository
 ============================================
 
 This repository is currently under refactoring and unstable.
-Use at your own risk.
-I'm aiming at making a stable version before the end of the year and will the 
-follow a standard git workflow.
+Use at your own risk. I'm aiming at making a stable version before the end of 
+the year and will the follow a standard git workflow.
 
 Various Linux configuration files — lot of them using bépo layout and/or 
 vim-styles shortcuts.
