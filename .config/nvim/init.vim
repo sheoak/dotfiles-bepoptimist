@@ -483,6 +483,18 @@ tnoremap <C-g> <C-\><C-n>
 " (ð is altGr+d)
 nnoremap ð "_d
 
+" Denite-like mappings
+nmap <leader>s :w<CR>
+nmap <leader>S :w!<CR>
+nmap <leader>w :s 
+nmap <leader>W :s! 
+nmap <leader>q :q<CR>
+nmap <leader>Q :q!<CR>
+nmap <leader>x :x<CR>
+nmap <leader>X :x!<CR>
+nmap <leader>d :bdelete<CR>
+nmap <leader>D :bdelete!<CR>
+
 " }}}
 
 " Plugins configuration {{{
@@ -590,7 +602,7 @@ let g:deoplete#sources._ = []
 let g:deoplete#file#enable_buffer_path = 1
 " }}}
 
-" {{{ Denite
+" Denite {{{
 
 " TODO: check that denite is loaded (lazy loading). How?
 
@@ -599,6 +611,7 @@ call denite#custom#source('file,file/rec,file/mru,file/old,file/point',
     \ 'converters', ['devicons_denite_converter'])
 
 call denite#custom#option('default', { 'prompt': '❯' })
+call denite#custom#option('default', { 'reversed': 'true' })
 
 call denite#custom#source('file', 'matchers', [
         \ 'matcher/hide_hidden_files',
@@ -712,18 +725,6 @@ if (executable('ag'))
 
 endif
 
-" Denite-like mappings
-nmap <leader>s :w<CR>
-nmap <leader>S :w!<CR>
-nmap <leader>w :s 
-nmap <leader>W :s! 
-nmap <leader>q :q<CR>
-nmap <leader>Q :q!<CR>
-nmap <leader>x :x<CR>
-nmap <leader>X :x!<CR>
-nmap <leader>d :bdelete<CR>
-nmap <leader>D :bdelete!<CR>
-
 " -----------------------------------------------------------------------------
 " Memo:
 " -----------------------------------------------------------------------------
@@ -735,12 +736,9 @@ nmap <leader>D :bdelete!<CR>
 " -----------------------------------------------------------------------------
 
 " Recent and favorites
-nnoremap <Tab> :<C-u>Denite -auto-resize buffer<CR>
-nnoremap <leader>, :FZF<CR>
-nnoremap <leader><cr> :<C-u>Denite -resume<CR>
-nnoremap <leader>m :<C-u>Denite dirmark<CR>
-nnoremap <leader>M :<C-u>Denite dirmark/add<CR>
-nnoremap <leader><space> :<C-u>Denite -source-names=hide file_mru directory_mru dirmark<CR>
+" Alternative to fzf when action is needed:
+nnoremap <leader><Tab> :<C-u>Denite -auto-resize buffer<CR>
+nnoremap <leader><CR> :<C-u>Denite -resume<CR>
 
 " [R]ecent
 nnoremap <leader>r :<C-u>Denite file_mru<CR>
