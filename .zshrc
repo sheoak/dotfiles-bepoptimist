@@ -120,6 +120,6 @@ setopt menu_complete
 # ~/.oh-my-zsh/custom/plugins/bepoptimist/
 
 # testing fzf with rg instead of ag
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --ignore-file ~/.ignore '
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --ignore-file ~/.ignore --hidden '
 
 [[ -s $HOME/.zshrc.local ]] && source "$HOME/.zshrc.local"

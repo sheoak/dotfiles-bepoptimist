@@ -188,7 +188,6 @@ alias dicen='trans -d :en '
 alias dicja='trans -d :ja '
 
 alias f='fzf '
-alias F='FZF_DEFAULT_COMMAND="$FZF_DEFAULT_COMMAND --hidden ";f '
 
 alias finddup='find -name "*.*" -print0 | xargs -0 md5sum | sort | uniq -Dw 32'
 alias flac2mp3='parallel ffmpeg -i {} -qscale:a 0 {.}.mp3 ::: ./*.flac'
