@@ -1043,8 +1043,8 @@ autocmd ColorScheme * hi SneakLabel guifg=white guibg=magenta ctermfg=white cter
 " }}}
 
 " Startify {{{
+nnoremap <leader>v :Startify<CR>
 let g:startify_custom_header = []
-" let g:startify_custom_header = ['        Welcome back!']
 let g:startify_files_number = 6
 let g:startify_change_to_dir = 0
 " let g:startify_skiplist = [ ]
