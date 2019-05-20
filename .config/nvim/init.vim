@@ -518,7 +518,8 @@ nnoremap <silent> ]h :ALENext<cr>
 
 " Plugin vim-rooter {{{
 " how to identify a project root
-let g:rooter_patterns = ['Rakefile', '.git/', '.ctags', 'package.json']
+let g:rooter_patterns = ['Rakefile', '.git/', 'package.json', '.projectroot']
+let g:rooter_silent_chdir = 1
 " }}}
 "
 " Plugin vim-airline {{{
