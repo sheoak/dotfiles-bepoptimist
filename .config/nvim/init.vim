@@ -89,6 +89,7 @@ Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
 " All languages plugins {{{
 " ----------------------------------------------------------------------------
+Plug 'mhinz/vim-startify'
 Plug 'scrooloose/nerdtree'
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -164,6 +165,8 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 " }}}
 
 " Special plugins {{{
+Plug '/usr/bin/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'ryanoasis/vim-devicons'  " icons, must be loaded after the rest
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " }}}
@@ -367,6 +370,7 @@ if has("autocmd")
     " File type settings (autocmd) {{{
     augroup fileTypes
         au!
+
         " Tab settings
         au FileType sass,pug,html,yaml setlocal sts=2 sw=2 ts=2
 
