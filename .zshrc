@@ -107,19 +107,19 @@ source ~/.local/share/nvim/plugged/gruvbox/gruvbox_256palette.sh
 
 source $ZSH/oh-my-zsh.sh
 
-# git bare repository dotfiles
-# https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-
 # Python virtualenvwrapper
 export WORKON_HOME=~/.virtualenvs
 source ~/.local/bin/virtualenvwrapper.sh
 
 # move history file in a cleaner place
 HISTFILE=~/.local/share/zsh/zsh_history
+setopt menu_complete
 
 # custom alias in :
 # ~/.oh-my-zsh/custom/plugins/common-aliases/
 # ~/.oh-my-zsh/custom/plugins/bepoptimist/
+
+# testing fzf with rg instead of ag
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --ignore-file ~/.ignore '
 
 [[ -s $HOME/.zshrc.local ]] && source "$HOME/.zshrc.local"
