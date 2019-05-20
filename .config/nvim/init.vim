@@ -795,10 +795,13 @@ nnoremap <leader>E :<C-u>Denite emoji<CR>
 nnoremap <leader>k :<C-u>Denite help<CR>
 nnoremap <leader>l :<C-u>Denite line<CR>
 nnoremap <leader>L :<C-u>Denite line:buffers<CR>
-nnoremap <leader>n :<C-u>NERDTreeToggle<CR>
+nnoremap <leader>n :<C-u>Denite outline<CR>
+nnoremap <leader>M :<C-u>Denite mark<CR>
 nnoremap <leader>t :<C-u>Denite tag<CR>
 nnoremap <leader>u :<C-u>:Gundo<CR>
 nnoremap <leader>y :<C-u>Denite register<CR>
+nnoremap <leader>o :<C-u>Denite dirmark<CR>
+nnoremap <leader>O :<C-u>Denite dirmark/add<CR>
 nnoremap <leader>Z :<C-u>Denite grammarous<CR>
 nnoremap <leader>z :<C-u>Denite spell<CR>
 nnoremap <leader>: :<C-u>Denite command<CR>
