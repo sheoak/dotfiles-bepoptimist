@@ -381,23 +381,25 @@ if has("autocmd")
         " omnifunc by types
         au FileType php            setlocal omnifunc=phpcomplete#CompletePHP
         au FileType css,sass,less  setlocal omnifunc=csscomplete#CompleteCSS
+        au FileType html,markdown  setlocal omnifunc=htmlcomplete#CompleteTags
+        au FileType xml            setlocal omnifunc=xmlcomplete#CompleteTags
         au FileType javascript     setlocal omnifunc=javascriptcomplete#CompleteJS
         au FileType javascript     setlocal formatprg=prettier\ --stdin
         au FileType python         setlocal omnifunc=pythoncomplete#Complete
-        au FileType html,markdown  setlocal omnifunc=htmlcomplete#CompleteTags
-        au FileType xml            setlocal omnifunc=xmlcomplete#CompleteTags
+        au FileType java           setlocal omnifunc=javacomplete#Complete
 
         " formating by types
         au FileType vim       setlocal fdm=marker fdl=0
         au FileType text      setlocal tw=78 fo+=tw
         au FileType markdown  setlocal tw=80 fo+=tw
         au FileType gitcommit setlocal tw=72 cc=72 fo+=taw
-
         " Mail: remove annoying trail space detection and set gutter
         " fo+=aw is for mutt text_flowed option
         au FileType mail setlocal tw=72 fo+=aw listchars=tab:\ \ 
-        au FileType java setlocal omnifunc=javacomplete#Complete
 
+        " disable deoplete auto-complete for text files
+        autocmd FileType text,mail
+                \ call deoplete#custom#buffer_option('auto_complete', v:false)
     augroup END
     " }}}
 
