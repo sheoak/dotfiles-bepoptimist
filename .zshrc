@@ -1,12 +1,13 @@
-
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
   git-extras
+  gitfast       # fixes completion for bare repositories
   colorize
   vi-mode
+  fzf
   common-aliases
   bepoptimist
   private-aliases
@@ -59,20 +60,66 @@ ZSH_THEME="agnoster"
 HYPHEN_INSENSITIVE="true"
 
 POWERLINE_DETECT_SSH="true"
+
 POWERLINE_RIGHT_B="none"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# COMPLETION_WAITING_DOTS="true"
+
+# move history file in a cleaner place
+HISTFILE=~/.local/share/zsh/zsh_history
 
 # Uncomment the following line to change how often to auto-update (in days).
 export UPDATE_ZSH_DAYS=7
 
-# Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+# Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
+export KEYTIMEOUT=1
 
-# Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
+# Paths
+export ZSH=$HOME/.oh-my-zsh
+export PATH="$PATH:$HOME/bin:$HOME/.gem/ruby/2.5.0/bin:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.local/share/npm/bin:/usr/bin/node"
+export NODE_PATH="$NODE_PATH:$HOME/.local/share/npm/lib/node_modules"
+export JAVA_HOME="/usr/lib/jvm/java-11-openjdk"
+export PATH=$JAVA_HOME/bin:$PATH
 
+# Default executable
+export EDITOR=nvim
+export VISUAL=nvim
+export BROWSER=qutebrowser
+
+# use lesspipe
+export LESSOPEN="|lesspipe.sh %s"
+
+# no less history
+export LESSHISTFILE=/dev/null
+
+# fix ssh issues with kitty
+export TERM=xterm-256color
+
+# testing fzf with rg instead of ag
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --ignore-file ~/.ignore --hidden '
+# export FZF_COMPLETION_TRIGGER='~~'
+export FZF_COMPLETION_OPTS='+c -x'
+
+# privoxy
+#export http_proxy="http://localhost:8118"
+
+# Python virtualenvwrapper
+export WORKON_HOME=~/.virtualenvs
+
+# GPG settings
+export GPG_TTY=`tty`
+echo "UPDATESTARTUPTTY" | gpg-connect-agent > /dev/null 2>&1
+
+setopt menu_complete
+
+# TODO: export in another file, use Xresources
 # Solarized theme for tty, the dark version.
 # Based on:
 #   - Solarized (http://ethanschoonover.com/solarized)
@@ -99,27 +146,12 @@ if [ "$TERM" = "linux" ]; then
     clear # against bg artifacts
 fi
 
-# fix ssh issues with kitty
-export TERM=xterm-256color
-
-# gruvbox colors from vim plugin
+source ~/.local/bin/virtualenvwrapper.sh
 source ~/.local/share/nvim/plugged/gruvbox/gruvbox_256palette.sh
 
 source $ZSH/oh-my-zsh.sh
-
-# Python virtualenvwrapper
-export WORKON_HOME=~/.virtualenvs
-source ~/.local/bin/virtualenvwrapper.sh
-
-# move history file in a cleaner place
-HISTFILE=~/.local/share/zsh/zsh_history
-setopt menu_complete
-
 # custom alias in :
 # ~/.oh-my-zsh/custom/plugins/common-aliases/
 # ~/.oh-my-zsh/custom/plugins/bepoptimist/
-
-# testing fzf with rg instead of ag
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --ignore-file ~/.ignore --hidden '
 
 [[ -s $HOME/.zshrc.local ]] && source "$HOME/.zshrc.local"
