@@ -1,7 +1,12 @@
 The bépo keyboard addict dotfiles repository
 ============================================
 
-Various linux configuration files — lot of them using bépo layout and/or 
+This repository is currently under refactoring and unstable.
+Use at your own risk.
+I'm aiming at making a stable version before the end of the year and will the 
+follow a standard git workflow.
+
+Various Linux configuration files — lot of them using bépo layout and/or 
 vim-styles shortcuts.
 
 This is a keyboard oriented configuration based on i3 (currently testing 
@@ -10,7 +15,7 @@ sway/wayland).
 Most of the work on bépo configuration is made in my 
 [vim-bepoptimist](https://github.com/sheoak/vim-bepoptimist) plugin.
 I'm still experiencing a lot on it, it might be unstable. Any participation is 
-welcome if you're a bépo enthousiast.
+welcome if you're a bépo enthusiast.
 
 
 # Tip
@@ -46,7 +51,7 @@ You can now do for example:
     config push
 
 
-# Bepo keyboard oriented configurations:
+# Bépo keyboard oriented configurations:
 
 - mpv
 - ncmpcpp
