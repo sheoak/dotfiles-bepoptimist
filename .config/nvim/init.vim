@@ -989,3 +989,11 @@ let g:sneak#prompt = '❯'
 autocmd ColorScheme * hi! link Sneak Normal
 autocmd ColorScheme * hi SneakLabel guifg=white guibg=magenta ctermfg=white ctermbg=magenta
 " }}}
+
+" Startify {{{
+let g:startify_custom_header = ['Welcome back!']
+" }}}
+
+" vim-bookmarks {{{
+nnoremap ms <Plug>BookmarkShowAll
+" }}}
