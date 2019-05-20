@@ -732,8 +732,9 @@ nmap <leader>D :bdelete!<CR>
 " -----------------------------------------------------------------------------
 
 " Recent and favorites
-nnoremap <Tab> :<C-u>Denite buffer<CR>
-nnoremap <leader>, :<C-u>Denite -resume<CR>
+nnoremap <Tab> :<C-u>Denite -auto-resize buffer<CR>
+nnoremap <leader>, :FZF<CR>
+nnoremap <leader><cr> :<C-u>Denite -resume<CR>
 nnoremap <leader>m :<C-u>Denite dirmark<CR>
 nnoremap <leader>M :<C-u>Denite dirmark/add<CR>
 nnoremap <leader><space> :<C-u>Denite -source-names=hide file_mru directory_mru dirmark<CR>
@@ -777,9 +778,9 @@ nnoremap <leader>cg :<C-u>DeniteBufferDir
 " Searching
 nnoremap <leader># :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
 nnoremap <leader>/ :<C-u>DeniteProjectDir grep:. -mode=normal<CR>
-map <leader>a :DeniteProjectDir -buffer-name=grep -default-action=quickfix grep:::!<CR>
-map <leader>ca :DeniteBufferDir -buffer-name=grep -default-action=quickfix grep:::!<CR>
-map <leader>ha :Denite -path=~ -buffer-name=grep -default-action=quickfix grep:::!<CR>
+nnoremap <leader>a :DeniteProjectDir -buffer-name=grep -default-action=quickfix grep:::!<CR>
+nnoremap <leader>ca :DeniteBufferDir -buffer-name=grep -default-action=quickfix grep:::!<CR>
+nnoremap <leader>ha :Denite -path=~ -buffer-name=grep -default-action=quickfix grep:::!<CR>
 
 " Ranger
 nnoremap ,e :RangerWorkingDirectory<CR>
@@ -792,6 +793,7 @@ nnoremap <leader>C :<C-u>Denite colorscheme<CR>
 nnoremap <leader>E :<C-u>Denite emoji<CR>
 nnoremap <leader>k :<C-u>Denite help<CR>
 nnoremap <leader>l :<C-u>Denite line<CR>
+nnoremap <leader>L :<C-u>Denite line:buffers<CR>
 nnoremap <leader>n :<C-u>NERDTreeToggle<CR>
 nnoremap <leader>t :<C-u>Denite tag<CR>
 nnoremap <leader>u :<C-u>:Gundo<CR>
@@ -801,7 +803,11 @@ nnoremap <leader>z :<C-u>Denite spell<CR>
 nnoremap <leader>: :<C-u>Denite command<CR>
 nnoremap <leader>… :<C-u>Denite command_history<CR>
 nnoremap <leader>! :Denite output:!
-nnoremap <leader>? :map <leader><CR>
+nnoremap <leader>?a :Denite output:map
+nnoremap <leader>?n :Denite output:nmap
+nnoremap <leader>?i :Denite output:imap
+nnoremap <leader>?x :Denite output:xmap
+nnoremap <leader>?o :Denite output:omap
 " }}}
 
 " Goyo {{{
