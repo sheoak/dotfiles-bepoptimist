@@ -726,7 +726,6 @@ if (executable('ag'))
     call denite#custom#alias('source', 'file/rec/hidden', 'file/rec')
     call denite#custom#var('file/rec/hidden', 'command',
         \ ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])
-
 endif
 
 " -----------------------------------------------------------------------------
@@ -794,22 +793,24 @@ nnoremap ,he :Ranger ~<CR>
 
 " Others
 nnoremap <leader>à :<C-u>Denite jump<CR>
-nnoremap <leader>C :<C-u>Denite colorscheme<CR>
-nnoremap <leader>E :<C-u>Denite emoji<CR>
+nnoremap <leader>ç :<C-u>Denite colorscheme<CR>
+nnoremap <leader>C :<C-u>Denite change<CR>
+nnoremap <leader>j :<C-u>Denite emoji<CR>
 nnoremap <leader>k :<C-u>Denite help<CR>
 nnoremap <leader>l :<C-u>Denite line<CR>
 nnoremap <leader>L :<C-u>Denite line:buffers<CR>
 nnoremap <leader>n :<C-u>Denite outline<CR>
 nnoremap <leader>M :<C-u>Denite mark<CR>
+nnoremap <leader>o :<C-u>Denite dirmark<CR>
+nnoremap <leader>O :<C-u>Denite dirmark/add<CR>
+nnoremap <leader>p :<C-u>Denite neosnippet<CR>
 nnoremap <leader>t :<C-u>Denite tag<CR>
 nnoremap <leader>u :<C-u>:Gundo<CR>
 nnoremap <leader>y :<C-u>Denite register<CR>
-nnoremap <leader>o :<C-u>Denite dirmark<CR>
-nnoremap <leader>O :<C-u>Denite dirmark/add<CR>
-nnoremap <leader>Z :<C-u>Denite grammarous<CR>
 nnoremap <leader>z :<C-u>Denite spell<CR>
-nnoremap <leader>: :<C-u>Denite command<CR>
-nnoremap <leader>… :<C-u>Denite command_history<CR>
+nnoremap <leader>Z :<C-u>Denite grammarous<CR>
+nnoremap <leader>@ :<C-u>Denite command_history<CR>
+nnoremap <leader>… :<C-u>Denite command<CR>
 nnoremap <leader>! :<C-u>Denite output:!
 nnoremap <leader>?a :<C-u>Denite output:map
 nnoremap <leader>?n :<C-u>Denite output:nmap
@@ -823,12 +824,14 @@ nnoremap <leader>?o :<C-u>Denite output:omap
 " Faster than Denite, we use fzf when only need to open files
 nnoremap <Tab> :Buffers<CR>
 nnoremap <leader>, :FZF<CR>
-nnoremap <leader><space> :GFiles<CR>
+nnoremap ’’ :GFiles<CR>
+nnoremap <leader><space> :History<CR>
 nnoremap <leader>m :Marks<CR>
+nnoremap <leader>: :History:<CR>
 
 " Insert mode completion
 
-" [Buffers] Jump to the existing window if possible
+" Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
 " Global line completion (not just open buffers. ripgrep required.)
 inoremap <expr> <c-x><c-l> fzf#vim#complete(fzf#wrap({
@@ -845,8 +848,8 @@ imap <c-l> <plug>(fzf-complete-line)
 nnoremap ù :Cd ~
 
 " Customize fzf colors to match your color scheme
-let g:fzf_colors =
-            \ { 'fg':      ['fg', 'Normal'],
+let g:fzf_colors = {
+            \ 'fg':      ['fg', 'Normal'],
             \ 'bg':      ['bg', 'Normal'],
             \ 'hl':      ['fg', 'Comment'],
             \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
@@ -949,7 +952,6 @@ nnoremap þþ :TableModeToggle<CR>
 nnoremap þs :TableModeSort<CR>
 nnoremap þf :TableModeAddFormula<CR>
 nnoremap þe :TableModeEvalFormulaLine<CR>
-
 nnoremap þt <Plug>(table-mode-tableize)
 xnoremap þt <Plug>(table-mode-tableize)
 xnoremap þd <Plug>(table-mode-tableize-delimiter)
