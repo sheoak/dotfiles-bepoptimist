@@ -143,6 +143,8 @@ alias pmq='pm stop '
 alias z='zathura'
 
 # dotfiles managment shortcuts
+# https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias c='config'
 alias cst='config status'
 alias cadd='config add '
@@ -150,3 +152,43 @@ alias cpatch='config add -p '
 alias cpush='config push '
 alias cpull='config pull '
 alias ccommit='config commit'
+
+alias vl='vim -c ":Denite file_mru -immediately"'
+alias v='vim -c ":Denite file_mru"'
+alias s='screen'
+alias sr='screen -r'
+alias p='pass '
+alias pg='pass git '
+
+alias m='./manage.py '
+alias da='django-admin '
+alias mshell='./manage.py shell_plus --bpython'
+
+alias sc='systemctl '
+alias scr='systemctl restart '
+alias scs='systemctl start '
+alias sch='systemctl stop '
+alias scu='systemctl --user '
+alias scur='systemctl --user restart '
+alias scus='systemctl --user start '
+alias scuh='systemctl --user stop '
+
+alias wo='workon '
+alias pi='pip install '
+alias pir='pip uninstall '
+alias piu='pip install --user '
+alias piup='pip install --upgrade'
+
+# translations:
+alias enfr='trans en:fr '
+alias fren='trans fr:en '
+alias enjp='trans en:ja '
+alias dicfr='trans -d :fr '
+alias dicen='trans -d :en '
+alias dicja='trans -d :ja '
+
+alias f='fzf '
+alias F='FZF_DEFAULT_COMMAND="$FZF_DEFAULT_COMMAND --hidden ";f '
+
+alias finddup='find -name "*.*" -print0 | xargs -0 md5sum | sort | uniq -Dw 32'
+alias flac2mp3='parallel ffmpeg -i {} -qscale:a 0 {.}.mp3 ::: ./*.flac'
