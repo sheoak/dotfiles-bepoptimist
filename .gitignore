@@ -1,3 +1,5 @@
+.cache
+.abook
 *.swp
 *.local
 *.log
