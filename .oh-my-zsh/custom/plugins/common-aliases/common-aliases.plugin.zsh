@@ -194,3 +194,5 @@ alias flac2mp3='parallel ffmpeg -i {} -qscale:a 0 {.}.mp3 ::: ./*.flac'
 
 alias mbsync='mbsync -a -c $DOTFILES_PRIVATE/mbsyncrc'
 alias msmtp='msmtp -C $DOTFILES_PRIVATE/msmtprc'
+alias ssh='ssh -F $DOTFILES_PRIVATE/ssh/config '
+alias abook='abook -f $DOTFILES_PRIVATE/abook/addressbook '
