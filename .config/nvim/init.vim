@@ -614,6 +614,7 @@ call denite#custom#source('file,file/rec,file/mru,file/old,file/point',
 
 call denite#custom#option('default', { 'prompt': '❯' })
 call denite#custom#option('default', { 'reversed': 'true' })
+call denite#custom#option('default', { 'winheight': '12' })
 
 call denite#custom#source('file', 'matchers', [
         \ 'matcher/hide_hidden_files',
@@ -742,15 +743,13 @@ nnoremap <leader><CR> :<C-u>Denite -resume<CR>
 nnoremap <leader>r :<C-u>Denite file_mru<CR>
 nnoremap <leader>R :<C-u>Denite directory_mru<CR>
 
-" [f]ile
-nnoremap <leader>f :<C-u>DeniteProjectDir file/rec<CR>
-nnoremap <leader>cf :<C-u>DeniteBufferDir file/rec<CR>
-nnoremap <leader>hf :<C-u>Denite -path=~ file/rec<CR>
-
-" [F]older
-nnoremap <leader>F :<C-u>DeniteProjectDir directory_rec<CR>
-nnoremap <leader>cF :<C-u>DeniteBufferDir directory_rec<CR>
-nnoremap <leader>hF :<C-u>Denite -path=~ directory_rec<CR>
+" Recursive ([T]ree) files/folders
+nnoremap <leader>t :<C-u>DeniteProjectDir file/rec<CR>
+nnoremap <leader>ct :<C-u>DeniteBufferDir file/rec<CR>
+nnoremap <leader>ht :<C-u>Denite -path=~ file/rec<CR>
+nnoremap <leader>T :<C-u>DeniteProjectDir directory_rec<CR>
+nnoremap <leader>cT :<C-u>DeniteBufferDir directory_rec<CR>
+nnoremap <leader>hT :<C-u>Denite -path=~ directory_rec<CR>
 
 " [b]rowse (file/directory non recursive)
 nnoremap <leader>b :<C-u>DeniteProjectDir file<CR>
@@ -764,6 +763,11 @@ nnoremap <leader>cg :<C-u>DeniteBufferDir
     \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`<CR>
 nnoremap <leader>hg :<C-u>Denite -path=~ file/rec/git-dotfiles<CR>
 
+" Ranger
+nnoremap ,e :RangerWorkingDirectory<CR>
+nnoremap ,ce :RangerCurrentFile<CR>
+nnoremap ,he :Ranger ~<CR>
+
 " Searching
 nnoremap <leader># :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
 nnoremap <leader>/ :<C-u>DeniteProjectDir grep:. -mode=normal<CR>
@@ -771,13 +775,9 @@ nnoremap <leader>a :DeniteProjectDir -buffer-name=grep -default-action=quickfix 
 nnoremap <leader>ca :DeniteBufferDir -buffer-name=grep -default-action=quickfix grep:::!<CR>
 nnoremap <leader>ha :Denite -path=~ -buffer-name=grep -default-action=quickfix grep:::!<CR>
 
-" Ranger
-nnoremap ,e :RangerWorkingDirectory<CR>
-nnoremap ,ce :RangerCurrentFile<CR>
-nnoremap ,he :Ranger ~<CR>
-
 " Others
 nnoremap <leader>à :<C-u>Denite jump<CR>
+nnoremap <leader>À :<C-u>Denite tag<CR>
 nnoremap <leader>ç :<C-u>Denite colorscheme<CR>
 nnoremap <leader>C :<C-u>Denite change<CR>
 nnoremap <leader>j :<C-u>Denite emoji<CR>
@@ -789,7 +789,6 @@ nnoremap <leader>M :<C-u>Denite mark<CR>
 nnoremap <leader>o :<C-u>Denite dirmark<CR>
 nnoremap <leader>O :<C-u>Denite dirmark/add<CR>
 nnoremap <leader>p :<C-u>Denite neosnippet<CR>
-nnoremap <leader>t :<C-u>Denite tag<CR>
 nnoremap <leader>u :<C-u>:Gundo<CR>
 nnoremap <leader>y :<C-u>Denite register<CR>
 nnoremap <leader>z :<C-u>Denite spell<CR>
@@ -808,7 +807,9 @@ nnoremap <leader>?o :<C-u>Denite output:omap<CR>
 
 " Faster than Denite, we use fzf when only need to open files
 nnoremap <Tab> :Buffers<CR>
-nnoremap <leader>, :FZF<CR>
+nnoremap <leader>, :FZF ~<CR>
+nnoremap <leader>f :FZF<CR>
+nnoremap <leader>H :FZF<CR>
 nnoremap <leader><space> :History<CR>
 nnoremap <leader>m :Marks<CR>
 nnoremap <leader>: :History:<CR>
