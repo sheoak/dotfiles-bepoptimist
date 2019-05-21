@@ -634,23 +634,12 @@ call denite#custom#source('directory_rec', 'matchers', [
 call denite#custom#source('file/rec', 'sorters', [ 'sorter/rank' ])
 call denite#custom#source('directory_rec', 'sorters', [ 'sorter/rank' ])
 call denite#custom#source('file_mru', 'sorters', [ 'sorter/sublime' ])
-
-call denite#custom#source( 'grep', 'matchers', [
-        \ 'matcher_regexp'
-     \])
+call denite#custom#source( 'grep', 'matchers', [ 'matcher_regexp' ])
 
 " Denite for git
 call denite#custom#alias('source', 'file/rec/git', 'file/rec')
 call denite#custom#var('file/rec/git', 'command',
     \ ['git', 'ls-files', '-co', '--exclude-standard'])
-
-" call denite#custom#alias('source', 'directory/rec/git', 'directory_rec')
-" call denite#custom#var('directory/rec/git', 'command',
-"     \ ['git', 'ls-remote', '-co', '--exclude-standard'])
-
-call denite#custom#alias('source', 'file/rec/gitremote', 'file/rec')
-call denite#custom#var('file/rec/gitremote', 'command',
-    \ ['git', 'ls-remote', '-co', '--exclude-standard'])
 
 call denite#custom#map(
       \ 'insert',
@@ -720,10 +709,12 @@ if (executable('ag'))
     call denite#custom#var('grep', 'separator', ['--'])
     call denite#custom#var('grep', 'final_opts', [])
 
-    " Denite with hidden files
-    call denite#custom#alias('source', 'file/rec/hidden', 'file/rec')
-    call denite#custom#var('file/rec/hidden', 'command',
-        \ ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])
+    " Toggle hidden files on/off for file/rec search with ag
+    " Only if ag is active
+    nnoremap <silent> [o. :call denite#custom#var('file/rec', 'command',
+        \ ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])<CR>
+    nnoremap <silent> ]o. :call denite#custom#var('file/rec', 'command',
+        \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])<CR>
 endif
 
 " -----------------------------------------------------------------------------
@@ -747,19 +738,13 @@ nnoremap <leader>R :<C-u>Denite directory_mru<CR>
 
 " [f]ile
 nnoremap <leader>f :<C-u>DeniteProjectDir file/rec<CR>
-nnoremap <leader>.f :<C-u>DeniteProjectDir file/rec/hidden<CR>
 nnoremap <leader>cf :<C-u>DeniteBufferDir file/rec<CR>
-nnoremap <leader>.cf :<C-u>DeniteBufferDir file/rec/hidden<CR>
 nnoremap <leader>hf :<C-u>Denite -path=~ file/rec<CR>
-nnoremap <leader>.hf :<C-u>Denite -path=~ file/rec/hidden<CR>
 
 " [F]older
 nnoremap <leader>F :<C-u>DeniteProjectDir directory_rec<CR>
-nnoremap <leader>.F :<C-u>DeniteProjectDir directory/rec/hidden<CR>
 nnoremap <leader>cF :<C-u>DeniteBufferDir directory_rec<CR>
-nnoremap <leader>.cF :<C-u>DeniteBufferDir directory/rec/hidden<CR>
 nnoremap <leader>hF :<C-u>Denite -path=~ directory_rec<CR>
-nnoremap <leader>.hF :<C-u>Denite -path=~ directory/rec/hidden<CR>
 
 " [b]rowse (file/directory non recursive)
 nnoremap <leader>b :<C-u>DeniteProjectDir file<CR>
