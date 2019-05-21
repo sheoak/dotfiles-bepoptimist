@@ -345,7 +345,7 @@ animation-packetloss-framerate = 500
 
 type = internal/mpd
 
-include-file = ~/.config/mpd/mpd-private-polybar.conf
+include-file = $DOTFILES_PRIVATE/mpd/mpd-private-polybar.conf
 
 ; format-online = <bar-progress>  <icon-prev> <icon-stop> <toggle> <icon-next>  <label-song>
 ; format-online =  <label-song> · <icon-repeat> <icon-random> <icon-single> <icon-consume>
