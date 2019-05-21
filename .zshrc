@@ -9,6 +9,7 @@
 # local and private dotfiles path
 export DOTFILES_PRIVATE=$HOME/.dotfiles-private
 export DOTFILES_LOCAL=$HOME/.dotfiles-local
+export DOTFILES_REPOSITORY=$HOME/.cfg
 
 plugins=(
   git
