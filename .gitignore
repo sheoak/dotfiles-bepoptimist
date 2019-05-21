@@ -8,6 +8,8 @@
 .offlineimaprc
 .Xresources.local
 .config/nvim/init.local.vim
+.dotfiles-private
+.dotfiles-local
 .cfg-private
 .zshrc.local
 .xinitrc.local
