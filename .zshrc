@@ -95,8 +95,10 @@ export TERM=xterm-256color
 
 # testing fzf with rg instead of ag
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --ignore-file ~/.ignore --hidden '
-# export FZF_COMPLETION_TRIGGER='~~'
+export FZF_COMPLETION_TRIGGER='~~'
 export FZF_COMPLETION_OPTS='+c -x'
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
+bindkey '^F' fzf-cd-widget
 
 # privoxy
 #export http_proxy="http://localhost:8118"
