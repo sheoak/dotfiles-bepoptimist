@@ -21,6 +21,15 @@ private settings. You can find an exemple of local settings on my repository for
 the 
 [mid-2011 macbook air](https://github.com/sheoak/dotfiles-macbook-air-mid-2011).
 
+A lot effort is put on minimalist maintenance and installation time. All my 
+machine are using this same repository without any differences. Most 
+of the customization happen in the $DOTFILES_PRIVATE and $DOTFILES_LOCAL 
+directories.
+
+- ~/.dotfiles-private : custom config that should not be public
+- ~/.dotfiles-local   : local settings for the current host (monitor settings, 
+  themes…)
+
 I am working on a way to install everything automatically using ansible and will 
 share the source code when it's done.
 
