@@ -13,7 +13,7 @@ source ~/.mutt/gpg.rc
 
 # Set up mutt to use our local maildir:
 set mbox_type=Maildir
-set sendmail = msmtp-enqueue.sh
+set sendmail = "msmtp-enqueue.sh -C $DOTFILES_PRIVATE/msmtprc"
 
 # --------- Basic options
 set quit=ask-yes
