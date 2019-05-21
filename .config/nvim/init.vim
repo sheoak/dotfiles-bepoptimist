@@ -826,11 +826,28 @@ inoremap <expr> <c-x><c-l> fzf#vim#complete(fzf#wrap({
             \ 'reducer': { lines -> join(split(lines[0], ':\zs')[2:], '') }}))
 
 imap <c-k> <plug>(fzf-complete-word)
-imap <c-f> <plug>(fzf-complete-file-ag)
+" FIXME: hidden files are missing
+" imap <c-f> <plug>(fzf-complete-path)
+imap <c-j> <plug>(fzf-complete-file-ag)
 imap <c-l> <plug>(fzf-complete-line)
 
-" TODO: changeme…
-nnoremap ù :Cd ~
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0)
+
+" Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+" Likewise, Files command with preview window
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors = {
@@ -869,9 +886,9 @@ let g:ranger_replace_netrw = 1 " open ranger when vim open a directory
 " Neosnippets {{{
 " Plugin key-mappings.
 " Note: It must be "imap" and "smap"
-imap <C-space>     <Plug>(neosnippet_expand_or_jump)
-smap <C-space>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-space>     <Plug>(neosnippet_expand_target)
+imap <C-space> <Plug>(neosnippet_expand_or_jump)
+smap <C-space> <Plug>(neosnippet_expand_or_jump)
+xmap <C-space> <Plug>(neosnippet_expand_target)
 
 " SuperTab like snippets behavior.
 " Note: It must be "imap" and "smap"
