@@ -810,8 +810,8 @@ nnoremap <leader>u :<C-u>:Gundo<CR>
 nnoremap <leader>y :<C-u>Denite register<CR>
 nnoremap <leader>z :<C-u>Denite spell<CR>
 nnoremap <leader>Z :<C-u>Denite grammarous<CR>
-nnoremap <leader>@ :<C-u>Denite command_history<CR>
-nnoremap <leader>… :<C-u>Denite command<CR>
+nnoremap <leader>… :<C-u>Denite command_history<CR>
+nnoremap <leader>@ :<C-u>Denite command<CR>
 nnoremap <leader>! :<C-u>Denite output:!
 nnoremap <leader>?a :<C-u>Denite output:map
 nnoremap <leader>?n :<C-u>Denite output:nmap
@@ -825,7 +825,6 @@ nnoremap <leader>?o :<C-u>Denite output:omap
 " Faster than Denite, we use fzf when only need to open files
 nnoremap <Tab> :Buffers<CR>
 nnoremap <leader>, :FZF<CR>
-nnoremap ’’ :GFiles<CR>
 nnoremap <leader><space> :History<CR>
 nnoremap <leader>m :Marks<CR>
 nnoremap <leader>: :History:<CR>
