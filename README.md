@@ -1,15 +1,28 @@
 The bépo keyboard addict dotfiles repository
 ============================================
 
+# Introduction
+
+Various Linux configuration files — lot of them using bépo layout and/or 
+vim-styles shortcuts. This is a keyboard oriented configuration based on i3 
+(currently testing sway/wayland).
+
+
+# Caution
+
 This repository is currently under refactoring and unstable.
 Use at your own risk. I'm aiming at making a stable version before the end of 
 the year and will the follow a standard git workflow.
 
-Various Linux configuration files — lot of them using bépo layout and/or 
-vim-styles shortcuts.
+# The goal
 
-This is a keyboard oriented configuration based on i3 (currently testing 
-sway/wayland).
+I aim to make all configuration files generic, with external files for local and 
+private settings. You can find an exemple of local settings on my repository for 
+the 
+[mid-2011 macbook air](https://github.com/sheoak/dotfiles-macbook-air-mid-2011).
+
+I am working on a way to install everything automatically using ansible and will 
+share the source code when it's done.
 
 Most of the work on bépo configuration is made in my 
 [vim-bepoptimist](https://github.com/sheoak/vim-bepoptimist) plugin.
@@ -17,7 +30,7 @@ I'm still experiencing a lot on it, it might be unstable. Any participation is
 welcome if you're a bépo enthusiast.
 
 
-# Tip
+# Installation
 
 You can easily install it by forking it and then using 
 [this method explained on atlassian.com](https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/).
@@ -52,26 +65,26 @@ You can now do for example:
 
 # Bépo keyboard oriented configurations:
 
-- mpv
-- ncmpcpp
+- feh
+- i3 window manager
 - kitty terminal
 - less
-- rtorrent
-- zathura
-- feh
-- ranger
-- qutebrowser
-- i3 window manager
-- screen
-- neovim (see my plugin [vim-bepoptimist](https://github.com/sheoak/vim-bepoptimist)
-- plugin)
+- mpv
+- ncmpcpp
 - neomutt (see ~/.mutt/bepo.muttrc)
+- neovim (see my plugin [vim-bepoptimist](https://github.com/sheoak/vim-bepoptimist)
+- oh-my-zsh
+- qutebrowser
+- ranger
+- rtorrent
+- screen
+- vimium
+- zathura
 
 
 # Standard configuration files for:
 
 - X
-- asound
 - gnupg
 - ssh
 - gtk 2/3
@@ -86,13 +99,13 @@ You can now do for example:
 # Work in progress
 
 - sway/wayland
+- install via ansible
 
 
 # Dropped support
 
 I'm leaving those files but will not maintain them anymore:
 
-- vimium
 - vimb
 - urxvt
 - xcolors
