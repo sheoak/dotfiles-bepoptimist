@@ -1032,6 +1032,7 @@ let g:startify_custom_indices = ['a', 'u', 'r', 'h', 'n', 'p', 'd', 'l',
 
 " vim-bookmarks {{{
 nnoremap ms <Plug>BookmarkShowAll
+let g:bookmark_auto_save_file = $DOTFILES_PRIVATE . '/nvim/vim-bookmarks'
 " }}}
 " }}}
 
