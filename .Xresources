@@ -100,7 +100,7 @@ URxvt*modifier: alt
 
 URxvt*foreground: #657b83
 
-#URxvt*background: rgba:0000/2b00/3600/2200
+!URxvt*background: rgba:0000/2b00/3600/2200
 URxvt*background: #002b36
 !URxvt*shading: 10%
 
@@ -140,7 +140,3 @@ URxvt*color14: #93a1a1
 !! white dark/light
 URxvt*color7: #eee8d5
 URxvt*color15: #fdf6e3
-
-!! local settings, overriding generic ones
-#include ".Xresources.local"
-

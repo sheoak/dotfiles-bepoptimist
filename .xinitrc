@@ -1,19 +1,31 @@
 #!/bin/sh
 
+# export DOTFILES_PRIVATE=$HOME/.dotfiles-private
+# export DOTFILES_LOCAL=$HOME/.dotfiles-local
+
 # start some nice programs
 if [ -d /etc/X11/xinit/xinitrc.d ] ; then
- for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
-  [ -x "$f" ] && . "$f"
- done
- unset f
+    for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
+        [ -x "$f" ] && . "$f"
+    done
+    unset f
 fi
 
-xrdbcmd='xrdb -I$HOME ~/.Xresources'
+# TODO: use private dotfiles
 [[ -f ~/.Xresources ]] && xrdb -load ~/.Xresources
 
+# Local Xresource (mainly monitor/dpi settings)
+if [ -f $DOTFILES_LOCAL/Xresources ]; then
+    xrdb -merge $DOTFILES_LOCAL/Xresources
+fi
+
 # local system configuration
-if [ -f ~/.xinitrc.local ]; then
-    source ~/.xinitrc.local
+if [ -d $DOTFILES_LOCAL ] ; then
+    shopt -s nullglob
+    for f in ${DOTFILES_LOCAL}/xinitrc*; do
+        source "$f"
+    done
+    unset f
 fi
 
 # terminal for graphical environment, we use kitty
@@ -31,9 +43,6 @@ setxkbmap -option ctrl:nocaps fr bepo
 # make short-pressed Ctrl behave like Escape:
 xcape -e 'Control_L=Escape'
 
-# desktop wallpaper and color, put it in .xinitrc.local
-#/usr/bin/feh --bg-fill --no-fehbg --randomize ~/images/wallpapers/*
-
 # notifications
 systemctl --user start dunst
 systemctl --user import-environment DISPLAY
@@ -41,5 +50,6 @@ systemctl --user import-environment DISPLAY
 # udiskie : -T: no tray -q: quiet
 /usr/bin/udiskie -T -q --use-udisks2 -a &
 
-#exec i3 -d all > ~/i3.log
+compton -b
+
 exec i3

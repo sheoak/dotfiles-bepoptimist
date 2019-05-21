@@ -1,6 +1,15 @@
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+#
+# custom alias in :
+# ~/.oh-my-zsh/custom/plugins/common-aliases/
+# ~/.oh-my-zsh/custom/plugins/bepoptimist/
+
+# local and private dotfiles path
+export DOTFILES_PRIVATE=$HOME/.dotfiles-private
+export DOTFILES_LOCAL=$HOME/.dotfiles-local
+
 plugins=(
   git
   git-extras
@@ -8,49 +17,30 @@ plugins=(
   colorize
   vi-mode
   fzf
+  z
+  fz
   common-aliases
   bepoptimist
-  private-aliases
 )
+
+# private system configuration for plugins
+# you can use a private git repository and store it in 
+# .oh-my-zsh/custom/plugins/
+if [ -f ${DOTFILES_PRIVATE}/zshrc.plugins ] ; then
+    source "${DOTFILES_PRIVATE}/zshrc.plugins"
+fi
+
+# Custom path for custom plugins and themes
+# ZSH_CUSTOM=$HOME/.oh-my-zsh-custom/
 
 # bug with completion security check
 ZSH_DISABLE_COMPFIX=true
 
-# Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
-export KEYTIMEOUT=1
-
-export GPG_TTY=`tty`
-echo "UPDATESTARTUPTTY" | gpg-connect-agent > /dev/null 2>&1
-
-# privoxy
-#export http_proxy="http://localhost:8118"
-
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
-export PATH="$PATH:$HOME/bin:$HOME/.gem/ruby/2.5.0/bin:$HOME/.local/bin"
-
-export EDITOR=nvim
-export VISUAL=nvim
-
-# for neomutt/urlscan
-export BROWSER=qutebrowser
-
-# use lesspipe
-export LESSOPEN="|lesspipe.sh %s"
-# no less history
-export LESSHISTFILE=/dev/null
-
-# custom node path
-export PATH="$PATH:$HOME/.local/share/npm/bin:/usr/bin/node"
-export NODE_PATH="$NODE_PATH:$HOME/.local/share/npm/lib/node_modules"
-
-export JAVA_HOME="/usr/lib/jvm/java-11-openjdk"
-export PATH=$JAVA_HOME/bin:$PATH
-
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="agnoster"
+# ZSH_THEME="agnoster"
+ZSH_THEME="multiline"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -119,6 +109,11 @@ echo "UPDATESTARTUPTTY" | gpg-connect-agent > /dev/null 2>&1
 
 setopt menu_complete
 
+source $ZSH/oh-my-zsh.sh
+
+# Completion for kitty
+kitty + complete setup zsh | source /dev/stdin
+
 # TODO: export in another file, use Xresources
 # Solarized theme for tty, the dark version.
 # Based on:
@@ -149,9 +144,6 @@ fi
 source ~/.local/bin/virtualenvwrapper.sh
 source ~/.local/share/nvim/plugged/gruvbox/gruvbox_256palette.sh
 
-source $ZSH/oh-my-zsh.sh
-# custom alias in :
-# ~/.oh-my-zsh/custom/plugins/common-aliases/
-# ~/.oh-my-zsh/custom/plugins/bepoptimist/
-
-[[ -s $HOME/.zshrc.local ]] && source "$HOME/.zshrc.local"
+# local settings
+[[ -s $DOTFILES_LOCAL/zshrc ]] && source "$DOTFILES_LOCAL/zshrc"
+[[ -s $DOTFILES_LOCAL/zshrc.local ]] && source "$DOTFILES_LOCAL/zshrc.local"
