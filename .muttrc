@@ -59,8 +59,8 @@ macro index,pager V "<view-attachments><search>html<enter><view-mailcap><exit>"
 folder-hook . `rm -f /tmp/mutt/*`
 
 # ----------- Adress book
-set query_command= "abook --mutt-query '%s'"
-macro index,pager  a "<pipe-message>abook --add-email-quiet<return>" "Add this sender to Abook"
+set query_command= "abook -f $DOTFILES_PRIVATE/abook/addressbook --mutt-query '%s'"
+macro index,pager  a "<pipe-message>abook -f $DOTFILES_PRIVATE/abook/addressbook --add-email-quiet<return>" "Add this sender to Abook"
 bind editor        <Tab> complete-query
 
 # ----------- Searching (mu)
