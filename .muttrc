@@ -132,5 +132,4 @@ set sleep_time = 0
 # set postponed   = "+myccount/gmail.drafts"
 # set realname    = "Your name"
 # set from        = "myemail@domain.ltd"
-source ~/.mutt/private.muttrc
-
+source `FILE=$DOTFILES_PRIVATE/mutt/muttrc; if [ ! -s "$FILE" ]; then FILE=/dev/null;fi;echo "$FILE"`
