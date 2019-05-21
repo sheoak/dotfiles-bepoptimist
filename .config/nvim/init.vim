@@ -752,15 +752,10 @@ nnoremap <leader>cb :<C-u>DeniteBufferDir file<CR>
 nnoremap <leader>hb :<C-u>Denite -path=~ file<CR>
 
 " [G]it
-" TODO: bare repo config?
 nnoremap <leader>g :<C-u>DeniteProjectDir
     \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`<CR>
-" nnoremap <leader>G :<C-u>DeniteProjectDir
-"     \ `finddir('.git', ';') != '' ? 'directory/rec/git' : 'directory/rec'`<CR>
 nnoremap <leader>cg :<C-u>DeniteBufferDir
     \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`<CR>
-" nnoremap <leader>cG :<C-u>DeniteBufferDir
-"     \ `finddir('.git', ';') != '' ? 'directory/rec/git' : 'directory/rec'`<CR>
 
 " Searching
 nnoremap <leader># :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
