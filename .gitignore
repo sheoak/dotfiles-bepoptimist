@@ -13,6 +13,7 @@
 .cfg-private
 .zshrc.local
 .xinitrc.local
+.virtualenvs/*
 backups/
 cloud/
 desktop/
