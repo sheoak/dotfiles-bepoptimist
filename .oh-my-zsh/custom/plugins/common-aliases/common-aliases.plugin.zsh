@@ -140,7 +140,7 @@ alias youtube-quickdl="youtube-dl --audio-quality 7 --prefer-free-formats --rest
 alias pm='. ~/bin/vendor/prm/prm.sh'
 alias pms='pm start '
 alias pmq='pm stop '
-alias z='zathura'
+alias za='zathura'
 
 # dotfiles managment shortcuts
 # https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/
