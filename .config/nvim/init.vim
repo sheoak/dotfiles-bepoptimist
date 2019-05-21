@@ -797,11 +797,11 @@ nnoremap <leader>Z :<C-u>Denite grammarous<CR>
 nnoremap <leader>… :<C-u>Denite command_history<CR>
 nnoremap <leader>@ :<C-u>Denite command<CR>
 nnoremap <leader>! :<C-u>Denite output:!
-nnoremap <leader>?a :<C-u>Denite output:map
-nnoremap <leader>?n :<C-u>Denite output:nmap
-nnoremap <leader>?i :<C-u>Denite output:imap
-nnoremap <leader>?x :<C-u>Denite output:xmap
-nnoremap <leader>?o :<C-u>Denite output:omap
+nnoremap <leader>?a :<C-u>Denite output:map<CR>
+nnoremap <leader>?n :<C-u>Denite output:nmap<CR>
+nnoremap <leader>?i :<C-u>Denite output:imap<CR>
+nnoremap <leader>?x :<C-u>Denite output:xmap<CR>
+nnoremap <leader>?o :<C-u>Denite output:omap<CR>
 " }}}
 
 " FZF {{{
