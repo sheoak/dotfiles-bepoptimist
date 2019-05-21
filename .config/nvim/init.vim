@@ -51,12 +51,9 @@ let g:local_config="~/.config/nvim/init.local.vim"
 call plug#begin(s:plug_path)
 
 " My custom plugins {{{
-"
-" TODO: split it
-" TODO: add more options
-" TODO: update documentation
 " ----------------------------------------------------------------------------
 Plug 'sheoak/vim-bepoptimist'   " Bepo keymap
+
 " }}}
 
 " Themes {{{
@@ -1056,9 +1053,13 @@ let g:startify_custom_indices = ['a', 'u', 'r', 'h', 'n', 'p', 'd', 'l',
 " vim-bookmarks {{{
 nnoremap ms <Plug>BookmarkShowAll
 " }}}
-
-" local configuration {{{
-if filereadable(expand(g:local_config))
-    exe 'source' g:local_config
-endif
 " }}}
+
+" Load private files (bookmarks, custom alias…)
+if (!empty($DOTFILES_PRIVATE))
+    for path in split(glob($DOTFILES_PRIVATE . '/nvim/*.vim'), '\n')
+        execute "source " . path
+    endfor
+else
+    echoerr "DOTFILES_PRIVATE var is not defined. Private plugins not loaded."
+endif
