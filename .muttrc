@@ -1,5 +1,6 @@
-# IMAP: offlineimap/mbsync generated mailboxes
-source ~/.mutt/mailboxes
+
+# private list of mailboxes
+source `FILE=$DOTFILES_PRIVATE/mutt/mailboxes; if [ ! -s "$FILE" ]; then FILE=/dev/null;fi;echo "$FILE"`
 
 # bépo mapping
 source ~/.mutt/bepo.muttrc
