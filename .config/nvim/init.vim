@@ -95,6 +95,7 @@ Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 " All languages plugins {{{
 " ----------------------------------------------------------------------------
 Plug 'mhinz/vim-startify'
+Plug 'terryma/vim-multiple-cursors'
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'ludovicchabant/vim-gutentags'    " Ctags generation
 Plug 'vim-airline/vim-airline'         " Cool status bar
