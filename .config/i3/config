@@ -20,7 +20,7 @@
 # this makes the i3 configuration file generic
 set_from_resource $mod i3wm.mod Mod1
 set_from_resource $win i3wm.win Mod4
-set_from_resource $font i3wm.font pango:Deja Vu Sans 7
+set_from_resource $font i3wm.font pango:Deja Vu Sans 12
 set_from_resource $innergap i3wn.innergap 7
 set_from_resource $outergap i3wn.outergap 3
 set_from_resource $border i3wn.outergap 3
