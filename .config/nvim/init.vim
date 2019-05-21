@@ -641,6 +641,12 @@ call denite#custom#alias('source', 'file/rec/git', 'file/rec')
 call denite#custom#var('file/rec/git', 'command',
     \ ['git', 'ls-files', '-co', '--exclude-standard'])
 
+" Denite for git dotfiles, bare repository
+call denite#custom#alias('source', 'file/rec/git-dotfiles', 'file/rec')
+call denite#custom#var('file/rec/git-dotfiles', 'command', [
+    \ 'git', '--git-dir=' . $DOTFILES_REPOSITORY, '--work-tree=' . $HOME,
+    \ 'ls-files', '-c', '--exclude-standard'])
+
 call denite#custom#map(
       \ 'insert',
       \ '<C-n>',
@@ -756,6 +762,7 @@ nnoremap <leader>g :<C-u>DeniteProjectDir
     \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`<CR>
 nnoremap <leader>cg :<C-u>DeniteBufferDir
     \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`<CR>
+nnoremap <leader>hg :<C-u>Denite -path=~ file/rec/git-dotfiles<CR>
 
 " Searching
 nnoremap <leader># :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
