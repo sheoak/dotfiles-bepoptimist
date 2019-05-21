@@ -663,14 +663,14 @@ call denite#custom#map(
 
 call denite#custom#map(
       \ 'insert',
-      \ '<C-t>',
+      \ '<C-p>',
       \ '<denite:move_to_previous_line>',
       \ 'noremap'
       \)
 
 call denite#custom#map(
       \ 'insert',
-      \ '<C-j>',
+      \ '<C-t>',
       \ '<denite:do_action:tabopen>',
       \ 'noremap'
       \)
