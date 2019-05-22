@@ -283,9 +283,7 @@ set foldmethod=marker   " fold based on indent level
 set guifont=Hack\ Nerd\ Font\ Mono\ 12
 set nonumber            " show line number ?
 set norelativenumber    " show relative number also ?
-
-" Disabled due to a bug (freeze) with matching pairs
-set nocursorline        " highlight current line
+set cursorline          " highlight current line
 set colorcolumn=80
 set showcmd             " display incomplete commands
 set showmode            " already in airline?
@@ -327,10 +325,12 @@ set previewheight=20    " preview window height
 " -----------------------------------------------------------------------------
 if has("gui_running")
     set background=light
-    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
+    set guifont="Fira Code 12"
 else
     set background=dark
 endif
+
+set termguicolors
 
 if $TERM == 'linux'
     colorscheme Tomorrow-Night-Eighties
@@ -343,7 +343,7 @@ else
 endif
 
 if has("syntax")
-  syntax on
+    syntax on
 endif
 
 " }}}
