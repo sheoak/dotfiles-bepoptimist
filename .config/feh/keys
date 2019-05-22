@@ -1,0 +1,47 @@
+# feh key configuration.
+# key definition: <action name> <key1> [<key2> [<key3>]]
+#
+# Each <key> is an X11 keysym (as output by xev) with optional modifier.
+# For instance, C-x would be Ctrl+X, or 4-space Mod4+Space
+
+# | mirror
+# _ flip
+# < > rotate
+
+toggle_fullscreen f
+
+# Examples for vim-like menu bindings on a qwerty keyboard:
+menu_parent t Left
+menu_child  n Right
+menu_down   s Down
+menu_up     r Up
+menu_select space Return
+
+jump_first g
+jump_last G
+
+# Same for image navigation ...
+next_img n Right space
+prev_img t Left BackSpace
+
+# and image movement
+scroll_up    R C-Up
+scroll_down  S C-Down
+scroll_left  T C-Left
+scroll_right N C-Right
+
+# File deletion
+remove     d   Delete
+delete   C-d C-Delete
+
+toggle_filenames i
+toggle_info I
+
+# zooming
+zoom_in  plus
+zoom_out minus
+zoom_default equal
+zoom_fit a
+
+save_image
+save_filelist

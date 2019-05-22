@@ -19,6 +19,10 @@
 
 # Set the default feh options to be recursive and verbose
 # feh -rV
+feh -B black \
+    -N \
+    --geometry 500x500 \
+    --auto-zoom
 
 # Multiple options can of course be used. They should all be on one line
 # imagemap -rV --quiet -W 400 -H 300 --thumb-width 40 --thumb-height 30
