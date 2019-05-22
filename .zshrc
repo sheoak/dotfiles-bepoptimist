@@ -24,52 +24,23 @@ plugins=(
   bepoptimist
 )
 
-# private system configuration for plugins
-# you can use a private git repository and store it in 
-# .oh-my-zsh/custom/plugins/
-if [ -f ${DOTFILES_PRIVATE}/zshrc.plugins ] ; then
-    source "${DOTFILES_PRIVATE}/zshrc.plugins"
-fi
+PRIVATE_PLUGINS=$DOTFILES_PRIVATE/zshrc.plugins
+[[ -s "$PRIVATE_PLUGINS" ]] && source "$PRIVATE_PLUGINS"
 
-# Custom path for custom plugins and themes
+ZSH_DISABLE_COMPFIX="true" # bug with completion security check
+ZSH_THEME="multiline"
+HYPHEN_INSENSITIVE="true"
+POWERLINE_DETECT_SSH="true"
+POWERLINE_RIGHT_B="none"
+HISTFILE=~/.local/share/zsh/zsh_history
+# CASE_SENSITIVE="true"
+# DISABLE_AUTO_UPDATE="true"
+# ENABLE_CORRECTION="true"
+# COMPLETION_WAITING_DOTS="true"
 # ZSH_CUSTOM=$HOME/.oh-my-zsh-custom/
 
-# bug with completion security check
-ZSH_DISABLE_COMPFIX=true
-
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME="agnoster"
-ZSH_THEME="multiline"
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-HYPHEN_INSENSITIVE="true"
-
-POWERLINE_DETECT_SSH="true"
-
-POWERLINE_RIGHT_B="none"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# move history file in a cleaner place
-HISTFILE=~/.local/share/zsh/zsh_history
-
-# Uncomment the following line to change how often to auto-update (in days).
 export UPDATE_ZSH_DAYS=7
-
-# Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
-export KEYTIMEOUT=1
+export KEYTIMEOUT=1     # faster vim transitions
 
 # Paths
 export ZSH=$HOME/.oh-my-zsh
@@ -93,29 +64,28 @@ export LESSHISTFILE=/dev/null
 # fix ssh issues with kitty
 export TERM=xterm-256color
 
-# testing fzf with rg instead of ag
+# FZF settings
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --ignore-file ~/.ignore --hidden '
 export FZF_COMPLETION_TRIGGER='~~'
 export FZF_COMPLETION_OPTS='+c -x'
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
-bindkey '^F' fzf-cd-widget
-
-# privoxy
-#export http_proxy="http://localhost:8118"
-
-# Python virtualenvwrapper
-export WORKON_HOME=~/.virtualenvs
 
 # GPG settings
 export GPG_TTY=`tty`
 echo "UPDATESTARTUPTTY" | gpg-connect-agent > /dev/null 2>&1
 
+# Python virtualenvwrapper
+export WORKON_HOME=~/.virtualenvs
+source virtualenvwrapper_lazy.sh
+
+# gruvbox colorscheme from vim plugin
+source ~/.local/share/nvim/plugged/gruvbox/gruvbox_256palette.sh
+
 setopt menu_complete
 
-source $ZSH/oh-my-zsh.sh
-
-# Completion for kitty
-kitty + complete setup zsh | source /dev/stdin
+# bindings
+bindkey '^F' fzf-cd-widget
+bindkey '^[[Z' reverse-menu-complete
 
 # TODO: export in another file, use Xresources
 # Solarized theme for tty, the dark version.
@@ -144,9 +114,11 @@ if [ "$TERM" = "linux" ]; then
     clear # against bg artifacts
 fi
 
-source ~/.local/bin/virtualenvwrapper.sh
-source ~/.local/share/nvim/plugged/gruvbox/gruvbox_256palette.sh
+source $ZSH/oh-my-zsh.sh
 
 # local settings
 [[ -s $DOTFILES_LOCAL/zshrc ]] && source "$DOTFILES_LOCAL/zshrc"
 [[ -s $DOTFILES_LOCAL/zshrc.local ]] && source "$DOTFILES_LOCAL/zshrc.local"
+
+# Completion for kitty
+# kitty + complete setup zsh | source /dev/stdin
