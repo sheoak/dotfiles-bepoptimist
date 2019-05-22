@@ -3,5 +3,5 @@ Description=Mailbox synchronization service
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/mbsync -Va -c $DOTFILES_PRIVATE/mbsyncrc
+ExecStart=/usr/bin/mbsync -Va -c ~/.dotfiles-private/mbsyncrc
 ExecStartPost=/usr/bin/polybar-msg hook mailipc 1
