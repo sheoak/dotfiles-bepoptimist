@@ -556,6 +556,14 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 "let g:airline_theme='solarized'
 let g:airline_theme='gruvbox'
 " }}}
+"
+" Gruvbox theme {{{
+let g:gruvbox_contrast_light = 'dark'
+" let g:gruvbox_italic = "1"
+" let g:gruvbox_guisp_fallback = 'bg'
+" let g:gruvbox_improved_warnings = "1"
+" let g:gruvbox_improved_strings = "1"
+" }}}
 
 " Plugin vim-jedi {{{
 " -----------------------------------------------------------------------------
@@ -609,6 +617,7 @@ let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
 let g:deoplete#sources = {}
 let g:deoplete#sources._ = []
 let g:deoplete#file#enable_buffer_path = 1
+let g:deoplete#auto_complete_delay = 100
 " }}}
 
 " Denite {{{
@@ -621,7 +630,7 @@ call denite#custom#source('file,file/rec,file/mru,file/old,file/point',
 
 call denite#custom#option('default', { 'prompt': '❯' })
 call denite#custom#option('default', { 'reversed': 'true' })
-call denite#custom#option('default', { 'winheight': '12' })
+call denite#custom#option('default', { 'winheight': '15' })
 
 call denite#custom#source('file', 'matchers', [
         \ 'matcher/hide_hidden_files',
@@ -951,7 +960,8 @@ nmap yog :GitGutterLineHighlightsToggle<CR>
 " }}}
 
 " Table-mode {{{
-" TODO: remove tm mapping
+let g:table_mode_map_prefix = ',\'
+
 nnoremap ]ot :TableModeEnable<CR>
 nnoremap [ot :TableModeDisable<CR>
 nnoremap yot :TableModeToggle<CR>
@@ -1007,6 +1017,7 @@ vmap <silent> ç <Plug>CamelCaseMotion_w
 vmap <silent> Ç <Plug>CamelCaseMotion_b
 vmap <silent> gç <Plug>CamelCaseMotion_e
 vmap <silent> gÇ <Plug>CamelCaseMotion_ge
+" }}}
 
 " text-objects {{{
 omap <silent> aç <Plug>CamelCaseMotion_iw
@@ -1066,9 +1077,39 @@ let g:startify_custom_indices = ['a', 'u', 'r', 'h', 'n', 'p', 'd', 'l',
 nnoremap ms <Plug>BookmarkShowAll
 let g:bookmark_auto_save_file = $DOTFILES_PRIVATE . '/nvim/vim-bookmarks'
 " }}}
+
+" bexec {{{
+let g:bexec_no_mappings = 1
 " }}}
 
-" Load private files (bookmarks, custom alias…)
+" bclose {{{
+let g:bclose_no_plugin_maps = 1
+" }}}
+
+" nvim-gdb {{{
+let g:nvimgdb_disable_start_keymaps = 1
+
+" ð is AltGr+d ([d]ebug)
+nnoremap ðð <C-w><C-p>
+nnoremap ðg :GdbStart gdb -q ./a.out
+nnoremap ðl :GdbStartLLDB lldb ./a.out
+nnoremap ðp :GdbStartPDB python -m pdb main.py
+nnoremap ð<Return> :GdbContinue<CR>
+nnoremap ð<Space> :GdbStep<CR>
+nnoremap ðu :GdbUntil<CR>
+nnoremap ðn :GdbNext<CR>
+nnoremap ðh :GdbFinish<CR>
+nnoremap ðt :GdbBreakpointToggle<CR>
+nnoremap ð< :GdbFrameUp<CR>
+nnoremap ð> :GdbFrameDown<CR>
+nnoremap ðe :GdbEvalWord<CR>
+vnoremap ðe :GdbEvalRange<CR>
+nnoremap ðd :GdbBreakpointClearAll<CR>
+nnoremap ði :GdbInterrupt<CR>
+nnoremap ðq :GdbDebugStop<CR>
+" }}}
+
+" Load private files (bookmarks, custom alias…) {{{
 if (!empty($DOTFILES_PRIVATE))
     for path in split(glob($DOTFILES_PRIVATE . '/nvim/*.vim'), '\n')
         execute "source " . path
@@ -1076,3 +1117,4 @@ if (!empty($DOTFILES_PRIVATE))
 else
     echoerr "DOTFILES_PRIVATE var is not defined. Private plugins not loaded."
 endif
+" }}}
