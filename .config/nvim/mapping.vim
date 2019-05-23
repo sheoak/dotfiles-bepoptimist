@@ -25,6 +25,10 @@ noremap <Space> <PageDown>
 " terminal escape instead of C-\ C-n
 tnoremap <C-g> <C-\><C-n>
 
+" EeasyAlign (, is leader)
+nmap \ <Plug>(EasyAlign)
+xmap \ <Plug>(EasyAlign)
+
 " -----------------------------------------------------------------------------
 " Vim-unimpaired-like mappings [* ]* y*
 " See bepotimist for remapping of conflicts (>p/»p)
@@ -94,6 +98,19 @@ nnoremap þe :TableModeEvalFormulaLine<CR>
 nnoremap þt <Plug>(table-mode-tableize)
 xnoremap þt <Plug>(table-mode-tableize)
 xnoremap þd <Plug>(table-mode-tableize-delimiter)
+
+" Sneak
+" Some mappings are in vim-bepoptimist plugin (homerow remap and <>)
+nmap é <Plug>Sneak_s
+xmap é <Plug>Sneak_s
+omap é <Plug>Sneak_s
+nmap É <Plug>Sneak_S
+xmap É <Plug>Sneak_S
+omap É <Plug>Sneak_S
+
+" label-mode
+nmap gé <Plug>SneakLabel_s
+nmap gÉ <Plug>SneakLabel_S
 
 " Grammarous
 " Memo: ß is AltGr+S ([S]pell)
