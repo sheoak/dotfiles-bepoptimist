@@ -370,10 +370,8 @@ nnoremap <leader>?o :<C-u>Denite output:omap<CR>
 " Insert mode mapping for completion
 " -----------------------------------------------------------------------------
 imap <c-k> <plug>(fzf-complete-word)
-" FIXME: Hidden files missing https://github.com/sheoak/dotfiles/issues/14
-imap <c-f> <plug>(fzf-complete-path)
-imap <c-j> <plug>(fzf-complete-file-ag)
 imap <c-l> <plug>(fzf-complete-line)
+inoremap <expr> <c-x><c-j> fzf#vim#complete#path('ag --hidden -l -g ""')
 
 " Global line completion (not just open buffers. ripgrep required.)
 " TODO: create a command
