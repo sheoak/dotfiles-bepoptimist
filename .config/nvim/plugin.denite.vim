@@ -1,4 +1,8 @@
 
+if (!exists("g:plugs['denite']"))
+    finish
+endif
+
 " temporory fix for devicons (deprecated sources):
 call denite#custom#source('file,file/rec,file/mru,file/old,file/point',
     \ 'converters', ['devicons_denite_converter'])
