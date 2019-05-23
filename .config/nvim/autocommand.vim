@@ -52,7 +52,7 @@ if has("autocmd")
         au FileType gitcommit setlocal tw=72 cc=72 fo+=taw
         " Mail: remove annoying trail space detection and set gutter
         " fo+=aw is for mutt text_flowed option
-        au FileType mail setlocal tw=72 fo+=aw listchars=tab:\ \ 
+        au FileType mail setlocal tw=72 fo+=aw fo-=t listchars=tab:\ \ 
 
         " disable deoplete auto-complete for text files
         autocmd FileType text,mail
