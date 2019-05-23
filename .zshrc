@@ -45,10 +45,13 @@ export KEYTIMEOUT=1     # faster vim transitions
 # Paths
 export ZSH=$HOME/.oh-my-zsh
 export PATH="$PATH:$HOME/bin:$HOME/.gem/ruby/2.5.0/bin:$HOME/.local/bin"
-export PATH="$PATH:$HOME/.local/share/npm/bin:/usr/bin/node"
+export PATH="$PATH:$HOME/.local/share/npm/bin"
 export NODE_PATH="$NODE_PATH:$HOME/.local/share/npm/lib/node_modules"
 export JAVA_HOME="/usr/lib/jvm/java-11-openjdk"
 export PATH=$JAVA_HOME/bin:$PATH
+
+# Dirty hack to fix /usr/bin/node that is not a directory
+export PATH=$(echo "$PATH" | sed -e 's/:\/usr\/bin\/node//')
 
 # Default executable
 export EDITOR=nvim
