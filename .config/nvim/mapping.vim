@@ -29,6 +29,12 @@ tnoremap <C-g> <C-\><C-n>
 nmap \ <Plug>(EasyAlign)
 xmap \ <Plug>(EasyAlign)
 
+" Git gutter text-objects (conflict with targets)
+omap ih <Plug>GitGutterTextObjectInnerPending
+omap ah <Plug>GitGutterTextObjectOuterPending
+xmap ih <Plug>GitGutterTextObjectInnerVisual
+xmap ah <Plug>GitGutterTextObjectOuterVisual
+
 " -----------------------------------------------------------------------------
 " Vim-unimpaired-like mappings [* ]* y*
 " See bepotimist for remapping of conflicts (>p/»p)
