@@ -167,13 +167,3 @@ if has("syntax")
     syntax on
 endif
 
-" -----------------------------------------------------------------------------
-" Spell configuration
-" -----------------------------------------------------------------------------
-if has("spell")
-    augroup spell
-        au!
-        au FileType text,mail,markdown,gitcommit setlocal spell spelllang=en,fr
-        au FileType help setlocal nospell
-    augroup END
-end

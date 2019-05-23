@@ -60,6 +60,17 @@ if has("autocmd")
     augroup END
     " }}}
 
+    " ------------------------------------------------------------------------
+    " Spell configuration
+    " ------------------------------------------------------------------------
+    if has("spell")
+        augroup spell
+            au!
+            au FileType text,mail,markdown,gitcommit setlocal spell spl=en,fr
+            au FileType help setlocal nospell
+        augroup END
+    end
+
 else
     set autoindent
 endif
