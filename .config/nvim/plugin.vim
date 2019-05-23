@@ -43,7 +43,6 @@ Plug 'sheoak/vim-bepoptimist'   " Bepo keymap
 Plug 'iCyMind/NeoSolarized'
 Plug 'morhetz/gruvbox'
 Plug 'chriskempson/vim-tomorrow-theme'
-Plug 'ryanoasis/vim-devicons'          " icons, must be loaded after the rest
 Plug 'junegunn/vim-emoji'
 Plug 'vim-airline/vim-airline'         " Cool status bar
 Plug 'vim-airline/vim-airline-themes'  " Airline themes
@@ -147,3 +146,6 @@ Plug 'PotatoesMaster/i3-vim-syntax', { 'for': 'i3' }
 
 " Text files
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+
+" After - plugins that must be loaded last
+Plug 'ryanoasis/vim-devicons'          " icons, must be loaded after the rest
