@@ -97,11 +97,11 @@ set smartcase
 " -----------------------------------------------------------------------------
 " Folding
 " -----------------------------------------------------------------------------
-set foldenable         " enable folding
-" set nofoldenable        " dont fold by default
+set foldenable          " enable folding
+" set nofoldenable      " dont fold by default
 set foldlevelstart=50   " open most folds by default
 set foldnestmax=2       " 2 nested fold max
-set foldmethod=syntax   " fold based on indent level
+set foldmethod=manual   " manual folding only
 set foldopen+=search    " open fold when searching
 
 " -----------------------------------------------------------------------------
