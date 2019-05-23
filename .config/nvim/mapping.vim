@@ -215,7 +215,7 @@ nnoremap ’fd :Gremove<CR>
 nnoremap ’fm :Gmove<CR>
 nnoremap ’i :Gpull<CR>
 nnoremap ’l :Glog --oneline<CR>
-nnoremap ’m :Ghove<CR>
+nnoremap ’m :Gmerge<CR>
 nnoremap ’p :Gpush<CR>
 nnoremap ’r :Grebase<CR>
 nnoremap ’s :Gstatus<CR>
