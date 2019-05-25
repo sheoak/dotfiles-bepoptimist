@@ -14,7 +14,7 @@
 " -----------------------------------------------------------------------------
 
 " default leader is bad in azerty and bépo keyboards
-" bepoptimist plugin will take care of moving , and ; to < >
+" vim-bepoptimist plugin will take care of moving , and ; to < >
 " it's better to set the leader here than in plugins to avoid issues
 let mapleader = ","
 
@@ -30,19 +30,21 @@ set shell=zsh                  " shell zsh by default
 " -----------------------------------------------------------------------------
 " History / undo
 " -----------------------------------------------------------------------------
+
+" you need to create backups and undo directory
+" XDG_DATA_HOME may not be defined so we use home
+" the last // will add the absolute path to the file
+set backupdir=$HOME/.local/share/nvim/backups,$HOME/.backups/,/tmp/
+set directory=$HOME/.local/share/nvim/swap//,$HOME/.backups//,/tmp//
+set backupskip=/tmp/*,$HOME/backups/*,*.tmp/*,*.cache/*
+
 set history=500                " keep 500 lines of command line history
 set backup
 set swapfile
-" you need to create backups and undo directory
-" XDG_DATA_HOME may not be defined so we use home
-set backupdir=$HOME/.local/share/nvim/backups,$HOME/.backups/,/tmp/
-" the last // will add the absolute path to the file
-set directory=$HOME/.local/share/nvim/swap//,$HOME/.backups//,/tmp//
-set writebackup
-set backupskip=/tmp/*,$HOME/backups/*,*.tmp/*,*.cache/*
+set writebackup                 " backup before overwritting a file
 set sessionoptions-=options     " do not save options
-set viminfo^=!                  " keep some vim history after closing
-set viminfo+=n~/.vim/viminfo
+" set viminfo^=!                  " keep some vim history after closing
+" set viminfo+=n~/.vim/viminfo
 
 " Persistent Undo
 " Keep undo history across sessions, by storing in file.

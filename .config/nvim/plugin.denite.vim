@@ -1,5 +1,5 @@
 
-if (!exists("g:plugs['denite']"))
+if (!exists("g:plugs['denite.nvim']"))
     finish
 endif
 
