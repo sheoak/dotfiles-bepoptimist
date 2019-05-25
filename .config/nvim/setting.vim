@@ -131,14 +131,15 @@ set linebreak           " Wrap lines at convenient points
 set display+=lastline   " Show as much as possible of long line (no @)
 set previewheight=20    " preview window height
 set termguicolors
-"set sidescroll=1
-
+set splitbelow          " new vertical splits are open below
+set splitright          " new horizontal splits are open on the right
 set wildignore+=*.o,*.obj,.git,*.jpg,*.png,*.gif,*.pdf,*.doc,*.swp,*.swf,*.bak
 set wildignore+=*.zip,*.tar,*.gz,*.ico,*.ttf,*.eot,*/tmp/*,*/node_modules/*
 set wildignore+=*.exe,*.mov,*.msi,*.xls,.ctags,*vim/backups*,*sass_cache*
 set wildignore+=*.woff,*.woff2,*.ttf,*.eot
 set wildignore+=*DS_Store*
 set wildmenu            " Better command-line completion
+"set sidescroll=1
 
 " Add guard around 'wildignorecase' to prevent terminal vim error
 if exists('&wildignorecase')
