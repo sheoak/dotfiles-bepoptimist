@@ -1,48 +1,58 @@
 The bépo keyboard addict dotfiles repository
 ============================================
 
+# TOC
+
+- [Introduction](#introduction)
+- [Caution](#caution)
+- [The goal](#the-goal)
+- [Installation](#installation)
+- [Bépo keyboard oriented configurations:](#bépo-keyboard-oriented-configurations)
+- [Standard configuration files for:](#standard-configuration-files-for)
+- [Work in progress](#work-in-progress)
+- [Dropped support](#dropped-support)
+
+
 # Introduction
 
-Various Linux configuration files — lot of them using bépo layout and/or 
-vim-styles shortcuts. This is a keyboard oriented configuration based on i3 
+Various Linux configuration files — lot of them using bépo layout and/or
+vim-styles shortcuts. This is a keyboard oriented configuration based on i3
 (currently testing sway/wayland).
 
 
 # Caution
 
-This repository is currently under refactoring and unstable.
-Use at your own risk. I'm aiming at making a stable version before the end of 
-the year and will the follow a standard git workflow.
+This repository is currently under refactoring and unstable. Use at your own
+risk. I'm aiming at making a stable version before the end of the year and will
+the follow a standard git workflow.
 
 # The goal
 
-I aim to make all configuration files generic, with external files for local and 
-private settings. You can find an exemple of local settings on my repository for 
-the 
-[mid-2011 macbook air](https://github.com/sheoak/dotfiles-macbook-air-mid-2011).
+I aim to make all configuration files generic, with external files for local and
+private settings. You can find an exemple of local settings on my repository for
+the [mid-2011 macbook air][1].
 
-A lot effort is put on minimalist maintenance and installation time. All my 
-machine are using this same repository without any differences. Most 
-of the customization happen in the $DOTFILES_PRIVATE and $DOTFILES_LOCAL 
-directories.
+A lot effort is put on minimalist maintenance and installation time. All my
+machine are using this same repository without any differences. Most of the
+customization happen in the $DOTFILES_PRIVATE and $DOTFILES_LOCAL directories.
 
 - ~/.dotfiles-private : custom config that should not be public
-- ~/.dotfiles-local   : local settings for the current host (monitor settings, 
+- ~/.dotfiles-local   : local settings for the current host (monitor settings,
   themes…)
 
-I am working on a way to install everything automatically using ansible and will 
+I am working on a way to install everything automatically using ansible and will
 share the source code when it's done.
 
-Most of the work on bépo configuration is made in my 
-[vim-bepoptimist](https://github.com/sheoak/vim-bepoptimist) plugin.
-I'm still experiencing a lot on it, it might be unstable. Any participation is 
-welcome if you're a bépo enthusiast.
+Most of the work on bépo configuration is made in my
+[vim-bepoptimist][2] plugin. I'm still
+experiencing a lot on it, it might be unstable. Any participation is welcome if
+you're a bépo enthusiast.
 
 
 # Installation
 
-You can easily install it by forking it and then using 
-[this method explained on atlassian.com](https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/).
+You can easily install it by forking it and then using
+[this method explained on atlassian.com][3].
 In short:
 
     $ cd ~
@@ -81,7 +91,7 @@ You can now do for example:
 - mpv
 - ncmpcpp
 - neomutt (see ~/.mutt/bepo.muttrc)
-- neovim (see my plugin [vim-bepoptimist](https://github.com/sheoak/vim-bepoptimist)
+- neovim (see my plugin [vim-bepoptimist][2]
 - oh-my-zsh
 - qutebrowser
 - ranger
@@ -119,8 +129,6 @@ I'm leaving those files but will not maintain them anymore:
 - urxvt
 - xcolors
 
-
-# Tips
-
-Nice way to store your dotfiles:
-https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/
+[1]: https://github.com/sheoak/dotfiles-macbook-air-mid-2011
+[2]: https://github.com/sheoak/vim-bepoptimist
+[3]: https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/
