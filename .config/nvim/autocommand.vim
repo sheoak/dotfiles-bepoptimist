@@ -50,13 +50,13 @@ augroup fileTypes
     au FileType javascript    setlocal formatprg=prettier\ --stdin
 
     " formating by types
-    au FileType text          setlocal tw=78 fo+=tw
-    au FileType markdown      setlocal tw=80 fo+=tw
-    au FileType gitcommit     setlocal tw=72 cc=72  fo+=taw
-    au FileType mail          setlocal tw=72 fo+=ow listchars=tab:\ \
+    au FileType text          setlocal tw=78 fo+=t cole=0
+    au FileType markdown      setlocal tw=80 fo+=t cole=0
+    au FileType gitcommit     setlocal tw=72 cc=72  fo+=ta
+    au FileType mail          setlocal tw=72 fo+=o listchars=tab:\ \
 
     " disable deoplete auto-complete for text files
-    au FileType text,mail
+    au FileType text,markdown,mail
             \ call deoplete#custom#buffer_option('auto_complete', v:false)
 augroup END
 
