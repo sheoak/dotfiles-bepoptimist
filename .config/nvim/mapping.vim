@@ -179,8 +179,9 @@ xmap ih <Plug>GitGutterTextObjectInnerVisual
 xmap ah <Plug>GitGutterTextObjectOuterVisual
 
 " Vim-arguments
-nmap g« <Plug>Argumentative_MoveLeft
-nmap g» <Plug>Argumentative_MoveRight
+" now using sideways (testing)
+" nmap g« <Plug>Argumentative_MoveLeft
+" nmap g» <Plug>Argumentative_MoveRight
 
 " Snea[k]
 " Some mappings are in vim-bepoptimist plugin (homerow remap and <>)
@@ -196,15 +197,31 @@ nmap gK <Plug>SneakLabel_S
 
 " Surround (l like ?)
 " s has been remapped by bepoptimist (homerow)
-nmap dl  <Plug>Dsurround
-nmap cl  <Plug>Csurround
-nmap cL  <Plug>CSurround
-nmap yl  <Plug>Ysurround
-nmap yL  <Plug>YSurround
-nmap yll <Plug>Yssurround
-nmap ylL <Plug>YSsurround
-xmap l   <Plug>VSurround
-xmap l   <Plug>VgSurround
+" need remapping if n/N move to l/L
+nmap dé  <Plug>Dsurround
+nmap cé  <Plug>Csurround
+nmap cÉ  <Plug>CSurround
+nmap yé  <Plug>Ysurround
+nmap yÉ  <Plug>YSurround
+nmap yéé <Plug>Yssurround
+nmap yéÉ <Plug>YSsurround
+xmap é   <Plug>VSurround
+xmap é   <Plug>VgSurround
+
+" Vim-move
+vmap às <Plug>MoveBlockDown
+vmap àr <Plug>MoveBlockUp
+vmap àt <Plug>MoveBlockLeft
+vmap àn <Plug>MoveBlockRight
+
+nmap càs <Plug>MoveLineDown
+nmap càr <Plug>MoveLineUp
+nmap càt <Plug>MoveCharLeft
+nmap càn <Plug>MoveCharRight
+
+" sideways (moving blocks)
+nnoremap g« :SidewaysLeft<cr>
+nnoremap g» :SidewaysRight<cr>
 
 " -----------------------------------------------------------------------------
 " Leader mappings:

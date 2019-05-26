@@ -12,6 +12,8 @@
 " ----------------------------------------------------------------------------
 Plug 'chrisbra/csv.vim'
 Plug 'SidOfc/mkdx'                     " Markdown goodies
+Plug 'AndrewRadev/sideways.vim'
+Plug 'matze/vim-move'
 
 " ----------------------------------------------------------------------------
 " My custom plugins

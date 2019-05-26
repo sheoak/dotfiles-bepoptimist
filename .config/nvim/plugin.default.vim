@@ -171,3 +171,6 @@ let g:no_viewdoc_maps = 1
 
 " let g:no_viewdoc_abbrev = 1
 let g:viewdoc_openempty = 0
+
+" vim-move
+let g:move_map_keys = 0
