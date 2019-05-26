@@ -1,7 +1,14 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Custom mappings
 " See bepotimist for homerow related mappings (tsrn)
+"
+" TODO: find a key and remap mkdx https://github.com/SidOfc/mkdx
+"       candidate are È ù œ (if moving tab)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" ============================================================================
+" Neovim built-in
+" ============================================================================
 
 " Don't use Ex mode, use Q for formatting
 noremap Q gq
