@@ -52,7 +52,7 @@ augroup fileTypes
     " formating by types
     au FileType text          setlocal tw=78 fo+=t cole=0
     au FileType markdown      setlocal tw=80 fo+=t cole=0
-    au FileType gitcommit     setlocal tw=72 cc=72  fo+=ta
+    au FileType gitcommit     setlocal tw=72 fo+=t cc=72
     au FileType mail          setlocal tw=72 fo+=o listchars=tab:\ \
 
     " disable deoplete auto-complete for text files
