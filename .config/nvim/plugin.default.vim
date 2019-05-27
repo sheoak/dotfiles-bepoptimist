@@ -70,6 +70,10 @@ let g:airline_symbols.paste = ''
 " vim-jedi
 " let g:ycm_min_num_of_chars_for_completion = 2
 let g:jedi#documentation_command = ''
+let g:jedi#rename_command = ''
+let g:jedi#usages_command = ''
+let g:jedi#goto_assignments_command = ''
+let g:jedi#goto_command = ''
 
 " vim-template
 " Try to get email and name from git
