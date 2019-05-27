@@ -459,7 +459,3 @@ nnoremap ðq :GdbDebugStop<CR>
 
 " vim-bookmarks
 nnoremap ms <Plug>BookmarkShowAll
-
-" Gundo
-" See bepoptimist
-
