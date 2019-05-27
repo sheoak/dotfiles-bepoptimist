@@ -38,22 +38,22 @@ let g:airline_highlighting_cache = 1
 let g:gruvbox_contrast_light = 'light'
 let g:airline_mode_map = {
       \ '__' : '-',
-      \ 'c'  : ' Command',
-      \ 'i'  : ' Insert',
-      \ 'ic' : ' Insert',
-      \ 'ix' : ' Insert',
-      \ 'n'  : ' Normal',
-      \ 'ni' : ' Normal',
-      \ 'no' : ' Normal',
-      \ 'R'  : '﯒ Replace',
-      \ 'Rv' : '﯒ Replace',
-      \ 's'  : ' Select',
-      \ 'S'  : ' Select',
-      \ '' : ' Select',
-      \ 't'  : ' Terminal',
-      \ 'v'  : ' Visual',
-      \ 'V'  : ' Visual Line',
-      \ '' : ' Visual Block',
+      \ 'c'  : ' command',
+      \ 'i'  : ' insert',
+      \ 'ic' : ' insert',
+      \ 'ix' : ' insert',
+      \ 'n'  : ' normal',
+      \ 'ni' : ' normal',
+      \ 'no' : ' normal',
+      \ 'R'  : '﯒ replace',
+      \ 'Rv' : '﯒ replace',
+      \ 's'  : ' select',
+      \ 'S'  : ' select',
+      \ '' : ' select',
+      \ 't'  : ' terminal',
+      \ 'v'  : ' visual',
+      \ 'V'  : ' visual Line',
+      \ '' : ' visual Block',
 \ }
 
 " do not show default correct utf-8 unix status
@@ -69,6 +69,7 @@ let g:airline_symbols.paste = ''
 
 " vim-jedi
 " let g:ycm_min_num_of_chars_for_completion = 2
+let g:jedi#documentation_command = ''
 
 " vim-template
 " Try to get email and name from git
@@ -174,3 +175,13 @@ let g:viewdoc_openempty = 0
 
 " vim-move
 let g:move_map_keys = 0
+
+" vim-multiple-cursors
+let g:multi_cursor_start_word_key      = '<C-h>'
+let g:multi_cursor_select_all_word_key = '<A-n>'
+let g:multi_cursor_start_key           = 'g<C-h>'
+let g:multi_cursor_select_all_key      = 'g<A-h>'
+let g:multi_cursor_next_key            = '<C-h>'
+let g:multi_cursor_prev_key            = '<C-p>'
+let g:multi_cursor_skip_key            = '<C-x>'
+let g:multi_cursor_quit_key            = '<Esc>'

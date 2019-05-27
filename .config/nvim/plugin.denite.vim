@@ -110,12 +110,5 @@ if (executable('ag'))
     call denite#custom#var('grep', 'pattern_opt', [])
     call denite#custom#var('grep', 'separator', ['--'])
     call denite#custom#var('grep', 'final_opts', [])
-
-    " Toggle hidden files on/off for file/rec search with ag
-    " Only if ag is active
-    nnoremap <silent> [o. :call denite#custom#var('file/rec', 'command',
-        \ ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])<CR>
-    nnoremap <silent> ]o. :call denite#custom#var('file/rec', 'command',
-        \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])<CR>
 endif
 

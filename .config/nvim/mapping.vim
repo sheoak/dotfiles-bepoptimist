@@ -19,9 +19,6 @@ inoremap <C-f> <C-x><C-f>
 inoremap <C-l> <C-x><C-l>
 inoremap <C-o> <C-x><C-o>
 
-" open file under cursor
-nnoremap gF :e <cfile><CR>
-
 " don't override register when pasting over
 xnoremap p pgvy
 
@@ -31,6 +28,8 @@ noremap <Space> <PageDown>
 
 " terminal escape instead of C-\ C-n
 tnoremap <C-g> <C-\><C-n>
+
+nnoremap gn :tabe <CR>
 
 " ============================================================================
 " Plugins
@@ -63,7 +62,7 @@ nnoremap ’H :CBommits!<CR>
 " GitGutter mappings
 nmap ’a <Plug>GitGutterStageHunk
 nmap ’u <Plug>GitGutterUndoHunk
-nmap ’z <Plug>GitGutterPreviewHunk
+nmap ’v <Plug>GitGutterPreviewHunk
 
 " -----------------------------------------------------------------------------
 " Vim-unimpaired-like mappings enable/disable/toggle ([, ], y)
@@ -106,6 +105,15 @@ nnoremap yoy :Goyo<CR>
 nmap ]g <Plug>(grammarous-move-to-next-error)
 nmap [g <Plug>(grammarous-move-to-previous-error)
 
+
+" Denite
+" Toggle hidden files on/off for file/rec search with ag
+if (executable('ag'))
+    nnoremap <silent> [o. :call denite#custom#var('file/rec', 'command',
+        \ ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])<CR>
+    nnoremap <silent> ]o. :call denite#custom#var('file/rec', 'command',
+        \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])<CR>
+endif
 
 " -----------------------------------------------------------------------------
 "  Completion (<tab>, <c-space>)
@@ -198,28 +206,18 @@ nmap gK <Plug>SneakLabel_S
 " Surround (l like ?)
 " s has been remapped by bepoptimist (homerow)
 " need remapping if n/N move to l/L
-nmap dé  <Plug>Dsurround
-nmap cé  <Plug>Csurround
-nmap cÉ  <Plug>CSurround
-nmap yé  <Plug>Ysurround
-nmap yÉ  <Plug>YSurround
-nmap yéé <Plug>Yssurround
-nmap yéÉ <Plug>YSsurround
-xmap é   <Plug>VSurround
-xmap é   <Plug>VgSurround
-
-" Vim-move
-vmap às <Plug>MoveBlockDown
-vmap àr <Plug>MoveBlockUp
-vmap àt <Plug>MoveBlockLeft
-vmap àn <Plug>MoveBlockRight
-
-nmap càs <Plug>MoveLineDown
-nmap càr <Plug>MoveLineUp
-nmap càt <Plug>MoveCharLeft
-nmap càn <Plug>MoveCharRight
+nmap du  <Plug>Dsurround
+nmap cu  <Plug>Csurround
+nmap cU  <Plug>CSurround
+nmap yu  <Plug>Ysurround
+nmap yU  <Plug>YSurround
+nmap yuu <Plug>Yssurround
+nmap yuU <Plug>YSsurround
+xmap u   <Plug>VSurround
+xmap u   <Plug>VgSurround
 
 " sideways (moving blocks)
+" TODO: use unimpaired [] ?
 nnoremap g« :SidewaysLeft<cr>
 nnoremap g» :SidewaysRight<cr>
 
@@ -464,3 +462,4 @@ nnoremap ms <Plug>BookmarkShowAll
 
 " Gundo
 " See bepoptimist
+
