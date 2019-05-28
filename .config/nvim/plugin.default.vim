@@ -5,9 +5,9 @@
 " Some plugin may not be installed, but I keep the settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Neovim
-let g:python_host_prog='/usr/bin/python2'
-let g:python3_host_prog='/usr/bin/python3'
+" Python configuration (neovim 2 & 3 virtualenv must be created)
+let g:python_host_prog=expand('~/.virtualenvs/neovim2/bin/python')
+let g:python3_host_prog=expand('~/.virtualenvs/neovim3/bin/python')
 
 " Emmet
 let g:user_emmet_install_global = 0
@@ -25,17 +25,19 @@ let g:rooter_silent_chdir = 1
 " vim-airline
 set laststatus=2 " Always display the statusline in all windows
 set noshowmode   " Remove the duplicated mode label
+
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#fnamemod = ':t' " just show filename
 let g:airline#extensions#tabline#fnamecollapse = 0
-" obsession indicator
-let g:airline#extensions#obsession#indicator_text = ''
-" syntax not 100% correct, but faster
-" can manually refresh with :AirlineRefresh
-let g:airline_highlighting_cache = 1
-" Gruvbox theme
 let g:gruvbox_contrast_light = 'light'
+" syntax not 100% correct, but faster, refresh with :AirlineRefresh :
+let g:airline_highlighting_cache = 1
+" do not show default correct utf-8 unix status
+let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
+
+" Icons and labels:
+let g:airline#extensions#obsession#indicator_text = ''
 let g:airline_mode_map = {
       \ '__' : '-',
       \ 'c'  : ' command',
@@ -55,9 +57,6 @@ let g:airline_mode_map = {
       \ 'V'  : ' visual Line',
       \ '' : ' visual Block',
 \ }
-
-" do not show default correct utf-8 unix status
-let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
@@ -97,8 +96,6 @@ let g:bim_map_fugitive = 1
 let g:surround_no_mappings = 1
 
 " Deoplete
-let g:python_host_prog=expand('~/.virtualenvs/neovim2/bin/python')
-let g:python3_host_prog=expand('~/.virtualenvs/neovim3/bin/python')
 let g:deoplete#enable_at_startup = 1
 let g:neosnippet#enable_completed_snippet = 1
 let g:deoplete#omni_patterns = {}
@@ -140,7 +137,7 @@ let g:mkdp_browser = 'qutebrowser'
 set updatetime=100
 
 " Table-mode
-let g:table_mode_map_prefix = ',\'
+let g:table_mode_map_prefix = ',|'
 
 " Grammarous
 let g:grammarous#default_comments_only_filetypes = {
@@ -171,12 +168,6 @@ let g:bclose_no_plugin_maps = 1
 " nvim-gdb
 let g:nvimgdb_disable_start_keymaps = 1
 
-" viewdoc
-let g:no_viewdoc_maps = 1
-
-" let g:no_viewdoc_abbrev = 1
-let g:viewdoc_openempty = 0
-
 " vim-multiple-cursors
 let g:multi_cursor_start_word_key      = '<C-h>'
 let g:multi_cursor_select_all_word_key = '<A-n>'
@@ -188,7 +179,4 @@ let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
 
 " Ternjs
-let g:deoplete#sources#ternjs#filetypes = [
-                \ 'jsx',
-                \ 'vue',
-                \ ]
+let g:deoplete#sources#ternjs#filetypes = ['jsx', 'vue']
