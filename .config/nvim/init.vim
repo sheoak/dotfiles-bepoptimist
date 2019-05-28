@@ -26,7 +26,6 @@ call plug#end()
 
 execute "source " . g:vimpath . "setting.vim"
 execute "source " . g:vimpath . "autocommand.vim"
-execute "source " . g:vimpath . "extend.vim"
 
 " default and individual plugin settings (for complex settings)
 for path in split(glob(g:vimpath. 'plugin.*.vim'), '\n')

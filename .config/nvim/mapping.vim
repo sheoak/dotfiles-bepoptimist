@@ -13,7 +13,8 @@
 " Don't use Ex mode, use Q for formatting
 noremap Q gq
 
-" Rewrite some vim maps in insert mode, not that usefull anyway:
+" Rewrite some vim maps in insert mode, not that usefull anyway if you know 
+" how to use vim in normal mode properly:
 inoremap <C-j> <C-x><C-]>
 inoremap <C-f> <C-x><C-f>
 inoremap <C-l> <C-x><C-l>
@@ -29,6 +30,7 @@ noremap <Space> <PageDown>
 " terminal escape instead of C-\ C-n
 tnoremap <C-g> <C-\><C-n>
 
+" ranger style open tab
 nnoremap gn :tabe <CR>
 
 " ============================================================================
@@ -64,55 +66,14 @@ nmap ’a <Plug>GitGutterStageHunk
 nmap ’u <Plug>GitGutterUndoHunk
 nmap ’v <Plug>GitGutterPreviewHunk
 
-" -----------------------------------------------------------------------------
-" Vim-unimpaired-like mappings enable/disable/toggle ([, ], y)
-" See bepotimist for remapping of conflicts (>p/»p)
-" -----------------------------------------------------------------------------
-
 " ALE
-nnoremap <silent> ]oa :ALEDisable<cr>
-nnoremap <silent> [oa :ALEEnable<cr>
-nnoremap <silent> yoa :ALEToggle<cr>
 nnoremap <silent> ylf :ALEFix<cr>
 nnoremap <silent> yld :ALEDetail<cr>
-nnoremap <silent> [h :ALEPrevious<cr>
-nnoremap <silent> ]h :ALENext<cr>
-
-" Deoplete
-nnoremap <silent> ]o<tab> :call deoplete#disable()
-nnoremap <silent> ]o<tab> :call deoplete#enable()
-nnoremap <silent> yo<tab> :call deoplete#toggle()
-
-" vim-markdown
-nmap [om <Plug>MarkdownPreview
-nmap ]om <Plug>MarkdownPreviewStop
-nmap yom <Plug>MarkdownPreviewToggle
-
-" Git-gutter
-nmap ]og :GitGutterLineHighlightsDisable<CR>
-nmap [og :GitGutterLineHighlightsEnable<CR>
-nmap yog :GitGutterLineHighlightsToggle<CR>
-
-" table-mode
-nnoremap ]ot :TableModeEnable<CR>
-nnoremap [ot :TableModeDisable<CR>
-nnoremap yot :TableModeToggle<CR>
-
-" Goyo
-nnoremap yoy :Goyo<CR>
-
-" Grammarous
-nmap ]g <Plug>(grammarous-move-to-next-error)
-nmap [g <Plug>(grammarous-move-to-previous-error)
-
 
 " Denite
-" Toggle hidden files on/off for file/rec search with ag
 if (executable('ag'))
-    nnoremap <silent> [o. :call denite#custom#var('file/rec', 'command',
-        \ ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])<CR>
-    nnoremap <silent> ]o. :call denite#custom#var('file/rec', 'command',
-        \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])<CR>
+    let g:unimpaired_extra_denite_cmd_hidden = ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', '']
+    let g:unimpaired_extra_denite_cmd = ['ag', '--follow', '--nocolor', '--nogroup', '-g', '']
 endif
 
 " -----------------------------------------------------------------------------
@@ -120,7 +81,6 @@ endif
 " -----------------------------------------------------------------------------
 
 " Neosnippets
-" Note: It must be "imap" and "smap"
 imap <C-space> <Plug>(neosnippet_expand_or_jump)
 smap <C-space> <Plug>(neosnippet_expand_or_jump)
 xmap <C-space> <Plug>(neosnippet_expand_target)
@@ -391,9 +351,17 @@ nmap ;tp :!pytest<CR>
 " [O]rder all css properties
 nnoremap ;c :<C-u>g/{/ .+1,/}/-1 sort<CR>
 nnoremap ;u :<C-u>:GundoToggle<CR>
+
+command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+            \ | wincmd p | diffthis
 nnoremap ;do :DiffOrig<CR>
 " Clean dirty white space (EOL)
 nnoremap ;<space> :silent! %s/\s\+$//<CR>
+
+" Forgotten unbreakable spaces… for French only
+" TODO: move me with execute ;
+" TODO: operator cleaner?
+nnoremap ;  :%s/\(\S\) \([:;?!]\)/\1 \2/g<CR>
 
 " -----------------------------------------------------------------------------
 "  Language related plugins (ß)
@@ -428,13 +396,9 @@ nnoremap ßq :ThesaurusQueryReplace<space>
 " Operator
 omap ß <Plug>(operator-grammarous)
 
-
 " -----------------------------------------------------------------------------
 "  Other mappings
 " -----------------------------------------------------------------------------
-
-" Viewdoc
-nnoremap S :ViewDoc <cword>
 
 " nvim-gdb
 " Memo: ð is AltGr+d ([d]ebug)

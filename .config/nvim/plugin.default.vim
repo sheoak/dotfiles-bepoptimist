@@ -180,3 +180,9 @@ let g:multi_cursor_quit_key            = '<Esc>'
 
 " Ternjs
 let g:deoplete#sources#ternjs#filetypes = ['jsx', 'vue']
+
+" vim-unimpaired-extras
+if (executable('ag'))
+    let g:unimpaired_extra_denite_cmd_hidden = ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', '']
+    let g:unimpaired_extra_denite_cmd = ['ag', '--follow', '--nocolor', '--nogroup', '-g', '']
+endif
