@@ -24,15 +24,56 @@ let g:rooter_silent_chdir = 1
 
 " vim-airline
 set laststatus=2 " Always display the statusline in all windows
+set noshowmode   " Remove the duplicated mode label
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#fnamemod = ':t' " just show filename
-
+let g:airline#extensions#tabline#fnamecollapse = 0
+" obsession indicator
+let g:airline#extensions#obsession#indicator_text = ''
+" syntax not 100% correct, but faster
+" can manually refresh with :AirlineRefresh
+let g:airline_highlighting_cache = 1
 " Gruvbox theme
-let g:gruvbox_contrast_light = 'dark'
+let g:gruvbox_contrast_light = 'light'
+let g:airline_mode_map = {
+      \ '__' : '-',
+      \ 'c'  : ' command',
+      \ 'i'  : ' insert',
+      \ 'ic' : ' insert',
+      \ 'ix' : ' insert',
+      \ 'n'  : ' normal',
+      \ 'ni' : ' normal',
+      \ 'no' : ' normal',
+      \ 'R'  : '﯒ replace',
+      \ 'Rv' : '﯒ replace',
+      \ 's'  : ' select',
+      \ 'S'  : ' select',
+      \ '' : ' select',
+      \ 't'  : ' terminal',
+      \ 'v'  : ' visual',
+      \ 'V'  : ' visual Line',
+      \ '' : ' visual Block',
+\ }
+
+" do not show default correct utf-8 unix status
+let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+let g:airline_symbols.readonly = ""
+let g:airline_symbols.spell = '暈'
+let g:airline_symbols.paste = ''
 
 " vim-jedi
 " let g:ycm_min_num_of_chars_for_completion = 2
+let g:jedi#documentation_command = ''
+let g:jedi#rename_command = ''
+let g:jedi#usages_command = ''
+let g:jedi#goto_assignments_command = ''
+let g:jedi#goto_command = ''
 
 " vim-template
 " Try to get email and name from git
@@ -68,7 +109,7 @@ let g:deoplete#file#enable_buffer_path = 1
 let g:deoplete#auto_complete_delay = 100
 
 " Goyo
-let g:goyo_height='90%'
+let g:goyo_height='98%'
 let g:goyo_width=80
 let g:goyo_linenr=1
 
@@ -88,11 +129,9 @@ let g:neosnippet#snippets_directory='~/.local/share/nvim/plugged/vim-snippets/sn
 let g:neosnippet#scope_aliases = {}
 let g:neosnippet#scope_aliases['python'] = 'python,django'
 
-" EasyAlign
-" Defined in bepoptimist
-
 " Gutentag
 let g:gutentags_ctags_tagfile=".ctags"
+let g:gutentags_exclude_project_root=['/etc']
 
 " vim-markdown
 let g:mkdp_browser = 'qutebrowser'

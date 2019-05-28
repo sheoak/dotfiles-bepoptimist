@@ -1,16 +1,19 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vim main configuration file
 "
+" Plugin manager: vim plug - https://github.com/junegunn/vim-plug
+" To install:
+"
+" :PlugInstall
+"
 " Maintainer: sheoak
 " Version:    O.3
 "
-" See README.md for more informations
+" See README.md and documentation for more informations
+"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:vimpath = "~/.config/nvim/"
 
-" ----------------------------------------------------------------------------
-" Plugins (vim-plug)
-" ----------------------------------------------------------------------------
 if has('nvim')
     let s:plug_path=$HOME . '/.local/share/nvim/plugged'
 else
@@ -18,11 +21,12 @@ else
 endif
 
 call plug#begin(s:plug_path)
-execute "source " . g:vimpath . "plugin.vim"
+    execute "source " . g:vimpath . "plugin.vim"
 call plug#end()
 
 execute "source " . g:vimpath . "setting.vim"
 execute "source " . g:vimpath . "autocommand.vim"
+execute "source " . g:vimpath . "extend.vim"
 
 " default and individual plugin settings (for complex settings)
 for path in split(glob(g:vimpath. 'plugin.*.vim'), '\n')

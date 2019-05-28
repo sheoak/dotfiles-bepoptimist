@@ -1,7 +1,14 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Custom mappings
 " See bepotimist for homerow related mappings (tsrn)
+"
+" TODO: find a key and remap mkdx https://github.com/SidOfc/mkdx
+"       candidate are È ù œ (if moving tab)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" ============================================================================
+" Neovim built-in
+" ============================================================================
 
 " Don't use Ex mode, use Q for formatting
 noremap Q gq
@@ -11,9 +18,6 @@ inoremap <C-j> <C-x><C-]>
 inoremap <C-f> <C-x><C-f>
 inoremap <C-l> <C-x><C-l>
 inoremap <C-o> <C-x><C-o>
-
-" open file under cursor
-nnoremap gF :e <cfile><CR>
 
 " don't override register when pasting over
 xnoremap p pgvy
@@ -25,18 +29,43 @@ noremap <Space> <PageDown>
 " terminal escape instead of C-\ C-n
 tnoremap <C-g> <C-\><C-n>
 
-" EeasyAlign (, is leader)
-nmap \ <Plug>(EasyAlign)
-xmap \ <Plug>(EasyAlign)
+nnoremap gn :tabe <CR>
 
-" Git gutter text-objects (conflict with targets)
-omap ih <Plug>GitGutterTextObjectInnerPending
-omap ah <Plug>GitGutterTextObjectOuterPending
-xmap ih <Plug>GitGutterTextObjectInnerVisual
-xmap ah <Plug>GitGutterTextObjectOuterVisual
+" ============================================================================
+" Plugins
+" ============================================================================
 
 " -----------------------------------------------------------------------------
-" Vim-unimpaired-like mappings [* ]* y*
+" GIT mappings (’)
+" -----------------------------------------------------------------------------
+
+" Fugitive mappings
+nnoremap ’b :Gblame<CR>
+nnoremap ’c :Gcommit<CR>
+nnoremap ’d :Gdiff<CR>
+nnoremap ’e :Gedit<CR>
+nnoremap ’fd :Gremove<CR>
+nnoremap ’fm :Gmove<CR>
+nnoremap ’i :Gpull<CR>
+nnoremap ’l :Glog --oneline<CR>
+nnoremap ’m :Gmerge<CR>
+nnoremap ’p :Gpush<CR>
+nnoremap ’r :Grebase<CR>
+nnoremap ’s :Gstatus<CR>
+nnoremap ’w :Gwrite<CR>
+
+" FZF
+nnoremap ’’ :GFiles<CR>
+nnoremap ’h :Commits!<CR>
+nnoremap ’H :CBommits!<CR>
+
+" GitGutter mappings
+nmap ’a <Plug>GitGutterStageHunk
+nmap ’u <Plug>GitGutterUndoHunk
+nmap ’v <Plug>GitGutterPreviewHunk
+
+" -----------------------------------------------------------------------------
+" Vim-unimpaired-like mappings enable/disable/toggle ([, ], y)
 " See bepotimist for remapping of conflicts (>p/»p)
 " -----------------------------------------------------------------------------
 
@@ -70,17 +99,28 @@ nnoremap [ot :TableModeDisable<CR>
 nnoremap yot :TableModeToggle<CR>
 
 " Goyo
-nnoremap yoy :Goyo
+nnoremap yoy :Goyo<CR>
 
 " Grammarous
 nmap ]g <Plug>(grammarous-move-to-next-error)
 nmap [g <Plug>(grammarous-move-to-previous-error)
 
+
+" Denite
+" Toggle hidden files on/off for file/rec search with ag
+if (executable('ag'))
+    nnoremap <silent> [o. :call denite#custom#var('file/rec', 'command',
+        \ ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])<CR>
+    nnoremap <silent> ]o. :call denite#custom#var('file/rec', 'command',
+        \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])<CR>
+endif
+
+" -----------------------------------------------------------------------------
+"  Completion (<tab>, <c-space>)
 " -----------------------------------------------------------------------------
 
 " Neosnippets
 " Note: It must be "imap" and "smap"
-" -----------------------------------------------------------------------------
 imap <C-space> <Plug>(neosnippet_expand_or_jump)
 smap <C-space> <Plug>(neosnippet_expand_or_jump)
 xmap <C-space> <Plug>(neosnippet_expand_target)
@@ -94,9 +134,13 @@ imap <expr><TAB>
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
+
+" -----------------------------------------------------------------------------
+"  Formatting (þ, \)
+" -----------------------------------------------------------------------------
+
 " Table-mode
 " Memo: þ is AltGr+T ([T]able)
-" -----------------------------------------------------------------------------
 nnoremap þþ :TableModeToggle<CR>
 nnoremap þs :TableModeSort<CR>
 nnoremap þf :TableModeAddFormula<CR>
@@ -105,53 +149,21 @@ nnoremap þt <Plug>(table-mode-tableize)
 xnoremap þt <Plug>(table-mode-tableize)
 xnoremap þd <Plug>(table-mode-tableize-delimiter)
 
-" Sneak
-" Some mappings are in vim-bepoptimist plugin (homerow remap and <>)
-nmap é <Plug>Sneak_s
-xmap é <Plug>Sneak_s
-omap é <Plug>Sneak_s
-nmap É <Plug>Sneak_S
-xmap É <Plug>Sneak_S
-omap É <Plug>Sneak_S
+" EeasyAlign (, is leader)
+nmap \ <Plug>(EasyAlign)
+xmap \ <Plug>(EasyAlign)
 
-" label-mode
-nmap gé <Plug>SneakLabel_s
-nmap gÉ <Plug>SneakLabel_S
+" Mkdx
+" See extend.vim for functions
+let g:mkdx#settings = { 'map': { 'prefix': 'ù' } }
+" Overwrite the default action for toggling quickfix
+nnoremap <silent> ùI :call <SID>MkdxFzfQuickfixHeaders()<CR>
 
-" Grammarous
-" Memo: ß is AltGr+S ([S]pell)
 " -----------------------------------------------------------------------------
-nmap ßß <Plug>(grammarous-fixit)
-nmap ßI <Plug>(grammarous-move-to-info-window)
-nmap ßi <Plug>(grammarous-open-info-window)
-nmap ßh <Plug>(grammarous-reset)
-nmap ßa <Plug>(grammarous-fixall)
-nmap ßq <Plug>(grammarous-close-info-window)
-nmap ßr <Plug>(grammarous-remove-error)
-nmap ßd <Plug>(grammarous-disable-rule)
-nmap ßn <Plug>(grammarous-move-to-next-error)
-nmap ßp <Plug>(grammarous-move-to-previous-error)
-nmap ßc :GrammarousCheck<CR>
-vmap ß :GrammarousCheck<CR>
-
-" Vim spell
-nmap ßf :set spelllang=fr<CR>
-nmap ße :set spelllang=en<CR>
-nmap ßm :set spelllang=en,fr<CR>
-nmap ßs z=
-
-" Thesaurus
-nnoremap ßt :ThesaurusQueryReplaceCurrentWord<CR>
-nnoremap ßT :Thesaurus<space>
-nnoremap ßq :ThesaurusQueryReplace<space>
-
-" Operator
-omap ß <Plug>(operator-grammarous)
-
-" CamelCase motions
+"  Motions and text-objects (ç, é…)
 " -----------------------------------------------------------------------------
 
-" motions
+" CamelCase motions (ç)
 nmap <silent> ç <Plug>CamelCaseMotion_w
 nmap <silent> Ç <Plug>CamelCaseMotion_b
 nmap <silent> gç <Plug>CamelCaseMotion_e
@@ -161,104 +173,58 @@ vmap <silent> Ç <Plug>CamelCaseMotion_b
 vmap <silent> gç <Plug>CamelCaseMotion_e
 vmap <silent> gÇ <Plug>CamelCaseMotion_ge
 
-" text-objects
+" CamelCase text-objects (ç)
 omap <silent> aç <Plug>CamelCaseMotion_iw
 xmap <silent> aç <Plug>CamelCaseMotion_iw
 omap <silent> iç <Plug>CamelCaseMotion_ib
 xmap <silent> iç <Plug>CamelCaseMotion_ib
 
-" vim-arguments
-" -----------------------------------------------------------------------------
-nmap g« <Plug>Argumentative_MoveLeft
-nmap g» <Plug>Argumentative_MoveRight
+" Git gutter text-objects (conflict with targets)
+" [h]unks
+omap ih <Plug>GitGutterTextObjectInnerPending
+omap ah <Plug>GitGutterTextObjectOuterPending
+xmap ih <Plug>GitGutterTextObjectInnerVisual
+xmap ah <Plug>GitGutterTextObjectOuterVisual
 
-" Sneak
-" -----------------------------------------------------------------------------
-" Defined in bepoptimist
+" Vim-arguments
+" now using sideways (testing)
+" nmap g« <Plug>Argumentative_MoveLeft
+" nmap g» <Plug>Argumentative_MoveRight
 
-" vim-bookmarks
-" -----------------------------------------------------------------------------
-nnoremap ms <Plug>BookmarkShowAll
-
-" Surround
-" s has been remapped by bepoptimist (homerow)
-nmap dk  <Plug>Dsurround
-nmap ck  <Plug>Csurround
-nmap cK  <Plug>CSurround
-nmap yk  <Plug>Ysurround
-nmap yK  <Plug>YSurround
-nmap ykk <Plug>Yssurround
-nmap yKk <Plug>YSsurround
-xmap k   <Plug>VSurround
-xmap K   <Plug>VgSurround
-
-" Sneak
-" See bepoptimist
-
+" Snea[k]
+" Some mappings are in vim-bepoptimist plugin (homerow remap and <>)
+nmap k <Plug>Sneak_s
+xmap k <Plug>Sneak_s
+omap k <Plug>Sneak_s
+nmap K <Plug>Sneak_S
+xmap K <Plug>Sneak_S
+omap K <Plug>Sneak_S
 " label-mode
-nmap gé <Plug>SneakLabel_s
-nmap gÉ <Plug>SneakLabel_S
+nmap gk <Plug>SneakLabel_s
+nmap gK <Plug>SneakLabel_S
 
-" Gundo
-" See bepoptimist
+" Surround (l like ?)
+" s has been remapped by bepoptimist (homerow)
+" need remapping if n/N move to l/L
+nmap du  <Plug>Dsurround
+nmap cu  <Plug>Csurround
+nmap cU  <Plug>CSurround
+nmap yu  <Plug>Ysurround
+nmap yU  <Plug>YSurround
+nmap yuu <Plug>Yssurround
+nmap yuU <Plug>YSsurround
+xmap u   <Plug>VSurround
+xmap u   <Plug>VgSurround
 
-" -----------------------------------------------------------------------------
-" GIT mappings
-" -----------------------------------------------------------------------------
-
-" Fugitive mappings
-nnoremap ’b :Gblame<CR>
-nnoremap ’c :Gcommit<CR>
-nnoremap ’d :Gdiff<CR>
-nnoremap ’e :Gedit<CR>
-nnoremap ’fd :Gremove<CR>
-nnoremap ’fm :Gmove<CR>
-nnoremap ’i :Gpull<CR>
-nnoremap ’l :Glog --oneline<CR>
-nnoremap ’m :Gmerge<CR>
-nnoremap ’p :Gpush<CR>
-nnoremap ’r :Grebase<CR>
-nnoremap ’s :Gstatus<CR>
-nnoremap ’w :Gwrite<CR>
-
-" FZF
-nnoremap ’’ :GFiles<CR>
-nnoremap ’h :Commits!<CR>
-nnoremap ’H :CBommits!<CR>
-
-" GitGutter mappings
-nmap ’a <Plug>GitGutterStageHunk
-nmap ’u <Plug>GitGutterUndoHunk
-nmap ’z <Plug>GitGutterPreviewHunk
-
-" nvim-gdb
-" Memo: ð is AltGr+d ([d]ebug)
-" -----------------------------------------------------------------------------
-nnoremap ðð <C-w><C-p>
-nnoremap ðg :GdbStart gdb -q ./a.out
-nnoremap ðl :GdbStartLLDB lldb ./a.out
-nnoremap ðp :GdbStartPDB python -m pdb main.py
-nnoremap ð<Return> :GdbContinue<CR>
-nnoremap ð<Space> :GdbStep<CR>
-nnoremap ðu :GdbUntil<CR>
-nnoremap ðn :GdbNext<CR>
-nnoremap ðh :GdbFinish<CR>
-nnoremap ðt :GdbBreakpointToggle<CR>
-nnoremap ð< :GdbFrameUp<CR>
-nnoremap ð> :GdbFrameDown<CR>
-nnoremap ðe :GdbEvalWord<CR>
-vnoremap ðe :GdbEvalRange<CR>
-nnoremap ðd :GdbBreakpointClearAll<CR>
-nnoremap ði :GdbInterrupt<CR>
-nnoremap ðq :GdbDebugStop<CR>
-
-" viewdoc
-" -----------------------------------------------------------------------------
-" TODO
+" sideways (moving blocks)
+" TODO: use unimpaired [] ?
+nnoremap g« :SidewaysLeft<cr>
+nnoremap g» :SidewaysRight<cr>
 
 " -----------------------------------------------------------------------------
 " Leader mappings:
 " -----------------------------------------------------------------------------
+"
 " All leader mappings are use for file managment: actions on file, buffers…
 "
 " This mainly use Denite and FZF or basic actions like saving file
@@ -283,13 +249,11 @@ nnoremap ðq :GdbDebugStop<CR>
 "
 " Combination:
 " - ,.S force (S) save all (.) files
-"            
 "
 " For file saving/exiting, uppercase mean 'for all files'
+"
+" TODO: hidden buffers (denite buffers:!)
 " -----------------------------------------------------------------------------
-
-" Faster than Denite, we use fzf when only need to open files
-nnoremap <Tab> :Buffers<CR>
 
 " Common actions (no plugin)
 nmap <leader>s :w<CR>
@@ -312,11 +276,12 @@ nmap <leader>D :bdelete!<CR>
 nmap <leader>.d :bufdo bdelete<CR>
 nmap <leader>.D :bufdo bdelete!<CR>
 
-" FZF
-nnoremap <leader>, :FZF ~<CR>
-nnoremap <leader>f :FZF<CR>
+" FZF, it's faster than denite to open, no delay
+nnoremap <Tab> :Buffers<CR>
+nnoremap <leader><leader> :FZF<CR>
+nnoremap ;; :FZF ~<CR>
 nnoremap <leader><space> :History<CR>
-nnoremap <leader>m :Marks<CR>
+" nnoremap <leader>m :Marks<CR>
 nnoremap <leader>: :History:<CR>
 
 " Startify
@@ -374,10 +339,9 @@ nnoremap <leader>k :<C-u>Denite help<CR>
 nnoremap <leader>l :<C-u>Denite line<CR>
 nnoremap <leader>L :<C-u>Denite line:buffers<CR>
 nnoremap <leader>n :<C-u>Denite outline<CR>
-nnoremap <leader>M :<C-u>Denite mark<CR>
+nnoremap <leader>m :<C-u>Denite mark<CR>
 nnoremap <leader>p :<C-u>Denite neosnippet<CR>
 nnoremap <leader>o :<C-u>Denite output:!
-nnoremap <leader>u :<C-u>:Gundo<CR>
 nnoremap <leader>y :<C-u>Denite register<CR>
 nnoremap <leader>z :<C-u>Denite spell<CR>
 nnoremap <leader>Z :<C-u>Denite grammarous<CR>
@@ -389,9 +353,7 @@ nnoremap <leader>?i :<C-u>Denite output:imap<CR>
 nnoremap <leader>?x :<C-u>Denite output:xmap<CR>
 nnoremap <leader>?o :<C-u>Denite output:omap<CR>
 
-" -----------------------------------------------------------------------------
 " Insert mode mapping for completion
-" -----------------------------------------------------------------------------
 imap <c-k> <plug>(fzf-complete-word)
 imap <c-l> <plug>(fzf-complete-line)
 inoremap <expr> <c-x><c-j> fzf#vim#complete#path('ag --hidden -l -g ""')
@@ -428,16 +390,72 @@ nmap ;tt :!tox<CR>
 nmap ;tp :!pytest<CR>
 " [O]rder all css properties
 nnoremap ;c :<C-u>g/{/ .+1,/}/-1 sort<CR>
-
-" Convenient command to see the difference between the current buffer and the
-" file it was loaded from, thus the changes you made.
-command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-            \ | wincmd p | diffthis
-
+nnoremap ;u :<C-u>:GundoToggle<CR>
 nnoremap ;do :DiffOrig<CR>
-
 " Clean dirty white space (EOL)
 nnoremap ;<space> :silent! %s/\s\+$//<CR>
 
+" -----------------------------------------------------------------------------
+"  Language related plugins (ß)
+" -----------------------------------------------------------------------------
+
+" Grammarous
+" Memo: ß is AltGr+S ([S]pell)
+nmap ßß <Plug>(grammarous-fixit)
+nmap ßI <Plug>(grammarous-move-to-info-window)
+nmap ßi <Plug>(grammarous-open-info-window)
+nmap ßh <Plug>(grammarous-reset)
+nmap ßa <Plug>(grammarous-fixall)
+nmap ßq <Plug>(grammarous-close-info-window)
+nmap ßr <Plug>(grammarous-remove-error)
+nmap ßd <Plug>(grammarous-disable-rule)
+nmap ßn <Plug>(grammarous-move-to-next-error)
+nmap ßp <Plug>(grammarous-move-to-previous-error)
+nmap ßc :GrammarousCheck<CR>
+vmap ß :GrammarousCheck<CR>
+
+" Vim spell
+nmap ßf :set spelllang=fr<CR>
+nmap ße :set spelllang=en<CR>
+nmap ßm :set spelllang=en,fr<CR>
+nmap ßs z=
+
+" Thesaurus
+nnoremap ßt :ThesaurusQueryReplaceCurrentWord<CR>
+nnoremap ßT :Thesaurus<space>
+nnoremap ßq :ThesaurusQueryReplace<space>
+
+" Operator
+omap ß <Plug>(operator-grammarous)
+
+
+" -----------------------------------------------------------------------------
+"  Other mappings
+" -----------------------------------------------------------------------------
+
 " Viewdoc
 nnoremap S :ViewDoc <cword>
+
+" nvim-gdb
+" Memo: ð is AltGr+d ([d]ebug)
+" -----------------------------------------------------------------------------
+nnoremap ðð <C-w><C-p>
+nnoremap ðg :GdbStart gdb -q ./a.out
+nnoremap ðl :GdbStartLLDB lldb ./a.out
+nnoremap ðp :GdbStartPDB python -m pdb main.py
+nnoremap ð<Return> :GdbContinue<CR>
+nnoremap ð<Space> :GdbStep<CR>
+nnoremap ðu :GdbUntil<CR>
+nnoremap ðn :GdbNext<CR>
+nnoremap ðh :GdbFinish<CR>
+nnoremap ðt :GdbBreakpointToggle<CR>
+nnoremap ð< :GdbFrameUp<CR>
+nnoremap ð> :GdbFrameDown<CR>
+nnoremap ðe :GdbEvalWord<CR>
+vnoremap ðe :GdbEvalRange<CR>
+nnoremap ðd :GdbBreakpointClearAll<CR>
+nnoremap ði :GdbInterrupt<CR>
+nnoremap ðq :GdbDebugStop<CR>
+
+" vim-bookmarks
+nnoremap ms <Plug>BookmarkShowAll

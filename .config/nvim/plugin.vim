@@ -1,28 +1,11 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Loading plugin via vim-plug
-"
-" TODO: is lazy loading useful?
-" TODO: migrate to Dein? Benchmark?
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " ----------------------------------------------------------------------------
 " Disabled plugins
 " ----------------------------------------------------------------------------
-" Plug 'scrooloose/nerdtree'
-" Plug 'Xuyuanp/nerdtree-git-plugin'
-" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-" Plug 'rbgrouleff/bclose.vim'           " Ranger plugin dependency
 " Plug 'bfredl/nvim-ipy'
-" Plug 'ap/vim-css-color'
-" https://github.com/padawan-php/deoplete-padawan
-" Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
-
-" This slows down vim:
-" Plug 'flazz/vim-colorschemes'
-" Plug 'plytophogy/vim-virtualenv'
-" Plug 'szymonmaszke/vimpyter'
-" For vim-vebugger
-" Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
 " ----------------------------------------------------------------------------
 " Under testing …
@@ -73,6 +56,7 @@ Plug 'wokalski/autocomplete-flow', { 'for': 'js' }
 " ----------------------------------------------------------------------------
 " All languages plugins
 " ----------------------------------------------------------------------------
+Plug 'tpope/vim-obsession'             " Actually usable session system
 Plug 'tpope/vim-fugitive'              " Git integration
 Plug 'tpope/vim-surround'              " Motions around words
 Plug 'tpope/vim-repeat'                " Missing repeat with dot
@@ -104,11 +88,13 @@ Plug 'airblade/vim-rooter'             " Auto cd to project dir
 Plug 'fboender/bexec'                  " Execute current script
 Plug 'sakhnik/nvim-gdb',               " A debugger that actually works
 Plug 'airblade/vim-gitgutter'          " Git gutter on the left
+Plug 'rbgrouleff/bclose.vim'           " Ranger plugin dependency
 Plug 'francoiscabrol/ranger.vim'       " Ranger integration
 Plug 'kana/vim-operator-user'          " Grammarous dep
 Plug 'aperezdc/vim-template'           " Auto-template when opening new file
 Plug 'honza/vim-snippets'              " Snippets for different languages
 Plug 'diepm/vim-rest-console'          " Call REST API from vim
+Plug 'rhysd/vim-grammarous'            " Grammar check
 
 " ----------------------------------------------------------------------------
 " Filetype specific plugins
