@@ -11,6 +11,7 @@
 .offlineimaprc
 .Xresources.local
 .config/nvim/init.local.vim
+.config/systemd/user/mbsync.service.d/override.conf
 .dotfiles-private
 .dotfiles-local
 .cfg-private
