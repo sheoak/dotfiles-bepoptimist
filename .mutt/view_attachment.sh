@@ -56,7 +56,7 @@
 #
 
 # the tmp directory to use.
-tmpdir="~/.cache/mutt"
+tmpdir="$HOME/.cache/mutt"
 
 # the name of the debug file if debugging is turned on.
 debug_file=$tmpdir/debug
