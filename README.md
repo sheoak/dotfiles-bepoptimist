@@ -137,4 +137,4 @@ I'm leaving those files but will not maintain them anymore:
 [1]: https://github.com/sheoak/dotfiles-macbook-air-mid-2011
 [2]: https://github.com/sheoak/vim-bepoptimist
 [3]: https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/
-[4]: https://github.com/sheoak/dotfiles-neovim-bepoptimist
+[4]: https://github.com/sheoak/dotfiles-neovim-bepoptimist.git
