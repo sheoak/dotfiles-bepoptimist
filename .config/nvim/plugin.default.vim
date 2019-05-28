@@ -138,4 +138,18 @@ let g:no_viewdoc_maps = 1
 " let g:no_viewdoc_abbrev = 1
 let g:viewdoc_openempty = 0
 
-" vim-online-thesaurus
+" vim-multiple-cursors
+let g:multi_cursor_start_word_key      = '<C-h>'
+let g:multi_cursor_select_all_word_key = '<A-n>'
+let g:multi_cursor_start_key           = 'g<C-h>'
+let g:multi_cursor_select_all_key      = 'g<A-h>'
+let g:multi_cursor_next_key            = '<C-h>'
+let g:multi_cursor_prev_key            = '<C-p>'
+let g:multi_cursor_skip_key            = '<C-x>'
+let g:multi_cursor_quit_key            = '<Esc>'
+
+" Ternjs
+let g:deoplete#sources#ternjs#filetypes = [
+                \ 'jsx',
+                \ 'vue',
+                \ ]

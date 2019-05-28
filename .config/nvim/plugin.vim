@@ -27,10 +27,9 @@
 " ----------------------------------------------------------------------------
 " Under testing …
 " ----------------------------------------------------------------------------
-Plug 'fmoralesc/nlanguagetool.nvim'
-Plug 'dpelle/vim-LanguageTool'
-Plug 'rhysd/vim-grammarous'            " Grammar check
-Plug 'powerman/vim-plugin-viewdoc'
+Plug 'chrisbra/csv.vim'
+Plug 'SidOfc/mkdx'                     " Markdown goodies
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 
 " ----------------------------------------------------------------------------
 " My custom plugins
@@ -67,13 +66,9 @@ Plug 'Shougo/neosnippet-snippets'
 " Extra sources
 Plug 'kmnk/denite-dirmark'
 Plug 'pocari/vim-denite-emoji'
-Plug 'kristijanhusak/deoplete-phpactor', { 'for': 'php' }
+" Plug 'kristijanhusak/deoplete-phpactor', { 'for': 'php' }
 Plug 'deoplete-plugins/deoplete-zsh'
-" an alternative to test:
-Plug 'lvht/phpcd.vim'
 Plug 'wokalski/autocomplete-flow', { 'for': 'js' }
-" an alternative to test:
-" Plug 'carlitux/deoplete-ternjs'
 
 " ----------------------------------------------------------------------------
 " All languages plugins
@@ -98,6 +93,7 @@ Plug 'michaeljsmith/vim-indent-object' " Indentation text objects
 Plug 'jeetsukumaran/vim-indentwise'    " Motion for indentations
 Plug 'jeetsukumaran/vim-pythonsense'   " Additionnal python text-objects
 Plug 'PeterRincker/vim-argumentative'  " Switch arguments
+Plug 'AndrewRadev/sideways.vim'        " Moving arguments and attributes
 Plug 'junegunn/goyo.vim'               " Minimalist interface on demand
 Plug 'dmerejkowsky/vim-ale'            " Async Linter
 Plug 'sjl/gundo.vim'                   " More undo
