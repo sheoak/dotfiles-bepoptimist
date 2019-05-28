@@ -137,7 +137,7 @@ let g:mkdp_browser = 'qutebrowser'
 set updatetime=100
 
 " Table-mode
-let g:table_mode_map_prefix = ',|'
+let g:table_mode_map_prefix = ',\|'
 
 " Grammarous
 let g:grammarous#default_comments_only_filetypes = {
