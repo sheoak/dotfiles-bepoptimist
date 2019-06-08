@@ -1,3 +1,0 @@
-[Service]
-Environment="HOME=/home/myusername/"
-Environment="DOTFILES_PRIVATE=/home/myusername/.dotfiles-private/"
