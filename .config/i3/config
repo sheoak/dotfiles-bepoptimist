@@ -2,15 +2,15 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 #
 # The homerow is tsrn (not ctsr)
-# Which is how all the apps from my repo are configured, including vim
+# This is how all the apps from my repo are configured, including vim
 # This makes more sense when having to remap it all anyway.
 #
 # Include
 # - virtualbox mode for Internet Explorer testing, to configure
 # - dual screen configuration
 #
-# Maintainer: Sheoak <dev@sheoak.fr>
-# v0.2
+# Maintainer: Sheoak <github at sheoak.fr>
+# v0.3
 
 # ----------------------------------------------------------------------------
 # I3 settings
@@ -417,60 +417,24 @@ for_window [class="^Pidgin$" window_role="^conversation$"] resize grow width 0 p
 
 # ----------------------------------------------------------------------------
 # Theme
-# ----------------------------------------------------------------------------
-# set $bg #282828AA
 # TODO: move to xresources
-set $bg #1F1F1F
+# ----------------------------------------------------------------------------
 set $black #000000
+set $white #DDDDDD
 set $red #dc322f
 set $green #98971a
 set $yellow #fba922
 set $blue #458588
 set $lightblue #268bd2
 set $purple #9f78e1
-set $aqua #689d68
 set $gray #777777
-set $midgray #555555
 set $darkgray #333333
-set $aquat #689d68BB
-set $bluet #458588BB
-set $darkgrayt #1d2021DD
-set $yellowt #d79921BB
-set $red #cc241dBB
-set $white #DDDDDD
-set $whitet #DDDDDD88
 set $transparent #00000055
 
-# class                 border|backgr|text|indicator|child_border
-client.focused          $black $black $lightblue $green $yellow
-client.focused_inactive $black $black $white $darkgray $aqua
-client.unfocused        $black $darkgray $gray $darkgray $transparent
-client.urgent           $black $red $white $red $red
+# class                 border backgr    text       indicator child_border
+client.focused          $black $black    $lightblue $green    $yellow
+client.focused_inactive $black $black    $white     $darkgray $aqua
+client.unfocused        $black $darkgray $gray      $darkgray $transparent
+client.urgent           $black $red      $white     $red      $red
 
 exec_always --no-startup-id polybar-launch.sh
-
-# Disabled: using polybar
-# i3bar configuration
-# bar {
-#     position bottom
-#     strip_workspace_numbers yes
-#     font pango:DejaVu Sans Mono, FontAwesome 7
-#     separator_symbol "⋆"
-#     height 18
-#     # status_command i3status --config ~/.config/i3/i3status.conf
-#     # i3bar_command i3bar -t
-#     # i3bar_command $HOME/bin/polybar-launch.sh
-#     # statusbar colors      border    background  text
-#     colors {
-#         # bar background color
-#         background $transparent
-#         # text color used for blocks that do not have a color specified.
-#         statusline $gray
-#         # workspaces section
-#         #                    border     backgr.     text
-#         focused_workspace    $bluet     $bluet      $darkgray
-#         inactive_workspace   $darkgrayt $darkgrayt  $gray
-#         active_workspace     $darkgray  $darkgrayt  $yellow
-#         urgent_workspace     $yellow    $yellow     $bg
-#     }
-# }
