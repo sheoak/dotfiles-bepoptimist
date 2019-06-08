@@ -1,0 +1,33 @@
+BROWSER='qutebrowser'
+
+# default command to generate passwords
+_pwgen () {
+    pwgen -snyc -r \'\"\\ $(( ( RANDOM % 5 )  + 14 )) 1
+}
+
+# menu, autotype, copyPass, typeUser, typePass, copyUser, copyUrl, viewEntry,
+# typeMenu, actionMenu, copyMenu, openUrl
+default_do='menu'
+default_user=gomunochikin
+
+clip_clear=45
+edit_new_pass="true"
+password_length=16
+xdotool_delay=5
+
+autotype="Alt+1"
+type_pass="Alt+2"
+type_user="Alt+3"
+open_url="Alt+4"
+copy_name="Alt+5"
+#copy_url="Alt+l"
+#copy_pass="Alt+p"
+#show="Alt+o"
+#copy_entry="Alt+2"
+#type_entry="Alt+1"
+#copy_menu="Alt+c"
+#action_menu="Alt+a"
+#type_menu="Alt+t"
+#help="Alt+h"
+#switch="Alt+x"
+#insert_pass="Alt+n"
