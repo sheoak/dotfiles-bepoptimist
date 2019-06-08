@@ -192,6 +192,8 @@ alias f='fzf '
 alias finddup='find -name "*.*" -print0 | xargs -0 md5sum | sort | uniq -Dw 32'
 alias flac2mp3='parallel ffmpeg -i {} -qscale:a 0 {.}.mp3 ::: ./*.flac'
 
+alias ap='ansible-playbook -i hosts playbook.yml -v -K '
+
 alias mbsync='mbsync -a -c $DOTFILES_PRIVATE/mbsyncrc'
 alias msmtp='msmtp -C $DOTFILES_PRIVATE/msmtprc'
 alias ssh='ssh -F $DOTFILES_PRIVATE/ssh/config '
