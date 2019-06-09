@@ -2,7 +2,7 @@
 export XKB_DEFAULT_LAYOUT=fr
 export XKB_DEFAULT_VARIANT=bepo
 export XKB_DEFAULT_OPTIONS=ctrl:nocaps
-export TERMINAL=urxvtc
+export TERMINAL=kitty
 export WLC_REPEAT_DELAY=250
 export WLC_REPEAT_RATE=72
 

@@ -7,6 +7,16 @@ Qutebrowser configuration file with bepo and french settings
 Author: sheoak <dev@sheoak.fr>
 """
 
+# try to import local configuration
+try:
+    from local_config import *
+except:
+    force_rendering = False
+
+# for nouveau drivers
+if force_rendering:
+    c.qt.force_software_rendering = 'chromium'
+
 # ----------------------------------------------------------------------------
 # System Configuration
 # You probably want to edit this section with your own values
@@ -27,7 +37,7 @@ yt_download_mp3_cmd = "youtube-dl --audio-format mp3 --audio-quality 7 \
         + download_path_music + "/%(title)s.%(ext)s'"
 
 # fonts are very small on hidpi
-c.zoom.default = 100
+c.zoom.default = 120
 
 # I have many graphical bugs with webengine…
 # c.backend = 'webkit'
@@ -311,16 +321,16 @@ config.bind('dY', 'spawn ' + yt_download_mp3_cmd
 c.content.user_stylesheets.append('user.css')
 
 # fonts configuration
-c.fonts.monospace = '10px Hack'
-c.fonts.prompts = '10px'
-c.fonts.messages.error = '10px Hack'
-c.fonts.messages.info = '10px'
-c.fonts.messages.warning = '10px'
-c.fonts.hints = '10px Hack'
-c.fonts.statusbar = '14px Hack'
-c.fonts.completion.entry = '14px Hack'
-c.fonts.completion.category = '14px'
-c.fonts.downloads = '10px'
+c.fonts.monospace = '12px Hack'
+c.fonts.prompts = '12px'
+c.fonts.messages.error = '12px Hack'
+c.fonts.messages.info = '12px'
+c.fonts.messages.warning = '12px'
+c.fonts.hints = '12px Hack'
+c.fonts.statusbar = '18px Hack'
+c.fonts.completion.entry = '18px Hack'
+c.fonts.completion.category = '18px'
+c.fonts.downloads = '12px'
 c.hints.border = '1px solid'
 
 # Solarized theme by YouNeverWalkAlone

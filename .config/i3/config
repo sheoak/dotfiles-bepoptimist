@@ -438,3 +438,5 @@ client.unfocused        $black $darkgray $gray      $darkgray $transparent
 client.urgent           $black $red      $white     $red      $red
 
 exec_always --no-startup-id polybar-launch.sh
+
+

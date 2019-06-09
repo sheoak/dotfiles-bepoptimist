@@ -295,7 +295,7 @@ label-mode-foreground = ${colors.background}
 
 [module/wireless-network]
 type = internal/network
-interface = wlp2s0
+interface = ${env:DEFAULT_NETWORK_INTERFACE:wlp2s0}
 interval = 2.0
 ping-interval = 10
 
@@ -345,7 +345,7 @@ animation-packetloss-framerate = 500
 
 type = internal/mpd
 
-include-file = $DOTFILES_PRIVATE/mpd/mpd-private-polybar.conf
+; include-file = $DOTFILES_PRIVATE/mpd/mpd-private-polybar.conf
 
 ; format-online = <bar-progress>  <icon-prev> <icon-stop> <toggle> <icon-next>  <label-song>
 ; format-online =  <label-song> · <icon-repeat> <icon-random> <icon-single> <icon-consume>
@@ -417,7 +417,7 @@ label-foreground = ${colors.primary-alt}
 type = internal/pulseaudio
 ; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
 ; If not, uses default sink
-sink = alsa_output.pci-0000_00_1b.0.analog-stereo
+; sink = alsa_output.pci-0000_00_1b.0.analog-stereo
 ; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
 ; Default: true
 use-ui-max = true
@@ -604,12 +604,11 @@ label-unmounted-foreground = #55
 [module/temperature]
 type = internal/temperature
 thermal-zone = 0
-warn-temperature = 40
+warn-temperature = 45
 
 format =
 format-warn =  <label-warn>
 format-warn-foreground = ${colors.red}
-format-warn-underline = ${colors.red}
 
 label = %temperature-c%
 label-warn = %temperature-c%
@@ -621,10 +620,10 @@ type = custom/script
 exec = ~/bin/check-vpn.sh
 interval = 2
 
-format = <label>
-label = %output%
-format-foreground = ${colors.gray}
-label-foreground = ${colors.purple}
+; format = <label>
+; label = %output%
+; format-foreground = ${colors.gray}
+; label-foreground = ${colors.purple}
 
 [module/sepstraight]
 type = custom/text
@@ -641,25 +640,24 @@ type = custom/text
 content = %{T6}%{T-}
 content-foreground = ${colors.superlight}
 
-[module/mail]
-type = custom/script
-exec = ~/bin/check-mail.sh
+; [module/mail]
+; type = custom/script
+; exec = ~/bin/check-mail.sh
+; interval = 2
 
-interval = 2
-
-; Available tags:
-;   <output> - deprecated
-;   <label> (default)
-format = <label>
-; format-background = #999
-format-foreground = ${colors.accent}
-format-padding = 0
+; ; Available tags:
+; ;   <output> - deprecated
+; ;   <label> (default)
+; format = <label>
+; ; format-background = #999
+; format-foreground = ${colors.accent}
+; format-padding = 0
 
 ; Available tokens:
 ;   %output%
 ; Default: %output%
 ; label =  %output:0:15:No mail%
-label =  %output%
+; label =  %output%
 
 
 [module/mailipc]
@@ -669,15 +667,14 @@ format = <output>
 format-foreground = ${colors.accent}
 initial = 1
 
-
 [module/bluetooth]
 type = custom/script
 exec = ~/bin/check-bluetooth.sh
 interval = 10
 
-format = <label>
-format-foreground = ${colors.blue}
-format-padding = 0
+; format = <label>
+; format-foreground = ${colors.blue}
+; format-padding = 0
 
 [module/msmtp]
 type = custom/script
@@ -688,13 +685,13 @@ interval = 5
 ; Available tags:
 ;   <output> - deprecated
 ;   <label> (default)
-format =  <label>
-; format-background = #999
-format-foreground = ${colors.purple}
-format-padding = 4
+; format =  <label>
+; ; format-background = #999
+; format-foreground = ${colors.purple}
+; format-padding = 4
 
 ; Available tokens:
 ;   %output%
 ; Default: %output%
-label =   %output:0:15:No queue%
+; label =   %output:0:15:No queue%
 ; vim:ft=dosini

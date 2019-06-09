@@ -77,6 +77,23 @@ export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap 
 export FZF_CTRL_T_COMMAND='rg --files --no-ignore-vcs --ignore-file ~/.ignore --hidden '
 export FZF_DEFAULT_OPTS='--inline-info --prompt="❯"'
 
+export GDK_BACKEND=wayland
+export CLUTTER_BACKEND=wayland
+export QT_QPA_PLATFORM=wayland-egl
+export QT_WAYLAND_FORCE_DPI=physical
+
+export SWAY_MOD='Mod1'
+export SWAY_WIN='Mod4'
+export SWAY_FONT='Deja Vu Sans 12'
+export SWAY_INNERGAP=7
+export SWAY_OUTERGAP=3
+export SWAY_BORDER=3
+export SWAY_BORDER_FLOAT=7
+export MONITOR='eDP-1'
+export MONITOR_EXT='HDMI-1'
+
+export MOZ_ENABLE_WAYLAND=1
+
 # GPG settings
 export GPG_TTY=`tty`
 echo "UPDATESTARTUPTTY" | gpg-connect-agent > /dev/null 2>&1
@@ -134,3 +151,6 @@ fi
 
 # Completion for kitty
 # kitty + complete setup zsh | source /dev/stdin
+
+alias vi=nvim
+

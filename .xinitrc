@@ -51,5 +51,6 @@ systemctl --user import-environment DISPLAY
 /usr/bin/udiskie -T -q --use-udisks2 -a &
 
 compton -b
+feh --bg-scale ~/images/wallpaper.jpg
 
 exec i3
