@@ -10,7 +10,7 @@
 # - dual screen configuration
 #
 # Maintainer: Sheoak <github at sheoak.fr>
-# v0.3
+# v0.4
 
 # ----------------------------------------------------------------------------
 # I3 settings
@@ -22,9 +22,10 @@ input * xkb_options "ctrl:nocaps"
 input * repeat_delay 250
 input * repeat_rate 72
 
+# how to read from ENV?
 set $SWAY_MOD Mod1
 set $SWAY_WIN Mod4
-set $SWAY_FONT Deja Vu Sans 12
+set $SWAY_FONT Fira Code 12
 set $SWAY_INNERGAP 7
 set $SWAY_OUTERGAP 3
 set $SWAY_BORDER 3
@@ -53,10 +54,9 @@ gaps inner $innergap
 gaps outer $outergap
 smart_gaps on
 smart_borders on
-# new_window          pixel $border
 default_border pixel $border
 default_floating_border pixel $borderfloat
-hide_edge_borders   smart
+# hide_edge_borders   smart
 
 # for i3-gaps
 for_window [class="^.*"] border pixel $border
@@ -76,7 +76,7 @@ set $termDetached kitty
 set $term kitty --single-instance 
 set $ncmpcpp ncmpcpp -c ~/.config/ncmpcpp/config-private
 set $lockalert 'xset dpms force off'
-set $Locker i3lock -c 000000
+set $locker i3lock -c 000000
 set $screenshot grim
 set $screenshot_zone grim -g "$(slurp)"
 
@@ -269,9 +269,9 @@ mode "$mode_virtualbox" {
 bindsym $mod+Control+BackSpace mode "$mode_system"
 bindsym XF86PowerOff           mode "$mode_system"
 mode "$mode_system" {
-    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym l exec --no-startup-id $locker, mode "default"
     bindsym o exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    bindsym s exec --no-startup-id $locker && systemctl suspend, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym p exec --no-startup-id  systemctl poweroff -i, mode "default"
     # back to normal: Enter or Escape
@@ -279,10 +279,10 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 # we keep a quick lock binding
-bindsym $mod+Control+l exec $Locker
+bindsym $mod+Control+l exec $locker
 
 # autolock
-exec xautolock -time $autolock -locker $Locker -notify 20 -notifier $lockalert &
+exec xautolock -time $autolock -locker $locker -notify 20 -notifier $lockalert &
 
 # ----------------------------------------------------------------------------
 # Screensaver mode
@@ -464,4 +464,5 @@ exec_always --no-startup-id /usr/bin/mako
 
 bar {
     swaybar_command waybar
+    # swaybar_command swaybar
 }
