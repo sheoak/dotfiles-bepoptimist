@@ -433,7 +433,7 @@ set $transparent #00000055
 
 # class                 border backgr    text       indicator child_border
 client.focused          $black $black    $lightblue $green    $yellow
-client.focused_inactive $black $black    $white     $darkgray $aqua
+client.focused_inactive $black $black    $white     $darkgray $blue
 client.unfocused        $black $darkgray $gray      $darkgray $transparent
 client.urgent           $black $red      $white     $red      $red
 
