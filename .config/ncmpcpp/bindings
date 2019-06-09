@@ -1,0 +1,462 @@
+#####################################################
+## this is example key configuration file, copy it ##
+## to ~/.ncmpcpp/keys and set up your preferences  ##
+#####################################################
+##
+## Tips:
+## - it's possible to bind maximum two keys to a command
+## - keys can be defined with a character or a decimal value
+## - a command can be disabled by binding it to 0
+##
+## Note: First bind of volume_up/down
+## will be used to switch between columns.
+
+
+# bepo homerow
+def_key "r"
+  scroll_up
+
+def_key "s"
+  scroll_down
+
+def_key "n"
+  next_column
+
+# column mode
+def_key "t"
+  previous_column
+
+# browse mode
+def_key "t"
+  jump_to_parent_directory
+
+def_key "?"
+  find_item_backward
+
+def_key "/"
+  find_item_forward
+
+def_key "u"
+  update_database
+
+def_key "l"
+  next_found_item
+
+def_key "L"
+  previous_found_item
+
+def_key "ctrl-b"
+  page_up
+
+def_key "R"
+  page_up
+
+def_key "ctrl-f"
+  page_down
+
+def_key "S"
+  page_down
+
+def_key "g"
+  move_home
+
+def_key "G"
+  move_end
+
+def_key "tab"
+  next_screen
+
+def_key "shift-tab"
+  previous_screen
+
+def_key "a"
+  add_item_to_playlist
+
+def_key "ctrl-l"
+  show_lyrics
+
+# panels
+# TODO: device
+# TODO: tag edit
+# TODO: playlist editor
+# TODO: visual
+
+def_key "c"
+  show_playlist
+
+def_key "C"
+  show_playlist_editor
+
+def_key "f"
+  show_search_engine
+
+def_key "o"
+  show_tag_editor
+
+def_key "b"
+  show_browser
+
+# def_key "B"
+#     change_browse_mode
+
+def_key "m"
+  show_media_library
+
+def_key "h"
+  show_help
+
+# playing commands
+
+def_key "P"
+  stop
+
+def_key "p"
+  pause
+
+# we do use the same as vim-bim (page down) because it's much more usefull
+# to have play/pause at hand on ncmpcpp
+def_key "space"
+  pause
+
+def_key "<"
+  previous
+
+def_key ">"
+  next
+
+def_key "w"
+  save_playlist
+
+def_key "e"
+  edit_playlist_name
+
+def_key "d"
+  delete_playlist_items
+
+def_key "D"
+  clear_playlist
+
+def_key "ctrl-d"
+  delete_stored_playlist
+
+def_key "ctrl-d"
+  clear_main_playlist
+
+# like vim repeat
+def_key "."
+  toggle_repeat
+
+# [A]leatoire
+def_key "ctrl-r"
+  toggle_random
+
+def_key "x"
+  toggle_crossfade
+
+# Search engine
+def_key "F"
+  reset_search_engine
+
+def_key "!"
+  start_searching
+
+def_key "up"
+  move_selected_items_up
+
+def_key "down"
+  move_selected_items_down
+
+#def_key "mouse"
+#  mouse_event
+#
+#def_key "shift-up"
+#  select_item
+#  scroll_up
+#
+#def_key "shift-down"
+#  select_item
+#  scroll_down
+#
+#def_key "["
+#  scroll_up_album
+#
+#def_key "]"
+#  scroll_down_album
+#
+#def_key "{"
+#  scroll_up_artist
+#
+#def_key "}"
+#  scroll_down_artist
+#
+#def_key "insert"
+#  select_item
+#
+#def_key "enter"
+#  enter_directory
+#
+#def_key "enter"
+#  toggle_output
+#
+#def_key "enter"
+#  run_action
+#
+#def_key "enter"
+#  play_item
+#
+#def_key "space"
+#  add_item_to_playlist
+#
+#def_key "space"
+#  toggle_lyrics_update_on_song_change
+#
+#def_key "space"
+#  toggle_visualization_type
+#def_key "d"
+#  delete_browser_items
+#
+
+#def_key "right"
+#  slave_screen
+#
+#def_key "right"
+#  volume_up
+#
+#def_key "+"
+#  volume_up
+#
+#
+#def_key "left"
+#  master_screen
+#
+#def_key "left"
+#  volume_down
+#
+#def_key "-"
+#  volume_down
+#
+#def_key ":"
+#  execute_command
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#def_key "4"
+#  toggle_media_library_columns_mode
+#
+#def_key "5"
+#  show_playlist_editor
+#
+#def_key "6"
+#  show_tag_editor
+#
+#def_key "7"
+#  show_outputs
+#
+#def_key "8"
+#  show_visualizer
+#
+#def_key "="
+#  show_clock
+#
+#def_key "@"
+#  show_server_info
+
+
+#def_key "ctrl-h"
+#  replay_song
+#
+#def_key "backspace"
+#  jump_to_parent_directory
+#
+#def_key "backspace"
+#  replay_song
+#
+def_key "right"
+  seek_forward
+#
+def_key "left"
+  seek_backward
+
+#def_key "y"
+#  save_tag_changes
+#
+#
+#def_key "y"
+#  toggle_single
+#
+#def_key "R"
+#  toggle_consume
+#
+#def_key "Y"
+#  toggle_replay_gain_mode
+#
+#def_key "T"
+#  toggle_add_mode
+#
+#def_key "|"
+#  toggle_mouse
+#
+#def_key "#"
+#  toggle_bitrate_visibility
+#
+#def_key "Z"
+#  shuffle
+
+#def_key "X"
+#  set_crossfade
+#
+#
+#def_key "ctrl-s"
+#  sort_playlist
+#
+#def_key "ctrl-s"
+#  toggle_browser_sort_mode
+#
+#def_key "ctrl-s"
+#  toggle_media_library_sort_mode
+#
+#def_key "ctrl-r"
+#  reverse_playlist
+#
+#def_key "ctrl-f"
+#  apply_filter
+#
+#def_key "ctrl-_"
+#  select_found_items
+
+#
+#def_key "?"
+#  find
+#
+#def_key "?"
+#  find_item_backward
+#
+#
+#def_key "w"
+#  toggle_find_mode
+#
+#def_key "e"
+#  edit_song
+#
+#def_key "e"
+#  edit_library_tag
+#
+#def_key "e"
+#  edit_library_album
+#
+#def_key "e"
+#  edit_directory_name
+#
+#
+#def_key "e"
+#  edit_lyrics
+#
+#def_key "i"
+#  show_song_info
+#
+#def_key "I"
+#  show_artist_info
+#
+#def_key "g"
+#  jump_to_position_in_song
+#
+#def_key "l"
+#  show_lyrics
+#
+#def_key "ctrl-v"
+#  select_range
+#
+#def_key "v"
+#  reverse_selection
+#
+#def_key "V"
+#  remove_selection
+#
+#def_key "B"
+#  select_album
+#
+#def_key "a"
+#  add_selected_items
+#
+
+#
+#def_key "C"
+#  crop_playlist
+#
+#def_key "C"
+#  crop_main_playlist
+#
+#def_key "m"
+#  move_sort_order_up
+#
+#
+#def_key "n"
+#  move_sort_order_down
+#
+#
+#def_key "M"
+#  move_selected_items_to
+#
+#def_key "A"
+#  add
+#
+#
+#def_key "o"
+#  jump_to_playing_song
+#
+#def_key "G"
+#  jump_to_browser
+#
+#def_key "G"
+#  jump_to_playlist_editor
+#
+#def_key "~"
+#  jump_to_media_library
+#
+#def_key "E"
+#  jump_to_tag_editor
+#
+#def_key "U"
+#  toggle_playing_song_centering
+#
+#def_key "P"
+#  toggle_display_mode
+#
+#def_key "\\"
+#  toggle_interface
+#
+#def_key "!"
+#  toggle_separators_between_albums
+#
+#def_key "L"
+#  toggle_lyrics_fetcher
+#
+#def_key "F"
+#  fetch_lyrics_in_background
+#
+#def_key "alt-l"
+#  toggle_fetching_lyrics_in_background
+#
+#def_key "ctrl-l"
+#  toggle_screen_lock
+#
+#def_key "`"
+#  toggle_library_tag_type
+#
+#def_key "`"
+#  refetch_lyrics
+#
+#def_key "`"
+#  add_random_items
+#
+#def_key "ctrl-p"
+#  set_selected_items_priority
+#
+#def_key "q"
+#  quit
