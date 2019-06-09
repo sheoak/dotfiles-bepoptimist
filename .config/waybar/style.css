@@ -1,0 +1,204 @@
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Fira Code", "Hack", "Deja vu Sans Mono", sans-serif;
+    font-size: 10px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: #000000;
+    border-bottom: 0;
+    color: #DDDDDD;
+    transition-property: background-color;
+    transition-duration: .5s;
+    padding: 0;
+    border-top-width: 1px;
+}
+
+window#waybar.hidden {
+    opacity: 1;
+}
+
+/*
+window#waybar.empty {
+    background-color: transparent;
+}
+window#waybar.solo {
+    background-color: #FFFFFF;
+}
+*/
+
+window#waybar.termite {
+    background-color: #3F3F3F;
+}
+
+window#waybar.chromium {
+    background-color: #000000;
+    border: none;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces button {
+    padding: 0 5px;
+    background-color: transparent;
+    color: #DDDDDD;
+    border-bottom: 3px solid transparent;
+}
+
+#workspaces button.focused {
+    background-color: #64727D;
+    border-bottom: 3px solid #ffffff;
+    color: #DDDDDD;
+}
+
+#workspaces button.urgent {
+    background-color: #eb4d4b;
+    color: #DDDDDD;
+}
+
+#mode {
+    background-color: #64727D;
+    border-bottom: 3px solid #ffffff;
+    color: #DDDDDD;
+}
+
+#clock, #battery, #cpu, #memory, #temperature, #backlight, #network, #pulseaudio, #custom-media, #tray, #mode, #idle_inhibitor {
+    padding: 0 10px;
+    margin: 0 5px;
+    color: #DDDDDD;
+}
+
+#clock {
+    background-color: #000000;
+    color: #DDDDDD;
+}
+
+#battery {
+    background-color: #000000;
+    color: #DDDDDD;
+}
+
+#battery.charging {
+    background-color: #000000;
+    color: #DDDDDD;
+}
+
+@keyframes blink {
+    to {
+        background-color: #000000;
+        color: #DDDDDD;
+    }
+}
+
+#battery.critical:not(.charging) {
+    background-color: #000000;
+    color: #DDDDDD;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+label:focus {
+    background-color: #000000;
+    color: #DDDDDD;
+}
+
+#cpu {
+    background-color: #000000;
+    color: #DDDDDD;
+}
+
+#memory {
+    background-color: #000000;
+    color: #DDDDDD;
+}
+
+#backlight {
+    background-color: #000000;
+    color: #DDDDDD;
+}
+
+#network {
+    background-color: #000000;
+    color: #DDDDDD;
+}
+
+#network.disconnected {
+    background-color: #000000;
+    color: #DDDDDD;
+}
+
+#pulseaudio {
+    background-color: #000000;
+    color: #DDDDDD;
+}
+
+#pulseaudio.muted {
+    background-color: #000000;
+    color: #DDDDDD;
+}
+
+#custom-media {
+    background-color: #000000;
+    min-width: 100px;
+    color: #DDDDDD;
+}
+
+#custom-media.custom-spotify {
+    background-color: #000000;
+    color: #DDDDDD;
+}
+
+#custom-media.custom-vlc {
+    background-color: #000000;
+    color: #DDDDDD;
+}
+
+#temperature {
+    background-color: #000000;
+    color: #DDDDDD;
+}
+
+#temperature.critical {
+    background-color: #000000;
+    color: #DDDDDD;
+}
+
+#tray {
+    background-color: #000000;
+    color: #DDDDDD;
+}
+
+#idle_inhibitor {
+    background-color: #000000;
+    color: #DDDDDD;
+}
+
+#idle_inhibitor.activated {
+    background-color: #000000;
+    color: #DDDDDD;
+}
+
+#mpd {
+    background-color: #000000;
+    color: #DDDDDD;
+}
+
+#mpd.disconnected {
+    background-color: #000000;
+    color: #DDDDDD;
+}
+
+#mpd.stopped {
+    background-color: #000000;
+    color: #DDDDDD;
+}
+
+#mpd.paused {
+    background-color: #000000;
+    color: #DDDDDD;
+}
