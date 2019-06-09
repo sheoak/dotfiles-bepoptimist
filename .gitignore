@@ -13,6 +13,8 @@
 .config/nvim/init.local.vim
 .config/systemd/user/mbsync.service.d/override.conf
 .dotfiles-private
+.gnupg
+.mail
 .dotfiles-local
 .cfg-private
 .zshrc.local
