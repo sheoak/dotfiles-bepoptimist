@@ -19,6 +19,7 @@ plugins=(
   vi-mode
   fzf
   z
+  fzf-z
   fz
   common-aliases
   bepoptimist
@@ -28,7 +29,7 @@ PRIVATE_PLUGINS=$DOTFILES_PRIVATE/zshrc.plugins
 [[ -s "$PRIVATE_PLUGINS" ]] && source "$PRIVATE_PLUGINS"
 
 ZSH_DISABLE_COMPFIX="true" # bug with completion security check
-ZSH_THEME="multiline"
+ZSH_THEME="agnoster"
 HYPHEN_INSENSITIVE="true"
 POWERLINE_DETECT_SSH="true"
 POWERLINE_RIGHT_B="none"
@@ -37,7 +38,8 @@ HISTFILE=~/.local/share/zsh/zsh_history
 # DISABLE_AUTO_UPDATE="true"
 # ENABLE_CORRECTION="true"
 # COMPLETION_WAITING_DOTS="true"
-# ZSH_CUSTOM=$HOME/.oh-my-zsh-custom/
+
+ZSH_CUSTOM=$DOTFILES_PRIVATE/oh-my-zsh/
 
 export UPDATE_ZSH_DAYS=7
 export KEYTIMEOUT=1     # faster vim transitions
