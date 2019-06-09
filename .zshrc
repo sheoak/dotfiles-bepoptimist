@@ -19,10 +19,6 @@ plugins=(
   vi-mode
   fzf
   z
-  fzf-z
-  fz
-  common-aliases
-  bepoptimist
 )
 
 PRIVATE_PLUGINS=$DOTFILES_PRIVATE/zshrc.plugins
