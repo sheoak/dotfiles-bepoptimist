@@ -110,9 +110,6 @@ source $ZSH/oh-my-zsh.sh
 # Theme
 # ----------------------------------------------------------------------------
 
-# we test first to avoid sourcing for nothing
-source ~/.local/share/nvim/plugged/gruvbox/gruvbox_256palette.sh
-
 # TODO: export in another file, use Xresources
 # Solarized theme for tty, the dark version.
 # Based on:
@@ -139,6 +136,9 @@ if [ "$TERM" = "xterm-256color" ]; then
     echo -en "\e]PFfdf6e3" # S_base3
     clear # against bg artifacts
 fi
+
+# we test first to avoid sourcing for nothing
+source ~/.local/share/nvim/plugged/gruvbox/gruvbox_256palette.sh
 
 # local settings
 [[ -s $DOTFILES_PRIVATE/zshrc ]] && source "$DOTFILES_PRIVATE/zshrc"
