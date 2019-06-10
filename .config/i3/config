@@ -5,12 +5,15 @@
 # This is how all the apps from my repo are configured, including vim
 # This makes more sense when having to remap it all anyway.
 #
+# The colors  are read from Xresources to avoid duplicate and fallback
+# to gruvbox theme colors if not found
+#
 # Include
 # - virtualbox mode for Internet Explorer testing, to configure
 # - dual screen configuration
 #
 # Maintainer: Sheoak <github at sheoak.fr>
-# v0.3
+# v0.4
 
 # ----------------------------------------------------------------------------
 # I3 settings
@@ -20,10 +23,10 @@
 # this makes the i3 configuration file generic
 set_from_resource $mod i3wm.mod Mod1
 set_from_resource $win i3wm.win Mod4
-set_from_resource $font i3wm.font pango:Deja Vu Sans 12
+set_from_resource $font i3wm.font pango:Fira Code 10
 set_from_resource $innergap i3wn.innergap 7
 set_from_resource $outergap i3wn.outergap 3
-set_from_resource $border i3wn.outergap 3
+set_from_resource $border i3wn.outergap 1
 set_from_resource $borderfloat i3wn.outergap 7
 set_from_resource $monitor monitor eDP-1
 set_from_resource $monitorext monitorext HDMI-1
@@ -417,26 +420,37 @@ for_window [class="^Pidgin$" window_role="^conversation$"] resize grow width 0 p
 
 # ----------------------------------------------------------------------------
 # Theme
-# TODO: move to xresources
 # ----------------------------------------------------------------------------
-set $black #000000
-set $white #DDDDDD
-set $red #dc322f
-set $green #98971a
-set $yellow #fba922
-set $blue #458588
-set $lightblue #268bd2
-set $purple #9f78e1
-set $gray #777777
-set $darkgray #333333
-set $transparent #00000055
-
+# set $black #000000
+# set $white #DDDDDD
+# set $red #dc322f
+# set $green #98971a
+# set $yellow #fba922
+# set $blue #458588
+# set $lightblue #268bd2
+# set $purple #9f78e1
+# set $gray #777777
+# set $darkgray #333333
+# set $transparent #00000055
 # class                 border backgr    text       indicator child_border
-client.focused          $black $black    $lightblue $green    $yellow
-client.focused_inactive $black $black    $white     $darkgray $blue
-client.unfocused        $black $darkgray $gray      $darkgray $transparent
-client.urgent           $black $red      $white     $red      $red
+# client.focused          $black $black    $lightblue $green    $yellow
+# client.focused_inactive $black $black    $white     $darkgray $blue
+# client.unfocused        $black $darkgray $gray      $darkgray $transparent
+# client.urgent           $black $red      $white     $red      $red
+
+set_from_resource $bg background #1D2021
+set_from_resource $red color1 #CC241D
+set_from_resource $green color2 #98971A
+set_from_resource $yellow color3 #D79921
+set_from_resource $blue color4 #458588
+set_from_resource $purple color5 #B16286
+set_from_resource $aqua color6 #689D6A
+set_from_resource $gray color7 #A89984
+set_from_resource $darkgray color0 #282828
+
+client.focused          $blue     $blue     $darkgray $purple $blue
+client.focused_inactive $darkgray $darkgray $white    $purple $darkgray
+client.unfocused        $darkgray $darkgray $gray     $purple $darkgray
+client.urgent           $red      $red      $white    $red    $red
 
 exec_always --no-startup-id polybar-launch.sh
-
-
