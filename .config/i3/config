@@ -362,8 +362,10 @@ bindsym $mod+ccedilla bar mode toggle
 # ----------------------------------------------------------------------------
 
 # Screenshot
-bindsym XF86Display exec "scrot ~/desktop/Screenshot%Y-%m-%d%H:%M:%S.png"
+bindsym Print exec "scrot ~/desktop/Screenshot%Y-%m-%d%H:%M:%S.png"
 bindsym $win+F1     exec "scrot ~/desktop/Screenshot%Y-%m-%d%H:%M:%S.png"
+bindsym --release $mod+Print   exec "scrot -s ~/desktop/Screenshot%Y-%m-%d%H:%M:%S.png"
+bindsym --release $mod+$win+F1 exec "scrot -s ~/desktop/Screenshot%Y-%m-%d%H:%M:%S.png"
 
 # TODO: read from .Xresources
 bindsym XF86AudioRaiseVolume exec amixer -c0 -D pulse sset Master 5%+ && paplay /usr/share/sounds/freedesktop/stereo/message.oga
