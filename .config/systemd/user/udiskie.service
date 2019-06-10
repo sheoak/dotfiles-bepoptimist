@@ -1,0 +1,9 @@
+[Unit]
+Description=handle automounting
+
+[Service]
+ExecStart=/usr/bin/udiskie -T -q --use-udisks2 -a
+Restart=always
+
+[Install]
+WantedBy=default.target
