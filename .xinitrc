@@ -34,24 +34,17 @@ export TERMINAL=kitty
 # keyboard speed
 xset r rate 280 56
 
-# swap esc and cap locks (macbook air)
-#setxkbmap -option caps:swapescape -option crtl:nocaps fr bepo
-
 # make CapsLock behave like Ctrl:
 setxkbmap -option ctrl:nocaps fr bepo
-
-# make short-pressed Ctrl behave like Escape:
-# xcape -e 'Control_L=Escape'
 
 # notifications
 systemctl --user start dunst
 systemctl --user import-environment DISPLAY
 
-# udiskie : -T: no tray -q: quiet
-# TODO: move me outta here, not related to x
-/usr/bin/udiskie -T -q --use-udisks2 -a &
-
+# transparency
 compton -b
+
+# wallpaper
 feh --bg-scale ~/images/wallpaper.jpg
 
 exec i3
