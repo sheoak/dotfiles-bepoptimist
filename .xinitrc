@@ -41,13 +41,14 @@ xset r rate 280 56
 setxkbmap -option ctrl:nocaps fr bepo
 
 # make short-pressed Ctrl behave like Escape:
-xcape -e 'Control_L=Escape'
+# xcape -e 'Control_L=Escape'
 
 # notifications
 systemctl --user start dunst
 systemctl --user import-environment DISPLAY
 
 # udiskie : -T: no tray -q: quiet
+# TODO: move me outta here, not related to x
 /usr/bin/udiskie -T -q --use-udisks2 -a &
 
 compton -b
