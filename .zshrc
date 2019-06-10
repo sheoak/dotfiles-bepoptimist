@@ -58,12 +58,15 @@ export BROWSER=qutebrowser
 
 # use lesspipe
 export LESSOPEN="|lesspipe.sh %s"
+export LESS='-R '
 
 # no less history
 export LESSHISTFILE=/dev/null
 
 # fix ssh issues with kitty
-export TERM=xterm-256color
+if [ "$TERM" != 'linux' ]; then
+  export TERM=xterm-256color
+fi
 
 # FZF settings
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --ignore-file ~/.ignore --hidden '
@@ -73,22 +76,14 @@ export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap 
 export FZF_CTRL_T_COMMAND='rg --files --no-ignore-vcs --ignore-file ~/.ignore --hidden '
 export FZF_DEFAULT_OPTS='--inline-info --prompt="❯"'
 
-export GDK_BACKEND=wayland
-export CLUTTER_BACKEND=wayland
-export QT_QPA_PLATFORM=wayland-egl
-export QT_WAYLAND_FORCE_DPI=physical
-
-export SWAY_MOD='Mod1'
-export SWAY_WIN='Mod4'
-export SWAY_FONT='Deja Vu Sans 12'
-export SWAY_INNERGAP=7
-export SWAY_OUTERGAP=3
-export SWAY_BORDER=3
-export SWAY_BORDER_FLOAT=7
+# export GDK_BACKEND=wayland
+# export CLUTTER_BACKEND=wayland
+# export QT_QPA_PLATFORM=wayland-egl
+# export QT_WAYLAND_FORCE_DPI=physical
 export MONITOR='eDP-1'
 export MONITOR_EXT='HDMI-1'
 
-export MOZ_ENABLE_WAYLAND=1
+# export MOZ_ENABLE_WAYLAND=1
 
 # GPG settings
 export GPG_TTY=`tty`
@@ -106,39 +101,26 @@ bindkey '^[[Z' reverse-menu-complete
 
 source $ZSH/oh-my-zsh.sh
 
-# ----------------------------------------------------------------------------
-# Theme
-# ----------------------------------------------------------------------------
-
-# TODO: export in another file, use Xresources
-# Solarized theme for tty, the dark version.
-# Based on:
-#   - Solarized (http://ethanschoonover.com/solarized)
-#   - Xresources from http://github.com/altercation/solarized
-# Generated with pty2tty.awk by Joep van Delft
-# http://github.com/joepvd/tty-solarized
-if [ "$TERM" = "xterm-256color" ]; then
-    echo -en "\e]P0000C0F" # S_base02
-    echo -en "\e]P1dc322f" # S_red
-    echo -en "\e]P2859900" # S_green
-    echo -en "\e]P3b58900" # S_yellow
-    echo -en "\e]P4268bd2" # S_blue
-    echo -en "\e]P5d33682" # S_magenta
-    echo -en "\e]P62aa198" # S_cyan
-    echo -en "\e]P7eee8d5" # S_base2
-    echo -en "\e]P8002b36" # S_base03
-    echo -en "\e]P9cb4b16" # S_orange
-    echo -en "\e]PA586e75" # S_base01
-    echo -en "\e]PB657b83" # S_base00
-    echo -en "\e]PC839496" # S_base0
-    echo -en "\e]PD6c71c4" # S_violet
-    echo -en "\e]PE93a1a1" # S_base1
-    echo -en "\e]PFfdf6e3" # S_base3
+# colors for tty (gruvbox modified with darker background)
+if [ "$TERM" = "linux" ]; then
+    echo -en "\e]P0080808" # S_base02
+    echo -en "\e]P1cc241d" # S_red
+    echo -en "\e]P298971a" # S_green
+    echo -en "\e]P3d79921" # S_yellow
+    echo -en "\e]P4458588" # S_blue
+    echo -en "\e]P5b16286" # S_magenta
+    echo -en "\e]P6689d6a" # S_cyan
+    echo -en "\e]P7a89984" # S_base2
+    echo -en "\e]P8928374" # S_base03
+    echo -en "\e]P9fb4934" # S_orange
+    echo -en "\e]PAb8bb26" # S_base01
+    echo -en "\e]PBfabd2f" # S_base00
+    echo -en "\e]PC83a598" # S_base0
+    echo -en "\e]PDd3869b" # S_violet
+    echo -en "\e]PE8ec07c" # S_base1
+    echo -en "\e]PFebdbb2" # S_base3
     clear # against bg artifacts
 fi
-
-# we test first to avoid sourcing for nothing
-source ~/.local/share/nvim/plugged/gruvbox/gruvbox_256palette.sh
 
 # local settings
 [[ -s $DOTFILES_PRIVATE/zshrc ]] && source "$DOTFILES_PRIVATE/zshrc"
@@ -150,3 +132,11 @@ source ~/.local/share/nvim/plugged/gruvbox/gruvbox_256palette.sh
 
 alias vi=nvim
 
+export LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
+export LESS_TERMCAP_md=$'\E[1;36m'     # begin blink
+export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
+export LESS_TERMCAP_so=$'\E[01;44;33m' # begin reverse video
+export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
+export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
+export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
+export GROFF_NO_SGR=1                  # for konsole and gnome-terminal
