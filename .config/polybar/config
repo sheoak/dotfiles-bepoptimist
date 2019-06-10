@@ -30,7 +30,7 @@ superlight = #555
 primary = #EEE
 primary-alt = #999999
 secondary = #fba922
-background =  #DD000000
+background = ${env:POLYBAR_COLOR:#88000000}
 foreground = ${self.primary}
 ; active_background = #3F3F3F
 active_background = #333
@@ -39,21 +39,6 @@ accent = ${self.secondary}
 urgent = ${self.red}
 good = ${self.green}
 disabled = ${self.gray}
-
-; test =       #073642
-; test =       #002b36
-; test =       #dc322f
-; colotest =   #859900
-; test =       #586e75
-; colotest =   #b58900
-; color1test = #657b83
-; colortest =  #268bd2
-; coltest   =  #839496
-; colortest =  #d33682
-; colortest =  #6c71c4
-; colotest =   #2aa198
-; colotest =   #93a1a1
-
 
 
 [bar/bottom]
