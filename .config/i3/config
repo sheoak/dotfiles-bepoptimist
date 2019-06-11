@@ -59,8 +59,8 @@ set $autolock 15
 set $termDetached kitty
 set $term kitty --single-instance 
 set $ncmpcpp ncmpcpp -c ~/.config/ncmpcpp/config-private
-set $lockalert 'xset dpms force off'
-set $Locker i3lock -c 000000
+# set $lockalert 'xset dpms force off'
+set $locker i3lock -c 000000
 
 # ----------------------------------------------------------------------------
 # modes
@@ -251,9 +251,9 @@ mode "$mode_virtualbox" {
 bindsym $mod+Control+BackSpace mode "$mode_system"
 bindsym XF86PowerOff           mode "$mode_system"
 mode "$mode_system" {
-    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym l exec --no-startup-id $locker, mode "default"
     bindsym o exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    bindsym s exec --no-startup-id $locker && systemctl suspend, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym p exec --no-startup-id  systemctl poweroff -i, mode "default"
     # back to normal: Enter or Escape
@@ -261,10 +261,7 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 # we keep a quick lock binding
-bindsym $mod+Control+l exec $Locker
-
-# autolock
-exec xautolock -time $autolock -locker $Locker -notify 20 -notifier $lockalert &
+bindsym $mod+Control+l exec $locker
 
 # ----------------------------------------------------------------------------
 # Screensaver mode

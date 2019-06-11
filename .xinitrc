@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# export DOTFILES_PRIVATE=$HOME/.dotfiles-private
-# export DOTFILES_LOCAL=$HOME/.dotfiles-local
-
 # start some nice programs
 if [ -d /etc/X11/xinit/xinitrc.d ] ; then
     for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
@@ -37,9 +34,8 @@ xset r rate 280 56
 # make CapsLock behave like Ctrl:
 setxkbmap -option ctrl:nocaps fr bepo
 
-# notifications
-systemctl --user start dunst
-systemctl --user import-environment DISPLAY
+# xautolock should be attached to x, not i3 or systemd
+xautolock -time 15 -locker "i3lock -c 000000" -notify 20 -notifier "xset dpms force off" &
 
 # transparency
 compton -b
