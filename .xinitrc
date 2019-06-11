@@ -35,7 +35,7 @@ xset r rate 280 56
 setxkbmap -option ctrl:nocaps fr bepo
 
 # xautolock should be attached to x, not i3 or systemd
-xautolock -time 15 -locker "i3lock -c 000000" -notify 20 -notifier "xset dpms force off" &
+xautolock -time 15 -locker "physlock" -notify 20 -notifier "xset dpms force off" &
 
 # transparency
 compton -b
