@@ -70,11 +70,11 @@ if [ "$TERM" != 'linux' ]; then
 fi
 
 # FZF settings
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --ignore-file ~/.ignore --hidden '
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --ignore-file $DOTFILES_PRIVATE/agignore --hidden '
 export FZF_COMPLETION_TRIGGER='~~'
 export FZF_COMPLETION_OPTS='+c -x'
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
-export FZF_CTRL_T_COMMAND='rg --files --no-ignore-vcs --ignore-file ~/.ignore --hidden '
+export FZF_CTRL_T_COMMAND='rg --files --no-ignore-vcs --ignore-file $DOTFILES_PRIVATE/agignore --hidden '
 export FZF_DEFAULT_OPTS='--inline-info --prompt="❯"'
 
 # export GDK_BACKEND=wayland
