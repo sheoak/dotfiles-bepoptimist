@@ -1,0 +1,13 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:davatorium/rofi-scripts.git
+	branch = master
+	commit = 8c5717e96f847f7b68fad9d6a29108350e527466
+	parent = 1552cdde7b00fe5d882a9231febf1f82188370b8
+	method = merge
+	update = auto
+	cmdver = 0.4.1
