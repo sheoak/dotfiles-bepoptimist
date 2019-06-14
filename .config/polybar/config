@@ -88,7 +88,7 @@ font-7 = Font Awesome 5 Free:style=Solid:size=7;1
 
 modules-left = i3 sepstraight mpd msmtp
 ; modules-center = xwindow
-modules-right = mailipc temperature sepright wireless-network openvpn bluetooth sepleft battery sepleft pulseaudio sepright clock
+modules-right = mailipc temperature sepright wireless-network openvpn bluetooth sepleft dpms battery sepleft pulseaudio sepright clock
 
 screenchange-reload = true
 
@@ -598,6 +598,12 @@ format-warn-foreground = ${colors.red}
 label = %temperature-c%
 label-warn = %temperature-c%
 label-warn-foreground = ${colors.primary}
+
+[module/dpms]
+type = custom/script
+exec = ~/bin/check-dpms.sh
+interval = 4
+label-foreground = ${colors.gray}
 
 [module/openvpn]
 ; TODO: check if /sys/class/net/tun0/dev_id exists instead
