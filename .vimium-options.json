@@ -1,5 +1,5 @@
 {
-  "settingsVersion": "1.64.3",
+  "settingsVersion": "1.64.6",
   "exclusionRules": [
     {
       "pattern": "https?://mail.google.com/*",
@@ -9,7 +9,7 @@
   "filterLinkHints": false,
   "waitForEnterForFilteredHints": true,
   "hideHud": false,
-  "keyMappings": "# Insert your preferred key mappings here.\nmap t scrollDown\nmap s scrollUp\nmap c scrollLeft\nmap r scrollRight\nmap h reload\nmap gn createTab\nunmap «\nunmap »\nmap « goBack\nmap » goForward\nmap éq removeTab\n\nmap a togglePinTab\n\nmap go Vomnibar.activateEditUrl\nmap gO Vomnibar.activateEditUrlInNewTab",
+  "keyMappings": "# Insert your preferred key mappings here.\nmap s scrollDown\nmap r scrollUp\nmap t scrollLeft\nmap n scrollRight\nmap h performFind\nmap H performBackwardsFind\nmap l reload\nmap gn createTab\nunmap «\nunmap »\nmap « goBack\nmap » goForward\nmap éq removeTab\nmap éé visitPreviousTab\nmap æ previousTab\nmap € nextTab\n\nmap a togglePinTab\n\nmap go Vomnibar.activateEditUrl\nmap gO Vomnibar.activateEditUrlInNewTab",
   "linkHintCharacters": "sadfjklewcmpgh",
   "linkHintNumbers": "0123456789",
   "newTabUrl": "about:newtab",
