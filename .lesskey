@@ -6,14 +6,14 @@
 # bepo keys, homerow is tsrn (not ctsr)
 # t   next-tag
 # T   prev-tag
-s   forw-line
-r   back-line
-S   forw-scroll
-R   back-scroll
+s forw-line
+r back-line
+S forw-scroll
+R back-scroll
 
 # bepotimist neovim-like (n still works)
-l   repeat-search
-L   reverse-search
+h repeat-search
+H reverse-search
 
 # replace keys
 a repaint
