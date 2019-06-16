@@ -103,13 +103,13 @@ config.bind('»', 'forward')
 config.bind('æ', 'back')
 config.bind('€', 'forward')
 
-config.bind('l', 'search-next')
-config.bind('L', 'search-prev')
+config.bind('h', 'search-next')
+config.bind('H', 'search-prev')
 
 # we need to move the reload key
-config.bind('<Ctrl-R>', 'reload -f')
+config.bind('l', 'reload -f')
 # h alone is a little bit dangerous if escaping insert mode by mistake
-config.bind('hh', 'reload')
+config.bind('L', 'reload')
 
 # CARET Mode -----------------------------------------------------------------
 config.bind('r', 'move-to-prev-line', 'caret')
