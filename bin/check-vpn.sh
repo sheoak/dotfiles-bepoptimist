@@ -10,7 +10,7 @@ if [[ -f /sys/class/net/tun0/dev_id ]]; then
     # echo " "
     echo ""
 else
-    echo "%{F#dc322f}%{F-}"
+    echo "%{F#dc322f}%{F-}"
 fi
 
 

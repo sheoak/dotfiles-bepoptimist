@@ -1,161 +1,87 @@
 ; polybar configuration
 ;
 ; set your env (ex: ~/.xinitrc)
-;
 ; export MONITOR=e-DP1
-;
-; !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-; Work in progress
-; !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 [colors]
-black = #1F1F1F
-; white = #93a1a1
-white = #98a6a6
-red = #dc322f
-lightred = #FF0000
-green = #2aa198
-blue = #268bd2
-lightblue = #00FFFF
-orange = #f48d18
-yellow = #fba922
-gray = #777
-purple = #9f78e1
-lightpurple = #FF78FF
-pink = #d33682
-light = #999
-superlight = #555
-
-; primary = #a89984
-primary = #EEE
-primary-alt = #999999
-secondary = #fba922
-background = ${env:POLYBAR_COLOR:#88000000}
-foreground = ${self.primary}
-; active_background = #3F3F3F
-active_background = #333
-active_text = #f3f3f3
-accent = ${self.secondary}
-urgent = ${self.red}
-good = ${self.green}
-disabled = ${self.gray}
+black             = #1F1F1F
+white             = #98a6a6
+red               = #dc322f
+lightred          = #FF0000
+green             = #2aa198
+blue              = #268bd2
+lightblue         = #00FFFF
+orange            = #f48d18
+yellow            = #fba922
+gray              = #777777
+purple            = #9f78e1
+lightpurple       = #FF78FF
+pink              = #d33682
+light             = #999999
+superlight        = #555555
+primary           = #EEEEEE
+primary-alt       = #999999
+secondary         = #fba922
+active_background = #333333
+active_text       = #f3f3f3
+accent            = ${self.secondary}
+urgent            = ${self.red}
+good              = ${self.green}
+disabled          = ${self.gray}
+background        = ${env:POLYBAR_COLOR:#88000000}
+foreground        = ${self.primary}
 
 
 [bar/bottom]
+
+; fonts
+; ----------------------------------------------------------------------------
+font-0 = Siji:pixelsize=8;3
+font-1 = Fira Code Light:size=8;3
+; for workspaces
+font-2 = Font Awesome 5 Free:style=Solid:size=7;1
+; for volume
+font-3 = Fira Code Light:style=Regular:size=8;4
+font-4 = Hack Nerd Font Mono:style=Regular:size=15;1
+font-5 = Fira Code Light:style=Regular:size=7;3
+; ----------------------------------------------------------------------------
+
 enable-ipc = true
 monitor = ${env:MONITOR:HDMI-1}
 monitor-fallback = eDP-1
 width = 100%
 height = 21
-
 bottom = true
-
-; background = ${colors.black}
-; background = #111111
 background = ${colors.background}
-; background = #BB000000
 foreground = ${colors.primary}
-
 border-bottom-size = 0
 border-bottom-color = #333
-
 border-top-size = 1
-; border-top-color = #333
 border-top-color = #111
-
 overline-size = 1
 overline-color = ${self.background}
 underline-size = 1
 underline-color = ${self.background}
-
 padding-left = 0
 padding-right = 0
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = Fira Mono:size=8;3
-font-1 = Siji:pixelsize=8;3
-font-2 = Font Awesome 5 Free:style=Solid:size=7;3
-font-3 = Font Awesome 5 Free:style=Regular:size=7;3
-font-4 = FontAwesome:style=Regular:size=7;3
-font-5 = Hack Nerd Font Mono:style=Regular:size=15;1
-font-6 = Fira Mono:style=Regular:size=8;4
-font-7 = Font Awesome 5 Free:style=Solid:size=7;1
-; font-4 = Font Awesome 5 Brands:style=Regular:size=7;2
-; font-0 = NotoSans-Regular:size=7;0
-; font-0 = DejaVu Sans Mono:size=7;2
-; font-7 = MaterialIcons:size=10;2
-
 modules-left = i3 sepstraight mpd msmtp
 ; modules-center = xwindow
-modules-right = mailipc temperature sepright wireless-network openvpn bluetooth sepleft dpms battery sepleft pulseaudio sepright clock
+modules-right = mailipc temperature dpms sepright wireless-network openvpn bluetooth sepleft battery sepleft pulseaudio sepright clock
 
 screenchange-reload = true
-
-; wm-restack = bspwm
-
 tray-position = right
-
 cursor-click = pointer
-
-;[bar/external]
-;enable-ipc = true
-;monitor = HDMI-1
-;bottom = true
-;;dock = true
-;width = ${bar/bottom.width}
-;height = ${bar/bottom.height}
-
-;background = ${bar/bottom.background}
-;foreground = ${bar/bottom.foreground}
-
-;underline-size = ${bar/bottom.underline-size}
-;underline-color = ${bar/bottom.underline-color}
-;overline-size = ${bar/bottom.overline-size}
-;overline-color = ${bar/bottom.overline-color}
-
-;border-bottom.= ${bar/bottom.border-bottom}
-;border-bottom.color = ${bar/bottom.border-bottom-color}
-
-;spacing = ${bar/bottom.spacing}
-;padding-left = ${bar/bottom.padding-left}
-;padding-right = ${bar/bottom.padding-right}
-;module-margin-left = 0
-;module-margin-right = ${bar/bottom.module-margin-right}
-
-;font-0 = ${bar/bottom.font-0}
-;font-1 = ${bar/bottom.font-1}
-;font-2 = ${bar/bottom.font-2}
-;font-3 = ${bar/bottom.font-3}
-;font-4 = ${bar/bottom.font-4}
-;font-5 = ${bar/bottom.font-5}
-
-;modules-left = i3
-;modules-center = xwindow
-;modules-right = fs-root clock
-
-;wm-restack = ${bar/bottom.wm-restack}
-
-
-; [module/fs-root]
-; type = internal/fs
-; mount-0 = /
-; label-mounted = %{F#e60053}%percentage_used%%%{F-} used of %mountpoint%
 
 
 [module/i3]
 type = internal/i3
-;format = <label-state> <label-mode> %{F#333}%{T9}%{T-}%{F}
 format = <label-state> <label-mode>
-
-; format = <label-state> <label-mode> 
 pin-workspaces = false
 strip-wsnumbers = true
 enable-click = true
-
-; Sort the workspaces by index instead of the default
-; sorting that groups the workspaces by output
-; Default: false
 index-sort = true
 
 ws-icon-0 = 1:Term;
@@ -171,51 +97,352 @@ ws-icon-default = 
 label-dimmed-underline = ${root.background}
 
 label-focused = %icon%
-; label-focused = %icon% %name%
 label-focused-foreground = ${colors.blue}
-; label-focused-background = ${colors.blue}
-; label-focused-background = ${colors.superlight}
 label-focused-underline = ${colors.blue}
-; label-focused-overline = ${colors.blue}
 label-focused-overline-size = 1
-
-; label-focused-underline = ${colors.accent}
-label-focused-font = 8
+label-focused-font = 3
 label-focused-padding = 1
 label-focused-margin = 1
 
-; label-unfocused = %icon%  %name%
 label-unfocused = %icon%
-; label-unfocused-underline = #555555
-label-unfocused-font = 8
+label-unfocused-font = 3
 label-unfocused-padding = 1
 label-unfocused-margin = 1
 label-unfocused-foreground = ${colors.gray}
 
-; label-urgent = %icon% %name%
 label-urgent = %icon%
-; label-urgent-foreground = ${colors.yellow}
-; label-urgent-foreground = ${colors.gray}
 label-urgent-underline = ${colors.urgent}
-label-urgent-font = 8
+label-urgent-font = 3
 label-urgent-padding = 1
 label-urgent-margin = 1
 
-; label-visible = %icon% %name%
 label-visible = %icon%
 label-visible-foreground = ${colors.primary}
-; label-visible-background = ${colors.gray}
-label-visible-font = 8
+label-visible-font = 3
 label-visible-padding = 1
 label-visible-margin = 1
 
-; Available tokens:
-;   %mode%
-; Default: %mode%
 label-mode = %mode%
 label-mode-padding = 2
 label-mode-background = ${colors.secondary}
 label-mode-foreground = ${colors.background}
+
+
+[module/wireless-network]
+type = internal/network
+interface = ${env:DEFAULT_NETWORK_INTERFACE:wlp2s0}
+interval = 2.0
+ping-interval = 10
+
+format-connected = <ramp-signal> <label-connected>
+; format-connected-prefix = ""
+format-connected-prefix-foreground = ${colors.gray}
+format-connected-prefix-offset = -6
+
+label-connected = %{A1:rofi-wifi-menu:}%essid%%{A}
+format-connected-foreground = ${colors.gray}
+label-connected-foreground = ${colors.primary-alt}
+
+format-disconnected = <label-disconnected>
+label-disconnected = %{A1:rofi-wifi-menu:}%{A}
+label-disconnected-foreground = ${colors.red}
+; format-disconnected-foreground = ${colors.urgent}
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+ramp-signal-foreground = ${colors.gray}
+ramp-signal-0-foreground = ${colors.urgent}
+ramp-signal-1-foreground = ${colors.accent}
+
+format-packetloss = <animation-packetloss> <label-connected>
+label-packetloss = %essid%
+label-packetloss-foreground = ${colors.red}
+
+animation-packetloss-0 = 
+animation-packetloss-0-foreground = ${colors.red}
+animation-packetloss-1 = 
+animation-packetloss-1-foreground = ${colors.secondary}
+animation-packetloss-framerate = 500
+
+; [module/wired-network]
+; type = internal/network
+; interface = eth1
+; interval = 2.0
+
+; label-connected =   %local_ip%
+; label-disconnected = Ethernet disconnected
+; label-disconnected-foreground = #66
+
+
+[module/mpd]
+
+type = internal/mpd
+; include-file = $DOTFILES_PRIVATE/mpd/mpd-private-polybar.conf
+
+format-online = <label-song>
+label-song = %{A1:mpc toggle:}%artist% – %title%%{A}
+
+format-offline =  <label-offline>
+label-offline = mpd off
+format-offline-foreground = ${colors.urgent}
+
+format-playing = <label-song>
+format-playing-prefix= " "
+format-playing-prefix-foreground = ${colors.gray}
+
+format-paused = <label-song>
+format-paused-foreground = ${colors.gray}
+format-paused-prefix= " "
+format-paused-prefix-foreground = ${colors.gray}
+
+format-stopped =
+
+format-online-suffix = " "
+format-online-suffix-font = 5
+format-online-suffix-foreground = ${colors.superlight}
+
+; icon-play = 
+; icon-pause = 
+; icon-stop = 
+; icon-prev = 
+; icon-next = 
+; icon-random = 
+; icon-repeat = 
+; icon-consume = 
+; icon-single = (1)
+
+toggle-on-foreground =
+toggle-off-foreground = #55
+
+
+[module/clock]
+type = internal/date
+interval = 5
+format-padding = 2
+date =  %A %d · %H:%M
+format = <label>
+format-foreground = ${colors.gray}
+label-foreground = ${colors.primary-alt}
+
+
+[module/pulseaudio]
+type = internal/pulseaudio
+; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
+; If not, uses default sink
+; sink = alsa_output.pci-0000_00_1b.0.analog-stereo
+; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
+; Default: true
+use-ui-max = true
+
+; Interval for volume increase/decrease (in percent points)
+interval = 5
+format-volume = <bar-volume>
+format-muted = <label-muted>
+label-volume = 
+label-muted = 
+label-muted-foreground = ${colors.purple}
+
+ramp-volume-0 = 1
+ramp-volume-1 = 2
+ramp-volume-2 = 3
+
+bar-volume-width = 10
+bar-volume-foreground-0 = ${colors.lightpurple}
+bar-volume-foreground-1 = ${colors.lightpurple}
+bar-volume-foreground-2 = ${colors.lightblue}
+bar-volume-foreground-3 = ${colors.lightblue}
+bar-volume-foreground-4 = ${colors.lightblue}
+bar-volume-foreground-5 = ${colors.secondary}
+bar-volume-foreground-6 = ${colors.lightred}
+bar-volume-gradient = false
+bar-volume-indicator = 
+bar-volume-indicator-font = 4
+bar-volume-fill = ·
+bar-volume-fill-font = 4
+bar-volume-empty = ·
+bar-volume-empty-font = 4
+bar-volume-empty-foreground = ${colors.light}
+
+
+[module/battery]
+type = internal/battery
+full-at = 91
+
+battery = BAT0
+adapter = ADP1
+
+poll-interval = 5
+time-format = %H:%M
+
+; format-foreground-1 = ${colors.blue}
+; format-foreground-2 = ${colors.secondary}
+
+; Charging
+; ----------------------------------------------------------------------------
+format-charging = <label-charging> <animation-charging>
+format-charging-foreground = ${colors.gray}
+label-charging = %percentage%%
+label-charging-foreground = ${colors.primary}
+; label-discharging-font = 4
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-foreground = ${colors.blue}
+
+; Discharging
+; ----------------------------------------------------------------------------
+format-discharging = <label-discharging> <ramp-capacity>
+label-discharging = %percentage%%
+label-discharging-foreground = ${colors.yellow}
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-0-foreground = ${colors.red}
+ramp-capacity-1-foreground = ${colors.orange}
+ramp-capacity-2-foreground = ${colors.green}
+ramp-capacity-3-foreground = ${colors.blue}
+
+; Full
+; ----------------------------------------------------------------------------
+label-full = 
+format-full = <label-full>
+format-full-foreground = ${colors.purple}
+
+
+[module/xwindow]
+type = internal/xwindow
+label-maxlen = 75
+; label-foreground = #bbb
+
+; [module/powermenu]
+; type = custom/menu
+
+; format-padding = 3
+; format-background = #000
+; format-foreground = #fff
+
+; label-open = 
+; label-close = 
+; label-separator = " - "
+
+; menu-0-0 = Terminate WM
+; menu-0-0-foreground = ${colors.accent}
+; menu-0-0-exec = bspc quit -1
+; menu-0-1 = Reboot
+; menu-0-1-foreground = ${colors.accent}
+; menu-0-1-exec = menu-open-1
+; menu-0-2 = Power off
+; menu-0-2-foreground = ${colors.accent}
+; menu-0-2-exec = menu-open-2
+
+; menu-1-0 = Cancel
+; menu-1-0-foreground = ${colors.accent}
+; menu-1-0-exec = menu-open-0
+; menu-1-1 = Reboot
+; menu-1-1-foreground = ${colors.accent}
+; menu-1-1-exec = sudo reboot
+
+; menu-2-0 = Power off
+; menu-2-0-foreground = ${colors.accent}
+; menu-2-0-exec = sudo poweroff
+; menu-2-1 = Cancel
+; menu-2-1-foreground = ${colors.accent}
+; menu-2-1-exec = menu-open-0
+
+
+[module/filesystem]
+type = internal/fs
+
+; Mountpoints to display
+mount-0 = /
+mount-1 = /home
+interval = 20
+fixed-values = true
+spacing = 4
+format-mounted = <label-mounted>
+format-unmounted = <label-unmounted>
+label-mounted = %mountpoint%: %free%
+label-unmounted = %mountpoint%: not mounted
+label-unmounted-foreground = #55
+
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 45
+
+format =
+format-warn =  <label-warn>
+format-warn-foreground = ${colors.red}
+
+label = %temperature-c%
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.primary}
+
+
+[module/dpms]
+type = custom/script
+exec = ~/bin/check-dpms.sh
+interval = 4
+label-foreground = ${colors.purple}
+
+
+[module/openvpn]
+; TODO: check if /sys/class/net/tun0/dev_id exists instead
+type = custom/script
+exec = ~/bin/check-vpn.sh
+interval = 2
+label-foreground = ${colors.purple}
+
+; format = <label>
+; label = %output%
+; format-foreground = ${colors.gray}
+
+
+[module/sepstraight]
+type = custom/text
+content = %{T5}   %{T-}
+content-foreground = ${colors.superlight}
+
+
+[module/sepleft]
+type = custom/text
+content = %{T5}%{T-}
+content-foreground = ${colors.superlight}
+
+
+[module/sepright]
+type = custom/text
+content = %{T5}%{T-}
+content-foreground = ${colors.superlight}
+
+
+[module/mailipc]
+type=custom/ipc
+hook-0 = ~/bin/check-mail.sh
+format = <output>
+format-foreground = ${colors.accent}
+initial = 1
+
+
+[module/bluetooth]
+type = custom/script
+exec = ~/bin/check-bluetooth.sh
+interval = 10
+format-foreground = ${colors.blue}
+
+
+[module/msmtp]
+type = custom/script
+exec = ~/bin/check-msmtp.sh
+interval = 5
 
 
 ; [module/cpu]
@@ -278,411 +505,4 @@ label-mode-foreground = ${colors.background}
 ; bar-used-empty-font = 5
 ; bar-used-empty-foreground = #44
 
-[module/wireless-network]
-type = internal/network
-interface = ${env:DEFAULT_NETWORK_INTERFACE:wlp2s0}
-interval = 2.0
-ping-interval = 10
-
-format-connected = <ramp-signal> <label-connected>
-; format-connected-prefix = ""
-format-connected-prefix-foreground = ${colors.gray}
-format-connected-prefix-offset = -6
-
-label-connected = %{A1:rofi-wifi-menu:}%essid%%{A}
-format-connected-foreground = ${colors.gray}
-label-connected-foreground = ${colors.primary}
-
-format-disconnected = <label-disconnected>
-label-disconnected = %{A1:rofi-wifi-menu:}%{A}
-label-disconnected-foreground = ${colors.red}
-; format-disconnected-foreground = ${colors.urgent}
-
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
-ramp-signal-foreground = ${colors.gray}
-ramp-signal-0-foreground = ${colors.urgent}
-ramp-signal-1-foreground = ${colors.accent}
-
-format-packetloss = <animation-packetloss> <label-connected>
-label-packetloss = %essid%
-label-packetloss-foreground = ${colors.red}
-
-animation-packetloss-0 = 
-animation-packetloss-0-foreground = ${colors.red}
-animation-packetloss-1 = 
-animation-packetloss-1-foreground = ${colors.secondary}
-animation-packetloss-framerate = 500
-
-; [module/wired-network]
-; type = internal/network
-; interface = eth1
-; interval = 2.0
-
-; label-connected =   %local_ip%
-; label-disconnected = Ethernet disconnected
-; label-disconnected-foreground = #66
-
-[module/mpd]
-
-type = internal/mpd
-
-; include-file = $DOTFILES_PRIVATE/mpd/mpd-private-polybar.conf
-
-; format-online = <bar-progress>  <icon-prev> <icon-stop> <toggle> <icon-next>  <label-song>
-; format-online =  <label-song> · <icon-repeat> <icon-random> <icon-single> <icon-consume>
-format-online = <label-song>
-label-song = %{A1:mpc toggle:}%artist% – %title%%{A}
-; format-online-foreground = ${colors.gray}
-
-format-offline =  <label-offline>
-label-offline = mpd off
-format-offline-foreground = ${colors.urgent}
-
-format-playing = <label-song>
-format-paused = <label-song>
-format-stopped =
-
-format-playing-prefix= " "
-format-playing-prefix-foreground = ${colors.gray}
-
-format-paused-foreground = ${colors.gray}
-format-paused-prefix= " "
-format-paused-prefix-foreground = ${colors.gray}
-
-format-online-suffix = " "
-format-online-suffix-foreground = ${colors.superlight}
-format-online-suffix-font = 6
-
-
-; icon-play = 
-; icon-pause = 
-; icon-stop = 
-; icon-prev = 
-; icon-next = 
-; icon-random = 
-; icon-repeat = 
-; icon-consume = 
-; icon-single = (1)
-
-toggle-on-foreground =
-toggle-off-foreground = #55
-
-; bar-progress-width = 45
-; bar-progress-format = %{+o +u}%fill%%{-o -u}%indicator%%{+o +u}%empty%%{-u -o}
-; ; bar-progress-indicator = |
-; bar-progress-indicator = █
-; bar-progress-indicator-foreground = #ff
-; bar-progress-indicator-font = 3
-; ; bar-progress-fill = ─
-; bar-progress-fill = █
-; bar-progress-fill-foreground = #bb
-; bar-progress-fill-font = 3
-; ; bar-progress-empty = ─
-; bar-progress-empty = ▒
-; bar-progress-empty-font = 3
-; bar-progress-empty-foreground = #44
-
-[module/clock]
-type = internal/date
-interval = 5
-format-padding = 4
-; format-background = #000
-; format-foreground = #fff
-; date = %%{F#bb}%Y-%m-%d%%{F-}  %%{F#ee}%H:%M%%{F-}
-date =  %A %d · %H:%M
-format = <label>
-format-foreground = ${colors.gray}
-label-foreground = ${colors.primary-alt}
-
-[module/pulseaudio]
-type = internal/pulseaudio
-; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
-; If not, uses default sink
-; sink = alsa_output.pci-0000_00_1b.0.analog-stereo
-; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
-; Default: true
-use-ui-max = true
-
-; Interval for volume increase/decrease (in percent points)
-; Default: 5
-interval = 5
-
-; Available tags:
-;   <label-volume> (default)
-;   <ramp-volume>
-;   <bar-volume>
-; format-volume = <label-volume> <bar-volume>
-format-volume = <bar-volume>
-
-; Available tags:
-;   <label-muted> (default)
-;   <ramp-volume>
-;   <bar-volume>
-format-muted = <label-muted>
-
-; Available tokens:
-;   %percentage% (default)
-label-volume = 
-
-; Available tokens:
-;   %percentage% (default)
-label-muted = 
-label-muted-foreground = ${colors.purple}
-
-; Only applies if <ramp-volume> is used
-ramp-volume-0 = 1
-ramp-volume-1 = 2
-ramp-volume-2 = 3
-
-bar-volume-width = 10
-bar-volume-foreground-0 = ${colors.lightpurple}
-bar-volume-foreground-1 = ${colors.lightpurple}
-bar-volume-foreground-2 = ${colors.lightblue}
-bar-volume-foreground-3 = ${colors.lightblue}
-bar-volume-foreground-4 = ${colors.lightblue}
-bar-volume-foreground-5 = ${colors.secondary}
-bar-volume-foreground-6 = ${colors.lightred}
-bar-volume-gradient = false
-bar-volume-indicator = 
-bar-volume-indicator-font = 7
-bar-volume-fill = ·
-bar-volume-fill-font = 7
-bar-volume-empty = ·
-bar-volume-empty-font = 7
-bar-volume-empty-foreground = ${colors.light}
-
-[module/battery]
-type = internal/battery
-full-at = 91
-
-battery = BAT0
-adapter = ADP1
-
-poll-interval = 5
-time-format = %H:%M
-
-format-charging = <label-charging>
-format-discharging = <ramp-capacity> <label-discharging>
-format-full = <label-full>
-
-format-charging-prefix = " "
-format-charging-prefix-foreground = ${colors.accent}
-
-label-discharging = %percentage%%
-label-charging = %percentage%%
-label-full = 
-
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-3 = 
-ramp-capacity-4 = 
-
-ramp-capacity-0-foreground = ${colors.urgent}
-ramp-capacity-1-foreground = ${colors.orange}
-ramp-capacity-2-foreground = ${colors.yellow}
-ramp-capacity-3-foreground = ${colors.green}
-ramp-capacity-4-foreground = ${colors.blue}
-
-label-discharging-foreground = ${colors.primary}
-
-format-charging-foreground = ${colors.gray}
-label-charging-foreground = ${colors.primary}
-format-full-foreground = ${colors.gray}
-
-format-foreground-1 = ${colors.blue}
-format-foreground-2 = ${colors.secondary}
-
-[module/xwindow]
-type = internal/xwindow
-label-maxlen = 75
-; label-foreground = #bbb
-
-; [module/powermenu]
-; type = custom/menu
-
-; format-padding = 3
-; format-background = #000
-; format-foreground = #fff
-
-; label-open = 
-; label-close = 
-; label-separator = " - "
-
-; menu-0-0 = Terminate WM
-; menu-0-0-foreground = ${colors.accent}
-; menu-0-0-exec = bspc quit -1
-; menu-0-1 = Reboot
-; menu-0-1-foreground = ${colors.accent}
-; menu-0-1-exec = menu-open-1
-; menu-0-2 = Power off
-; menu-0-2-foreground = ${colors.accent}
-; menu-0-2-exec = menu-open-2
-
-; menu-1-0 = Cancel
-; menu-1-0-foreground = ${colors.accent}
-; menu-1-0-exec = menu-open-0
-; menu-1-1 = Reboot
-; menu-1-1-foreground = ${colors.accent}
-; menu-1-1-exec = sudo reboot
-
-; menu-2-0 = Power off
-; menu-2-0-foreground = ${colors.accent}
-; menu-2-0-exec = sudo poweroff
-; menu-2-1 = Cancel
-; menu-2-1-foreground = ${colors.accent}
-; menu-2-1-exec = menu-open-0
-
-
-[module/filesystem]
-type = internal/fs
-
-; Mountpoints to display
-mount-0 = /
-mount-1 = /home
-
-; Seconds to sleep between updates
-; Default: 30
-interval = 20
-
-; Display fixed precision values
-; Default: false
-fixed-values = true
-
-; Spacing between entries
-; Default: 2
-spacing = 4
-
-; Available tags:
-;   <label-mounted> (default)
-;   <bar-free>
-;   <bar-used>
-;   <ramp-capacity>
-format-mounted = <label-mounted>
-
-; Available tags:
-;   <label-unmounted> (default)
-format-unmounted = <label-unmounted>
-
-; Available tokens:
-;   %mountpoint%
-;   %type%
-;   %fsname%
-;   %percentage_free%
-;   %percentage_used%
-;   %total%
-;   %free%
-;   %used%
-; Default: %mountpoint% %percentage_free%%
-label-mounted = %mountpoint%: %free%
-
-; Available tokens:
-;   %mountpoint%
-; Default: %mountpoint% is not mounted
-label-unmounted = %mountpoint%: not mounted
-label-unmounted-foreground = #55
-
-[module/temperature]
-type = internal/temperature
-thermal-zone = 0
-warn-temperature = 45
-
-format =
-format-warn =  <label-warn>
-format-warn-foreground = ${colors.red}
-
-label = %temperature-c%
-label-warn = %temperature-c%
-label-warn-foreground = ${colors.primary}
-
-[module/dpms]
-type = custom/script
-exec = ~/bin/check-dpms.sh
-interval = 4
-label-foreground = ${colors.gray}
-
-[module/openvpn]
-; TODO: check if /sys/class/net/tun0/dev_id exists instead
-type = custom/script
-exec = ~/bin/check-vpn.sh
-interval = 2
-
-; format = <label>
-; label = %output%
-; format-foreground = ${colors.gray}
-; label-foreground = ${colors.purple}
-
-[module/sepstraight]
-type = custom/text
-content = %{T6}   %{T-}
-content-foreground = ${colors.superlight}
-
-[module/sepleft]
-type = custom/text
-content = %{T6}%{T-}
-content-foreground = ${colors.superlight}
-
-[module/sepright]
-type = custom/text
-content = %{T6}%{T-}
-content-foreground = ${colors.superlight}
-
-; [module/mail]
-; type = custom/script
-; exec = ~/bin/check-mail.sh
-; interval = 2
-
-; ; Available tags:
-; ;   <output> - deprecated
-; ;   <label> (default)
-; format = <label>
-; ; format-background = #999
-; format-foreground = ${colors.accent}
-; format-padding = 0
-
-; Available tokens:
-;   %output%
-; Default: %output%
-; label =  %output:0:15:No mail%
-; label =  %output%
-
-
-[module/mailipc]
-type=custom/ipc
-hook-0 = ~/bin/check-mail.sh
-format = <output>
-format-foreground = ${colors.accent}
-initial = 1
-
-[module/bluetooth]
-type = custom/script
-exec = ~/bin/check-bluetooth.sh
-interval = 10
-
-; format = <label>
-; format-foreground = ${colors.blue}
-; format-padding = 0
-
-[module/msmtp]
-type = custom/script
-exec = ~/bin/check-msmtp.sh
-
-interval = 5
-
-; Available tags:
-;   <output> - deprecated
-;   <label> (default)
-; format =  <label>
-; ; format-background = #999
-; format-foreground = ${colors.purple}
-; format-padding = 4
-
-; Available tokens:
-;   %output%
-; Default: %output%
-; label =   %output:0:15:No queue%
 ; vim:ft=dosini
