@@ -23,7 +23,7 @@
 # this makes the i3 configuration file generic
 set_from_resource $mod i3wm.mod Mod1
 set_from_resource $win i3wm.win Mod4
-set_from_resource $font i3wm.font pango:Fira Code 10
+set_from_resource $font i3wm.font pango:Fira Code Light 8
 set_from_resource $innergap i3wn.innergap 7
 set_from_resource $outergap i3wn.outergap 3
 set_from_resource $border i3wn.outergap 1
@@ -449,7 +449,7 @@ set_from_resource $aqua color6 #689D6A
 set_from_resource $gray color7 #A89984
 set_from_resource $darkgray color0 #282828
 
-client.focused          $blue     $blue     $darkgray $purple $blue
+client.focused          $blue     $blue     #000000 $purple $blue
 client.focused_inactive $darkgray $darkgray $white    $purple $darkgray
 client.unfocused        $darkgray $darkgray $gray     $purple $darkgray
 client.urgent           $red      $red      $white    $red    $red
