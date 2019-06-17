@@ -335,6 +335,7 @@ bindsym $mod+Control+s restart
 bindsym $mod+d exec "rofi -show run"
 bindsym $mod+g exec "udiskie-rofi"
 bindsym $mod+o exec "rofimoji"
+bindsym $mod+Shift+o exec "rofi-nerdfonts"
 
 #bindsym $mod+apostrophe exec "rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}'"
 # bindsym $mod+apostrophe exec "rofi -font 'Hack 10'  -width 1000 -lines 26 -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}' ; sleep 0.5; xdotool type $(xclip -o -selection clipboard)"
