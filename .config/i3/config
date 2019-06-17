@@ -80,12 +80,12 @@ set $W1  "1:Term"
 set $W2  "2:Work"
 set $W3  "3:Social"
 set $W4  "4:Web"
-set $W5  "5:Files"
+set $W5  "5:Secondary"
 set $W6  "6:Medias"
-set $W7  "7:Secondary"
-set $W8  "8:Others"
-set $W9  "9:Extra"
-set $W10 "10:Extra 2"
+set $W7  "7:Files"
+set $W8  "8:Virtual"
+set $W9  "9:Secondary"
+set $W10 "10:Secondary"
 
 # ----------------------------------------------------------------------------
 # Workspaces
