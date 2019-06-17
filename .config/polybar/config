@@ -20,7 +20,7 @@ pink              = #d33682
 light             = #999999
 superlight        = #555555
 primary           = #EEEEEE
-primary-alt       = #999999
+; primary-alt       = #BBBBBB
 secondary         = #fba922
 active_background = #333333
 active_text       = #f3f3f3
@@ -39,7 +39,7 @@ foreground        = ${self.primary}
 font-0 = Siji:pixelsize=8;3
 font-1 = Fira Code Light:size=8;3
 ; for workspaces
-font-2 = Font Awesome 5 Free:style=Solid:size=7;1
+font-2 = Font Awesome 5 Free:style=Solid:size=6;2
 ; for volume
 font-3 = Fira Code Light:style=Regular:size=8;4
 font-4 = Hack Nerd Font Mono:style=Regular:size=15;1
@@ -88,9 +88,12 @@ ws-icon-0 = 1:Term;
 ws-icon-1 = 2:Work;
 ws-icon-2 = 3:Social;
 ws-icon-3 = 4:Web;
-ws-icon-4 = 5:Files;
-ws-icon-5 = 6:Medias;
-ws-icon-6 = 7:Secondary;
+ws-icon-4 = 5:Secondary;
+ws-icon-5 = 6:Medias;
+ws-icon-6 = 7:Files;
+ws-icon-7 = 8:Virtual;
+ws-icon-8 = 9:Secondary;
+ws-icon-9 = 10:Secondary;
 
 ws-icon-default = 
 
@@ -141,7 +144,7 @@ format-connected-prefix-offset = -6
 
 label-connected = %{A1:rofi-wifi-menu:}%essid%%{A}
 format-connected-foreground = ${colors.gray}
-label-connected-foreground = ${colors.primary-alt}
+label-connected-foreground = ${colors.primary}
 
 format-disconnected = <label-disconnected>
 label-disconnected = %{A1:rofi-wifi-menu:}%{A}
@@ -221,11 +224,11 @@ toggle-off-foreground = #55
 [module/clock]
 type = internal/date
 interval = 5
-format-padding = 2
-date =  %A %d · %H:%M
+format-padding = 3
+date = %A %d · %H:%M
 format = <label>
 format-foreground = ${colors.gray}
-label-foreground = ${colors.primary-alt}
+label-foreground = ${colors.primary}
 
 
 [module/pulseaudio]
@@ -245,11 +248,7 @@ label-volume =
 label-muted = 
 label-muted-foreground = ${colors.purple}
 
-ramp-volume-0 = 1
-ramp-volume-1 = 2
-ramp-volume-2 = 3
-
-bar-volume-width = 10
+bar-volume-width = 8
 bar-volume-foreground-0 = ${colors.lightpurple}
 bar-volume-foreground-1 = ${colors.lightpurple}
 bar-volume-foreground-2 = ${colors.lightblue}
@@ -257,6 +256,7 @@ bar-volume-foreground-3 = ${colors.lightblue}
 bar-volume-foreground-4 = ${colors.lightblue}
 bar-volume-foreground-5 = ${colors.secondary}
 bar-volume-foreground-6 = ${colors.lightred}
+
 bar-volume-gradient = false
 bar-volume-indicator = 
 bar-volume-indicator-font = 4
@@ -298,8 +298,12 @@ animation-charging-foreground = ${colors.blue}
 ; ----------------------------------------------------------------------------
 format-discharging = <label-discharging> <ramp-capacity>
 label-discharging = %percentage%%
-label-discharging-foreground = ${colors.yellow}
+label-discharging-foreground = ${colors.primary}
+; label-discharging-underline = ${colors.yellow}
+; label-discharging-underline-size = 1
 
+; ramp-capacity-underline = ${colors.yellow}
+; ramp-capacity-underline-size = 1
 ramp-capacity-0 = 
 ramp-capacity-1 = 
 ramp-capacity-2 = 
@@ -376,10 +380,11 @@ label-unmounted-foreground = #55
 [module/temperature]
 type = internal/temperature
 thermal-zone = 0
-warn-temperature = 45
+warn-temperature = 50
+format-warn-margin = 2
 
 format =
-format-warn =  <label-warn>
+format-warn =  <label-warn>
 format-warn-foreground = ${colors.red}
 
 label = %temperature-c%
@@ -392,6 +397,7 @@ type = custom/script
 exec = ~/bin/check-dpms.sh
 interval = 4
 label-foreground = ${colors.purple}
+label-font = 3
 
 
 [module/openvpn]
