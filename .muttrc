@@ -6,22 +6,23 @@ source `FILE=$DOTFILES_PRIVATE/mutt/mailboxes; if [ ! -s "$FILE" ]; then FILE=/d
 source ~/.mutt/bepo.muttrc
 
 # theme solarized
-source ~/.mutt/colors/solarized/mutt-colors-solarized-dark-16.muttrc
+source ~/.mutt/colors/gruvbox/dotfiles_mutt_colors-gruvbox-shuber.muttrc
+source ~/.mutt/colors/gruvbox/dotfiles_mutt_colors-gruvbox-shuber-extended.muttrc
 
 # gpg settings
 source ~/.mutt/gpg.rc
 
 # Set up mutt to use our local maildir:
 set mbox_type=Maildir
-set sendmail = "msmtp-enqueue.sh -C $DOTFILES_PRIVATE/msmtprc"
+set sendmail="msmtp-enqueue.sh -C $DOTFILES_PRIVATE/msmtprc"
 
 # --------- Basic options
 set quit=ask-yes
 set beep_new=yes
 # Check for mail every minute for current IMAP mailbox every 1 min
-set timeout = 60
+set timeout=60
 # Check for new mail in ALL mailboxes every 2 min
-set mail_check = 120
+set mail_check=120
 
 # --------- Locales and charsets
 set send_charset="utf-8"
@@ -41,10 +42,9 @@ set strict_threads
 set smart_wrap
 # Automatically delete messages marked for deletion on exit
 set delete=yes
-set to_chars=" +TCFL"
 
 # ---------- Attachments
-set mailcap_path = ~/.mutt/mailcap
+set mailcap_path=~/.mutt/mailcap
 auto_view text/html
 #alternative_order text/plain text/enriched text/html
 alternative_order text/enriched text/plain text/html text
@@ -60,8 +60,8 @@ folder-hook . `rm -f /tmp/mutt/*`
 
 # ----------- Adress book
 set query_command= "abook -f $DOTFILES_PRIVATE/abook/addressbook --mutt-query '%s'"
-macro index,pager  a "<pipe-message>abook -f $DOTFILES_PRIVATE/abook/addressbook --add-email-quiet<return>" "Add this sender to Abook"
-bind editor        <Tab> complete-query
+macro index,pager a "<pipe-message>abook -f $DOTFILES_PRIVATE/abook/addressbook --add-email-quiet<return>" "Add this sender to Abook"
+bind editor <Tab> complete-query
 
 # ----------- Searching (mu)
 # Adress lookup with lbdb
@@ -75,8 +75,21 @@ bind editor        <Tab> complete-query
 #--------- Bind keys
 # filtering
 bind index . noop
-macro index .f  "<limit>(~N|~F)<Enter>"  "view new/flag"
-macro index .a  "<limit>~A<Enter>"       "view all"
+macro index .f "<limit>(~N|~F)<Enter>"  "view new/flag"
+macro index .a "<limit>~A<Enter>"       "view all"
+
+# 'L' performs a notmuch query, showing only the results
+macro index L "<enter-command>unset wait_key<enter> \
+    <shell-escape>read -p 'notmuch query: ' x; \
+    echo \$x >~/.cache/mutt_terms<enter><limit>~i \"\`notmuch search \
+    --output=messages \$(cat ~/.cache/mutt_terms) | head -n 600 | \
+    perl -le '@a=<>;chomp@a;s/\^id:// for@a;$,=\"|\";print@a'\`\"<enter>" \
+    "show only messages matching a notmuch pattern"
+
+# add dbus call to sync-mailbox key (polybar dbus)
+macro generic,index $ "<enter-command>unset wait_key<enter><sync-mailbox><shell-escape>/usr/bin/polybar-msg hook mailipc 1 2> /dev/null &<enter>" "Show Mutt documentation"
+# check new messages in the background
+macro generic,index <F5> "<enter-command>unset wait_key<enter><shell-escape>systemctl --user start mbsync.service 2> /dev/null &<enter>" "Show Mutt documentation"
 
 # quit
 macro index Q   ":set quit=yes\nqy"  "Quit mutt without asking"
@@ -94,7 +107,7 @@ bind index,browser G last-entry
 bind pager G bottom
 
 # vim-bepo-typematrix-like
-bind index,pager H group-reply
+# bind index,pager H group-reply
 bind index,pager <Space> next-page
 bind index,pager <BackSpace> previous-page
 bind index,pager ^ change-folder
@@ -102,9 +115,19 @@ bind index,pager ^ change-folder
 macro index t <sync-mailbox><change-folder>?<tab> "Go to the folder menu"
 
 # ----------- Appearance
-set index_format="[%Z] %{!%d %b} %1M %-28.28L │ %s"
+set help=no # remove the help top bar
 
-set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
+# ----------------------------------------------------------------------------
+# Powerline / nerdfont
+# ----------------------------------------------------------------------------
+set index_format=" %T  %{!%d %b} %1M %-28.28L │ %s"
+set pager_format=" %T %n  %s%*  %P "
+set status_format = " %r %f   %m %?n?  %n? %?d?  %d ?%?t? 笠%t ?%?F?  %F? %> %?p?  %p ? "
+# no addressed to me, to me, group, cc, sent by me, mailing list
+set to_chars=""
+# unchanged mailbox, changed, read only, attach mode
+set status_chars = " "
+# ----------------------------------------------------------------------------
 
 # Colour definitions when on a mono screen
 mono bold bold
