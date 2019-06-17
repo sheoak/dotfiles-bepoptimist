@@ -13,7 +13,7 @@ rofi.hide-scrollbar: true
 rofi.scrollbar-width: 1
 rofi.levenshtein-sort: false
 
-rofi.font: Fira Code, Regular, 14
+rofi.font: FuraCode Nerd Font, Regular, 14
 rofi.color-enabled: true
 
 rofi.matching: fuzzy
