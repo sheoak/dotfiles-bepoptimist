@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+SCRIPTDIR=$HOME/.mutt/scripts/
+IGNORE="$SCRIPTDIR/.ignore"
+
+fzf_command='fzf'
+fd_command="fd . ${HOME}/.mail/ --ignore-file=${IGNORE} --type d"
+
+folder="$($fd_command | $fzf_command)"
+
+echo "push 'c$folder<enter>'"

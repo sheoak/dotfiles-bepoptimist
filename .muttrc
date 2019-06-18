@@ -61,7 +61,8 @@ folder-hook . `rm -f /tmp/mutt/*`
 # ----------- Adress book
 set query_command= "abook -f $DOTFILES_PRIVATE/abook/addressbook --mutt-query '%s'"
 macro index,pager a "<pipe-message>abook -f $DOTFILES_PRIVATE/abook/addressbook --add-email-quiet<return>" "Add this sender to Abook"
-bind editor <Tab> complete-query
+macro index M "<tag-prefix>w?" "Move tagged messages"
+macro index T ":source ~/.mutt/scripts/fzffolder|<return>"
 
 # ----------- Searching (mu)
 # Adress lookup with lbdb
@@ -73,6 +74,7 @@ bind editor <Tab> complete-query
 # macro index <F5> "<change-folder-readonly>~/Mail/mu-search\n" "display mu-find results"
 
 #--------- Bind keys
+bind index D delete-pattern
 # filtering
 bind index . noop
 macro index .f "<limit>(~N|~F)<Enter>"  "view new/flag"
@@ -106,13 +108,9 @@ bind pager gg top
 bind index,browser G last-entry
 bind pager G bottom
 
-# vim-bepo-typematrix-like
-# bind index,pager H group-reply
 bind index,pager <Space> next-page
 bind index,pager <BackSpace> previous-page
-bind index,pager ^ change-folder
 #bind pager <shift><Space> tag-message
-macro index t <sync-mailbox><change-folder>?<tab> "Go to the folder menu"
 
 # ----------- Appearance
 set help=no # remove the help top bar

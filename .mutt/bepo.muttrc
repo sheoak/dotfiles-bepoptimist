@@ -1,37 +1,46 @@
 # bépo bindings
+
+# -----------------------------------------------------------------------------
+# Homerow:
+# -----------------------------------------------------------------------------
+macro index t <sync-mailbox><change-folder>?<tab> "Go to the folder menu"
 bind browser,attach s next-entry
 bind browser,attach r previous-entry
 bind index s next-undeleted
 bind index r previous-undeleted
-bind index D delete-message
+bind pager s next-line
+bind pager r previous-line
 bind generic,index s next-entry
 bind generic,index r previous-entry
 bind browser S next-entry
 bind browser R previous-entry
-bind pager s next-line
-bind pager r previous-line
-bind index,attach j tag-entry
-bind index J tag-pattern
-bind index ^ noop
-bind generic,index,pager h search-next
-bind generic,index,pager H search-opposite
-bind generic ? search-reverse
-bind generic gh help
-bind index ^J untag-pattern
-bind index <Esc>j tag-thread
-bind pager,index w save-message
-bind attach,pager t exit
 bind browser t previous-page
 bind generic R bottom-page
 bind browser n select-entry
 bind index n display-message
 bind pager n view-attachments
 bind attach n view-attach
-bind attach w save-entry
-bind index,pager,attach , reply
 bind index,pager R half-up
 bind index,pager S half-down
-bind index L query
-# bind pager h change-folder
-# bind generic C top-page
-# bind generic L recall-message
+bind attach,pager t exit
+
+# -----------------------------------------------------------------------------
+# Re-allocate
+# -----------------------------------------------------------------------------
+bind generic,index,pager h search-next
+bind generic,index,pager H search-opposite
+bind index,attach j tag-entry
+bind index J tag-pattern
+bind index ^J untag-pattern
+bind generic gh help
+
+# -----------------------------------------------------------------------------
+# Others
+# -----------------------------------------------------------------------------
+bind index ^ noop
+bind generic ? search-reverse
+bind index <Esc>j tag-thread
+bind pager,index w save-message
+bind attach w save-entry
+bind index,pager,attach , reply
+bind index,pager A group-reply
