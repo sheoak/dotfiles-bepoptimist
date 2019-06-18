@@ -1,32 +1,33 @@
 
-nnoremap c h
-nnoremap r l
-nnoremap t j
-nnoremap s k
-nnoremap C H
-nnoremap R L
+nnoremap t h
+nnoremap s j
+nnoremap r k
+nnoremap n l
 
-nnoremap T <C-d>
-nnoremap S <C-u>
+nnoremap S <C-d>
+nnoremap R <C-u>
+
+nnoremap æ <C-o>
+nnoremap € <C-i>
 
 nnoremap gn t
 nnoremap j t
 nnoremap J T
-nnoremap l c
-nnoremap L C
-nnoremap h r
-nnoremap H R
+nnoremap l r
+nnoremap L R
+nnoremap h n
+nnoremap H N
 nnoremap k s
 nnoremap K S
 
-nnoremap gs gk
-nnoremap gt gj
+nnoremap gs gj
+nnoremap gr gk
 
-nnoremap c <C-o>
-nnoremap r <C-i>
-nnoremap gb gT
-nnoremap gé gt
+nnoremap T gT
+nnoremap N gt
 
+nnoremap O t
+nnoremap go O
 
 nnoremap <BS> <C-u>
 nnoremap <Space> <Cd>
@@ -37,14 +38,45 @@ nmap = zz
 nmap <F5> h
 nmap <F11> :set statusbar!<CR>:set fullscreen!<CR>
 
-nmap d :quit<CR>
+nmap ,d :quit<CR>
+nmap ,q :quit<CR>
 
-set hintkeys=auiectrsn
+nmap gq :qpop<CR>
 
-set previouspattern=/\bprev\|précédent\|previous\b/i,/^(<\|<<\|«)$/,/^(<\|<<\|«)/,/(<\|<<\|«)$/
-set nextpattern=/\bnext\|suivant\b/i,/^(>\|>>\|»)$/,/^(>\|>>\|»)/,/(>\|>>\|»)$/,/\bmore\b/i
+nmap ;d ;s
+
+# set previouspattern=/\bprev\|précédent\|previous\b/i,/^(<\|<<\|«)$/,/^(<\|<<\|«)/,/(<\|<<\|«)$/
+# set nextpattern=/\bnext\|suivant\b/i,/^(>\|>>\|»)$/,/^(>\|>>\|»)/,/(>\|>>\|»)$/,/\bmore\b/i
 
 set editor-command=/usr/bin/urxvt -e vim %s
 
-set fontsize=16
 set strict-ssl=false
+
+set default-zoom=125
+set default-font="Fira Mono"
+set sans-serif-font="Fira Sans"
+set serif-font="Cardo"
+set hint-keys=auiectrsndopv
+set download-path=~/downloads
+set editor-command=nvim
+set strict-ssl=true
+set input-autohide=true
+
+shortcut-add g=https://www.google.com/search?hl=en&q=$0
+shortcut-add q=https://lite.qwant.com/?l=fr&t=web&q=$0
+shortcut-add y=https://www.youtube.com/results?search_query=$0
+shortcut-add w=https://en.wikipedia.org/wiki/$0
+shortcut-add w=https://developer.mozilla.org/fr/search?q=$0
+shortcut-add m=http://www.openstreetmap.org/search?query=$0
+shortcut-add gm=https://www.google.fr/maps/place/$0
+
+shortcut-default g
+
+# set completion-css=color:#d3d0c8;background-color:#393939;font:14px Fira Mono;
+# set completion-hover-css=color:#d3d0c8;background-color:#393939;font:14px Fira Mono;
+# set completion-selected-css=color:#d3d0c8;background-color:#515151;font:14px Fira Mono;
+# set input-css=color:#d3d0c8;background-color:#393939;font:14px Fira Mono;
+# set input-error-css=color:#f2777a;background-color:#393939;font:14px Fira Mono;
+# set status-css=color:#ffcc66;background-color:#393939;font:14px Fira Mono;
+# set status-ssl-css=color:#99cc99;background-color:#393939;font:14px Fira Mono;
+# set status-ssl-invalid-css=color:#f2777a;background-color:#393939;font:14px Fira Mono;

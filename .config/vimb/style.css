@@ -1,0 +1,31 @@
+
+body {
+    background: white;
+}
+
+span[vimbhint^='label'] {
+    background-color: #f2f0ec !important;
+    border: 1px solid #2d2d2d !important;
+    color: #2d2d2d !important;
+    font: 12px "Fira Mono" !important;
+    opacity: 1 !important;
+    padding: .1em .4em !important;
+    text-transform: uppercase !important;
+}
+span[vimbhint='label focus'] {
+    font: bold 14px "Fira Mono" !important;
+}
+
+*[vimbhint^='hint'] {
+    background-color: #FFFFFF !important;
+    color: #2d2d2d !important;
+}
+*[vimbhint='hint focus'] {
+    background-color: #FFFFFF !important;
+    color: #2d2d2d !important;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
