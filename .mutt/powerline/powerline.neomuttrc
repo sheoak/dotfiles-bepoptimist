@@ -8,15 +8,6 @@ set index_format=" %T %{!%d %b} %1M %-28.28L  %?X?&·? %s"
 set pager_format=" %T %n  %s%*  %P "
 set status_format = " %r %f   %m %?n?  %n ?  %?d?  %d ?%?t?  %t ?%?F?  %F? %>  %?p?  %p ?"
 
-# powerline status bar hack
-color status color142 color235 ''
-color status color166 color235 ''
-color status color167 color235 ''
-color status brightcolor250 color24 '(.*)' 1
-color status color24 color235 '.*()' 1
-color status brightcolor250 color24 '\s* [0-9]+\s*'
-color status color24 color235 '().*$' 1
-
 # no addressed to me, to me, group, cc, sent by me, mailing list
 set to_chars=""
 # unchanged mailbox, changed, read only, attach mode
@@ -33,3 +24,13 @@ tag-formats "replied" "GR" \
             "encrypted" "GE" \
             "signed" "GS" \
             "attachment" "GA" \
+
+# powerline status bar hack
+color status white black
+color status green black ''
+color status yellow black ''
+color status red black ''
+color status brightblack blue '(.*)' 1
+color status blue black '.*()' 1
+color status brightblack blue '\s* [0-9]+\s*'
+color status blue black '().*$' 1

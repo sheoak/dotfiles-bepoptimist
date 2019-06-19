@@ -10,8 +10,9 @@ source `FILE=$DOTFILES_PRIVATE/mutt/mailboxes; if [ ! -s "$FILE" ]; then FILE=/d
 source ~/.mutt/bepo.muttrc
 
 # theme solarized
-source ~/.mutt/powerline/gruvbox-powerline.neomuttrc
-source ~/.mutt/powerline/gruvbox-powerline-extended.neomuttrc
+source ~/.mutt/colors/solarized-dark-256.neomuttrc
+# source ~/.mutt/colors/gruvbox/grubox-256.neomttrc
+# source ~/.mutt/powerline/colors/gruvbox-powerline.neomuttrc
 source ~/.mutt/powerline/powerline.neomuttrc
 
 # gpg settings
