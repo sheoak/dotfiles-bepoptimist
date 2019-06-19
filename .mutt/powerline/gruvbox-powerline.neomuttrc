@@ -1,19 +1,28 @@
+# ----------------------------------------------------------------------------
 # gruvbox dark (contrast dark):
+# https://github.com/morhetz/gruvbox
+#
+# From Stefan Huber neomutt adaptation found on:
+# from https://www.sthu.org/code/codesnippets/mutt-gruvbox.html
+#
+# Adapted to fit powerline status and minimalist interface by
+# sheoak <contact [at] sheoak.fr>
+# ----------------------------------------------------------------------------
 
 # bg0    = 234
 # bg1    = 237
 # bg2    = 239
 # bg3    = 241
 # bg4    = 243
-# 
+
 # gray   = 245
-# 
+
 # fg0    = 229
 # fg1    = 223
 # fg2    = 250
 # fg3    = 248
 # fg4    = 246
-# 
+
 # red    = 167
 # green  = 142
 # yellow = 214
@@ -24,7 +33,6 @@
 
 
 # See http://www.mutt.org/doc/manual/#color
-
 color attachment  color109 color234
 color bold        color229 color234
 color error       color167 color234
@@ -40,7 +48,7 @@ color quoted4     color250 color234
 color quoted5     color108 color234
 color search      color234 color208
 color signature   color108 color234
-color status      color234 color250
+color status      color223 color235
 color tilde       color243 color234
 color tree        color142 color234
 color underline   color223 color239
@@ -49,14 +57,25 @@ color sidebar_divider    color250 color234
 color sidebar_new        color142 color234
 
 # http://www.mutt.org/doc/manual/#patterns
-color index color109 color234 ~P
-color index color142 color234 ~N
-color index color108 color234 ~O
-color index color214 color234 ~F
-color index color245 color234 ~Q
-color index color167 color234 ~=
-color index color234 color223 ~T
-color index color234 color167 ~D
+# https://neomutt.org/feature/index-color
+color index_subject color109 color234 "~P !~T !~D"
+color index_author color109 color234 "~P !~T !~D"
+color index_subject color243 color234 "~Q !~T !~D"
+color index_author color243 color234 "~Q !~T !~D"
+color index_subject brightcolor142 color234 "~N !~T !~D"
+color index_author  brightcolor142 color234 "~N !~T !~D"
+color index_subject color142 color234 "~O !~T !~D"
+color index_author color142 color234 "~O !~T !~D"
+color index_subject color214 color234 "~F !~T !~D"
+color index_author color214 color234 "~F !~T !~D"
+color index_subject brightcolor214 color234 "~F ~N !~T !~D"
+color index_author  brightcolor214 color234 "~F ~N !~T !~D"
+color index_subject color167 color234 "~= !~T !~D"
+color index_author color167 color234 "~= !~T !~D"
+color index_subject brightcolor109 color234 "~P ~N !~T !~D"
+color index_author brightcolor109 color234 "~P ~N !~T !~D"
+color index color234 color223 "~T"
+color index color229 color124 "~D"
 
 color header color214 color234 "^(To:|From:)"
 color header color142 color234 "^Subject:"
@@ -80,3 +99,5 @@ color body color214 color234 "^gpg: There is no indication that the signature be
 color body color214 color234 "^gpg: can't handle these multiple signatures"
 color body color214 color234 "^gpg: signature verification suppressed"
 color body color214 color234 "^gpg: invalid node with packet of type"
+
+# color index_date brightgreen default

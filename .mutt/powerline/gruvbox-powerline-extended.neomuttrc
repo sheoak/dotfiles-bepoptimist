@@ -1,3 +1,4 @@
+# https://www.sthu.org/code/codesnippets/mutt-gruvbox.html
 color compose header            color223 color234
 color compose security_encrypt  color175 color234
 color compose security_sign     color109 color234

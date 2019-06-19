@@ -1,13 +1,18 @@
 
+# virtual mailboxes/notmuch
+set nm_default_uri = "notmuch://$HOME/.mail"
+
 # private list of mailboxes
+# must come after nm_default_uri setting
 source `FILE=$DOTFILES_PRIVATE/mutt/mailboxes; if [ ! -s "$FILE" ]; then FILE=/dev/null;fi;echo "$FILE"`
 
 # bépo mapping
 source ~/.mutt/bepo.muttrc
 
 # theme solarized
-source ~/.mutt/colors/gruvbox/dotfiles_mutt_colors-gruvbox-shuber.muttrc
-source ~/.mutt/colors/gruvbox/dotfiles_mutt_colors-gruvbox-shuber-extended.muttrc
+source ~/.mutt/powerline/gruvbox-powerline.neomuttrc
+source ~/.mutt/powerline/gruvbox-powerline-extended.neomuttrc
+source ~/.mutt/powerline/powerline.neomuttrc
 
 # gpg settings
 source ~/.mutt/gpg.rc
@@ -15,6 +20,8 @@ source ~/.mutt/gpg.rc
 # Set up mutt to use our local maildir:
 set mbox_type=Maildir
 set sendmail="msmtp-enqueue.sh -C $DOTFILES_PRIVATE/msmtprc"
+set virtual_spoolfile=yes
+# set mail_check_stats=yes
 
 # --------- Basic options
 set quit=ask-yes
@@ -80,6 +87,10 @@ bind index . noop
 macro index .f "<limit>(~N|~F)<Enter>"  "view new/flag"
 macro index .a "<limit>~A<Enter>"       "view all"
 
+macro index A "<modify-labels>+archive -unread -inbox\\n" "Archive message"
+macro index c "<change-vfolder>?" "Change to vfolder overview"
+macro index \\\\ "<vfolder-from-query>" "Search mailbox"
+
 # 'L' performs a notmuch query, showing only the results
 macro index L "<enter-command>unset wait_key<enter> \
     <shell-escape>read -p 'notmuch query: ' x; \
@@ -116,16 +127,6 @@ bind index,pager <BackSpace> previous-page
 set help=no # remove the help top bar
 
 # ----------------------------------------------------------------------------
-# Powerline / nerdfont
-# ----------------------------------------------------------------------------
-set index_format=" %T  %{!%d %b} %1M %-28.28L │ %s"
-set pager_format=" %T %n  %s%*  %P "
-set status_format = " %r %f   %m %?n?  %n? %?d?  %d ?%?t? 笠%t ?%?F?  %F? %> %?p?  %p ? "
-# no addressed to me, to me, group, cc, sent by me, mailing list
-set to_chars=""
-# unchanged mailbox, changed, read only, attach mode
-set status_chars = " "
-# ----------------------------------------------------------------------------
 
 # Colour definitions when on a mono screen
 mono bold bold
@@ -153,4 +154,6 @@ set sleep_time = 0
 # set postponed   = "+myccount/gmail.drafts"
 # set realname    = "Your name"
 # set from        = "myemail@domain.ltd"
+
 source `FILE=$DOTFILES_PRIVATE/mutt/muttrc; if [ ! -s "$FILE" ]; then FILE=/dev/null;fi;echo "$FILE"`
+
