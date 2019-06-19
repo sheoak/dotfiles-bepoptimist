@@ -1,0 +1,13 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:sheoak/neomutt-powerline-nerdfonts.git
+	branch = master
+	commit = 604b96d8c090ef90ea890f1d8f94625884054b06
+	parent = 4e8f2ea1030d3dd05c77f1bd3dc9ba4bfb9fd81e
+	method = merge
+	update = auto
+	cmdver = 0.4.1
