@@ -4,4 +4,4 @@ Description=Mailbox synchronization service
 [Service]
 Type=oneshot
 ExecStart=/usr/bin/mbsync -Va -c ${DOTFILES_PRIVATE}/mbsyncrc
-ExecStartPost=/usr/bin/polybar-msg hook mailipc 1
+ExecStartPost=~/.mutt/scripts/post-sync
