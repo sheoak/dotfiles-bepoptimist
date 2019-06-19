@@ -52,7 +52,7 @@ set smart_wrap
 set delete=yes
 
 # ---------- Attachments
-set mailcap_path=mailcap
+set mailcap_path=~/.config/neomutt/mailcap
 auto_view text/html
 #alternative_order text/plain text/enriched text/html
 alternative_order text/enriched text/plain text/html text
