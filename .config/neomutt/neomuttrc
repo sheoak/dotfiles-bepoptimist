@@ -7,16 +7,16 @@ set nm_default_uri = "notmuch://$HOME/.mail"
 source `FILE=$DOTFILES_PRIVATE/neomutt/mailboxes; if [ ! -s "$FILE" ]; then FILE=/dev/null;fi;echo "$FILE"`
 
 # bépo mapping
-source ~/.config/neomutt/bepo.muttrc
+source bepo.muttrc
 
 # theme solarized
-# source ~/.config/neomutt/colors/solarized-dark-256.neomuttrc
-source ~/.config/neomutt/colors/gruvbox/grubox-256.neomttrc
-source ~/.config/neomutt/powerline/colors/gruvbox-powerline.neomuttrc
-source ~/.config/neomutt/powerline/powerline.neomuttrc
+# source colors/solarized-dark-256.neomuttrc
+source colors/gruvbox/grubox-256.neomttrc
+source powerline/colors/gruvbox-powerline.neomuttrc
+source powerline/powerline.neomuttrc
 
 # gpg settings
-source ~/.config/neomutt/gpg.rc
+source gpg.rc
 
 # Set up mutt to use our local maildir:
 set mbox_type=Maildir
@@ -52,7 +52,7 @@ set smart_wrap
 set delete=yes
 
 # ---------- Attachments
-set mailcap_path=~/.config/neomutt/mailcap
+set mailcap_path=mailcap
 auto_view text/html
 #alternative_order text/plain text/enriched text/html
 alternative_order text/enriched text/plain text/html text
@@ -70,7 +70,7 @@ folder-hook . `rm -f /tmp/mutt/*`
 set query_command= "abook -f $DOTFILES_PRIVATE/abook/addressbook --mutt-query '%s'"
 macro index,pager a "<pipe-message>abook -f $DOTFILES_PRIVATE/abook/addressbook --add-email-quiet<return>" "Add this sender to Abook"
 macro index M "<tag-prefix>w?" "Move tagged messages"
-macro index T ":source ~/.config/neomutt/scripts/fzffolder|<return>"
+macro index T ":source scripts/fzffolder|<return>"
 
 # ----------- Searching (mu)
 # Adress lookup with lbdb
@@ -102,7 +102,7 @@ macro index L "<enter-command>unset wait_key<enter> \
 
 # add dbus call to sync-mailbox key (polybar dbus)
 # macro generic,index $ "<enter-command>unset wait_key<enter><sync-mailbox><shell-escape>/usr/bin/polybar-msg hook mailipc 1 2> /dev/null &<enter>" "Show Mutt documentation"
-macro generic,index $ "<enter-command>unset wait_key<enter><sync-mailbox><shell-escape>~/.config/neomutt/scripts/post-sync &<enter>" "Show Mutt documentation"
+macro generic,index $ "<enter-command>unset wait_key<enter><sync-mailbox><shell-escape>scripts/post-sync &<enter>" "Show Mutt documentation"
 # check new messages in the background
 macro generic,index <F5> "<enter-command>unset wait_key<enter><shell-escape>systemctl --user start mbsync.service 2> /dev/null &<enter>" "Show Mutt documentation"
 
