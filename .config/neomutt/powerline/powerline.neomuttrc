@@ -5,8 +5,8 @@
 # Author: Sheoak <contact [at] sheoak.fr>
 # ----------------------------------------------------------------------------
 set index_format=" %T %{!%d %b} %1M %-28.28L  %?X?&·? %s"
-set pager_format=" %T %n  %s%*  %P "
-set status_format = " %r %f   %m %?n?  %n ?  %?d?  %d ?%?t?  %t ?%?F?  %F? %>  %?p?  %p ?"
+set pager_format=" %T %n  %s%*  %{!%d %b · %H:%M} %?X?  %X ? %P  "
+set status_format = " %r %f   %m %?n?  %n ?  %?d?  %d ?%?t?  %t ?%?F?  %F? %> %?p?   %p ?"
 
 # no addressed to me, to me, group, cc, sent by me, mailing list
 set to_chars=""
@@ -34,3 +34,10 @@ color status brightblack blue '(.*)' 1
 color status blue black '.*()' 1
 color status brightblack blue '\s* [0-9]+\s*'
 color status blue black '().*$' 1
+color status yellow black '()\s*\s*[0-9]+\s*' 1
+color status brightblack yellow '\s*\s*[0-9]+\s*'
+color status blue yellow '() [0-9]+% \s*' 1
+color status blue yellow '() all \s*' 1
+color status black blue ' [0-9]+% \s*'
+color status black blue ' all \s*'
+color status yellow black '()\s*' 1
