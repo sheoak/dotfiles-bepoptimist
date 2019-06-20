@@ -6,8 +6,8 @@
 [subrepo]
 	remote = git@github.com:sheoak/neomutt-powerline-nerdfonts.git
 	branch = master
-	commit = e7e772063656d9a947e46e75a3967e56f00b086d
-	parent = 000603a108cd05728798c032d0ede3c2c08f2c50
+	commit = c1b88b68ddbfa475acc083567c1b9a627e6503ed
+	parent = 8042229868e70fcf76b4304d84f390a8837aeb96
 	method = merge
 	update = auto
 	cmdver = 0.4.1
