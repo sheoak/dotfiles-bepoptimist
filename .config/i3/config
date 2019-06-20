@@ -175,7 +175,7 @@ bindsym $mod+Shift+v     layout stacking
 bindsym $mod+Shift+h     layout tabbed
 bindsym $mod+Shift+g     layout toggle split
 
-bindsym $mod+f fullscreen
+bindsym $mod+k fullscreen
 bindsym $mod+p focus parent
 bindsym $mod+c focus child
 bindsym $mod+Control+space move scratchpad
@@ -187,7 +187,7 @@ bindsym $mod+q kill
 # ----------------------------------------------------------------------------
 # Resi[z]e window mode
 # ----------------------------------------------------------------------------
-bindsym $mod+z mode "$mode_resize"
+bindsym $win+z mode "$mode_resize"
 mode "$mode_resize" {
     # These bindings trigger as soon as you enter the resize mode
     bindsym t        resize shrink width  10 px or 10 ppt
@@ -233,7 +233,7 @@ bindsym --whole-window button11 workspace next
 # ----------------------------------------------------------------------------
 # Virtualbox mode : run vms with different IE versions
 # ----------------------------------------------------------------------------
-bindsym $mod+Control+v mode "$mode_virtualbox"
+bindsym $win+v mode "$mode_virtualbox"
 mode "$mode_virtualbox" {
     bindsym w exec VBoxSDL -startvm "Windows";mode "default"
     bindsym u exec VBoxSDL -startvm "Ubuntu";mode "default"
@@ -267,7 +267,7 @@ bindsym $mod+Control+l exec $locker
 # Screensaver mode
 # Bepoptimist-style shortcut (è for screen)
 # ----------------------------------------------------------------------------
-bindsym $mod+egrave mode "$mode_screen"
+bindsym $win+s mode "$mode_screen"
 mode "$mode_screen" {
     bindsym e exec --no-startup-id xset s on +dpms, mode "default"
     bindsym d exec --no-startup-id xset s off -dpms, mode "default"
@@ -280,7 +280,7 @@ mode "$mode_screen" {
 # ----------------------------------------------------------------------------
 # Gaps mode
 # ----------------------------------------------------------------------------
-bindsym $mod+j mode "$mode_gaps"
+bindsym $win+g mode "$mode_gaps"
 mode "$mode_gaps" {
         bindsym guillemotleft  gaps inner current minus 5
         bindsym guillemotright gaps inner current plus 5
@@ -292,7 +292,7 @@ mode "$mode_gaps" {
         bindsym Escape mode "default"
 }
 
-bindsym $mod+shift+j mode "$mode_gaps_all"
+bindsym $win+shift+g mode "$mode_gaps_all"
 mode "$mode_gaps_all" {
         bindsym Shift+guillemotright gaps inner all plus 5
         bindsym Shift+guillemotleft  gaps inner all minus 5
@@ -307,7 +307,7 @@ mode "$mode_gaps_all" {
 # ----------------------------------------------------------------------------
 # MPC mode
 # ----------------------------------------------------------------------------
-bindsym $mod+Control+m mode "$mode_mpc"
+bindsym $win+m mode "$mode_mpc"
 mode "$mode_mpc" {
         bindsym p exec mpc toggle
         # next/previous
@@ -386,23 +386,20 @@ bindsym XF86AudioPrev  exec mpc prev
 
 # ----------------------------------------------------------------------------
 # Shortcuts: Apps
-# TODO: open if not openned yet (mutt, ncmpcpp…)
 # ----------------------------------------------------------------------------
 
+# main apps on "alt gr"
 bindsym $mod+Return exec $term
 bindsym $mod+shift+Return exec $termDetached -o font_size=8
-bindsym $win+m exec i3-msg '[con_mark="mutt"] focus'
-bindsym XF86Mail exec i3-msg '[con_mark="mutt"] focus'
-bindsym $win+shift+m workspace $w3; exec $termDetached -o font_size=12 sh -c "i3-msg mark mutt && mutt"
-bindsym $win+b exec i3-msg '[title="Messenger for Desktop"] focus'
-bindsym $win+shift+b workspace $W3; exec messengerfordesktop
+bindsym $mod+m workspace $w3; exec run-or-raise neomutt
+bindsym $mod+f exec firefox
+bindsym $mod+Shift+f exec chromium
+bindsym $mod+z exec zathura
+bindsym $mod+l workspace $w6; exec run-or-raise ncmpcpp
+bindsym $win+b exec $term --title "ranger" ranger
+
+# secondary apps on "win"
 bindsym $win+q exec qutebrowser
-bindsym $win+c exec chromium
-bindsym $win+f exec firefox
-bindsym $win+z exec zathura
-bindsym $win+n exec i3-msg '[con_mark="ncmpcpp"] focus'
-bindsym $win+shift+n workspace $w6; exec $termDetached -o font_size=12 sh -c "i3-msg mark ncmpcpp && $ncmpcpp"
-bindsym $win+r exec $term --title "ranger" ranger
 
 # Mouse
 # The middle button over a titlebar kills the window

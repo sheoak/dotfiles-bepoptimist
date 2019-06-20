@@ -1,0 +1,12 @@
+#!/bin/sh
+termDetached=kitty
+
+ps aux | grep "[0-9]\+ $1\$"
+count=`ps aux | grep -c "[0-9]\+ $1\$"`
+if [ $count -eq 0 ]; then
+    echo "running cmd $count"
+    $termDetached sh -c "i3-msg mark $1 && $1"
+else
+    echo "count = $count"
+    i3-msg "[con_mark=$1] focus"
+fi
