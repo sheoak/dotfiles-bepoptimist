@@ -1,7 +1,9 @@
 # vim: filetype=muttrc
+#
+# Neomutt Solarized 
+# Found on https://github.com/altercation/mutt-colors-solarized
+# modified by sheoak <contact [at] sheoak.fr>
 
-#
-#
 # make sure that you are using mutt linked against slang, not ncurses, or
 # suffer the consequences of weird color issues. use "mutt -v" to check this.
 
@@ -52,7 +54,7 @@ mono  error         bold
 #color index         J_base          default         "~A~N!~T!~p!~Q!~F!~D"      # the rest, new
 color index         red             default         "~A"                        # all messages
 color index         brightred       default         "~E"                        # expired messages
-color index         green           default         "~N"                        # new messages
+color index         brightgreen     default         "~N"                        # new messages
 color index         blue            default         "~O"                        # old messages
 color index         brightmagenta   default         "~Q"                        # messages that have been replied to
 color index         default         default         "~R"                        # read messages
@@ -61,14 +63,13 @@ color index         green           default         "~U~$"                      
 color index         brightyellow    default         "~v"                        # messages part of a collapsed thread
 color index         brightyellow    default         "~P"                        # messages from me
 color index         cyan            default         "~p!~F"                     # messages to me
-color index         green           default         "~N~p!~F"                   # new messages to me
+color index         brightgreen     default         "~N~p!~F"                   # new messages to me
 color index         green           default         "~U~p!~F"                   # unread messages to me
 color index         default         default         "~R~p!~F"                   # messages to me
-color index         red             default         "~F"                        # flagged messages
-color index         red             default         "~F~p"                      # flagged messages to me
-color index         red             default         "~N~F"                      # new flagged messages
-color index         red             default         "~N~F~p"                    # new flagged messages to me
-color index         red             default         "~U~F~p"                    # new flagged messages to me
+color index         yellow          default         "~F"                        # flagged messages
+color index         yellow          default         "~F~p"                      # flagged messages to me
+color index         brightyellow    default         "~N~F"                      # new flagged messages
+color index         brightyellow    default         "~N~F~p"                    # new flagged messages to me
 color index         black           red             "~D"                        # deleted messages
 color index         brightcyan      default         "~v~(!~N)"                  # collapsed thread with no unread
 color index         yellow          default         "~v~(~N)"                   # collapsed thread with some unread
@@ -83,7 +84,7 @@ color index         cyan            black           "~v~(~p)"                   
 color index         yellow          red             "~v~(~D)"                   # thread with deleted (doesn't differentiate between all or partial)
 #color index         yellow          default         "~(~N)"                    # messages in threads with some unread
 #color index         green           default         "~S"                       # superseded messages
-#color index         red             default         "~T"                       # tagged messages
+color index         black           cyan           "~T"                       # tagged messages
 #color index         brightred       red             "~="                       # duplicated messages
 
 # message headers ------------------------------------------------------

@@ -10,9 +10,11 @@ source `FILE=$DOTFILES_PRIVATE/neomutt/mailboxes; if [ ! -s "$FILE" ]; then FILE
 source bepo.muttrc
 
 # theme solarized
-# source colors/solarized-dark-256.neomuttrc
-source colors/gruvbox/grubox-256.neomttrc
-source powerline/colors/gruvbox-powerline.neomuttrc
+# terminal colors must be set, otherwise use the 256 colors theme
+# source colors/gruvbox/base16-gruvbox.dark.256.muttrc
+source colors/solarized/mutt-colors-solarized-dark-16.muttrc
+# source colors/gruvbox/grubox-256.neomttrc
+# source powerline/colors/gruvbox-powerline.neomuttrc
 source powerline/powerline.neomuttrc
 
 # gpg settings
