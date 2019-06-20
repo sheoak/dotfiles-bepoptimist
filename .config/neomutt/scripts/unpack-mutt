@@ -1,0 +1,10 @@
+#!/bin/bash
+
+DEST=$HOME/downloads/mails
+
+[ -d $DEST ] || mkdir -p $DEST
+
+cd $HOME/downloads/mails
+TMP=`mktemp -d 'unzip-XXXXXXXXXX'`
+aunpack -X $TMP "$1"
+ranger "$HOME/downloads/mails/$TMP"

@@ -2,7 +2,18 @@ text/html; ~/.config/neomutt/scripts/view_attachment.sh %s html; test=test -n "$
 text/html; w3m %s; nametemplate=%s.html; needsterminal
 text/html; w3m -v -F -T text/html -dump %s; copiousoutput
 
-image/*; feh --auto-zoom  -B black -FZx %s
+text/plain; nvim %;
+
+image/*; feh --auto-zoom  -B black -FZx %s; edit=gimp %
 application/pdf; zathura %s
+
+# auto-unpack and open ranger
+application/zip; ~/.config/neomutt/scripts/unpack-mutt %s
+application/gzip; ~/.config/neomutt/scripts/unpack-mutt %s
+application/x-bzip; ~/.config/neomutt/scripts/unpack-mutt %s
+application/x-bzip2; ~/.config/neomutt/scripts/unpack-mutt %s
+application/x-tar; ~/.config/neomutt/scripts/unpack-mutt %s
+application/x-7z-compressed; ~/.config/neomutt/scripts/unpack-mutt %s
+application/x-rar-compressed; ~/.config/neomutt/scripts/unpack-mutt %s
 
 application/*; mkdir -p /tmp/mutt \; cp %s /tmp/mutt \; xdg-open /tmp/mutt/$(basename %s) &
