@@ -72,7 +72,7 @@ folder-hook . `rm -f /tmp/mutt/*`
 set query_command= "abook -f $DOTFILES_PRIVATE/abook/addressbook --mutt-query '%s'"
 macro index,pager a "<pipe-message>abook -f $DOTFILES_PRIVATE/abook/addressbook --add-email-quiet<return>" "Add this sender to Abook"
 macro index M "<tag-prefix>w?" "Move tagged messages"
-macro index T ":source scripts/fzffolder|<return>"
+macro index T ":source ~/.config/neomutt/scripts/fzffolder|<return>"
 
 # ----------- Searching (mu)
 # Adress lookup with lbdb
@@ -104,7 +104,7 @@ macro index L "<enter-command>unset wait_key<enter> \
 
 # add dbus call to sync-mailbox key (polybar dbus)
 # macro generic,index $ "<enter-command>unset wait_key<enter><sync-mailbox><shell-escape>/usr/bin/polybar-msg hook mailipc 1 2> /dev/null &<enter>" "Show Mutt documentation"
-macro generic,index $ "<enter-command>unset wait_key<enter><sync-mailbox><shell-escape>scripts/post-sync &<enter>" "Show Mutt documentation"
+macro generic,index $ "<enter-command>unset wait_key<enter><sync-mailbox><shell-escape>~/.config/neomutt/scripts/post-sync &<enter>" "Show Mutt documentation"
 # check new messages in the background
 macro generic,index <F5> "<enter-command>unset wait_key<enter><shell-escape>systemctl --user start mbsync.service 2> /dev/null &<enter>" "Show Mutt documentation"
 
@@ -161,3 +161,4 @@ set sleep_time = 0
 
 source `FILE=$DOTFILES_PRIVATE/neomutt/neomuttrc; if [ ! -s "$FILE" ]; then FILE=/dev/null;fi;echo "$FILE"`
 
+macro attach S "<pipe-message>~/.config/neomutt/scripts/muttsaveattach.sh"<enter>

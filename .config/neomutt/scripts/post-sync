@@ -1,0 +1,3 @@
+#!/bin/sh
+/usr/bin/polybar-msg hook mailipc 1 > /dev/null 2>&1  &
+/usr/bin/notmuch new > /dev/null 2>&1 &
