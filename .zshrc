@@ -25,15 +25,51 @@ PRIVATE_PLUGINS=$DOTFILES_PRIVATE/zshrc.plugins
 [[ -s "$PRIVATE_PLUGINS" ]] && source "$PRIVATE_PLUGINS"
 
 ZSH_DISABLE_COMPFIX="true" # bug with completion security check
-ZSH_THEME="agnoster"
+
+# custom theme
+# (the plugin is included in private file)
+# https://github.com/bhilburn/powerlevel9k/wiki/Stylizing-Your-Prompt
+ZSH_THEME="powerlevel10k/powerlevel10k"
+POWERLEVEL9K_BATTERY_LOW_THRESHOLD='15'
+POWERLEVEL9K_BATTERY_HIDE_ABOVE_THRESHOLD='20'
+POWERLEVEL9K_MODE='nerdfont-complete'
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_DISABLE_RPROMPT=true
+VIRTUAL_ENV_DISABLE_PROMPT=1
+POWERLEVEL9K_DISK_USAGE_ONLY_WARNING=true
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir virtualenv vcs background_jobs disk_usage battery)
+POWERLEVEL9K_DIR_DEFAULT_FOREGROUND='black'
+POWERLEVEL9K_DIR_DEFAULT_BACKGROUND='cyan'
+POWERLEVEL9K_DIR_HOME_FOREGROUND='black'
+POWERLEVEL9K_DIR_HOME_BACKGROUND='cyan'
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND='cyan'
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND='black'
+POWERLEVEL9K_DIR_FOLDER_BACKGROUND='cyan'
+POWERLEVEL9K_DIR_FOLDER_FOREGROUND='black'
+POWERLEVEL9K_DIR_ETC_BACKGROUND='cyan'
+POWERLEVEL9K_DIR_ETC_FOREGROUND='black'
+POWERLEVEL9K_VCS_CLEAN_FOREGROUND='green'
+POWERLEVEL9K_VCS_CLEAN_BACKGROUND='black'
+POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='purple'
+POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='black'
+POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='yellow'
+POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='black'
+POWERLEVEL9K_VIRTUALENV_FOREGROUND='black'
+POWERLEVEL9K_VIRTUALENV_BACKGROUND='white'
+POWERLEVEL9K_VCS_UNTRACKED_ICON=''
+POWERLEVEL9K_VCS_UNSTAGED_ICON=''
+POWERLEVEL9K_BACKGROUND_JOBS_ICON=''
+POWERLEVEL9K_BATTERY_ICON=''
+POWERLEVEL9K_VCS_STASH_ICON='  '
+POWERLEVEL9K_VCS_INCOMING_CHANGES_ICON=' '
+POWERLEVEL9K_VCS_OUTGOING_CHANGES_ICON=' '
+POWERLEVEL9K_HOME_ICON=''
+POWERLEVEL9K_HOME_SUB_ICON=''
+
 HYPHEN_INSENSITIVE="true"
 POWERLINE_DETECT_SSH="true"
 POWERLINE_RIGHT_B="none"
 HISTFILE=~/.local/share/zsh/zsh_history
-# CASE_SENSITIVE="true"
-# DISABLE_AUTO_UPDATE="true"
-# ENABLE_CORRECTION="true"
-# COMPLETION_WAITING_DOTS="true"
 
 ZSH_CUSTOM=$DOTFILES_PRIVATE/oh-my-zsh/
 
@@ -55,7 +91,7 @@ export PATH=$(echo "$PATH" | sed -e 's/:\/usr\/bin\/node//')
 # Default executable
 export EDITOR=nvim
 export VISUAL=nvim
-export BROWSER=qutebrowser
+export BROWSER=firefox
 
 # use lesspipe
 export LESSOPEN="|lesspipe.sh %s"
@@ -67,6 +103,9 @@ export LESSHISTFILE=/dev/null
 # fix ssh issues with kitty
 if [ "$TERM" != 'linux' ]; then
   export TERM=xterm-256color
+else
+  POWERLEVEL9K_IGNORE_TERM_COLORS=true
+  POWERLEVEL9K_MODE='Powerlevel9k'
 fi
 
 # FZF settings
@@ -77,10 +116,6 @@ export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap 
 export FZF_CTRL_T_COMMAND='rg --files --no-ignore-vcs --ignore-file $DOTFILES_PRIVATE/agignore --hidden '
 export FZF_DEFAULT_OPTS='--inline-info --prompt="❯"'
 
-# export GDK_BACKEND=wayland
-# export CLUTTER_BACKEND=wayland
-# export QT_QPA_PLATFORM=wayland-egl
-# export QT_WAYLAND_FORCE_DPI=physical
 export MONITOR='eDP-1'
 export MONITOR_EXT='HDMI-1'
 
@@ -101,27 +136,6 @@ bindkey '^F' fzf-cd-widget
 bindkey '^[[Z' reverse-menu-complete
 
 source $ZSH/oh-my-zsh.sh
-
-# colors for tty (gruvbox modified with darker background)
-if [ "$TERM" = "linux" ]; then
-    echo -en "\e]P0080808" # S_base02
-    echo -en "\e]P1cc241d" # S_red
-    echo -en "\e]P298971a" # S_green
-    echo -en "\e]P3d79921" # S_yellow
-    echo -en "\e]P4458588" # S_blue
-    echo -en "\e]P5b16286" # S_magenta
-    echo -en "\e]P6689d6a" # S_cyan
-    echo -en "\e]P7a89984" # S_base2
-    echo -en "\e]P8928374" # S_base03
-    echo -en "\e]P9fb4934" # S_orange
-    echo -en "\e]PAb8bb26" # S_base01
-    echo -en "\e]PBfabd2f" # S_base00
-    echo -en "\e]PC83a598" # S_base0
-    echo -en "\e]PDd3869b" # S_violet
-    echo -en "\e]PE8ec07c" # S_base1
-    echo -en "\e]PFebdbb2" # S_base3
-    clear # against bg artifacts
-fi
 
 # local settings
 [[ -s $DOTFILES_PRIVATE/zshrc ]] && source "$DOTFILES_PRIVATE/zshrc"
