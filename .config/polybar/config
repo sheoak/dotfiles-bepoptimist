@@ -4,7 +4,7 @@
 ; export MONITOR=e-DP1
 
 [colors]
-black             = #1F1F1F
+black             = #002B36
 white             = #98a6a6
 red               = #dc322f
 lightred          = #FF0000
@@ -28,7 +28,7 @@ accent            = ${self.secondary}
 urgent            = ${self.red}
 good              = ${self.green}
 disabled          = ${self.gray}
-background        = ${env:POLYBAR_COLOR:#88000000}
+background        = ${env:POLYBAR_COLOR:#FF002B36}
 foreground        = ${self.primary}
 
 
@@ -46,14 +46,14 @@ font-4 = Hack Nerd Font Mono:style=Regular:size=15;1
 font-5 = Fira Code Light:style=Regular:size=7;3
 ; ----------------------------------------------------------------------------
 
-enable-ipc = true
-monitor = ${env:MONITOR:HDMI-1}
-monitor-fallback = eDP-1
+; styles
+; ----------------------------------------------------------------------------
+background = ${colors.background}
+foreground = ${colors.primary}
+
 width = 100%
 height = 21
 bottom = true
-background = ${colors.background}
-foreground = ${colors.primary}
 border-bottom-size = 0
 border-bottom-color = #333
 border-top-size = 1
@@ -66,14 +66,17 @@ padding-left = 0
 padding-right = 0
 module-margin-left = 1
 module-margin-right = 1
+cursor-click = pointer
 
 modules-left = i3 sepstraight mpd msmtp
 ; modules-center = xwindow
 modules-right = mailipc temperature dpms sepright wireless-network openvpn bluetooth sepleft battery sepleft pulseaudio sepright clock
 
+enable-ipc = true
+monitor = ${env:MONITOR:HDMI-1}
+monitor-fallback = eDP-1
 screenchange-reload = true
 tray-position = right
-cursor-click = pointer
 
 
 [module/i3]
