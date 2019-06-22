@@ -6,4 +6,9 @@ export TERMINAL=kitty
 export WLC_REPEAT_DELAY=250
 export WLC_REPEAT_RATE=72
 
+export GDK_BACKEND=wayland
+export CLUTTER_BACKEND=wayland
+export QT_QPA_PLATFORM=wayland-egl
+export QT_WAYLAND_FORCE_DPI=physical
+
 sway -dV
