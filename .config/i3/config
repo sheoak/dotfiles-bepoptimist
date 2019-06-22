@@ -90,7 +90,7 @@ set $W10 "10:Secondary"
 # ----------------------------------------------------------------------------
 # Workspaces
 # ----------------------------------------------------------------------------
-
+workspace_layout tabbed
 # first monitor workspaces
 workspace $W1 output $monitor
 workspace $W2 output $monitor
@@ -283,23 +283,25 @@ mode "$mode_screen" {
 bindsym $win+g mode "$mode_gaps"
 mode "$mode_gaps" {
         bindsym guillemotleft  gaps inner current minus 5
-        bindsym guillemotright gaps inner current plus 5
-        bindsym r              gaps inner current set 0
-        bindsym plus    gaps outer current plus 5
-        bindsym minus   gaps outer current minus 5
-        bindsym Shift+r gaps outer current set 0
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+        bindsym guillemotright gaps inner current plus  5
+        bindsym c              gaps inner current set   0
+        bindsym s              gaps outer current minus 5
+        bindsym r              gaps outer current plus  5
+        bindsym Shift+s        gaps inner current minus 5
+        bindsym Shift+r        gaps inner current plus  5
+        bindsym Return         mode "default"
+        bindsym Escape         mode "default"
 }
 
 bindsym $win+shift+g mode "$mode_gaps_all"
 mode "$mode_gaps_all" {
-        bindsym Shift+guillemotright gaps inner all plus 5
-        bindsym Shift+guillemotleft  gaps inner all minus 5
-        bindsym r                    gaps inner all set 0
-        bindsym Shift+plus  gaps outer all plus 5
-        bindsym Shift+minus gaps outer all minus 5
-        bindsym Shift+r     gaps outer all set 0
+        bindsym guillemotleft  gaps inner all minus 5
+        bindsym guillemotright gaps inner all plus  5
+        bindsym c              gaps inner all set   0
+        bindsym s              gaps outer all minus 5
+        bindsym r              gaps outer all plus  5
+        bindsym Shift+s        gaps inner all minus 5
+        bindsym Shift+r        gaps inner all plus  5
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
@@ -336,10 +338,6 @@ bindsym $mod+d exec "rofi -show run"
 bindsym $mod+g exec "udiskie-rofi"
 bindsym $mod+o exec "rofimoji"
 bindsym $mod+Shift+o exec "rofi-nerdfonts"
-
-#bindsym $mod+apostrophe exec "rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}'"
-# bindsym $mod+apostrophe exec "rofi -font 'Hack 10'  -width 1000 -lines 26 -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}' ; sleep 0.5; xdotool type $(xclip -o -selection clipboard)"
-bindsym $mod+Shift+apostrophe exec "greenclip clear"
 bindsym $mod+eacute exec "rofi-pass"
 bindsym $mod+Shift+eacute exec "rofi-pass --bmarks"
 bindsym $mod+Control+eacute exec "rofi-pass --last-used"
@@ -351,26 +349,35 @@ bindsym $mod+x  exec rofi-xrandr
 # with ssh, commands
 bindsym $mod+Shift+d exec "rofi -combi-modi ssh,run -show combi -modi combi"
 # search web from rofi
-# bindsym $mod+Control+d exec echo "" | rofi -dmenu -p "Search" -lines 0 | xargs -I{} qutebrowser \{\}
 # window search with rofi, larger for window titles
 bindsym $mod+Tab exec "rofi -width 80 -combi-modi ,window -show combi -modi combi"
 # toggle i3bar
-bindsym $mod+ccedilla bar mode toggle
+bindsym $mod+ccedilla exec polybar-msg cmd toggle
 
 # ----------------------------------------------------------------------------
 # Shortcuts: Multimedia keys
 # ----------------------------------------------------------------------------
 
 # Screenshot
-bindsym Print exec "scrot ~/desktop/Screenshot%Y-%m-%d%H:%M:%S.png"
-bindsym $win+F1     exec "scrot ~/desktop/Screenshot%Y-%m-%d%H:%M:%S.png"
-bindsym --release $mod+Print   exec "scrot -s ~/desktop/Screenshot%Y-%m-%d%H:%M:%S.png"
-bindsym --release $mod+$win+F1 exec "scrot -s ~/desktop/Screenshot%Y-%m-%d%H:%M:%S.png"
+bindsym Print \
+    exec "scrot ~/desktop/Screenshot%Y-%m-%d%H:%M:%S.png"
+bindsym $win+F1 \
+    exec "scrot ~/desktop/Screenshot%Y-%m-%d%H:%M:%S.png"
+bindsym --release $mod+Print \
+    exec "scrot -s ~/desktop/Screenshot%Y-%m-%d%H:%M:%S.png"
+bindsym --release $mod+$win+F1 \
+    exec "scrot -s ~/desktop/Screenshot%Y-%m-%d%H:%M:%S.png"
 
 # TODO: read from .Xresources
-bindsym XF86AudioRaiseVolume exec amixer -c0 -D pulse sset Master 5%+ && paplay /usr/share/sounds/freedesktop/stereo/message.oga
-bindsym XF86AudioLowerVolume exec amixer -c0 -D pulse sset Master 5%- && paplay /usr/share/sounds/freedesktop/stereo/message.oga
-bindsym XF86AudioMute        exec amixer -c0 -D pulse -q set Master toggle && paplay /usr/share/sounds/freedesktop/stereo/message.oga
+bindsym XF86AudioRaiseVolume \
+    exec "amixer -c0 -D pulse sset Master 5%+ && \
+    paplay /usr/share/sounds/freedesktop/stereo/message.oga"
+bindsym XF86AudioLowerVolume \
+    exec "amixer -c0 -D pulse sset Master 5%- && \
+    paplay /usr/share/sounds/freedesktop/stereo/message.oga"
+bindsym XF86AudioMute \
+    exec "amixer -c0 -D pulse -q set Master toggle && \
+    paplay /usr/share/sounds/freedesktop/stereo/message.oga"
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessDown   exec xbacklight -dec 10
@@ -415,39 +422,20 @@ bindsym --whole-window $mod+button2 kill
 for_window [class="qutebrowser"] layout tabbed
 no_focus [class="qutebrowser"]
 
-for_window [class="^Pidgin$" window_role="^conversation$"] resize grow width 0 px or 30 ppt
-
 # ----------------------------------------------------------------------------
 # Theme
 # ----------------------------------------------------------------------------
-# set $black #000000
-# set $white #DDDDDD
-# set $red #dc322f
-# set $green #98971a
-# set $yellow #fba922
-# set $blue #458588
-# set $lightblue #268bd2
-# set $purple #9f78e1
-# set $gray #777777
-# set $darkgray #333333
-# set $transparent #00000055
-# class                 border backgr    text       indicator child_border
-# client.focused          $black $black    $lightblue $green    $yellow
-# client.focused_inactive $black $black    $white     $darkgray $blue
-# client.unfocused        $black $darkgray $gray      $darkgray $transparent
-# client.urgent           $black $red      $white     $red      $red
+set_from_resource $bg       background #1D2021
+set_from_resource $red      color1     #CC241D
+set_from_resource $green    color2     #98971A
+set_from_resource $yellow   color3     #D79921
+set_from_resource $blue     color4     #458588
+set_from_resource $purple   color5     #B16286
+set_from_resource $aqua     color6     #689D6A
+set_from_resource $gray     color7     #A89984
+set_from_resource $darkgray color0     #282828
 
-set_from_resource $bg background #1D2021
-set_from_resource $red color1 #CC241D
-set_from_resource $green color2 #98971A
-set_from_resource $yellow color3 #D79921
-set_from_resource $blue color4 #458588
-set_from_resource $purple color5 #B16286
-set_from_resource $aqua color6 #689D6A
-set_from_resource $gray color7 #A89984
-set_from_resource $darkgray color0 #282828
-
-client.focused          $blue     $blue     #000000 $purple $blue
+client.focused          $blue     $blue     $bg       $purple $blue
 client.focused_inactive $darkgray $darkgray $white    $purple $darkgray
 client.unfocused        $darkgray $darkgray $gray     $purple $darkgray
 client.urgent           $red      $red      $white    $red    $red
