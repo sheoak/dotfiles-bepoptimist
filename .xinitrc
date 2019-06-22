@@ -27,6 +27,8 @@ fi
 
 # terminal for graphical environment, we use kitty
 export TERMINAL=kitty
+export QT_STYLE_OVERRIDE=adwaita
+export XDG_CONFIG_HOME="$HOME/.config"
 
 # keyboard speed
 xset r rate 280 56
