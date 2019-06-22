@@ -4,16 +4,16 @@
 # 1 2 3
 # 8 0 4
 # 7 6 5 
-POSITION=0
+POSITION=5
 
 #y-offset
-YOFF=-50
+YOFF=-21
 
 #x-offset
-XOFF=0
+XOFF=-250
 
 #fields to be displayed
 FIELDS=SSID,SECURITY,BARS
 
 #font
-FONT="Hack 10"
+FONT="Fira Code 10"
