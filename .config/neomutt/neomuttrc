@@ -1,4 +1,10 @@
 
+# unbind annoynig stuff…
+bind generic,pager,editor,index g noop
+bind generic,pager,editor,index G noop
+bind generic,pager,editor,index \b noop
+bind generic,pager,editor,index \f noop
+
 # virtual mailboxes/notmuch
 set nm_default_uri = "notmuch://$HOME/.mail"
 
@@ -9,13 +15,20 @@ source `FILE=$DOTFILES_PRIVATE/neomutt/mailboxes; if [ ! -s "$FILE" ]; then FILE
 # bépo mapping
 source bepo.muttrc
 
-# theme solarized
+# ----------- Appearance
 # terminal colors must be set, otherwise use the 256 colors theme
-# source colors/gruvbox/base16-gruvbox.dark.256.muttrc
+# theme solarized
 source colors/solarized/mutt-colors-solarized-dark-16.muttrc
 # source colors/gruvbox/grubox-256.neomttrc
 # source powerline/colors/gruvbox-powerline.neomuttrc
 source powerline/powerline.neomuttrc
+
+set help=no # remove the help top bar
+# Colour definitions when on a mono screen
+mono bold bold
+mono underline underline
+mono indicator reverse
+# ----------------------------------------------------------------------------
 
 # gpg settings
 source gpg.rc
@@ -23,16 +36,27 @@ source gpg.rc
 # Set up mutt to use our local maildir:
 set mbox_type=Maildir
 set sendmail="msmtp-enqueue.sh -C $DOTFILES_PRIVATE/msmtprc"
-set virtual_spoolfile=yes
+set virtual_spoolfile=no
 # set mail_check_stats=yes
 
 # --------- Basic options
 set quit=ask-yes
 set beep_new=yes
 # Check for mail every minute for current IMAP mailbox every 1 min
-set timeout=60
+# set timeout=60
 # Check for new mail in ALL mailboxes every 2 min
-set mail_check=120
+# set mail_check=120
+set menu_scroll
+# set pager_index_lines=8
+set pager_context=5
+# avoid weird line breaks
+# vim needs to have this setting for mutt: setlocal fo+=aw
+set text_flowed=yes
+# Specifies time, in seconds, to pause while displaying certain informational
+# messages, while moving from folder to folder and after expunging messages
+# from the current folder. The default is to pause one second, so a value of
+# zero for this option suppresses the pause.
+set sleep_time = 0
 
 # --------- Locales and charsets
 set send_charset="utf-8"
@@ -50,7 +74,7 @@ set copy=yes
 set strict_threads
 # dont wrap mid word
 set smart_wrap
-# Automatically delete messages marked for deletion on exit
+# don't ask for purge
 set delete=yes
 
 # ---------- Attachments
@@ -58,42 +82,66 @@ set mailcap_path=~/.config/neomutt/mailcap
 auto_view text/html
 #alternative_order text/plain text/enriched text/html
 alternative_order text/enriched text/plain text/html text
-bind attach <return>  view-mailcap
-
-# Make quick html view macro
-# from https://demu.red/blog/2017/11/neomutt-macro-opening-texthtml-attachment-from-the-index-view/
-bind index,pager V  noop        ## Unbinds V from version
-macro index,pager V "<view-attachments><search>html<enter><view-mailcap><exit>"
-
 # clean tmp attachments when changing folder
 folder-hook . `rm -f /tmp/mutt/*`
 
 # ----------- Adress book
 set query_command= "abook -f $DOTFILES_PRIVATE/abook/addressbook --mutt-query '%s'"
-macro index,pager a "<pipe-message>abook -f $DOTFILES_PRIVATE/abook/addressbook --add-email-quiet<return>" "Add this sender to Abook"
-macro index M "<tag-prefix>w?" "Move tagged messages"
-macro index T ":source ~/.config/neomutt/scripts/fzffolder|<return>"
 
-# ----------- Searching (mu)
-# Adress lookup with lbdb
-# set query_command="mu cfind --muhome=~/.mu-sent-index --format=mutt-ab '%s'"
-
-# macro index <F4> "<enter-command>unset wait_key<enter><shell-escape>read -p'mu query: ' x; \
-#       mu find --clearlinks --linksdir ~/Mail/mu-search --format links \$x<enter>\
-#       <change-folder-readonly>~/Mail/mu-search\n" "mu find"
-# macro index <F5> "<change-folder-readonly>~/Mail/mu-search\n" "display mu-find results"
-
-#--------- Bind keys
+# ----------------------------------------------------------------------------
+# Basic mappings
+# ----------------------------------------------------------------------------
+# change c key behavior
+bind editor <Tab> complete-query
+bind editor ^T complete
+bind index,browser gg first-entry
+bind pager gg top
+bind index,browser G last-entry
+bind pager G bottom
 bind index D delete-pattern
-# filtering
-bind index . noop
-macro index .f "<limit>(~N|~F)<Enter>"  "view new/flag"
-macro index .a "<limit>~A<Enter>"       "view all"
+bind attach <return> view-mailcap
+bind index <Space> next-page
+bind index <BackSpace> previous-page
+# Get back the , key for more bindings
+bind index,pager,attach , noop
+bind index,pager ,r reply
+bind index,pager ,g group-reply
+bind index,pager ,f forward-message
+macro index ,q ":set quit=yes\nqy"  "Quit mutt without asking"
+macro generic,browser,pager ,q ":set quit=yes\nqqy" "Quit mutt without asking"
+macro index ,m "<tag-prefix>w?" "Move tagged messages"
+macro index ,c ":source ~/.config/neomutt/scripts/fzffolder|<return>"
 
-macro index A "<modify-labels>+archive -unread -inbox\\n" "Archive message"
+# ----------------------------------------------------------------------------
+# Attachement/messages format
+# ----------------------------------------------------------------------------
+# quickly download in mails folder
+macro attach W "<save-message>~/downloads/mails/<enter>y"
+# open with zathura instead of mailcap default (convert to text)
+macro attach z "<pipe-message>zathura -<enter>"
+# open html messages in firefox or lynx
+macro index,pager ,h "<view-attachments><search>html<enter><view-mailcap><exit>"
+macro index,pager ,l "<view-attachments><search>html<enter>,l"
+macro attach ,l "<pipe-entry>lynx -stdin -force_html<enter>"
+# check new messages in the background
+macro generic,index ,s "<enter-command>unset wait_key<enter><shell-escape>\
+    systemctl --user start mbsync.service 2> /dev/null &<enter>" "Run mbsync"
+# extract message urls:
+macro index,pager ,u "<pipe-message> urlscan<Enter>" \
+    "call urlscan to extract URLs out of a message"
+
+# ----------------------------------------------------------------------------
+# Address book
+# ----------------------------------------------------------------------------
+macro index,pager a "<pipe-message>abook -f \
+    $DOTFILES_PRIVATE/abook/addressbook --add-email-quiet<return>"\
+    "Add this sender to Abook"
+
+# ----------------------------------------------------------------------------
+# Notmuch / virtual mailboxes
+# ----------------------------------------------------------------------------
 macro index c "<change-vfolder>?" "Change to vfolder overview"
-macro index \\\\ "<vfolder-from-query>" "Search mailbox"
-
+macro index ,/ "<vfolder-from-query>" "Search mailbox"
 # 'L' performs a notmuch query, showing only the results
 macro index L "<enter-command>unset wait_key<enter> \
     <shell-escape>read -p 'notmuch query: ' x; \
@@ -103,53 +151,20 @@ macro index L "<enter-command>unset wait_key<enter> \
     "show only messages matching a notmuch pattern"
 
 # add dbus call to sync-mailbox key (polybar dbus)
-# macro generic,index $ "<enter-command>unset wait_key<enter><sync-mailbox><shell-escape>/usr/bin/polybar-msg hook mailipc 1 2> /dev/null &<enter>" "Show Mutt documentation"
-macro generic,index $ "<enter-command>unset wait_key<enter><sync-mailbox><shell-escape>~/.config/neomutt/scripts/post-sync &<enter>" "Show Mutt documentation"
-# check new messages in the background
-macro generic,index <F5> "<enter-command>unset wait_key<enter><shell-escape>systemctl --user start mbsync.service 2> /dev/null &<enter>" "Show Mutt documentation"
-
-# quit
-macro index Q   ":set quit=yes\nqy"  "Quit mutt without asking"
-macro browser Q ":set quit=yes\nqqy" "Quit mutt without asking"
-
-bind editor <Tab> complete-query
-bind editor ^T complete
-
-# Index Key Bindings ---------------------------------
-bind index g noop
-bind pager g noop
-bind index,browser gg first-entry
-bind pager gg top
-bind index,browser G last-entry
-bind pager G bottom
-
-bind index,pager <Space> next-page
-bind index,pager <BackSpace> previous-page
-#bind pager <shift><Space> tag-message
-
-# ----------- Appearance
-set help=no # remove the help top bar
+macro generic,index $ "<enter-command>unset wait_key<enter><sync-mailbox>\
+    <shell-escape>~/.config/neomutt/scripts/post-sync &<enter>" "Sync mails"
 
 # ----------------------------------------------------------------------------
-
-# Colour definitions when on a mono screen
-mono bold bold
-mono underline underline
-mono indicator reverse
-
-macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
-macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
-
-# avoid weird line breaks
-# vim needs to have this setting for mutt:
-# setlocal fo+=aw
-set text_flowed=yes
-
-# Specifies time, in seconds, to pause while displaying certain informational
-# messages, while moving from folder to folder and after expunging messages
-# from the current folder. The default is to pause one second, so a value of
-# zero for this option suppresses the pause.
-set sleep_time = 0
+# Filters
+# ----------------------------------------------------------------------------
+bind index . noop
+macro index .u "<limit>(~U|~N)<Enter>"  "view unread messages"
+macro index .n "<limit>(~N)<Enter>"     "view new messages"
+macro index .a "<limit>~A<Enter>"       "view all messages"
+macro index .f "<limit>~f "             "view from…"
+macro index .F "<limit>~F<Enter>"       "view flagged messages"
+macro index .d "<limit>~D<Enter>"       "view deleted messages"
+macro index .t "<limit>~T<Enter>"       "view tagged messages"
 
 # private settings
 # set folder      = "$HOME/mail"
@@ -158,7 +173,16 @@ set sleep_time = 0
 # set postponed   = "+myccount/gmail.drafts"
 # set realname    = "Your name"
 # set from        = "myemail@domain.ltd"
+source `FILE=$DOTFILES_PRIVATE/neomutt/neomuttrc;\
+    if [ ! -s "$FILE" ]; then FILE=/dev/null;fi;echo "$FILE"`
 
-source `FILE=$DOTFILES_PRIVATE/neomutt/neomuttrc; if [ ! -s "$FILE" ]; then FILE=/dev/null;fi;echo "$FILE"`
-
-macro attach S "<pipe-message>~/.config/neomutt/scripts/muttsaveattach.sh"<enter>
+# macro attach C "<pipe-message>~/.config/neomutt/scripts/mutt-convert-pdf"<enter>
+# macro index A "<modify-labels>+archive -unread -inbox\\n" "Archive message"
+# macro index A "<modify-labels>+deleted\\n" "Delete message"
+# ----------- Searching (mu)
+# Adress lookup with lbdb
+# set query_command="mu cfind --muhome=~/.mu-sent-index --format=mutt-ab '%s'"
+# macro index <F4> "<enter-command>unset wait_key<enter><shell-escape>read -p'mu query: ' x; \
+#       mu find --clearlinks --linksdir ~/Mail/mu-search --format links \$x<enter>\
+#       <change-folder-readonly>~/Mail/mu-search\n" "mu find"
+# macro index <F5> "<change-folder-readonly>~/Mail/mu-search\n" "display mu-find results"
