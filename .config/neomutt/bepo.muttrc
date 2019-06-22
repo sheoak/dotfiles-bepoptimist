@@ -1,8 +1,6 @@
 # bépo bindings
 
-# -----------------------------------------------------------------------------
 # Homerow:
-# -----------------------------------------------------------------------------
 macro index t <sync-mailbox><change-folder>?<tab> "Go to the folder menu"
 bind browser,attach s next-entry
 bind browser,attach r previous-entry
@@ -24,21 +22,18 @@ bind index,pager R half-up
 bind index,pager S half-down
 bind attach,pager t exit
 
-# -----------------------------------------------------------------------------
 # Re-allocate
-# -----------------------------------------------------------------------------
 bind generic,index,pager h search-next
 bind generic,index,pager H search-opposite
 bind index,attach j tag-entry
 bind index J tag-pattern
-bind index ^J untag-pattern
-bind generic gh help
+bind index \cj untag-pattern
+bind generic,index,pager g noop
+bind generic,index,pager gh help
 
-# -----------------------------------------------------------------------------
 # Others
-# -----------------------------------------------------------------------------
 bind index ^ noop
-bind generic ? search-reverse
+bind generic,index,pager ? search-reverse
 bind index <Esc>j tag-thread
 bind pager,index w save-message
 bind attach w save-entry
