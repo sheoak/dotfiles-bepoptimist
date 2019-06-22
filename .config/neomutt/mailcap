@@ -5,7 +5,12 @@ text/html; w3m -v -F -T text/html -dump %s; copiousoutput
 text/plain; nvim %;
 
 image/*; feh --auto-zoom  -B black -FZx %s; edit=gimp %
-application/pdf; zathura %s
+
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; pandoc --from docx --to markdown %s; copiousoutput
+application/vnd.oasis.opendocument.text; pandoc --from odt --to markdown %s; copiousoutput
+application/pdf; pdftotext -nopgbrk -q -eol unix -layout %s -; copiousoutput;
+application/msword; antiword %s; copiousoutput;
+application/rtf; unrtf --text %s; copiousoutput;
 
 # auto-unpack and open ranger
 application/zip; ~/.config/neomutt/scripts/unpack-mutt %s
