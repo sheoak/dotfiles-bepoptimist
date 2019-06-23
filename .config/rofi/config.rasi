@@ -24,7 +24,6 @@
     normal-background:           rgba ( 0, 43, 55, 88 % );
     lightfg:                     rgba ( 88, 104, 117, 100 % );
     selected-normal-background:  rgba ( 0, 54, 66, 88 % );
-    border-color:                @foreground;
     border-color:                rgba(17, 17, 17, 30 %);
     spacing:                     2;
     separatorcolor:              rgba ( 0, 54, 66, 88 % );
@@ -66,7 +65,6 @@
     padding: 1px ;
 }
 #element.normal.normal {
-    background-color: @normal-background;
     text-color:       @normal-foreground;
 }
 #element.normal.urgent {
@@ -90,7 +88,6 @@
     text-color:       @selected-active-foreground;
 }
 #element.alternate.normal {
-    background-color: @alternate-normal-background;
     text-color:       @alternate-normal-foreground;
 }
 #element.alternate.urgent {
