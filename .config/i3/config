@@ -31,6 +31,8 @@ set_from_resource $borderfloat i3wn.outergap 7
 set_from_resource $monitor monitor eDP-1
 set_from_resource $monitorext monitorext HDMI-1
 
+set $border 10
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 # leave this on top because it can be override by workspace settings
@@ -425,19 +427,26 @@ no_focus [class="qutebrowser"]
 # ----------------------------------------------------------------------------
 # Theme
 # ----------------------------------------------------------------------------
-set_from_resource $bg       background #1D2021
-set_from_resource $red      color1     #CC241D
-set_from_resource $green    color2     #98971A
-set_from_resource $yellow   color3     #D79921
-set_from_resource $blue     color4     #458588
-set_from_resource $purple   color5     #B16286
-set_from_resource $aqua     color6     #689D6A
-set_from_resource $gray     color7     #A89984
-set_from_resource $darkgray color0     #282828
+set_from_resource $bg        background       #002b36
+set_from_resource $fg        foreground       #839496
+set_from_resource $red       color1           #dc322f
+set_from_resource $green     color2           #859900
+set_from_resource $yellow    color3           #b58900
+set_from_resource $blue      color4           #268bd2
+set_from_resource $purple    color13          #6c71c4
+set_from_resource $magenta   color5           #d33682
+set_from_resource $aqua      color6           #2aa198
+set_from_resource $gray      color10          #839496
+set_from_resource $lightgray color14          #93a1a1
+set_from_resource $darkgray  color0           #073642
+set_from_resource $white     color7           #eee8d5
+set_from_resource $white_alt color15          #fdf6e3
+set_from_resource $white_tr  color15_trans    #fdf6e369
 
-client.focused          $blue     $blue     $bg       $purple $blue
-client.focused_inactive $darkgray $darkgray $white    $purple $darkgray
-client.unfocused        $darkgray $darkgray $gray     $purple $darkgray
-client.urgent           $red      $red      $white    $red    $red
+#                       border    background  text       indicator   child bd
+client.focused          $bg       $bg         $white_alt $green      $white_tr
+client.focused_inactive $bg       $bg         $gray      $green      $darkgray
+client.unfocused        $darkgray $darkgray   $gray      $darkgray   $darkgray
+client.urgent           $darkgray $darkgray   $red       $red        $red
 
 exec_always --no-startup-id polybar-launch.sh
