@@ -22,6 +22,7 @@
 #define S_base1         #93a1a1
 #define S_base2         #eee8d5
 #define S_base3         #fdf6e3
+#define S_base3_trans   #fdf6e3BB
 
 
 ! Light
@@ -59,5 +60,7 @@
 *color13:                 S_violet
 *color14:                 S_base1
 *color15:                 S_base3
+
+*color15Trans:            S_base3_trans
 
 ! vim: ft=xdefaults
