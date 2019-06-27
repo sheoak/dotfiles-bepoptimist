@@ -23,15 +23,13 @@
 # this makes the i3 configuration file generic
 set_from_resource $mod i3wm.mod Mod1
 set_from_resource $win i3wm.win Mod4
-set_from_resource $font i3wm.font pango:Fira Code Light 8
-set_from_resource $innergap i3wn.innergap 7
-set_from_resource $outergap i3wn.outergap 3
-set_from_resource $border i3wn.outergap 1
-set_from_resource $borderfloat i3wn.outergap 7
+set_from_resource $font i3wm.font pango:Fira Code Light 10
+set_from_resource $innergap i3wn.innergap 8
+set_from_resource $outergap i3wn.outergap 6
+set_from_resource $border i3wn.border 6
+set_from_resource $borderfloat i3wn.borderfloat 8
 set_from_resource $monitor monitor eDP-1
 set_from_resource $monitorext monitorext HDMI-1
-
-set $border 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -59,7 +57,7 @@ set $autolock 15
 # commands
 # ----------------------------------------------------------------------------
 set $termDetached kitty
-set $term kitty --single-instance 
+set $term "kitty --single-instance "
 set $ncmpcpp ncmpcpp -c ~/.config/ncmpcpp/config-private
 # set $lockalert 'xset dpms force off'
 set $locker physlock
@@ -71,8 +69,8 @@ set $mode_system  [L]ock     Log[o]ut     [S]uspend     [R]eboot    
 set $mode_resize  Mode resize
 set $mode_virtualbox   [w]indows     [u]buntu
 set $mode_screen  [E]nable    [D]isable    [A]ctivate
-set $mode_gaps Inner Gaps: +|-|r Outer Gaps: «|»|R (local)
-set $mode_gaps_all Inner Gaps: +|-|r Outer Gaps: «|»|R (global)
+set $mode_gaps Inner Gaps: s|r|c Outer Gaps: S|R|C (local)
+set $mode_gaps_all Inner Gaps: s|r|c Outer Gaps: S|R|C (global)
 set $mode_mpc MPC: [p] play/pause, [u] update, [f/r] forward, [b/B] backward, [n/N] next/previous
 
 # ----------------------------------------------------------------------------
@@ -98,23 +96,14 @@ workspace $W1 output $monitor
 workspace $W2 output $monitor
 workspace $W3 output $monitor
 workspace $W4 output $monitor
-workspace $W5 output $monitor
-workspace $W6 output $monitor
+workspace $W5 output $monitorext
+workspace $W6 output $monitorext
 
 # second monitor
 workspace $W7  output $monitorext
 workspace $W8  output $monitorext
 workspace $W9  output $monitorext
 workspace $W10 output $monitorext
-
-# no gap for browser and workspace
-# workspace $W2 gaps inner 0
-# workspace $W2 gaps outer 0
-# workspace $W4 gaps inner 0
-# workspace $W4 gaps outer 0
-
-# default workspace, to avoid "1" by default
-# exec --no-startup-id i3-msg "workspace $W1"
 
 # switch to workspace
 bindsym $mod+a        workspace $W1
@@ -284,26 +273,24 @@ mode "$mode_screen" {
 # ----------------------------------------------------------------------------
 bindsym $win+g mode "$mode_gaps"
 mode "$mode_gaps" {
-        bindsym guillemotleft  gaps inner current minus 5
-        bindsym guillemotright gaps inner current plus  5
+        bindsym s              gaps inner current minus 5
+        bindsym r              gaps inner current plus  5
         bindsym c              gaps inner current set   0
-        bindsym s              gaps outer current minus 5
-        bindsym r              gaps outer current plus  5
-        bindsym Shift+s        gaps inner current minus 5
-        bindsym Shift+r        gaps inner current plus  5
+        bindsym Shift+s        gaps outer current minus 5
+        bindsym Shift+r        gaps outer current plus  5
+        bindsym Shift+c        gaps outer current set   0
         bindsym Return         mode "default"
         bindsym Escape         mode "default"
 }
 
 bindsym $win+shift+g mode "$mode_gaps_all"
 mode "$mode_gaps_all" {
-        bindsym guillemotleft  gaps inner all minus 5
-        bindsym guillemotright gaps inner all plus  5
+        bindsym s              gaps inner all minus 5
+        bindsym r              gaps inner all plus  5
         bindsym c              gaps inner all set   0
-        bindsym s              gaps outer all minus 5
-        bindsym r              gaps outer all plus  5
-        bindsym Shift+s        gaps inner all minus 5
-        bindsym Shift+r        gaps inner all plus  5
+        bindsym Shift+s        gaps outer all minus 5
+        bindsym Shift+r        gaps outer all plus  5
+        bindsym Shift+c        gaps outer all set   0
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
@@ -441,7 +428,7 @@ set_from_resource $lightgray color14          #93a1a1
 set_from_resource $darkgray  color0           #073642
 set_from_resource $white     color7           #eee8d5
 set_from_resource $white_alt color15          #fdf6e3
-set_from_resource $white_tr  color15_trans    #fdf6e369
+set_from_resource $white_tr  color15_trans    #fdf6e3BB
 
 #                       border    background  text       indicator   child bd
 client.focused          $bg       $bg         $white_alt $green      $white_tr
@@ -450,3 +437,21 @@ client.unfocused        $darkgray $darkgray   $gray      $darkgray   $darkgray
 client.urgent           $darkgray $darkgray   $red       $red        $red
 
 exec_always --no-startup-id polybar-launch.sh
+
+# floating terminal on startup
+exec_always --no-startup-id $termDetached sh -c "i3-msg mark kitty-float"
+for_window [con_mark="kitty-float"] \
+                      floating enable; \
+                      move scratchpad; \
+                      scratchpad show; \
+
+for_window [con_mark="kitty-float"] \
+                      move position center; \
+                      # resize shrink height 150px; \
+                      # resize grow width 150px; \
+                      move scratchpad;
+    # move position 0px 22px; \
+    # resize shrink height 420px; move scratchpad;
+# for_window [con_mark="kitty-float"] resize grow left 150, \
+#     resize grow right 150, resize grow down 15, resize grow up 10, \
+#     move scratchpad;
