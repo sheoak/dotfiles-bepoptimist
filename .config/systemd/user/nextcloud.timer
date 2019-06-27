@@ -1,0 +1,10 @@
+[Unit]
+Description=Mailbox synchronization timer
+
+[Timer]
+OnBootSec=10m
+OnUnitActiveSec=20m
+Unit=nextcloud.service
+
+[Install]
+WantedBy=timers.target

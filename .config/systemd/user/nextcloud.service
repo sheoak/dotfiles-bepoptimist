@@ -1,0 +1,7 @@
+[Unit]
+Description=Nextcloud synchronisation service
+OnFailure=notify-failed@%i.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash ${HOME}/bin/nextcloud-sync.sh
