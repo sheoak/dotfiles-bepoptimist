@@ -19,7 +19,7 @@
 
 # Set the default feh options to be recursive and verbose
 # feh -rV
-feh -B black \
+feh --auto-rotate -B black \
     -N \
     --geometry 500x500 \
     --auto-zoom
