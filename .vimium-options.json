@@ -9,7 +9,7 @@
   "filterLinkHints": false,
   "waitForEnterForFilteredHints": true,
   "hideHud": false,
-  "keyMappings": "# Insert your preferred key mappings here.\nmap s scrollDown\nmap r scrollUp\nmap t scrollLeft\nmap n scrollRight\nmap h performFind\nmap H performBackwardsFind\nmap l reload\nmap gn createTab\nunmap «\nunmap »\n\nmap « goBack\nmap » goForward\nmap æ goBack\nmap € goForward\n\nmap éq removeTab\nmap éé visitPreviousTab\nmap T previousTab\nmap N nextTab\n\nmap ,d removeTab\nmap a togglePinTab\n\nmap go Vomnibar.activateEditUrl\nmap gO Vomnibar.activateEditUrlInNewTab",
+  "keyMappings": "# Insert your preferred key mappings here.\nmap s scrollDown\nmap r scrollUp\nmap t scrollLeft\nmap n scrollRight\nmap h performFind\nmap H performBackwardsFind\nmap l reload\nmap gn createTab\nunmap «\nunmap »\n\nunmap <c-e> \nmap <c-e> nextTab\n\nmap « goBack\nmap » goForward\nmap T goBack\nmap N goForward\n\nmap éq removeTab\nmap éé visitPreviousTab\nmap æ previousTab\nmap € nextTab\n\nmap ,d removeTab\nmap a togglePinTab\n\nmap go Vomnibar.activateEditUrl\nmap gO Vomnibar.activateEditUrlInNewTab",
   "linkHintCharacters": "sadfjklewcmpgh",
   "linkHintNumbers": "0123456789",
   "newTabUrl": "about:newtab",
