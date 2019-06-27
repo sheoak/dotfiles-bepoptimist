@@ -60,6 +60,11 @@
 !.urxvt/*
 
 # # then exclude again special files
+
+# ignore systemd symlinks
+.config/systemd/user/*.wants/**
+.config/systemd/user/*.d
+
 tmp/**
 *.swp
 *.old
@@ -69,3 +74,4 @@ tmp/**
 *.log
 *.bak
 .ctags
+**/__pycache__/**
