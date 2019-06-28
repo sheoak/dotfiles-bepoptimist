@@ -2,7 +2,7 @@
 Description=handle automounting
 
 [Service]
-ExecStart=/usr/bin/udiskie -T -q --use-udisks2 -a
+ExecStart=/usr/bin/udiskie -T -q --use-udisks2 -a -c ${DOTFILES_PRIVATE}/udiskie/config.yml
 Restart=always
 
 [Install]
