@@ -1,5 +1,5 @@
 [Unit]
-Description=Mailbox synchronization timer
+Description=Nextcloud synchronization timer
 
 [Timer]
 OnBootSec=10m
