@@ -3,4 +3,4 @@ Description=Checking battery state
 
 [Service]
 Type=oneshot
-ExecStart=/home/sheoak/bin/check-battery.sh
+ExecStart=%h/bin/check-battery.sh
