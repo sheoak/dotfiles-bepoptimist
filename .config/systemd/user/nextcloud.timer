@@ -3,7 +3,7 @@ Description=Nextcloud synchronization timer
 
 [Timer]
 OnBootSec=10m
-OnUnitActiveSec=20m
+OnUnitActiveSec=30m
 Unit=nextcloud.service
 
 [Install]
