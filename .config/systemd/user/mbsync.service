@@ -4,5 +4,5 @@ OnFailure=notify-failed@%i.service
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/mbsync -Va -c ${DOTFILES_PRIVATE}/mbsyncrc
+ExecStart=/usr/bin/mbsync -aq -c ${DOTFILES_PRIVATE}/mbsyncrc
 ExecStartPost=/usr/bin/sh %h/.config/neomutt/scripts/post-sync
