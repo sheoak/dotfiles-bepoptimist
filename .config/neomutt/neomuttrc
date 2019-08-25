@@ -1,10 +1,4 @@
 
-# unbind annoynig stuff…
-bind generic,pager,editor,index g noop
-bind generic,pager,editor,index G noop
-bind generic,pager,editor,index \b noop
-bind generic,pager,editor,index \f noop
-
 # virtual mailboxes/notmuch
 set nm_default_uri = "notmuch://$HOME/.mail"
 
@@ -17,10 +11,7 @@ source bepo.muttrc
 
 # ----------- Appearance
 # terminal colors must be set, otherwise use the 256 colors theme
-# theme solarized
 source colors/solarized/mutt-colors-solarized-dark-16.muttrc
-# source colors/gruvbox/grubox-256.neomttrc
-# source powerline/colors/gruvbox-powerline.neomuttrc
 source powerline/powerline.neomuttrc
 
 set help=no # remove the help top bar
@@ -56,7 +47,11 @@ set text_flowed=yes
 # messages, while moving from folder to folder and after expunging messages
 # from the current folder. The default is to pause one second, so a value of
 # zero for this option suppresses the pause.
-set sleep_time = 0
+set sleep_time=0
+# Threads settings
+set sort=threads
+set sort_aux=last-date-received
+set sort_re
 
 # --------- Locales and charsets
 set send_charset="utf-8"
@@ -91,6 +86,12 @@ set query_command= "abook -f $DOTFILES_PRIVATE/abook/addressbook --mutt-query '%
 # ----------------------------------------------------------------------------
 # Basic mappings
 # ----------------------------------------------------------------------------
+# unbind annoynig stuff…
+bind generic,pager,editor,index g noop
+bind generic,pager,editor,index G noop
+bind generic,pager,editor,index \b noop
+bind generic,pager,editor,index \f noop
+
 # change c key behavior
 bind editor <Tab> complete-query
 bind editor ^T complete
@@ -111,6 +112,12 @@ macro index ,q ":set quit=yes\nqy"  "Quit mutt without asking"
 macro generic,browser,pager ,q ":set quit=yes\nqqy" "Quit mutt without asking"
 macro index ,m "<tag-prefix>w?" "Move tagged messages"
 macro index ,c ":source ~/.config/neomutt/scripts/fzffolder|<return>"
+
+# ----------------------------------------------------------------------------
+# Threads
+# ----------------------------------------------------------------------------
+bind index - collapse-thread
+bind index g- collapse-all
 
 # ----------------------------------------------------------------------------
 # Attachement/messages format
