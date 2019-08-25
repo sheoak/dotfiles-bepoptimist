@@ -138,7 +138,7 @@ label-mode-foreground = ${colors.background}
 type = internal/network
 interface = ${env:DEFAULT_NETWORK_INTERFACE:wlp2s0}
 interval = 2.0
-ping-interval = 10
+ping-interval = 0
 
 format-connected = <ramp-signal> <label-connected>
 ; format-connected-prefix = ""
