@@ -1,8 +1,0 @@
-
-device_config:
-- id_uuid: part1-uuid
-  keyfile: /home/myuser/system/akeyfile
-
-device_config:
-- id_uuid: part2-uuid
-  keyfile: /home/myuser/system/anotherkeyfile
