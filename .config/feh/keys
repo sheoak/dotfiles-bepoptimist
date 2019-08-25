@@ -34,6 +34,8 @@ scroll_right N C-Right
 remove     d   Delete
 delete   C-d C-Delete
 
+save_image S
+
 toggle_filenames i
 toggle_info I
 
