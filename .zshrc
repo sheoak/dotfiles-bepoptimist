@@ -6,11 +6,6 @@
 # ~/.oh-my-zsh/custom/plugins/common-aliases/
 # ~/.oh-my-zsh/custom/plugins/bepoptimist/
 
-# local and private dotfiles path
-export DOTFILES_PRIVATE=$HOME/.dotfiles-private
-export DOTFILES_LOCAL=$HOME/.dotfiles-local
-export DOTFILES_REPOSITORY=$HOME/.cfg
-
 plugins=(
   git
   git-extras
@@ -89,8 +84,8 @@ export PATH=$JAVA_HOME/bin:$PATH
 export PATH=$(echo "$PATH" | sed -e 's/:\/usr\/bin\/node//')
 
 # Default executable
-export EDITOR=nvim
-export VISUAL=nvim
+# export EDITOR=nvim
+# export VISUAL=nvim
 export BROWSER=firefox
 
 # use lesspipe
@@ -115,9 +110,6 @@ export FZF_COMPLETION_OPTS='+c -x'
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
 export FZF_CTRL_T_COMMAND='rg --files --no-ignore-vcs --ignore-file $DOTFILES_PRIVATE/agignore --hidden '
 export FZF_DEFAULT_OPTS='--inline-info --prompt="❯"'
-
-export MONITOR='eDP-1'
-export MONITOR_EXT='HDMI-1'
 
 # export MOZ_ENABLE_WAYLAND=1
 
