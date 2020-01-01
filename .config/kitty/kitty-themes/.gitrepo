@@ -1,0 +1,13 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:dexpota/kitty-themes.git
+	branch = master
+	commit = fca3335489bdbab4cce150cb440d3559ff5400e2
+	parent = ded39e1614fdd510b2579c92bad9d3d543501e4e
+	method = merge
+	update = auto
+	cmdver = 0.4.1
