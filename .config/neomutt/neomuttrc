@@ -78,7 +78,7 @@ auto_view text/html
 #alternative_order text/plain text/enriched text/html
 alternative_order text/enriched text/plain text/html text
 # clean tmp attachments when changing folder
-folder-hook . `rm -f /tmp/mutt/*`
+# folder-hook . `rm -f /tmp/mutt/*`
 
 # ----------- Adress book
 set query_command= "abook -f $DOTFILES_PRIVATE/abook/addressbook --mutt-query '%s'"
