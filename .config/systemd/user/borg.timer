@@ -1,0 +1,11 @@
+[Unit]
+Description=User backups timer
+Documentation=man:borg
+
+[Timer]
+OnBootSec=15min
+OnUnitActiveSec=1d
+
+[Install]
+WantedBy=timers.target
+
