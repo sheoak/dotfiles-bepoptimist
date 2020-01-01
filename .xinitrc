@@ -39,13 +39,12 @@ xset r rate 280 56
 setxkbmap -option ctrl:nocaps fr bepo
 
 # xautolock should be attached to x, not i3 or systemd
-xautolock -time 30 -locker "physlock" -notify 20 -notifier "xset dpms force off" &
-xcape -e 'Control_L=Escape'
+xautolock -time 30 -locker "systemctl suspend" -notify 20 -notifier "xset dpms force off" &
 
 # transparency
 compton -b
+# systemctl --user start redshift
 
-# wallpaper
-feh --bg-scale ~/images/wallpaper.jpg
+/usr/bin/setterm -blank 1 -powersave powerdown
 
 exec i3
