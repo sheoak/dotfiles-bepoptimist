@@ -1,0 +1,12 @@
+[Unit]
+Description=Protonmail bridge
+OnFailure=notify-failed@%i.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/protonmail-bridge --cli
+Restart=always
+
+[Install]
+WantedBy=default.target
+
