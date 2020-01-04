@@ -4,6 +4,14 @@
  * Copyright: Rasmus Steinke
  * Edited by sheoak <contact [at] sheoak.fr>
  ******************************************************************************/
+configuration {
+    modi: "window,drun,ssh,combi";
+    font: "FuraCode Nerd Font, Regular, 10";
+    combi-modi: "window,drun,ssh";
+    width: 60;
+    show-icons: true;
+ }
+
 * {
     selected-normal-foreground:  rgba ( 129, 147, 150, 100 % );
     foreground:                  rgba ( 129, 147, 150, 100 % );
