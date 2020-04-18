@@ -10,6 +10,7 @@ configuration {
     combi-modi: "window,drun,ssh";
     width: 60;
     show-icons: true;
+    /*monitor: "eDP1";*/
  }
 
 * {
