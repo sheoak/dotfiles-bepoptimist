@@ -6,7 +6,7 @@ session = ~/.rtorrent.session
 schedule2 = watch_directory_foo, 20, 10, "load.start_verbose=~/downloads/torrents/watch/*.torrent"
 
 
-network.port_range.set = 49164-49164
+network.port_range.set = 6882-6882
 
 protocol.encryption.set = allow_incoming,try_outgoing,enable_retry
 
@@ -16,7 +16,8 @@ protocol.pex.set= yes
 
 schedule2 = low_diskspace,5,60,((close_low_diskspace,100M))
 
-encryption = require,require_RC4,allow_incoming,try_outgoing
+# encryption = require,require_RC4,allow_incoming,try_outgoing
+encryption = allow_incoming,enable_retry,prefer_plaintext
 
 dht = disable
 
@@ -25,7 +26,7 @@ max_peers_seed=100
 max_uploads=2
 upload_rate=150
 
-port_range = 55556-55556
+port_range = 6883-6883
 
 throttle.min_peers.normal.set = 40
 throttle.max_peers.normal.set = 52
