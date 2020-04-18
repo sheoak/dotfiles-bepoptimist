@@ -324,9 +324,10 @@ bindsym $mod+Control+s restart
 
 # dmenu replacement with rofi, see ~/.Xresources for configuration
 bindsym $mod+d exec "rofi -show run"
+bindsym $mod+o exec "kittyfzf.sh"
 bindsym $mod+g exec "udiskie-rofi"
-bindsym $mod+o exec "rofimoji"
-bindsym $mod+Shift+o exec "rofi-nerdfonts"
+bindsym $mod+Shift+o exec "rofimoji"
+bindsym $mod+Ctrl+o exec "rofi-nerdfonts"
 bindsym $mod+eacute exec "rofi-pass"
 bindsym $mod+Shift+eacute exec "rofi-pass --bmarks"
 bindsym $mod+Control+eacute exec "rofi-pass --last-used"
@@ -436,20 +437,27 @@ client.focused_inactive $bg       $bg         $gray      $green      $darkgray
 client.unfocused        $darkgray $darkgray   $gray      $darkgray   $darkgray
 client.urgent           $darkgray $darkgray   $red       $red        $red
 
+exec_always --no-startup-id seafile-applet
 exec_always --no-startup-id polybar-launch.sh
 
 # floating terminal on startup
-exec_always --no-startup-id $termDetached sh -c "i3-msg mark kitty-float"
+exec_always --no-startup-id $termDetached -e sh -c "i3-msg mark kitty-float"
 for_window [con_mark="kitty-float"] \
                       floating enable; \
                       move scratchpad; \
-                      scratchpad show; \
+                      scratchpad show;
 
 for_window [con_mark="kitty-float"] \
                       move position center; \
                       # resize shrink height 150px; \
                       # resize grow width 150px; \
                       move scratchpad;
+
+for_window [instance="KittyFuzzy"] floating enable
+for_window [instance="KittyFuzzy"] resize set 2500 1500
+for_window [instance="KittyFuzzy"] move position center
+for_window [instance="KittyFuzzy"] border pixel 1
+
     # move position 0px 22px; \
     # resize shrink height 420px; move scratchpad;
 # for_window [con_mark="kitty-float"] resize grow left 150, \
