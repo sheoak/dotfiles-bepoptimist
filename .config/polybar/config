@@ -18,32 +18,36 @@ purple            = #9f78e1
 lightpurple       = #FF78FF
 pink              = #d33682
 light             = #999999
-superlight        = #555555
-primary           = #EEEEEE
+superlight        = #222222
+;primary           = #EEEEEE
+primary           = #aaaaaa
 ; primary-alt       = #BBBBBB
 secondary         = #fba922
 active_background = #333333
-active_text       = #f3f3f3
+; active_text       = #f3f3f3
+active_text       = #dddddd
 accent            = ${self.secondary}
 urgent            = ${self.red}
 good              = ${self.green}
 disabled          = ${self.gray}
-background        = ${env:POLYBAR_COLOR:#FF002B36}
-foreground        = ${self.primary}
+; background        = ${env:POLYBAR_COLOR:#FF002B36}
+background        = #000000
+;foreground        = ${self.primary}
+foreground        = #AAAAAA
 
 
 [bar/bottom]
 
 ; fonts
 ; ----------------------------------------------------------------------------
-font-0 = Siji:pixelsize=8;3
-font-1 = Fira Code Light:size=8;3
+font-0 = Siji:pixelsize=6;3
+font-1 = Fira Code Light:size=6;3
 ; for workspaces
-font-2 = Font Awesome 5 Free:style=Solid:size=6;2
+font-2 = Font Awesome 5 Free:style=Solid:size=4;2
 ; for volume
-font-3 = Fira Code Light:style=Regular:size=8;4
-font-4 = Hack Nerd Font Mono:style=Regular:size=15;1
-font-5 = Fira Code Light:style=Regular:size=7;3
+font-3 = Fira Code Light:style=Regular:size=6;4
+font-4 = Hack Nerd Font Mono:style=Regular:size=13;1
+font-5 = Fira Code Light:style=Regular:size=5;3
 ; ----------------------------------------------------------------------------
 
 ; styles
@@ -52,7 +56,7 @@ background = ${colors.background}
 foreground = ${colors.primary}
 
 width = 100%
-height = 21
+height = 50
 bottom = true
 border-bottom-size = 0
 border-bottom-color = #333
@@ -73,11 +77,11 @@ modules-left = i3 sepstraight mpd msmtp
 modules-right = mailipc temperature dpms sepright wireless-network openvpn bluetooth sepleft battery sepleft pulseaudio sepright clock
 
 enable-ipc = true
-monitor = ${env:MONITOR:HDMI-1}
-monitor-fallback = eDP-1
+monitor = ${env:MONITOR:eDP1}
+monitor-fallback = DP-2
 screenchange-reload = true
 tray-position = right
-
+dpi = 292
 
 [module/i3]
 type = internal/i3
@@ -383,7 +387,7 @@ label-unmounted-foreground = #55
 [module/temperature]
 type = internal/temperature
 thermal-zone = 0
-warn-temperature = 50
+warn-temperature = 60
 format-warn-margin = 2
 
 format =
