@@ -24,9 +24,9 @@
 set_from_resource $mod i3wm.mod Mod1
 set_from_resource $win i3wm.win Mod4
 set_from_resource $font i3wm.font pango:Fira Code Light 10
-set_from_resource $innergap i3wn.innergap 8
-set_from_resource $outergap i3wn.outergap 6
-set_from_resource $border i3wn.border 6
+set_from_resource $innergap i3wn.innergap 6
+set_from_resource $outergap i3wn.outergap 0
+set_from_resource $border i3wn.border 4
 set_from_resource $borderfloat i3wn.borderfloat 8
 set_from_resource $monitor monitor eDP-1
 set_from_resource $monitorext monitorext HDMI-1
@@ -51,16 +51,16 @@ for_window [class=".*"] title_format "  %title  "
 font $font
 
 # autolock timer in minutes
-set $autolock 15
+# set $autolock 15
 
 # ----------------------------------------------------------------------------
 # commands
 # ----------------------------------------------------------------------------
-set $termDetached kitty
+set $termDetached kitty --detach
 set $term "kitty --single-instance "
 set $ncmpcpp ncmpcpp -c ~/.config/ncmpcpp/config-private
 # set $lockalert 'xset dpms force off'
-set $locker physlock
+set $locker physlock -d -m &;
 
 # ----------------------------------------------------------------------------
 # modes
@@ -350,23 +350,23 @@ bindsym $mod+ccedilla exec polybar-msg cmd toggle
 
 # Screenshot
 bindsym Print \
-    exec "scrot ~/desktop/Screenshot%Y-%m-%d%H:%M:%S.png"
+    exec "scrot ~/desktop/Screenshot-%Y-%m-%d-%H:%M:%S.png"
 bindsym $win+F1 \
-    exec "scrot ~/desktop/Screenshot%Y-%m-%d%H:%M:%S.png"
+    exec "scrot ~/desktop/Screenshot-%Y-%m-%d-%H:%M:%S.png"
 bindsym --release $mod+Print \
-    exec "scrot -s ~/desktop/Screenshot%Y-%m-%d%H:%M:%S.png"
+    exec "scrot -s ~/desktop/Screenshot-%Y-%m-%d-%H:%M:%S.png"
 bindsym --release $mod+$win+F1 \
-    exec "scrot -s ~/desktop/Screenshot%Y-%m-%d%H:%M:%S.png"
+    exec "scrot -s ~/desktop/Screenshot-%Y-%m-%d-%H:%M:%S.png"
 
 # TODO: read from .Xresources
 bindsym XF86AudioRaiseVolume \
-    exec "amixer -c0 -D pulse sset Master 5%+ && \
+    exec "amixer -q sset Master,0 5%+ unmute && \
     paplay /usr/share/sounds/freedesktop/stereo/message.oga"
 bindsym XF86AudioLowerVolume \
-    exec "amixer -c0 -D pulse sset Master 5%- && \
+    exec "amixer -q sset Master,0 5%- unmute && \
     paplay /usr/share/sounds/freedesktop/stereo/message.oga"
 bindsym XF86AudioMute \
-    exec "amixer -c0 -D pulse -q set Master toggle && \
+    exec "amixer -q sset Master,0 toggle && \
     paplay /usr/share/sounds/freedesktop/stereo/message.oga"
 
 # Sreen brightness controls
@@ -415,7 +415,9 @@ no_focus [class="qutebrowser"]
 # ----------------------------------------------------------------------------
 # Theme
 # ----------------------------------------------------------------------------
-set_from_resource $bg        background       #002b36
+#set_from_resource $bg        background       #002b36
+set $bg        #000000
+
 set_from_resource $fg        foreground       #839496
 set_from_resource $red       color1           #dc322f
 set_from_resource $green     color2           #859900
@@ -429,7 +431,11 @@ set_from_resource $lightgray color14          #93a1a1
 set_from_resource $darkgray  color0           #073642
 set_from_resource $white     color7           #eee8d5
 set_from_resource $white_alt color15          #fdf6e3
-set_from_resource $white_tr  color15_trans    #fdf6e3BB
+set_from_resource $white_tr  color15_trans    #eee8d5BB
+
+set $white_alt   #999999
+set $darkgray    #181818
+set $white_tr    #BBBBBBBB
 
 #                       border    background  text       indicator   child bd
 client.focused          $bg       $bg         $white_alt $green      $white_tr
