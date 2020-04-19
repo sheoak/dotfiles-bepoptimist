@@ -109,9 +109,10 @@ fi
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --ignore-file $DOTFILES_PRIVATE/agignore --hidden '
 export FZF_COMPLETION_TRIGGER='~~'
 export FZF_COMPLETION_OPTS='+c -x'
-export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind 'tab:toggle-preview'"
+export FZF_CTRL_R_OPTS=""
+export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --theme=TwoDark --color=always {} | head -100' --preview-window='right' --bind 'ctrl-b:toggle-preview'"
 export FZF_CTRL_T_COMMAND='rg --files --no-ignore-vcs --ignore-file $DOTFILES_PRIVATE/agignore --hidden '
-export FZF_DEFAULT_OPTS='--inline-info --prompt="❯"'
+export FZF_DEFAULT_OPTS="--inline-info --reverse --prompt='❯' --preview 'bat --style=numbers --theme=TwoDark --color=always {} | head -100' --preview-window='right:50%:hidden' --bind '?:toggle-preview'"
 
 # bepo alias to z
 alias é="z"
@@ -121,6 +122,10 @@ alias é="z"
 # GPG settings
 export GPG_TTY=`tty`
 echo "UPDATESTARTUPTTY" | gpg-connect-agent > /dev/null 2>&1
+
+# Use bat for man
+export MANPAGER="sh -c 'col -bx | bat --theme="TwoDark" -l man -p'"
+# MANROFFOPT="-c"
 
 # Python virtualenvwrapper, lazy loading because it slows down loading
 export WORKON_HOME=~/.virtualenvs
@@ -138,20 +143,6 @@ source $ZSH/oh-my-zsh.sh
 [[ -s $DOTFILES_PRIVATE/zshrc ]] && source "$DOTFILES_PRIVATE/zshrc"
 [[ -s $DOTFILES_LOCAL/zshrc ]] && source "$DOTFILES_LOCAL/zshrc"
 [[ -s $DOTFILES_LOCAL/zshrc.local ]] && source "$DOTFILES_LOCAL/zshrc.local"
-
-# Completion for kitty
-# kitty + complete setup zsh | source /dev/stdin
-
-alias vi=nvim
-
-#export LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
-#export LESS_TERMCAP_md=$'\E[1;36m'     # begin blink
-#export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
-#export LESS_TERMCAP_so=$'\E[01;44;33m' # begin reverse video
-#export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
-#export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
-#export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
-#export GROFF_NO_SGR=1                  # for konsole and gnome-terminal
 
 # startx if on tty1
 if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
