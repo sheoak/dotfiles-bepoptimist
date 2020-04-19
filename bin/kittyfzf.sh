@@ -1,4 +1,5 @@
 #! /bin/sh
+[ -z $1 ] || cd "$1"
 xdotool search --onlyvisible --classname KittyFuzzy windowunmap \
   || xdotool search --classname KittyFuzzy windowmap \
-  || kitty --name KittyFuzzy --detach -e sh -c 'kitty --detach -e -c sh nohup xdg-open $(fzf --color=bw) > /dev/null 2>&1'
+  || kitty --name KittyFuzzy --detach -e sh -c 'kitty --detach -e -c sh nohup xdg-open "$(fzf --color=bw)" > /dev/null 2>&1'
