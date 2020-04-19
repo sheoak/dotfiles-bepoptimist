@@ -14,6 +14,7 @@ plugins=(
   vi-mode
   fzf
   z
+  virtualenvwrapper
 )
 
 PRIVATE_PLUGINS=$DOTFILES_PRIVATE/zshrc.plugins
