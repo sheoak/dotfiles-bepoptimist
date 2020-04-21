@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # ----------------------------------------------------------------------------
 # Zsh configuration, managed with zplug
 # https://github.com/zplug/zplug
@@ -52,6 +59,9 @@ setopt menu_complete
 bindkey '^F' fzf-cd-widget
 bindkey '^[[Z' reverse-menu-complete
 
+# case insensitive completion
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
+
 # history
 export HISTFILE=~/.zsh_history
 export HISTSIZE=10000
@@ -59,43 +69,7 @@ export SAVEHIST=10000
 
 # custom theme
 # https://github.com/bhilburn/powerlevel9k/wiki/Stylizing-Your-Prompt
-VIRTUAL_ENV_DISABLE_PROMPT=1
-POWERLEVEL9K_BATTERY_LOW_THRESHOLD='15'
-POWERLEVEL9K_BATTERY_HIDE_ABOVE_THRESHOLD='20'
-POWERLEVEL9K_MODE='nerdfont-complete'
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-POWERLEVEL9K_DISABLE_RPROMPT=true
-POWERLEVEL9K_DISK_USAGE_ONLY_WARNING=true
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir virtualenv vcs background_jobs disk_usage battery)
-POWERLEVEL9K_DIR_DEFAULT_FOREGROUND='black'
-POWERLEVEL9K_DIR_DEFAULT_BACKGROUND='cyan'
-POWERLEVEL9K_DIR_HOME_FOREGROUND='black'
-POWERLEVEL9K_DIR_HOME_BACKGROUND='cyan'
-POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND='cyan'
-POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND='black'
-POWERLEVEL9K_DIR_FOLDER_BACKGROUND='cyan'
-POWERLEVEL9K_DIR_FOLDER_FOREGROUND='black'
-POWERLEVEL9K_DIR_ETC_BACKGROUND='cyan'
-POWERLEVEL9K_DIR_ETC_FOREGROUND='black'
-POWERLEVEL9K_VCS_CLEAN_FOREGROUND='green'
-POWERLEVEL9K_VCS_CLEAN_BACKGROUND='black'
-POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='purple'
-POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='black'
-POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='yellow'
-POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='black'
-POWERLEVEL9K_VIRTUALENV_FOREGROUND='black'
-POWERLEVEL9K_VIRTUALENV_BACKGROUND='white'
-POWERLEVEL9K_VCS_UNTRACKED_ICON=''
-POWERLEVEL9K_VCS_UNSTAGED_ICON=''
-POWERLEVEL9K_BACKGROUND_JOBS_ICON=''
-POWERLEVEL9K_BATTERY_ICON=''
-POWERLEVEL9K_VCS_STASH_ICON='  '
-POWERLEVEL9K_VCS_INCOMING_CHANGES_ICON=' '
-POWERLEVEL9K_VCS_OUTGOING_CHANGES_ICON=' '
-POWERLEVEL9K_HOME_ICON=''
-POWERLEVEL9K_HOME_SUB_ICON=''
-POWERLINE_DETECT_SSH="true"
-POWERLINE_RIGHT_B="none"
+source ~/.p10k.zsh
 
 # fix ssh issues with kitty
 if [ "$TERM" != 'linux' ]; then
