@@ -5,6 +5,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# custom theme
+source ~/.p10k.zsh
+
 # ----------------------------------------------------------------------------
 # Zsh configuration, managed with zplug
 # https://github.com/zplug/zplug
@@ -45,7 +48,7 @@ zplug "$DOTFILES_PRIVATE/oh-my-zsh/plugins/fz", from:local, defer:3
 # FZF on CTRL-G
 zplug "$DOTFILES_PRIVATE/oh-my-zsh/plugins/fzf-z", from:local, defer:3
 zplug "$DOTFILES_PRIVATE/oh-my-zsh/plugins/fzftools", from:local, defer:3
-zplug "$DOTFILES_PRIVATE/oh-my-zsh/plugins/tty-solarized", from:local, defer:3
+# zplug "$DOTFILES_PRIVATE/oh-my-zsh/plugins/tty-solarized", from:local, defer:3
 
 # private confs and plugins
 zplug "$DOTFILES_PRIVATE", from:local, use:zshrc, defer:2
@@ -67,13 +70,9 @@ export HISTFILE=~/.zsh_history
 export HISTSIZE=10000
 export SAVEHIST=10000
 
-# custom theme
-# https://github.com/bhilburn/powerlevel9k/wiki/Stylizing-Your-Prompt
-source ~/.p10k.zsh
-
 # fix ssh issues with kitty
 if [ "$TERM" != 'linux' ]; then
-  export TERM=xterm-256color
+  # export TERM=xterm-256color
 else
   POWERLEVEL9K_IGNORE_TERM_COLORS=true
   POWERLEVEL9K_MODE='Powerlevel9k'
@@ -123,6 +122,10 @@ export MANPAGER="sh -c 'col -bx | bat --theme="TwoDark" -l man -p'"
 if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
   exec startx &>/dev/null
 fi
+
+# start in normal mode (vi-mode)
+# zle-line-init() { zle -K vicmd; }
+# zle -N zle-line-init
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then

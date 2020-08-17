@@ -35,12 +35,12 @@
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
     # os_icon                 # os identifier
+    vi_mode
     dir                     # current directory
     virtualenv
     vcs                     # git status
     disk_usage
     battery
-    vi_mode
     # =========================[ Line #2 ]=========================
     newline                 # \n
     # prompt_char           # prompt symbol
@@ -218,11 +218,17 @@
   typeset -g POWERLEVEL9K_DIR_FOREGROUND=254
   # If directory is too long, shorten some of its segments to the shortest possible unique
   # prefix. The shortened directory can be tab-completed to the original.
-  typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
+  # typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
   # Replace removed segment suffixes with this symbol.
-  typeset -g POWERLEVEL9K_SHORTEN_DELIMITER=
+  # typeset -g POWERLEVEL9K_SHORTEN_DELIMITER=
   # Color of the shortened directory segments.
   typeset -g POWERLEVEL9K_DIR_SHORTENED_FOREGROUND=250
+
+  # fish style
+  typeset -g POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
+  typeset -g POWERLEVEL9K_SHORTEN_DELIMITER=""
+  typeset -g POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
+
   # Color of the anchor directory segments. Anchor segments are never shortened. The first
   # segment is always an anchor.
   typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=255
@@ -440,11 +446,11 @@
   typeset -g POWERLEVEL9K_VCS_DISABLED_WORKDIR_PATTERN='~'
 
   # Disable the default Git status formatting.
-  typeset -g POWERLEVEL9K_VCS_DISABLE_GITSTATUS_FORMATTING=true
+  typeset -g POWERLEVEL9K_VCS_DISABLE_GITSTATUS_FORMATTING=false
   # Install our own Git status formatter.
-  typeset -g POWERLEVEL9K_VCS_CONTENT_EXPANSION='${$((my_git_formatter()))+${my_git_format}}'
+  # typeset -g POWERLEVEL9K_VCS_CONTENT_EXPANSION='${$((my_git_formatter()))+${my_git_format}}'
   # Enable counters for staged, unstaged, etc.
-  typeset -g POWERLEVEL9K_VCS_{STAGED,UNSTAGED,UNTRACKED,CONFLICTED,COMMITS_AHEAD,COMMITS_BEHIND}_MAX_NUM=-1
+  #typeset -g POWERLEVEL9K_VCS_{STAGED,UNSTAGED,UNTRACKED,CONFLICTED,COMMITS_AHEAD,COMMITS_BEHIND}_MAX_NUM=-1
 
   # Custom icon.
   # typeset -g POWERLEVEL9K_VCS_VISUAL_IDENTIFIER_EXPANSION='⭐'
@@ -1589,10 +1595,10 @@
   typeset -g POWERLEVEL9K_BACKGROUND_JOBS_ICON=''
   typeset -g POWERLEVEL9K_BATTERY_ICON=''
   typeset -g POWERLEVEL9K_VCS_STASH_ICON='  '
-  typeset -g POWERLEVEL9K_VCS_INCOMING_CHANGES_ICON=' '
+  typeset -g POWERLEVEL9K_VCS_INCOMING_CHANGES_ICON=''
   typeset -g POWERLEVEL9K_VCS_OUTGOING_CHANGES_ICON=' '
-  typeset -g POWERLEVEL9K_HOME_ICON=''
-  typeset -g POWERLEVEL9K_HOME_SUB_ICON=''
+  typeset -g POWERLEVEL9K_HOME_ICON=''
+  typeset -g POWERLEVEL9K_HOME_SUB_ICON=''
   typeset -g POWERLINE_DETECT_SSH="true"
   typeset -g POWERLINE_RIGHT_B="none"
 
