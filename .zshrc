@@ -104,10 +104,10 @@ export LESSHISTFILE=/dev/null
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --ignore-file $DOTFILES_PRIVATE/agignore --hidden '
 export FZF_COMPLETION_TRIGGER='~~'
 export FZF_COMPLETION_OPTS='+c -x'
-export FZF_CTRL_R_OPTS=""
-export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --theme=TwoDark --color=always {} | head -100' --preview-window='right' --bind 'ctrl-b:toggle-preview'"
+export FZF_CTRL_R_OPTS="--reverse"
+export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --theme=TwoDark --color=always {} | head -100' --preview-window='right' --bind 'ctrl-space:toggle-preview'"
 export FZF_CTRL_T_COMMAND='rg --files --no-ignore-vcs --ignore-file $DOTFILES_PRIVATE/agignore --hidden '
-export FZF_DEFAULT_OPTS="--inline-info --reverse --prompt='❯' --preview-window='right:50%' --bind '?:toggle-preview'"
+export FZF_DEFAULT_OPTS="--preview 'bat --style=numbers --theme=TwoDark --color=always {} | head -100' --inline-info --reverse --prompt='❯' --preview-window='right:50%:hidden' --bind 'ctrl-space:toggle-preview'"
 export FZF_PREVIEW_COMMAND="bat --style=numbers --theme=TwoDark --color=always {} | head -100"
 
 # GPG settings
