@@ -11,10 +11,13 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
     unset f
 fi
 
-# TODO: use private dotfiles
 [[ -f ~/.Xresources ]] && xrdb -load ~/.Xresources
 
 # Local Xresource (mainly monitor/dpi settings)
+if [ -f $DOTFILES_PRIVATE/Xresources ]; then
+    xrdb -merge $DOTFILES_PRIVATE/Xresources
+fi
+
 if [ -f $DOTFILES_LOCAL/Xresources ]; then
     xrdb -merge $DOTFILES_LOCAL/Xresources
 fi
