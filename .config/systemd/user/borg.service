@@ -1,0 +1,7 @@
+# [Unit]
+Description=User backups
+
+[Service]
+Type=oneshot
+ExecStart=~/dev/system/borg/backup.sh
+

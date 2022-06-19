@@ -4,10 +4,10 @@
 ; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
 ;
 [subrepo]
-	remote = git@github.com:sheoak/neomutt-powerline-nerdfonts.git
+	remote = https://github.com/sheoak/neomutt-powerline-nerdfonts
 	branch = master
-	commit = 88d7c78d56ce5fc8ae683965ff650e2e00fa9266
-	parent = 4e408ca167ad03451eaac4751d8ba2e2d9c81b8a
+	commit = dc014df127693ee48ae019305af0a3a61453a5c9
+	parent = fbeb1dbba296f5ab49d69d91ec5c15a8fc3d136d
 	method = merge
 	update = auto
 	cmdver = 0.4.1

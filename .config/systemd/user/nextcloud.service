@@ -1,8 +1,0 @@
-[Unit]
-Description=Nextcloud synchronisation service
-OnFailure=notify-failed@%i.service
-
-[Service]
-Type=oneshot
-EnvironmentFile=%h/.dotfiles-private/systemd/nextcloud.conf
-ExecStart=/bin/bash %h/bin/nextcloud-sync.sh

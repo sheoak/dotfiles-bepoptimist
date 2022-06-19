@@ -1,10 +1,11 @@
 ; polybar configuration
 ;
 ; set your env (ex: ~/.xinitrc)
-; export MONITOR=e-DP1
+; export MONITOR=eDP1
 
 [colors]
-black             = #002B36
+;black             = #002B36
+black             = #000000
 white             = #98a6a6
 red               = #dc322f
 lightred          = #FF0000
@@ -18,32 +19,30 @@ purple            = #9f78e1
 lightpurple       = #FF78FF
 pink              = #d33682
 light             = #999999
-superlight        = #555555
-primary           = #EEEEEE
-; primary-alt       = #BBBBBB
+superlight        = #111111
+primary           = #666666
 secondary         = #fba922
 active_background = #333333
-active_text       = #f3f3f3
+active_text       = #dddddd
 accent            = ${self.secondary}
 urgent            = ${self.red}
 good              = ${self.green}
 disabled          = ${self.gray}
-background        = ${env:POLYBAR_COLOR:#FF002B36}
-foreground        = ${self.primary}
-
+background        = #000000
+foreground        = #AAAAAA
 
 [bar/bottom]
 
 ; fonts
 ; ----------------------------------------------------------------------------
-font-0 = Siji:pixelsize=8;3
-font-1 = Fira Code Light:size=8;3
+font-0 = Siji:pixelsize=6;3
+font-1 = Fira Code Light:size=6;3
 ; for workspaces
-font-2 = Font Awesome 5 Free:style=Solid:size=6;2
+font-2 = Font Awesome 5 Free:style=Solid:size=4;2
 ; for volume
-font-3 = Fira Code Light:style=Regular:size=8;4
-font-4 = Hack Nerd Font Mono:style=Regular:size=15;1
-font-5 = Fira Code Light:style=Regular:size=7;3
+font-3 = Fira Code Light:style=Regular:size=6;4
+font-4 = Hack Nerd Font Mono:style=Regular:size=13;1
+font-5 = Fira Code Light:style=Regular:size=5;3
 ; ----------------------------------------------------------------------------
 
 ; styles
@@ -52,12 +51,12 @@ background = ${colors.background}
 foreground = ${colors.primary}
 
 width = 100%
-height = 21
+height = 50
 bottom = true
 border-bottom-size = 0
-border-bottom-color = #333
+border-bottom-color = #111
 border-top-size = 1
-border-top-color = #111
+border-top-color = #090909
 overline-size = 1
 overline-color = ${self.background}
 underline-size = 1
@@ -70,14 +69,16 @@ cursor-click = pointer
 
 modules-left = i3 sepstraight mpd msmtp
 ; modules-center = xwindow
-modules-right = mailipc temperature dpms sepright wireless-network openvpn bluetooth sepleft battery sepleft pulseaudio sepright clock
+#modules-right = mailipc temperature dpms sepright wireless-network openvpn bluetooth sepleft battery sepleft pulseaudio sepright clock
+# modules-right = temperature dpms sepright wireless-network openvpn bluetooth sepleft battery sepleft pulseaudio sepright time-france clock
+modules-right = temperature dpms sepright wireless-network sepleft battery sepleft pulseaudio sepright clock
 
 enable-ipc = true
-monitor = ${env:MONITOR:HDMI-1}
-monitor-fallback = eDP-1
+monitor = ${xrdb:monitorext}
+monitor-fallback = ${xrdb:monitor}
 screenchange-reload = true
 tray-position = right
-
+dpi = ${xrdb:dpi}
 
 [module/i3]
 type = internal/i3
@@ -145,7 +146,8 @@ format-connected = <ramp-signal> <label-connected>
 format-connected-prefix-foreground = ${colors.gray}
 format-connected-prefix-offset = -6
 
-label-connected = %{A1:rofi-wifi-menu:}%essid%%{A}
+; label-connected = %{A1:rofi-wifi-menu:}%essid%%{A}
+label-connected = %essid%
 format-connected-foreground = ${colors.gray}
 label-connected-foreground = ${colors.primary}
 
@@ -224,6 +226,12 @@ toggle-on-foreground =
 toggle-off-foreground = #55
 
 
+[module/time-france]
+type = custom/script
+interval = 10
+exec = TZ=Europe/Paris date +"FR: %H:%M"
+
+
 [module/clock]
 type = internal/date
 interval = 5
@@ -245,10 +253,11 @@ use-ui-max = true
 
 ; Interval for volume increase/decrease (in percent points)
 interval = 5
+
 format-volume = <bar-volume>
 format-muted = <label-muted>
-label-volume = 
-label-muted = 
+label-volume = %{A1:pavucontrol:}-%{A}
+label-muted = %{A1:pavucontrol:}%{A}
 label-muted-foreground = ${colors.purple}
 
 bar-volume-width = 8
@@ -383,7 +392,7 @@ label-unmounted-foreground = #55
 [module/temperature]
 type = internal/temperature
 thermal-zone = 0
-warn-temperature = 50
+warn-temperature = 60
 format-warn-margin = 2
 
 format =

@@ -30,7 +30,7 @@ bind generic,index,pager H search-opposite
 bind index,attach j tag-entry
 bind index J tag-pattern
 bind index \cj untag-pattern
-bind generic,index,pager gh help
+#bind generic,index,pager gh help
 
 # Others
 bind generic,index,pager ? search-reverse
