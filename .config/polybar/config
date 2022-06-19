@@ -1,10 +1,11 @@
 ; polybar configuration
 ;
 ; set your env (ex: ~/.xinitrc)
-; export MONITOR=e-DP1
+; export MONITOR=eDP1
 
 [colors]
-black             = #002B36
+;black             = #002B36
+black             = #000000
 white             = #98a6a6
 red               = #dc322f
 lightred          = #FF0000
@@ -18,23 +19,17 @@ purple            = #9f78e1
 lightpurple       = #FF78FF
 pink              = #d33682
 light             = #999999
-superlight        = #222222
-;primary           = #EEEEEE
-primary           = #aaaaaa
-; primary-alt       = #BBBBBB
+superlight        = #111111
+primary           = #666666
 secondary         = #fba922
 active_background = #333333
-; active_text       = #f3f3f3
 active_text       = #dddddd
 accent            = ${self.secondary}
 urgent            = ${self.red}
 good              = ${self.green}
 disabled          = ${self.gray}
-; background        = ${env:POLYBAR_COLOR:#FF002B36}
 background        = #000000
-;foreground        = ${self.primary}
 foreground        = #AAAAAA
-
 
 [bar/bottom]
 
@@ -59,9 +54,9 @@ width = 100%
 height = 50
 bottom = true
 border-bottom-size = 0
-border-bottom-color = #333
+border-bottom-color = #111
 border-top-size = 1
-border-top-color = #111
+border-top-color = #090909
 overline-size = 1
 overline-color = ${self.background}
 underline-size = 1
@@ -74,14 +69,16 @@ cursor-click = pointer
 
 modules-left = i3 sepstraight mpd msmtp
 ; modules-center = xwindow
-modules-right = mailipc temperature dpms sepright wireless-network openvpn bluetooth sepleft battery sepleft pulseaudio sepright clock
+#modules-right = mailipc temperature dpms sepright wireless-network openvpn bluetooth sepleft battery sepleft pulseaudio sepright clock
+# modules-right = temperature dpms sepright wireless-network openvpn bluetooth sepleft battery sepleft pulseaudio sepright time-france clock
+modules-right = temperature dpms sepright wireless-network sepleft battery sepleft pulseaudio sepright clock
 
 enable-ipc = true
-monitor = ${env:MONITOR:eDP1}
-monitor-fallback = DP-2
+monitor = ${xrdb:monitorext}
+monitor-fallback = ${xrdb:monitor}
 screenchange-reload = true
 tray-position = right
-dpi = 292
+dpi = ${xrdb:dpi}
 
 [module/i3]
 type = internal/i3
@@ -149,7 +146,8 @@ format-connected = <ramp-signal> <label-connected>
 format-connected-prefix-foreground = ${colors.gray}
 format-connected-prefix-offset = -6
 
-label-connected = %{A1:rofi-wifi-menu:}%essid%%{A}
+; label-connected = %{A1:rofi-wifi-menu:}%essid%%{A}
+label-connected = %essid%
 format-connected-foreground = ${colors.gray}
 label-connected-foreground = ${colors.primary}
 
@@ -228,6 +226,12 @@ toggle-on-foreground =
 toggle-off-foreground = #55
 
 
+[module/time-france]
+type = custom/script
+interval = 10
+exec = TZ=Europe/Paris date +"FR: %H:%M"
+
+
 [module/clock]
 type = internal/date
 interval = 5
@@ -249,10 +253,11 @@ use-ui-max = true
 
 ; Interval for volume increase/decrease (in percent points)
 interval = 5
+
 format-volume = <bar-volume>
 format-muted = <label-muted>
-label-volume = 
-label-muted = 
+label-volume = %{A1:pavucontrol:}-%{A}
+label-muted = %{A1:pavucontrol:}%{A}
 label-muted-foreground = ${colors.purple}
 
 bar-volume-width = 8

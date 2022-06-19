@@ -1,24 +1,26 @@
 ! Maintainer: sheoak <dev@sheoak.fr>
 
-! ! #include ".xcolors/solarized_dark"
-
-! Global
-*monitor:     eDP-1
-*monitorext:  HDMI-1
+! Should be set in $DOTFILES_LOCAL/Xresources.*
+! *monitor:     DP-2
+! *monitorext:  DP-1.3
+! *monitothree: DP-1.1
+! *monitormain: DP-1.3
+! *.dpi:        282
 
 ! I3
-i3wm*font: pango:Deja Vu Sans 12
+i3wm*font: pango:Fira Code 8
 i3wm*mod:  Mod1
 i3wm*win:  Mod4
 
 ! Cursor theme
 Xcursor*theme: aero
-Xcursor*size:  16
+Xcursor*size:  26
 
 ! Xft fonts
-Xft.dpi:            192
 Xft.antialias:      true
 Xft.rgba:           rgb
 Xft.hinting:        true
 Xft.hintstyle:      hintslight
+
+! Xterm
 XTerm*bellIsUrgent: true

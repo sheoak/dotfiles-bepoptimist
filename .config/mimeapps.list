@@ -21,6 +21,9 @@ video/x-mpeg3=mpv.desktop
 video/quicktime=mpv.desktop
 video/x-matroska=mpv.desktop
 video/x-msvideo=mpv.desktop
+x-scheme-handler/gitkraken=GitKraken.desktop
+x-scheme-handler/eclipse+command=_usr_lib_dbeaver_.desktop
+x-scheme-handler/webcal=chromium.desktop
 
 [Added Associations]
 x-scheme-handler/http=firefox.desktop;
@@ -36,3 +39,4 @@ application/x-extension-xhtml=firefox.desktop;
 application/x-extension-xht=firefox.desktop;
 application/pdf=org.pwmt.zathura-pdf-mupdf.desktop;
 application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop;
+text/markdown=nvim.desktop;

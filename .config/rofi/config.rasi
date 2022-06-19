@@ -6,9 +6,8 @@
  ******************************************************************************/
 configuration {
     modi: "window,drun,ssh,combi";
-    font: "FuraCode Nerd Font, Regular, 9";
+    font: "FuraCode Nerd Font, Regular, 20";
     combi-modi: "window,drun,ssh";
-    width: 60;
     show-icons: true;
     /*monitor: "eDP1";*/
  }
