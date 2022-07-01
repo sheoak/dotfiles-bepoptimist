@@ -327,8 +327,9 @@ bindsym $mod+Shift+o exec "kittyfzf.sh ~/downloads"
 bindsym $mod+g exec "udiskie-rofi"
 bindsym $mod+j exec "rofimoji"
 bindsym $mod+Ctrl+o exec "rofi-nerdfonts"
-bindsym $mod+eacute exec "rofi-pass"
-# bindsym $mod+eacute exec "bwmenu"
+# bindsym $mod+eacute exec "rofi-pass"
+bindsym $mod+egrave exec "~/bin/neovide.sh"
+bindsym $mod+eacute exec "bwmenu"
 bindsym $mod+Shift+eacute exec "rofi-pass --bmarks"
 bindsym $mod+Control+eacute exec "rofi-pass --last-used"
 # wifi with rofi, executable must be in path
@@ -442,20 +443,16 @@ set $darkgray    #181818
 set $white_tr    #BBBBBBBB
 
 #                       border    background  text       indicator   child bd
-client.focused          $bg       $bg         $white_alt $green      $white_tr
-client.focused_inactive $bg       $bg         $gray      $green      $darkgray
-client.unfocused        $darkgray $darkgray   $gray      $darkgray   $darkgray
+# client.focused          $bg       $bg         $white_alt $green      $white_tr
+client.focused          $darkgray $bg         $white_alt $green      $bg
+# client.focused_inactive $bg       $bg         $gray      $green      $darkgray
+client.focused_inactive $darkgray $bg         $gray      $green      $bg
+client.unfocused        $darkgray $darkgray   $gray      $darkgray   $bg
 client.urgent           $darkgray $darkgray   $red       $red        $red
 
-exec_always --no-startup-id seafile-applet
-exec_always --no-startup-id polybar-launch.sh
-
-# exec --no-startup-id picom -b -f
-exec_always --no-startup-id /usr/bin/caffeine
-
-# floating terminal on startup
-# exec_always --no-startup-id $termDetached -e sh -c "i3-msg mark kitty-float"
-
+# -------------------------------------------------------------------------------
+# Custom windows
+# -------------------------------------------------------------------------------
 for_window [con_mark="kitty-float"] \
                       floating enable; \
                       move scratchpad; \
@@ -463,8 +460,6 @@ for_window [con_mark="kitty-float"] \
 
 for_window [con_mark="kitty-float"] \
                       move position center; \
-                      # resize shrink height 150px; \
-                      # resize grow width 150px; \
                       move scratchpad;
 
 for_window [instance="KittyFuzzy"] floating enable
@@ -478,9 +473,13 @@ for_window [window_role="task_dialog"] floating enable
 for_window [window_role="Preferences"] floating enable
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
+for_window [class="neovide"] floating enable
+for_window [class="kitty"] floating enable
 
-    # move position 0px 22px; \
-    # resize shrink height 420px; move scratchpad;
-# for_window [con_mark="kitty-float"] resize grow left 150, \
-#     resize grow right 150, resize grow down 15, resize grow up 10, \
-#     move scratchpad;
+# -------------------------------------------------------------------------------
+# startup
+# -------------------------------------------------------------------------------
+exec_always --no-startup-id polybar-launch.sh
+# exec_always --no-startup-id seafile-daemon
+# exec_always --no-startup-id /usr/bin/caffeine
+
