@@ -8,12 +8,13 @@
 ! *.dpi:        282
 
 ! I3
-i3wm*font: pango:Fira Code 8
+i3wm*font: pango:Fira Code 10
 i3wm*mod:  Mod1
 i3wm*win:  Mod4
 
 ! Cursor theme
-Xcursor*theme: aero
+! Xcursor*theme: aero
+Xcursor*theme: volantes_light_cursors
 Xcursor*size:  26
 
 ! Xft fonts
