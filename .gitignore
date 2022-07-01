@@ -75,3 +75,6 @@ tmp/**
 *.bak
 .ctags
 **/__pycache__/**
+
+.config/mpd/playlist
+.config/mpv/watch_later/
